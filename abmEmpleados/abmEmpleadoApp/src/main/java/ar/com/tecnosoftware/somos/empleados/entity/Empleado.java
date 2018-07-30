@@ -41,20 +41,33 @@ public class Empleado {
     @Column(name="sueldo")
     private double sueldo;
 
-    public Empleado() {}
+    @Column(name="id_cliente_actual")
+    private Cliente idClienteActual;
 
+    @Column(name="cargo")
+    private CargoRHPRO idCargo;
+
+    @Column(name="id_centro_costo")
+    private CentroCosto idCentroCosto;
+
+
+    @Column(name="id_usuario")
+    private Usuario idUsuario;
+
+    public Empleado() {}
+/*
     public Empleado(int id, String nombre, int edad, double sueldo) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.sueldo = sueldo;
     }
-
+*/
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -80,6 +93,38 @@ public class Empleado {
 
     public void setSueldo(double sueldo) {
         this.sueldo = sueldo;
+    }
+
+    public Cliente getIdClienteActual() {
+        return idClienteActual;
+    }
+
+    public void setIdClienteActual(Cliente idClienteActual) {
+        this.idClienteActual = idClienteActual;
+    }
+
+    public CargoRHPRO getIdCargo() {
+        return idCargo;
+    }
+
+    public void setIdCargo(CargoRHPRO idCargo) {
+        this.idCargo = idCargo;
+    }
+
+    public CentroCosto getIdCentroCosto() {
+        return idCentroCosto;
+    }
+
+    public void setIdCentroCosto(CentroCosto idCentroCosto) {
+        this.idCentroCosto = idCentroCosto;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     @Override
