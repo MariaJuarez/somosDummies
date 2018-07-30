@@ -1,7 +1,7 @@
 package ar.com.tecnosoftware.somos.empleados.controller;
 import ar.com.tecnosoftware.somos.empleados.exception.EmpleadoNotFoundException;
 import ar.com.tecnosoftware.somos.empleados.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleados.service.EmpleadoService;
+import ar.com.tecnosoftware.somos.empleados.service.impl.EmpleadoServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class EmpleadoController {
 
 
     @Autowired
-    private EmpleadoService empleadoService;
+    private EmpleadoServiceImpl empleadoServiceImpl;
 
     /** Metodo para crear empleado
      *  {@link PostMapping @PostMapping} Es parte del @RequestMapping para recibir una peticion que se mappea hasta este método
@@ -61,7 +61,7 @@ public class EmpleadoController {
      **/
     @PostMapping (value = "/crear")
     public void addEmpleado(@Valid @RequestBody Empleado empleado) {
-        empleadoService.addEmpleado(empleado);
+        empleadoServiceImpl.addEmpleado(empleado);
     }
 
 
@@ -74,9 +74,10 @@ public class EmpleadoController {
      * @return con el ResponseEntity entrega un estado de tipo HTTP para enviarle
      *
      **/
+    /*
     @PutMapping(value = "/editar")
     public ResponseEntity<Empleado> editEmpleado(@Valid @RequestBody Empleado empleadoEdited) throws EmpleadoNotFoundException {
-        if (empleadoService.editEmpleado(empleadoEdited.getId(), empleadoEdited)) {
+        if (empleadoServiceImpl.editEmpleado(empleadoEdited.getId(), empleadoEdited)) {
             return ResponseEntity.ok(empleadoEdited);
         }
         throw new EmpleadoNotFoundException("No se encontro el empleado con el id: " + empleadoEdited.getId());
@@ -84,11 +85,11 @@ public class EmpleadoController {
 
 /*    Metodo para eliminar empleado con el parametro ID
         * Con @PathVariable le indico que el valor que va a entrar viene en la URL */
-
+/*
     @DeleteMapping(value = "/eliminar/{empleadoId}")
     public ResponseEntity<Empleado> deleteEmpleado(@PathVariable ("empleadoId") int empleadoId) throws EmpleadoNotFoundException {
-        Empleado empleado=empleadoService.searchEmpleado(empleadoId);
-        if(empleadoService.deleteEmpleado(empleadoId)){
+        Empleado empleado= empleadoServiceImpl.searchEmpleado(empleadoId);
+        if(empleadoServiceImpl.deleteEmpleado(empleadoId)){
             return ResponseEntity.ok(empleado);
         }
         throw new EmpleadoNotFoundException("No se encontro el empleado con el id: " + empleadoId);
@@ -96,18 +97,18 @@ public class EmpleadoController {
 
     @GetMapping("/list")
     public List<Empleado> listEmpleados() {
-        return empleadoService.listEmpleados();
+        return empleadoServiceImpl.listEmpleados();
     }
 
     @RequestMapping("/search/{empleadoId}")
     public ResponseEntity<Empleado> searchEmpleado(@PathVariable ("empleadoId") int empleadoId) throws  EmpleadoNotFoundException{
-        Empleado empleado = empleadoService.searchEmpleado(empleadoId);
+        Empleado empleado = empleadoServiceImpl.searchEmpleado(empleadoId);
         if (empleado == null) {
             throw new EmpleadoNotFoundException("No se encontro el empleado con el id: " + empleadoId);
         }
         return ResponseEntity.ok(empleado);
     }
-
+*/
     //
     @ExceptionHandler(EmpleadoNotFoundException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
