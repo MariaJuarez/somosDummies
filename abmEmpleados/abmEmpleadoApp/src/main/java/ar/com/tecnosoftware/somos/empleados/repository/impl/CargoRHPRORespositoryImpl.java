@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class CargoRHPRORespositoryImpl implements CargoRHPRORepository {
@@ -21,5 +22,17 @@ public class CargoRHPRORespositoryImpl implements CargoRHPRORepository {
     @Override
     public CargoRHPRO buscar(CargoRHPRO cargoRHPRO) {
         return entityManager.find(CargoRHPRO.class, cargoRHPRO.getId());
+    }
+
+    @Override
+    public List<CargoRHPRO> buscarTodos() {
+        String hql = "FROM CargoRHPRO WHERE baja = false";
+        return (List<CargoRHPRO>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBaja(CargoRHPRO cargoRHPRO) {
+        cargoRHPRO.setBaja(true);
+        entityManager.flush();
     }
 }

@@ -6,15 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
-
-/**
- *
- * En hibernate es necesario tener en la clase entity siempre un constructor vacio.
- * tambien especificar el nombre de las tablas y columnas sin camelcase ya que varias DB
- * lo toman como un guion bajo. Es decir si se usa idEmpleado la DB lo toma como id_empleado
- * y crea conflicto.
- *
- **/
+import java.util.Date;
 
 @Entity
 @Table(name="Empleados")
@@ -42,8 +34,19 @@ public class Empleado implements Serializable {
     @Column(name="sueldo")
     private double sueldo;
 
+    @NotBlank
+    @Column(name="baja")
+    private boolean baja;
+
+    @NotBlank
+    @Column(name="fecha_alta")
+    private Date fechaAlta;
+
+    @Column(name="fecha_baja")
+    private Date fechaBaja;
+
     @NotNull
-    @ManyToOne(cascade={CascadeType.ALL})
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private Cliente cliente_actual;
 
     @NotNull
@@ -60,10 +63,13 @@ public class Empleado implements Serializable {
 
     public Empleado() {}
 
-    public Empleado(String nombre, int edad, double sueldo, Cliente cliente_actual, CargoRHPRO cargo, CentroCosto centro_costo, Usuario usuario) {
+    public Empleado(String nombre, int edad, double sueldo, boolean baja, Date fechaAlta, Date fechaBaja, Cliente cliente_actual, CargoRHPRO cargo, CentroCosto centro_costo, Usuario usuario) {
         this.nombre = nombre;
         this.edad = edad;
         this.sueldo = sueldo;
+        this.baja = baja;
+        this.fechaAlta = fechaAlta;
+        this.fechaBaja = fechaBaja;
         this.cliente_actual = cliente_actual;
         this.cargo = cargo;
         this.centro_costo = centro_costo;
@@ -134,13 +140,28 @@ public class Empleado implements Serializable {
         this.usuario = usuario;
     }
 
-    @Override
-    public String toString() {
-        return "Empleado{" +
-                "id=" + id +
-                ", name='" + nombre + '\'' +
-                ", edad=" + edad +
-                ", sueldo=" + sueldo +
-                '}';
+    public boolean isBaja() {
+        return baja;
     }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
+    }
+
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
+    public Date getFechaBaja() {
+        return fechaBaja;
+    }
+
+    public void setFechaBaja(Date fechaBaja) {
+        this.fechaBaja = fechaBaja;
+    }
+
 }

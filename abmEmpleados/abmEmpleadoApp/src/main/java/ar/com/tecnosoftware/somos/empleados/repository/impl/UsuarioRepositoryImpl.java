@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository {
@@ -21,5 +22,17 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     @Override
     public Usuario buscar(Usuario usuario) {
         return entityManager.find(Usuario.class, usuario.getId());
+    }
+
+    @Override
+    public List<Usuario> buscarTodos() {
+        String hql = "FROM Usuario WHERE baja = false";
+        return entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBaja(Usuario usuario) {
+        usuario.setBaja(true);
+        entityManager.flush();
     }
 }

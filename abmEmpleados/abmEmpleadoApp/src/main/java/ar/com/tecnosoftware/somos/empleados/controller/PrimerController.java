@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -70,6 +71,21 @@ public class PrimerController {
     public void addUsuario(@Valid @RequestBody Usuario usuario) {
         usuarioService.addUsuario(usuario);
     }
+
+    @GetMapping (value = "/todos/empleado")
+    public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
+
+    @GetMapping (value = "/todos/cliente")
+    public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
+
+    @GetMapping (value = "/todos/cargoRHPRO")
+    public List<CargoRHPRO> findAllCargoRHPRO(){ return cargoRHPROService.buscarTodos();}
+
+    @GetMapping (value = "/todos/centroCosto")
+    public List<CentroCosto> findAllCentroCosto(){ return centroCostoService.buscarTodos();}
+
+    @GetMapping (value = "/todos/usuario")
+    public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
 
     @ExceptionHandler(EmpleadoNotFoundException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

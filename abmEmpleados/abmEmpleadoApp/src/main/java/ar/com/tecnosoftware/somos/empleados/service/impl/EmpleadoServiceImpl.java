@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class EmpleadoServiceImpl implements EmpleadoService {
@@ -35,6 +37,16 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         empleado.setUsuario(usuarioRepository.buscar(empleado.getUsuario()));
 
         empleadoRepository.guardar(empleado);
+    }
+
+    @Override
+    public List<Empleado> buscarTodos() {
+        return empleadoRepository.buscarTodos();
+    }
+
+    @Override
+    public void darBaja(Empleado empleado) {
+        empleadoRepository.darBaja(empleadoRepository.buscar(empleado));
     }
 }
 
