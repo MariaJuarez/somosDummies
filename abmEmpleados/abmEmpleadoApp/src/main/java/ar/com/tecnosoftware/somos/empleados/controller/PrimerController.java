@@ -17,9 +17,7 @@ import java.util.Map;
 
 /**
 
- * Clase controladora la cual recibe peticiones desde la WEB y da entrada a los metodos de ABM
-
- * TODO @author: Maria J. Juarez P.
+ * Controler CRUD
 
  * @version: 25/07/2018/A
 
@@ -46,37 +44,68 @@ public class PrimerController {
     @Autowired
     private UsuarioService usuarioService;
 
+    /**
+     *
+     * @param empleado
+     */
     @PostMapping (value = "/crear/empleado")
     public void addEmpleado(@Valid @RequestBody Empleado empleado) {
         empleadoService.addEmpleado(empleado);
     }
 
+    /**
+     *
+     * @param cliente
+     */
     @PostMapping (value = "/crear/cliente")
     public void addCliente(@Valid @RequestBody Cliente cliente) {
         clienteService.addCliente(cliente);
     }
 
+    /**
+     *
+     * @param cargoRHPRO
+     */
     @PostMapping (value = "/crear/cargoRHPRO")
     public void addCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
         cargoRHPROService.addCargoRHPRO(cargoRHPRO);
     }
 
+    /**
+     *
+     * @param centroCosto
+     */
     @PostMapping (value = "/crear/centroCosto")
     public void addCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
         centroCostoService.addCentroCosto(centroCosto);
     }
 
+    /**
+     *
+     * @param usuario
+     */
     @PostMapping (value = "/crear/usuario")
     public void addUsuario(@Valid @RequestBody Usuario usuario) {
         usuarioService.addUsuario(usuario);
     }
 
+    /**
+     *
+     * @param e
+     * @return mensaje si no existe el empleado
+     */
     @ExceptionHandler(EmpleadoNotFoundException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> onException(EmpleadoNotFoundException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 
+    /**
+     *
+     * @param ex
+     * @return Excepción que se lanzará cuando la validación de un argumento anotado con
+     * {@code @Valid} falla.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, Map<String, String>> validationError(MethodArgumentNotValidException ex) {
@@ -89,6 +118,13 @@ public class PrimerController {
         return errors;
     }
 
+    /**
+     *
+     * @param ex
+     * @return Lanzado cuando los errores de enlace se consideran fatales. Implementa el
+     * BindingResult interfaz (y su super-interfaz Errors)
+     * para permitir el análisis directo de errores vinculantes.
+     */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, Map<String, String>> validationError(BindException ex) {

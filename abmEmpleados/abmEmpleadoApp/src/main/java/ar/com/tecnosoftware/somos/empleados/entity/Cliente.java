@@ -6,6 +6,10 @@ import java.io.Serializable;
 @Entity
 public class Cliente implements Serializable {
 
+    /**
+     * Entidad de la DB relacionada a la tabla cliente
+     */
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")

@@ -14,6 +14,10 @@ public class CargoRHPROServiceImpl implements CargoRHPROService {
     @Autowired
     private CargoRHPRORepository cargoRHPRORepository;
 
+    /**
+     * Metodo para añadir cargo a la DB
+     *
+     */
     @Override
     public void addCargoRHPRO(CargoRHPRO cargoRHPRO) {
         cargoRHPRORepository.guardar(cargoRHPRO);

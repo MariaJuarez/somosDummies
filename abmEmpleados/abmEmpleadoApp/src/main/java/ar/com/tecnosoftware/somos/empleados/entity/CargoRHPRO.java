@@ -3,6 +3,10 @@ package ar.com.tecnosoftware.somos.empleados.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Entidad de la DB relacionada a la tabla CargoRHPRO
+ */
+
 @Entity
 public class CargoRHPRO implements Serializable {
 
