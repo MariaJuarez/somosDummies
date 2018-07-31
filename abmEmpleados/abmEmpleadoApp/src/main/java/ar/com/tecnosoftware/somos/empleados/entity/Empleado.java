@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 /**
  *
@@ -17,7 +18,7 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name="Empleados")
-public class Empleado {
+public class Empleado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,18 +42,17 @@ public class Empleado {
     @Column(name="sueldo")
     private double sueldo;
 
-    @Column(name="id_cliente_actual")
-    private Cliente idClienteActual;
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private Cliente cliente_actual;
 
-    @Column(name="cargo")
-    private CargoRHPRO idCargo;
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private CargoRHPRO cargo;
 
-    @Column(name="id_centro_costo")
-    private CentroCosto idCentroCosto;
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private CentroCosto centro_costo;
 
-
-    @Column(name="id_usuario")
-    private Usuario idUsuario;
+    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private Usuario usuario;
 
     public Empleado() {}
 /*
@@ -96,35 +96,35 @@ public class Empleado {
     }
 
     public Cliente getIdClienteActual() {
-        return idClienteActual;
+        return cliente_actual;
     }
 
-    public void setIdClienteActual(Cliente idClienteActual) {
-        this.idClienteActual = idClienteActual;
+    public void setIdClienteActual(Cliente cliente_actual) {
+        this.cliente_actual = cliente_actual;
     }
 
     public CargoRHPRO getIdCargo() {
-        return idCargo;
+        return cargo;
     }
 
-    public void setIdCargo(CargoRHPRO idCargo) {
-        this.idCargo = idCargo;
+    public void setIdCargo(CargoRHPRO cargo) {
+        this.cargo = cargo;
     }
 
     public CentroCosto getIdCentroCosto() {
-        return idCentroCosto;
+        return centro_costo;
     }
 
-    public void setIdCentroCosto(CentroCosto idCentroCosto) {
-        this.idCentroCosto = idCentroCosto;
+    public void setIdCentroCosto(CentroCosto centro_costo) {
+        this.centro_costo = centro_costo;
     }
 
     public Usuario getIdUsuario() {
-        return idUsuario;
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
