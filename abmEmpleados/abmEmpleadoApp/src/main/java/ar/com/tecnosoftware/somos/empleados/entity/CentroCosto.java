@@ -14,11 +14,17 @@ public class CentroCosto implements Serializable {
     @Column(name = "decripcion")
     private String descripcion;
 
+    public CentroCosto(){}
+
+    public CentroCosto(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

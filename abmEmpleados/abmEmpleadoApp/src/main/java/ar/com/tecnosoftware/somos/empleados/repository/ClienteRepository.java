@@ -6,4 +6,6 @@ public interface ClienteRepository {
 
     public void guardar(Cliente cliente);
 
+    public Cliente buscar(Cliente cliente);
+
 }
