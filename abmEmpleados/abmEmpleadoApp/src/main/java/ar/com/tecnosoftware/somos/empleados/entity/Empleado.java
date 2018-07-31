@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 
 /**
  *
@@ -17,7 +18,7 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name="Empleados")
-public class Empleado {
+public class Empleado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,20 +42,32 @@ public class Empleado {
     @Column(name="sueldo")
     private double sueldo;
 
-    public Empleado() {}
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private Cliente id_cliente_actual;
 
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private CargoRHPRO id_cargo;
+
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private CentroCosto id_centro_costo;
+
+    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    private Usuario id_usuario;
+
+    public Empleado() {}
+/*
     public Empleado(int id, String nombre, int edad, double sueldo) {
         this.id = id;
         this.nombre = nombre;
         this.edad = edad;
         this.sueldo = sueldo;
     }
-
+*/
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -80,6 +93,38 @@ public class Empleado {
 
     public void setSueldo(double sueldo) {
         this.sueldo = sueldo;
+    }
+
+    public Cliente getIdClienteActual() {
+        return id_cliente_actual;
+    }
+
+    public void setIdClienteActual(Cliente id_cliente_actual) {
+        this.id_cliente_actual = id_cliente_actual;
+    }
+
+    public CargoRHPRO getIdCargo() {
+        return id_cargo;
+    }
+
+    public void setIdCargo(CargoRHPRO id_cargo) {
+        this.id_cargo = id_cargo;
+    }
+
+    public CentroCosto getIdCentroCosto() {
+        return id_centro_costo;
+    }
+
+    public void setIdCentroCosto(CentroCosto id_centro_costo) {
+        this.id_centro_costo = id_centro_costo;
+    }
+
+    public Usuario getIdUsuario() {
+        return id_usuario;
+    }
+
+    public void setIdUsuario(Usuario id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     @Override
