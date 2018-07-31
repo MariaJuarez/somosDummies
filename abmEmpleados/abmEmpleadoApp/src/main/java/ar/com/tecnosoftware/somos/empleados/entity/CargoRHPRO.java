@@ -14,11 +14,17 @@ public class CargoRHPRO implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    public CargoRHPRO(){}
+
+    public CargoRHPRO(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
