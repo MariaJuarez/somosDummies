@@ -8,13 +8,8 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 
 /**
- *
- * En hibernate es necesario tener en la clase entity siempre un constructor vacio.
- * tambien especificar el nombre de las tablas y columnas sin camelcase ya que varias DB
- * lo toman como un guion bajo. Es decir si se usa idEmpleado la DB lo toma como id_empleado
- * y crea conflicto.
- *
- **/
+ * Entidad de la DB relacionada a la tabla empleado
+ */
 
 @Entity
 @Table(name="Empleados")
@@ -26,7 +21,6 @@ public class Empleado implements Serializable {
     private int id;
 
     @NotBlank
-    @NotEmpty
     @Column(name = "nombre")
     private String nombre;
 
@@ -42,18 +36,41 @@ public class Empleado implements Serializable {
     @Column(name="sueldo")
     private double sueldo;
 
+    /**
+     * No puede ser null
+     * Tiene relacion @ManytoOne ya que un Empleado solo puede tener un cliente
+     *
+     **/
     @NotNull
     @ManyToOne(cascade={CascadeType.ALL})
     private Cliente cliente_actual;
 
+    /**
+     * No puede ser null
+     * Tiene relacion @ManytoOne ya que un Empleado solo puede tener un cargo
+     * pero un cargo puede pertenecer a muchos empleados
+     *
+     **/
     @NotNull
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private CargoRHPRO cargo;
 
+    /**
+     * No puede ser null
+     * Tiene relacion @ManytoOne ya que un Empleado solo puede tener un costo
+     * pero un centro_costo puede pertenecer a muchos empleados
+     *
+     **/
     @NotNull
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private CentroCosto centro_costo;
 
+    /**
+     * No puede ser null
+     * Tiene relacion @OnetoOne ya que un Empleado solo puede tener un usuario
+     * y un usuario solo puede pertenecer a un empleado
+     *
+     **/
     @NotNull
     @OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private Usuario usuario;
@@ -137,10 +154,13 @@ public class Empleado implements Serializable {
     @Override
     public String toString() {
         return "Empleado{" +
-                "id=" + id +
-                ", name='" + nombre + '\'' +
+                "nombre='" + nombre + '\'' +
                 ", edad=" + edad +
                 ", sueldo=" + sueldo +
+                ", cliente_actual=" + cliente_actual +
+                ", cargo=" + cargo +
+                ", centro_costo=" + centro_costo +
+                ", usuario=" + usuario +
                 '}';
     }
 }

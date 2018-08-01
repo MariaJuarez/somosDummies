@@ -3,6 +3,9 @@ package ar.com.tecnosoftware.somos.empleados.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Entidad de la DB relacionada a la tabla centro_costo
+ */
 @Entity
 public class CentroCosto implements Serializable {
 
