@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -69,6 +70,46 @@ public class PrimerController {
     @PostMapping (value = "/crear/usuario")
     public void addUsuario(@Valid @RequestBody Usuario usuario) {
         usuarioService.addUsuario(usuario);
+    }
+
+    @GetMapping (value = "/todos/empleado")
+    public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
+
+    @GetMapping (value = "/todos/cliente")
+    public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
+
+    @GetMapping (value = "/todos/cargoRHPRO")
+    public List<CargoRHPRO> findAllCargoRHPRO(){ return cargoRHPROService.buscarTodos();}
+
+    @GetMapping (value = "/todos/centroCosto")
+    public List<CentroCosto> findAllCentroCosto(){ return centroCostoService.buscarTodos();}
+
+    @GetMapping (value = "/todos/usuario")
+    public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
+
+    @PostMapping (value = "/baja/empleado")
+    public void bajaEmpleado(@Valid @RequestBody Empleado empleado) {
+        empleadoService.darBaja(empleado);
+    }
+
+    @PostMapping (value = "/baja/cliente")
+    public void bajaCliente(@Valid @RequestBody Cliente cliente) {
+        clienteService.darBaja(cliente);
+    }
+
+    @PostMapping (value = "/baja/cargoRHPRO")
+    public void bajaCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
+        cargoRHPROService.darBaja(cargoRHPRO);
+    }
+
+    @PostMapping (value = "/baja/centroCosto")
+    public void bajaCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
+        centroCostoService.darBaja(centroCosto);
+    }
+
+    @PostMapping (value = "/baja/usuario")
+    public void bajaUsuario(@Valid @RequestBody Usuario usuario) {
+        usuarioService.darBaja(usuario);
     }
 
     @ExceptionHandler(EmpleadoNotFoundException.class)

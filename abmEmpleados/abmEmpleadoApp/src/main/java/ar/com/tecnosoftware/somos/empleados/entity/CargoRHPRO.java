@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.empleados.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -14,10 +16,14 @@ public class CargoRHPRO implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @Column(name="baja")
+    private boolean baja;
+
     public CargoRHPRO(){}
 
-    public CargoRHPRO(String descripcion) {
+    public CargoRHPRO(String descripcion, boolean baja) {
         this.descripcion = descripcion;
+        this.baja = baja;
     }
 
     public int getId() {
@@ -34,5 +40,13 @@ public class CargoRHPRO implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
     }
 }

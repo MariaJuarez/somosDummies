@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CargoRHPROServiceImpl implements CargoRHPROService {
@@ -17,5 +19,15 @@ public class CargoRHPROServiceImpl implements CargoRHPROService {
     @Override
     public void addCargoRHPRO(CargoRHPRO cargoRHPRO) {
         cargoRHPRORepository.guardar(cargoRHPRO);
+    }
+
+    @Override
+    public List<CargoRHPRO> buscarTodos() {
+        return cargoRHPRORepository.buscarTodos();
+    }
+
+    @Override
+    public void darBaja(CargoRHPRO cargoRHPRO) {
+        cargoRHPRORepository.darBaja(cargoRHPRORepository.buscar(cargoRHPRO));
     }
 }
