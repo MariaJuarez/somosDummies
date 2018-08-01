@@ -30,7 +30,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping("/crud")
-public class PrimerController {
+public class CrudController {
 
     @Autowired
     private EmpleadoService empleadoService;
@@ -72,42 +72,42 @@ public class PrimerController {
         usuarioService.addUsuario(usuario);
     }
 
-    @GetMapping (value = "/todos/empleado")
+    @GetMapping (value = "/list/empleado")
     public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
 
-    @GetMapping (value = "/todos/cliente")
+    @GetMapping (value = "/list/cliente")
     public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
 
-    @GetMapping (value = "/todos/cargoRHPRO")
+    @GetMapping (value = "/list/cargoRHPRO")
     public List<CargoRHPRO> findAllCargoRHPRO(){ return cargoRHPROService.buscarTodos();}
 
-    @GetMapping (value = "/todos/centroCosto")
+    @GetMapping (value = "/list/centroCosto")
     public List<CentroCosto> findAllCentroCosto(){ return centroCostoService.buscarTodos();}
 
-    @GetMapping (value = "/todos/usuario")
+    @GetMapping (value = "/list/usuario")
     public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
 
-    @PostMapping (value = "/baja/empleado")
+    @DeleteMapping (value = "/baja/empleado")
     public void bajaEmpleado(@Valid @RequestBody Empleado empleado) {
         empleadoService.darBaja(empleado);
     }
 
-    @PostMapping (value = "/baja/cliente")
+    @DeleteMapping (value = "/baja/cliente")
     public void bajaCliente(@Valid @RequestBody Cliente cliente) {
         clienteService.darBaja(cliente);
     }
 
-    @PostMapping (value = "/baja/cargoRHPRO")
+    @DeleteMapping (value = "/baja/cargoRHPRO")
     public void bajaCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
         cargoRHPROService.darBaja(cargoRHPRO);
     }
 
-    @PostMapping (value = "/baja/centroCosto")
+    @DeleteMapping (value = "/baja/centroCosto")
     public void bajaCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
         centroCostoService.darBaja(centroCosto);
     }
 
-    @PostMapping (value = "/baja/usuario")
+    @DeleteMapping (value = "/baja/usuario")
     public void bajaUsuario(@Valid @RequestBody Usuario usuario) {
         usuarioService.darBaja(usuario);
     }
