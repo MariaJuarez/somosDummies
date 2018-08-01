@@ -14,6 +14,13 @@ public class Cliente implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    public Cliente(){}
+
+    public Cliente(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+
     public int getId() {
         return id;
     }

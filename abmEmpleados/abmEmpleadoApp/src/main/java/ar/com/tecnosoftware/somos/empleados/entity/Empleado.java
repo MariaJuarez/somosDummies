@@ -42,32 +42,39 @@ public class Empleado implements Serializable {
     @Column(name="sueldo")
     private double sueldo;
 
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
+    @NotNull
+    @ManyToOne(cascade={CascadeType.ALL})
     private Cliente cliente_actual;
 
+    @NotNull
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private CargoRHPRO cargo;
 
+    @NotNull
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private CentroCosto centro_costo;
 
+    @NotNull
     @OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
     private Usuario usuario;
 
     public Empleado() {}
-/*
-    public Empleado(int id, String nombre, int edad, double sueldo) {
-        this.id = id;
+
+    public Empleado(String nombre, int edad, double sueldo, Cliente cliente_actual, CargoRHPRO cargo, CentroCosto centro_costo, Usuario usuario) {
         this.nombre = nombre;
         this.edad = edad;
         this.sueldo = sueldo;
+        this.cliente_actual = cliente_actual;
+        this.cargo = cargo;
+        this.centro_costo = centro_costo;
+        this.usuario = usuario;
     }
-*/
+
     public int getId() {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -95,35 +102,35 @@ public class Empleado implements Serializable {
         this.sueldo = sueldo;
     }
 
-    public Cliente getIdClienteActual() {
+    public Cliente getCliente_actual() {
         return cliente_actual;
     }
 
-    public void setIdClienteActual(Cliente cliente_actual) {
+    public void setCliente_actual(Cliente cliente_actual) {
         this.cliente_actual = cliente_actual;
     }
 
-    public CargoRHPRO getIdCargo() {
+    public CargoRHPRO getCargo() {
         return cargo;
     }
 
-    public void setIdCargo(CargoRHPRO cargo) {
+    public void setCargo(CargoRHPRO cargo) {
         this.cargo = cargo;
     }
 
-    public CentroCosto getIdCentroCosto() {
+    public CentroCosto getCentro_costo() {
         return centro_costo;
     }
 
-    public void setIdCentroCosto(CentroCosto centro_costo) {
+    public void setCentro_costo(CentroCosto centro_costo) {
         this.centro_costo = centro_costo;
     }
 
-    public Usuario getIdUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setIdUsuario(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
