@@ -87,6 +87,31 @@ public class PrimerController {
     @GetMapping (value = "/todos/usuario")
     public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
 
+    @PostMapping (value = "/baja/empleado")
+    public void bajaEmpleado(@Valid @RequestBody Empleado empleado) {
+        empleadoService.darBaja(empleado);
+    }
+
+    @PostMapping (value = "/baja/cliente")
+    public void bajaCliente(@Valid @RequestBody Cliente cliente) {
+        clienteService.darBaja(cliente);
+    }
+
+    @PostMapping (value = "/baja/cargoRHPRO")
+    public void bajaCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
+        cargoRHPROService.darBaja(cargoRHPRO);
+    }
+
+    @PostMapping (value = "/baja/centroCosto")
+    public void bajaCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
+        centroCostoService.darBaja(centroCosto);
+    }
+
+    @PostMapping (value = "/baja/usuario")
+    public void bajaUsuario(@Valid @RequestBody Usuario usuario) {
+        usuarioService.darBaja(usuario);
+    }
+
     @ExceptionHandler(EmpleadoNotFoundException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> onException(EmpleadoNotFoundException e) {
