@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,7 +28,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin
 @RequestMapping("/crud")
-public class PrimerController {
+public class CrudController {
 
     @Autowired
     private EmpleadoService empleadoService;
@@ -62,10 +63,6 @@ public class PrimerController {
         clienteService.addCliente(cliente);
     }
 
-    /**
-     *
-     * @param cargoRHPRO
-     */
     @PostMapping (value = "/crear/cargoRHPRO")
     public void addCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
         cargoRHPROService.addCargoRHPRO(cargoRHPRO);
@@ -87,6 +84,46 @@ public class PrimerController {
     @PostMapping (value = "/crear/usuario")
     public void addUsuario(@Valid @RequestBody Usuario usuario) {
         usuarioService.addUsuario(usuario);
+    }
+
+    @GetMapping (value = "/list/empleado")
+    public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
+
+    @GetMapping (value = "/list/cliente")
+    public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
+
+    @GetMapping (value = "/list/cargoRHPRO")
+    public List<CargoRHPRO> findAllCargoRHPRO(){ return cargoRHPROService.buscarTodos();}
+
+    @GetMapping (value = "/list/centroCosto")
+    public List<CentroCosto> findAllCentroCosto(){ return centroCostoService.buscarTodos();}
+
+    @GetMapping (value = "/list/usuario")
+    public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
+
+    @DeleteMapping (value = "/baja/empleado")
+    public void bajaEmpleado(@Valid @RequestBody Empleado empleado) {
+        empleadoService.darBaja(empleado);
+    }
+
+    @DeleteMapping (value = "/baja/cliente")
+    public void bajaCliente(@Valid @RequestBody Cliente cliente) {
+        clienteService.darBaja(cliente);
+    }
+
+    @DeleteMapping (value = "/baja/cargoRHPRO")
+    public void bajaCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
+        cargoRHPROService.darBaja(cargoRHPRO);
+    }
+
+    @DeleteMapping (value = "/baja/centroCosto")
+    public void bajaCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
+        centroCostoService.darBaja(centroCosto);
+    }
+
+    @DeleteMapping (value = "/baja/usuario")
+    public void bajaUsuario(@Valid @RequestBody Usuario usuario) {
+        usuarioService.darBaja(usuario);
     }
 
     /**

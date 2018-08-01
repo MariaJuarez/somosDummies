@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.empleados.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,11 +20,24 @@ public class Cliente implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
+    @NotBlank
+    @Column(name="baja")
+    private boolean baja;
+
     public Cliente(){}
 
-    public Cliente(int id, String descripcion) {
+    public Cliente(int id, String descripcion, boolean baja) {
         this.id = id;
         this.descripcion = descripcion;
+        this.baja = baja;
+    }
+
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
     }
 
     public int getId() {
