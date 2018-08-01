@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Repository
 public class ClienteRepositoryImpl implements ClienteRepository {
@@ -21,5 +22,17 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     @Override
     public Cliente buscar(Cliente cliente) {
         return entityManager.find(Cliente.class, cliente.getId());
+    }
+
+    @Override
+    public List<Cliente> buscarTodos() {
+        String hql = "FROM Cliente WHERE baja = false";
+        return (List<Cliente>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBaja(Cliente cliente) {
+        cliente.setBaja(true);
+        entityManager.flush();
     }
 }
