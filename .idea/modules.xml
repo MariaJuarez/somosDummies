@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/abmEmpleados/abmEmpleadoApp/empleados.iml" filepath="$PROJECT_DIR$/abmEmpleados/abmEmpleadoApp/empleados.iml" />
-      <module fileurl="file://$PROJECT_DIR$/abmEmpleados/abmEmpleadoApp/src/main/main.iml" filepath="$PROJECT_DIR$/abmEmpleados/abmEmpleadoApp/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/abmEmpleados/abmEmpleadoApp/src/test/test.iml" filepath="$PROJECT_DIR$/abmEmpleados/abmEmpleadoApp/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/abmEmpleadoApp/empleados.iml" filepath="$PROJECT_DIR$/abmEmpleadoApp/empleados.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/somos.iml" filepath="$PROJECT_DIR$/.idea/somos.iml" />
     </modules>
   </component>
 </project>
