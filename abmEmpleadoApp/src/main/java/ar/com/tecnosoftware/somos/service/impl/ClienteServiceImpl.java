@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
-import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entityoOld.Cliente;
 import ar.com.tecnosoftware.somos.repository.ClienteRepository;
 import ar.com.tecnosoftware.somos.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;

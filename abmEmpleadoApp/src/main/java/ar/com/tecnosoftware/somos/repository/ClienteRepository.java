@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.repository;
 
-import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entityoOld.Cliente;
 
 import java.util.List;
 

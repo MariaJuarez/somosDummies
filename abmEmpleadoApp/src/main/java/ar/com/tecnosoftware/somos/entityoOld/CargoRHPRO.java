@@ -1,32 +1,29 @@
-package ar.com.tecnosoftware.somos.entity;
-
-import org.hibernate.validator.constraints.NotBlank;
+package ar.com.tecnosoftware.somos.entityoOld;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Entidad de la DB relacionada a la tabla centro_costo
+ * Entidad de la DB relacionada a la tabla CargoRHPRO
  */
+
 @Entity
-public class CentroCosto implements Serializable {
+public class CargoRHPRO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "decripcion")
+    @Column(name = "descripcion")
     private String descripcion;
 
-    @NotBlank
     @Column(name="baja")
     private boolean baja;
 
-    public CentroCosto(){}
+    public CargoRHPRO(){}
 
-    public CentroCosto(int id, String descripcion, boolean baja) {
-        this.id = id;
+    public CargoRHPRO(String descripcion, boolean baja) {
         this.descripcion = descripcion;
         this.baja = baja;
     }

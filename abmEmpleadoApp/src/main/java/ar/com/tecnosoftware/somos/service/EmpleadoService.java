@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-import ar.com.tecnosoftware.somos.entity.Empleado;
+import ar.com.tecnosoftware.somos.entityoOld.Empleado;
 
 import java.util.List;
 

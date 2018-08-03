@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
-import ar.com.tecnosoftware.somos.entity.CargoRHPRO;
+import ar.com.tecnosoftware.somos.entityoOld.CargoRHPRO;
 import ar.com.tecnosoftware.somos.repository.CargoRHPRORepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.repository;
 
-import ar.com.tecnosoftware.somos.entity.CentroCosto;
+import ar.com.tecnosoftware.somos.entityoOld.CentroCosto;
 
 import java.util.List;
 

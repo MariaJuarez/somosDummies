@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
-import ar.com.tecnosoftware.somos.entity.CentroCosto;
+import ar.com.tecnosoftware.somos.entityoOld.CentroCosto;
 import ar.com.tecnosoftware.somos.repository.CentroCostoRepository;
 import ar.com.tecnosoftware.somos.service.CentroCostoService;
 import org.springframework.beans.factory.annotation.Autowired;

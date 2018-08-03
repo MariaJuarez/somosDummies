@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
-import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entityoOld.Cliente;
 import ar.com.tecnosoftware.somos.repository.ClienteRepository;
 import org.springframework.stereotype.Repository;
 

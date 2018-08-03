@@ -1,53 +1,55 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-public class Usuario implements Serializable {
+public class Usuario {
+    private int idUsuario;
+    private String descUsuario;
+    private Empleado empleado;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "descripcion")
-    private String descripcion;
-
-    @NotBlank
-    @Column(name="baja")
-    private boolean baja;
-
-    public Usuario(){}
-
-    public Usuario(String descripcion, boolean baja) {
-        this.descripcion = descripcion;
-        this.baja = baja;
+    @Column(name = "IdUsuario")
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
-    public int getId() {
-        return id;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Basic
+    @Column(name = "DescUsuario")
+    public String getDescUsuario() {
+        return descUsuario;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setDescUsuario(String descUsuario) {
+        this.descUsuario = descUsuario;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return idUsuario == usuario.idUsuario &&
+                Objects.equals(descUsuario, usuario.descUsuario);
     }
 
-    public boolean isBaja() {
-        return baja;
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(idUsuario, descUsuario);
     }
 
-    public void setBaja(boolean baja) {
-        this.baja = baja;
+    @OneToOne(mappedBy = "usuario")
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 }

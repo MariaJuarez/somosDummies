@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-import ar.com.tecnosoftware.somos.entity.CentroCosto;
+import ar.com.tecnosoftware.somos.entityoOld.CentroCosto;
 
 import java.util.List;
 
