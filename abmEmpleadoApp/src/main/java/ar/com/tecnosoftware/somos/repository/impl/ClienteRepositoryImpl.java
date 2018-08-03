@@ -36,4 +36,4 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         entityManager.flush();
     }
 }
-//daniel puto
+
