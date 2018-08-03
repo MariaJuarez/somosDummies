@@ -1,0 +1,16 @@
+ar\com\tecnosoftware\somos\user\repository\UserRepository.class
+ar\com\tecnosoftware\somos\empleados\service\EmpleadoServiceInterface.class
+ar\com\tecnosoftware\somos\empleados\controller\EmpleadoController.class
+ar\com\tecnosoftware\somos\user\entity\UserRole.class
+ar\com\tecnosoftware\somos\proyecto\entity\Proyecto.class
+ar\com\tecnosoftware\somos\user\entity\UserEntity.class
+ar\com\tecnosoftware\somos\empleados\exception\EmpleadoNotFoundException.class
+ar\com\tecnosoftware\somos\empleados\repository\EmpleadoInterfaceRepository.class
+ar\com\tecnosoftware\somos\SomosApplication.class
+ar\com\tecnosoftware\somos\user\service\UserService.class
+ar\com\tecnosoftware\somos\user\controller\UserController.class
+ar\com\tecnosoftware\somos\empleados\service\EmpleadoService.class
+ar\com\tecnosoftware\somos\empleados\entity\Empleado.class
+ar\com\tecnosoftware\somos\proyecto\controller\ProyectoController.class
+ar\com\tecnosoftware\somos\user\configuration\SecurityConfiguration.class
+ar\com\tecnosoftware\somos\components\RequestTimeInterceptor.class
