@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.controller;
 
-import ar.com.tecnosoftware.somos.entity.*;
+import ar.com.tecnosoftware.somos.entityoOld.*;
 import ar.com.tecnosoftware.somos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

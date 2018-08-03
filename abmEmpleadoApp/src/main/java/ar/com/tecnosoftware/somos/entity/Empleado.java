@@ -1,162 +1,219 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-
-/**
- * Entidad de la DB relacionada a la tabla empleado
- */
-import java.util.Date;
+import java.sql.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Table(name="Empleados")
-public class Empleado implements Serializable {
+public class Empleado {
+    private int idEmpleado;
+    private int legajo;
+    private String nombres;
+    private String apellidos;
+    private String responsable;
+    private Date fehaIngreso;
+    private Date fechaEgreso;
+    private String domicilioLaboral;
+    private String observaciones;
+    private boolean promovidoLps;
+    private boolean activo;
+    private String email;
+    private String telefono;
+    private Cliente clienteEmpleado;
+    private Areas cargo;
+    private Area area;
+    private Usuario usuario;
+    private List<ProyectoEmpleado> proyectosEmpleado;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @NotBlank
-    @Column(name = "nombre")
-    private String nombre;
-
-    @NotNull
-    @Min(value = 18, message = "Debe ser mayor de edad")
-    @Max(value = 80, message = "Edad fuera del rango correcto, debe estar entre los 18 y 80 años")
-    @Column(name="edad")
-    private int edad;
-
-    @NotNull
-    @DecimalMin("8000")
-    @DecimalMax("1000000.00")
-    @Column(name="sueldo")
-    private double sueldo;
-
-    @NotBlank
-    @Column(name="baja")
-    private boolean baja;
-
-    @NotBlank
-    @Column(name="fecha_alta")
-    private Date fechaAlta;
-
-    @Column(name="fecha_baja")
-    private Date fechaBaja;
-
-    /**
-     * No puede ser null
-     * Tiene relacion @ManytoOne ya que un Empleado solo puede tener un cliente
-     *
-     **/
-    @NotNull
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
-    private Cliente cliente_actual;
-
-    /**
-     * No puede ser null
-     * Tiene relacion @ManytoOne ya que un Empleado solo puede tener un cargo
-     * pero un cargo puede pertenecer a muchos empleados
-     *
-     **/
-    @NotNull
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
-    private CargoRHPRO cargo;
-
-    /**
-     * No puede ser null
-     * Tiene relacion @ManytoOne ya que un Empleado solo puede tener un costo
-     * pero un centro_costo puede pertenecer a muchos empleados
-     *
-     **/
-    @NotNull
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
-    private CentroCosto centro_costo;
-
-    /**
-     * No puede ser null
-     * Tiene relacion @OnetoOne ya que un Empleado solo puede tener un usuario
-     * y un usuario solo puede pertenecer a un empleado
-     *
-     **/
-    @NotNull
-    @OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
-    private Usuario usuario;
-
-    public Empleado() {}
-
-    public Empleado(String nombre, int edad, double sueldo, boolean baja, Date fechaAlta, Date fechaBaja, Cliente cliente_actual, CargoRHPRO cargo, CentroCosto centro_costo, Usuario usuario) {
-        this.nombre = nombre;
-        this.edad = edad;
-        this.sueldo = sueldo;
-        this.baja = baja;
-        this.fechaAlta = fechaAlta;
-        this.fechaBaja = fechaBaja;
-        this.cliente_actual = cliente_actual;
-        this.cargo = cargo;
-        this.centro_costo = centro_costo;
-        this.usuario = usuario;
+    @Column(name = "IdEmpleado")
+    public int getIdEmpleado() {
+        return idEmpleado;
     }
 
-    public int getId() {
-        return id;
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Basic
+    @Column(name = "Legajo")
+    public int getLegajo() {
+        return legajo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setLegajo(int legajo) {
+        this.legajo = legajo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    @Basic
+    @Column(name = "Nombres")
+    public String getNombres() {
+        return nombres;
     }
 
-    public int getEdad() {
-        return edad;
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    @Basic
+    @Column(name = "Apellidos")
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public double getSueldo() {
-        return sueldo;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public void setSueldo(double sueldo) {
-        this.sueldo = sueldo;
+    @Basic
+    @Column(name = "Responsable")
+    public String getResponsable() {
+        return responsable;
     }
 
-    public Cliente getCliente_actual() {
-        return cliente_actual;
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
     }
 
-    public void setCliente_actual(Cliente cliente_actual) {
-        this.cliente_actual = cliente_actual;
+    @Basic
+    @Column(name = "FehaIngreso")
+    public Date getFehaIngreso() {
+        return fehaIngreso;
     }
 
-    public CargoRHPRO getCargo() {
+    public void setFehaIngreso(Date fehaIngreso) {
+        this.fehaIngreso = fehaIngreso;
+    }
+
+    @Basic
+    @Column(name = "FechaEgreso")
+    public Date getFechaEgreso() {
+        return fechaEgreso;
+    }
+
+    public void setFechaEgreso(Date fechaEgreso) {
+        this.fechaEgreso = fechaEgreso;
+    }
+
+    @Basic
+    @Column(name = "DomicilioLaboral")
+    public String getDomicilioLaboral() {
+        return domicilioLaboral;
+    }
+
+    public void setDomicilioLaboral(String domicilioLaboral) {
+        this.domicilioLaboral = domicilioLaboral;
+    }
+
+    @Basic
+    @Column(name = "Observaciones")
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    @Basic
+    @Column(name = "PromovidoLPS")
+    public boolean isPromovidoLps() {
+        return promovidoLps;
+    }
+
+    public void setPromovidoLps(boolean promovidoLps) {
+        this.promovidoLps = promovidoLps;
+    }
+
+    @Basic
+    @Column(name = "Activo")
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    @Basic
+    @Column(name = "Email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Basic
+    @Column(name = "Telefono")
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Empleado empleado = (Empleado) o;
+        return idEmpleado == empleado.idEmpleado &&
+                legajo == empleado.legajo &&
+                promovidoLps == empleado.promovidoLps &&
+                activo == empleado.activo &&
+                Objects.equals(nombres, empleado.nombres) &&
+                Objects.equals(apellidos, empleado.apellidos) &&
+                Objects.equals(responsable, empleado.responsable) &&
+                Objects.equals(fehaIngreso, empleado.fehaIngreso) &&
+                Objects.equals(fechaEgreso, empleado.fechaEgreso) &&
+                Objects.equals(domicilioLaboral, empleado.domicilioLaboral) &&
+                Objects.equals(observaciones, empleado.observaciones) &&
+                Objects.equals(email, empleado.email) &&
+                Objects.equals(telefono, empleado.telefono);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(idEmpleado, legajo, nombres, apellidos, responsable, fehaIngreso, fechaEgreso, domicilioLaboral, observaciones, promovidoLps, activo, email, telefono);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleadoComercial", nullable = false)
+    public Cliente getClienteEmpleado() {
+        return clienteEmpleado;
+    }
+
+    public void setClienteEmpleado(Cliente clienteEmpleado) {
+        this.clienteEmpleado = clienteEmpleado;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargoRHPRO")
+    public Areas getCargo() {
         return cargo;
     }
 
-    public void setCargo(CargoRHPRO cargo) {
+    public void setCargo(Areas cargo) {
         this.cargo = cargo;
     }
 
-    public CentroCosto getCentro_costo() {
-        return centro_costo;
+    @OneToOne
+    @JoinColumn(name = "IdCentroCosto", referencedColumnName = "IdCentroCosto")
+    public Area getArea() {
+        return area;
     }
 
-    public void setCentro_costo(CentroCosto centro_costo) {
-        this.centro_costo = centro_costo;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
+    @OneToOne
+    @JoinColumn(name = "IdUsuario", referencedColumnName = "IdEmpleado")
     public Usuario getUsuario() {
         return usuario;
     }
@@ -165,28 +222,12 @@ public class Empleado implements Serializable {
         this.usuario = usuario;
     }
 
-    public boolean isBaja() {
-        return baja;
+    @OneToMany(mappedBy = "empleado")
+    public List<ProyectoEmpleado> getProyectosEmpleado() {
+        return proyectosEmpleado;
     }
 
-    public void setBaja(boolean baja) {
-        this.baja = baja;
+    public void setProyectosEmpleado(List<ProyectoEmpleado> proyectosEmpleado) {
+        this.proyectosEmpleado = proyectosEmpleado;
     }
-
-    public Date getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(Date fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
-
-    public Date getFechaBaja() {
-        return fechaBaja;
-    }
-
-    public void setFechaBaja(Date fechaBaja) {
-        this.fechaBaja = fechaBaja;
-    }
-
 }
