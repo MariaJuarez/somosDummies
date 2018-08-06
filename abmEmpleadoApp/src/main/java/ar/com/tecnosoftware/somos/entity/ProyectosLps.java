@@ -1,8 +1,6 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -17,7 +15,8 @@ public class ProyectosLps {
     private Date fechaInicio;
     private Date fechaFin;
 
-    @Basic
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProyectoLPS")
     public int getIdProyectoLps() {
         return idProyectoLps;

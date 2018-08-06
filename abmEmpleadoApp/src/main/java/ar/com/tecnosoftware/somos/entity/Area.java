@@ -4,13 +4,14 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CentroCosto", schema = "dbo", catalog = "Somos")
 public class Area {
     private int idCentroCosto;
     private String descCentroCosto;
+    private boolean baja;
     private Empleado empleado;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCentroCosto")
     public int getIdCentroCosto() {
         return idCentroCosto;
@@ -28,6 +29,16 @@ public class Area {
 
     public void setDescCentroCosto(String descCentroCosto) {
         this.descCentroCosto = descCentroCosto;
+    }
+
+    @Basic
+    @Column(name = "Baja")
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
     }
 
     @Override

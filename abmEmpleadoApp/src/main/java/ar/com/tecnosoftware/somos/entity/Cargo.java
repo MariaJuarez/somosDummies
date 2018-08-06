@@ -4,13 +4,15 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Areas {
+public class Cargo {
     private int idCargoRhpro;
     private String descCargoRhpro;
+    private boolean baja;
     private Empleado empleado;
 
     @Id
-    @Column(name = "IdCargoRHPRO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IdCargorhpro")
     public int getIdCargoRhpro() {
         return idCargoRhpro;
     }
@@ -29,11 +31,21 @@ public class Areas {
         this.descCargoRhpro = descCargoRhpro;
     }
 
+    @Basic
+    @Column(name = "Baja")
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Areas that = (Areas) o;
+        Cargo that = (Cargo) o;
         return idCargoRhpro == that.idCargoRhpro &&
                 Objects.equals(descCargoRhpro, that.descCargoRhpro);
     }

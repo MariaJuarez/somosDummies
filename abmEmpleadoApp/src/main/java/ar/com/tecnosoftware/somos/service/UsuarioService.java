@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-import ar.com.tecnosoftware.somos.entityoOld.Usuario;
+import ar.com.tecnosoftware.somos.entity.Usuario;
 
 import java.util.List;
 
@@ -10,6 +10,6 @@ public interface UsuarioService {
 
     public List<Usuario> buscarTodos();
 
-    public void darBaja(Usuario usuario);
+    public void darBaja(int id);
 
 }

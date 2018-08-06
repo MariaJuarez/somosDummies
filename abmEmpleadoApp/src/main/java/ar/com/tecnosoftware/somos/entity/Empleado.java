@@ -20,13 +20,15 @@ public class Empleado {
     private boolean activo;
     private String email;
     private String telefono;
-    private Cliente clienteEmpleado;
-    private Areas cargo;
+    private boolean baja;
+    private Cliente clienteActual;
+    private Cargo cargo;
     private Area area;
     private Usuario usuario;
     private List<ProyectoEmpleado> proyectosEmpleado;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdEmpleado")
     public int getIdEmpleado() {
         return idEmpleado;
@@ -156,6 +158,16 @@ public class Empleado {
         this.telefono = telefono;
     }
 
+    @Basic
+    @Column(name = "Baja")
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -183,22 +195,22 @@ public class Empleado {
     }
 
     @ManyToOne
-    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleadoComercial", nullable = false)
-    public Cliente getClienteEmpleado() {
-        return clienteEmpleado;
+    @JoinColumn(name = "IdClienteActual", referencedColumnName = "IdCliente", nullable = false)
+    public Cliente getClienteActual() {
+        return clienteActual;
     }
 
-    public void setClienteEmpleado(Cliente clienteEmpleado) {
-        this.clienteEmpleado = clienteEmpleado;
+    public void setClienteActual(Cliente clienteActual) {
+        this.clienteActual = clienteActual;
     }
 
     @OneToOne
-    @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargoRHPRO")
-    public Areas getCargo() {
+    @JoinColumn(name = "IdCargorhpro", referencedColumnName = "IdCargorhpro")
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(Areas cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
@@ -213,7 +225,7 @@ public class Empleado {
     }
 
     @OneToOne
-    @JoinColumn(name = "IdUsuario", referencedColumnName = "IdEmpleado")
+    @JoinColumn(name = "IdUsuario", referencedColumnName = "IdUsuario")
     public Usuario getUsuario() {
         return usuario;
     }

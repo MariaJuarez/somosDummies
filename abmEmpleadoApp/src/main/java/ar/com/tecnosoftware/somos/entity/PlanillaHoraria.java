@@ -1,17 +1,27 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 public class PlanillaHoraria {
+    private int idPlanillaHoraria;
     private String empleado;
     private int credencial;
     private Date fecha;
     private String tipo;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IdPlanillaHoraria")
+    public int getIdPlanillaHoraria() {
+        return idPlanillaHoraria;
+    }
+
+    public void setIdPlanillaHoraria(int idPlanillaHoraria) {
+        this.idPlanillaHoraria = idPlanillaHoraria;
+    }
 
     @Basic
     @Column(name = "Empleado")

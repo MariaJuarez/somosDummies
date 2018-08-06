@@ -12,6 +12,7 @@ public class Tecnologia {
     private List<ProyectoEmpleado> proyectosEmpleado;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdTecnologia")
     public int getIdTecnologia() {
         return idTecnologia;

@@ -10,6 +10,7 @@ public class TipoProyecto {
     private Proyecto proyecto;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdTipoProyecto")
     public int getIdTipoProyecto() {
         return idTipoProyecto;

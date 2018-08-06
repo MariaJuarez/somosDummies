@@ -1,9 +1,6 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -61,6 +58,7 @@ public class Base {
     private String detalleObservacionesPresentado2013;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     public int getId() {
         return id;

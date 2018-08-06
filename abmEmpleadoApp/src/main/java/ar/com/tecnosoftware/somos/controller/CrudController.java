@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.controller;
 
-import ar.com.tecnosoftware.somos.entityoOld.*;
+import ar.com.tecnosoftware.somos.entity.*;
+import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,10 +36,10 @@ public class CrudController {
     private ClienteService clienteService;
 
     @Autowired
-    private CargoRHPROService cargoRHPROService;
+    private CargoService cargoService;
 
     @Autowired
-    private CentroCostoService centroCostoService;
+    private AreaService areaService;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -61,18 +62,18 @@ public class CrudController {
         clienteService.addCliente(cliente);
     }
 
-    @PostMapping (value = "/crear/cargoRHPRO")
-    public void addCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
-        cargoRHPROService.addCargoRHPRO(cargoRHPRO);
+    @PostMapping (value = "/crear/cargo")
+    public void addCargo(@Valid @RequestBody Cargo cargo) {
+        cargoService.addCargo(cargo);
     }
 
     /**
      *
-     * @param centroCosto
+     * @param area
      */
-    @PostMapping (value = "/crear/centroCosto")
-    public void addCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
-        centroCostoService.addCentroCosto(centroCosto);
+    @PostMapping (value = "/crear/area")
+    public void addArea(@Valid @RequestBody Area area) {
+        areaService.addArea(area);
     }
 
     /**
@@ -90,38 +91,38 @@ public class CrudController {
     @GetMapping (value = "/list/cliente")
     public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
 
-    @GetMapping (value = "/list/cargoRHPRO")
-    public List<CargoRHPRO> findAllCargoRHPRO(){ return cargoRHPROService.buscarTodos();}
+    @GetMapping (value = "/list/cargo")
+    public List<Cargo> findAllCargos(){ return cargoService.buscarTodos();}
 
-    @GetMapping (value = "/list/centroCosto")
-    public List<CentroCosto> findAllCentroCosto(){ return centroCostoService.buscarTodos();}
+    @GetMapping (value = "/list/area")
+    public List<Area> findAllArea(){ return areaService.buscarTodos();}
 
     @GetMapping (value = "/list/usuario")
     public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
 
-    @DeleteMapping (value = "/baja/empleado")
-    public void bajaEmpleado(@Valid @RequestBody Empleado empleado) {
-        empleadoService.darBaja(empleado);
+    @DeleteMapping (value = "/baja/empleado/{id}")
+    public void bajaEmpleado(@RequestParam int id) {
+        empleadoService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/cliente")
-    public void bajaCliente(@Valid @RequestBody Cliente cliente) {
-        clienteService.darBaja(cliente);
+    @DeleteMapping (value = "/baja/cliente/{id}")
+    public void bajaCliente(@RequestParam int id) {
+        clienteService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/cargoRHPRO")
-    public void bajaCargpRHPRO(@Valid @RequestBody CargoRHPRO cargoRHPRO) {
-        cargoRHPROService.darBaja(cargoRHPRO);
+    @DeleteMapping (value = "/baja/cargo/{id}")
+    public void bajaCargo(@RequestParam int id) {
+        cargoService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/centroCosto")
-    public void bajaCentroCosto(@Valid @RequestBody CentroCosto centroCosto) {
-        centroCostoService.darBaja(centroCosto);
+    @DeleteMapping (value = "/baja/area/{id}")
+    public void bajaArea(@RequestParam int id) {
+        areaService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/usuario")
-    public void bajaUsuario(@Valid @RequestBody Usuario usuario) {
-        usuarioService.darBaja(usuario);
+    @DeleteMapping (value = "/baja/usuario/{id}")
+    public void bajaUsuario(@RequestParam int id) {
+        usuarioService.darBaja(id);
     }
 
     /**

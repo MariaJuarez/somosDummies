@@ -7,9 +7,11 @@ import java.util.Objects;
 public class Usuario {
     private int idUsuario;
     private String descUsuario;
+    private boolean baja;
     private Empleado empleado;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdUsuario")
     public int getIdUsuario() {
         return idUsuario;
@@ -27,6 +29,16 @@ public class Usuario {
 
     public void setDescUsuario(String descUsuario) {
         this.descUsuario = descUsuario;
+    }
+
+    @Basic
+    @Column(name = "Baja")
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
     }
 
     @Override

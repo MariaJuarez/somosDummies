@@ -1,7 +1,7 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
-import ar.com.tecnosoftware.somos.entityoOld.Empleado;
 
+import ar.com.tecnosoftware.somos.entity.Empleado;
 import ar.com.tecnosoftware.somos.repository.*;
 import ar.com.tecnosoftware.somos.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +21,20 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     private ClienteRepository clienteRepository;
 
     @Autowired
-    private CargoRHPRORepository cargoRHPRORepository;
+    private CargoRepository cargoRepository;
 
     @Autowired
-    private CentroCostoRepository centroCostoRepository;
+    private AreaRepository areaRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Override
     public void addEmpleado(Empleado empleado) {
-        empleado.setCliente_actual(clienteRepository.buscar(empleado.getCliente_actual()));
-        empleado.setCargo(cargoRHPRORepository.buscar(empleado.getCargo()));
-        empleado.setCentro_costo(centroCostoRepository.buscar(empleado.getCentro_costo()));
-        empleado.setUsuario(usuarioRepository.buscar(empleado.getUsuario()));
+        empleado.setClienteActual(clienteRepository.buscar(empleado.getClienteActual().getIdCliente()));
+        empleado.setCargo(cargoRepository.buscar(empleado.getCargo().getIdCargoRhpro()));
+        empleado.setArea(areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
+        empleado.setUsuario(usuarioRepository.buscar(empleado.getUsuario().getIdUsuario()));
 
         empleadoRepository.guardar(empleado);
     }
@@ -45,8 +45,9 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBaja(Empleado empleado) {
-        empleadoRepository.darBaja(empleadoRepository.buscar(empleado));
+    public void darBaja(int id) {
+        Empleado empleado = empleadoRepository.buscar(id);
+        empleadoRepository.darBaja(empleado);
     }
 }
 

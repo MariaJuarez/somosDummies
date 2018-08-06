@@ -1,9 +1,6 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -35,6 +32,7 @@ public class Sysdiagrams {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "diagram_id")
     public int getDiagramId() {
         return diagramId;

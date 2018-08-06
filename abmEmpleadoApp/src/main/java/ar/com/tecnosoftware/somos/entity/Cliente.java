@@ -11,16 +11,19 @@ public class Cliente {
     private int idLds;
     private String descClienteLps;
     private String grupo;
+    private boolean baja;
     private List<Empleado> empleadosCliente;
     private Rubro rubro;
     private Proyecto proyecto;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCliente")
     public int getIdCliente() {
         return idCliente;
     }
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
@@ -65,6 +68,16 @@ public class Cliente {
         this.grupo = grupo;
     }
 
+    @Basic
+    @Column(name = "Baja")
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,7 +96,7 @@ public class Cliente {
         return Objects.hash(idCliente, descCliente, idLds, descClienteLps, grupo);
     }
 
-    @OneToMany(mappedBy = "clienteEmpleado")
+    @OneToMany(mappedBy = "clienteActual")
     public List<Empleado> getEmpleadosCliente() {
         return empleadosCliente;
     }

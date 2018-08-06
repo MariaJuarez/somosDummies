@@ -1,9 +1,6 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +11,7 @@ public class AliasTecnologia {
     private int idTecnologia;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdAliasTecnologia")
     public int getIdAliasTecnologia() {
         return idAliasTecnologia;

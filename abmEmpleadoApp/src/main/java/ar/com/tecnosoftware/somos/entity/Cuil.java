@@ -1,8 +1,6 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -31,7 +29,8 @@ public class Cuil {
         this.nombre = nombre;
     }
 
-    @Basic
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CUIL")
     public String getCuil() {
         return cuil;

@@ -10,6 +10,7 @@ public class Rubro {
     private Cliente cliente;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdRubro")
     public int getIdRubro() {
         return idRubro;

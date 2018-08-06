@@ -1,16 +1,27 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 public class Data {
+    private int idData;
     private double año;
     private double mes;
     private double legajo;
     private double facturacion;
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idData")
+    public int getIdData() {
+        return idData;
+    }
+
+    public void setIdData(int idData) {
+        this.idData = idData;
+    }
 
     @Basic
     @Column(name = "Año")

@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "LDS", schema = "dbo", catalog = "Somos")
 public class LiderServicio {
     private short idLds;
     private String nombre;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdLDS")
     public short getIdLds() {
         return idLds;

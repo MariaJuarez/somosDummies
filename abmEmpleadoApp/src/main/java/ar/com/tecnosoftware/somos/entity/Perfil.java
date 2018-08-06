@@ -12,6 +12,7 @@ public class Perfil {
     private List<ProyectoEmpleado> proyectosEmpleado;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdPerfil")
     public int getIdPerfil() {
         return idPerfil;
