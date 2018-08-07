@@ -23,7 +23,6 @@ public class Cliente {
         return idCliente;
     }
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }

@@ -5,9 +5,21 @@ import java.util.Objects;
 
 @Entity
 public class Cuil {
+    private int idCuil;
     private double legajo;
     private String nombre;
     private String cuil;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCuil")
+    public int getIdCuil() {
+        return idCuil;
+    }
+
+    public void setIdCuil(int idCuil) {
+        this.idCuil = idCuil;
+    }
 
     @Basic
     @Column(name = "legajo")
@@ -28,10 +40,8 @@ public class Cuil {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CUIL")
+    
+    @Column(name = "cuil")
     public String getCuil() {
         return cuil;
     }
@@ -43,9 +53,10 @@ public class Cuil {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Cuil)) return false;
         Cuil cuil1 = (Cuil) o;
-        return Double.compare(cuil1.legajo, legajo) == 0 &&
+        return idCuil == cuil1.idCuil &&
+                Double.compare(cuil1.legajo, legajo) == 0 &&
                 Objects.equals(nombre, cuil1.nombre) &&
                 Objects.equals(cuil, cuil1.cuil);
     }
@@ -53,6 +64,9 @@ public class Cuil {
     @Override
     public int hashCode() {
 
-        return Objects.hash(legajo, nombre, cuil);
+        return Objects.hash(idCuil, legajo, nombre, cuil);
+    }
+
+    public Cuil() {
     }
 }

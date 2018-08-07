@@ -8,8 +8,8 @@ import java.util.Objects;
 public class ProyectosLps {
     private int idProyectoLps;
     private int idcliente;
-    private String nombreDelProyecto;
-    private String descripciónDelProyecto;
+    private String nombreProyecto;
+    private String descProyecto;
     private String herramientas;
     private String tipo;
     private Date fechaInicio;
@@ -37,23 +37,23 @@ public class ProyectosLps {
     }
 
     @Basic
-    @Column(name = "Nombre del Proyecto")
-    public String getNombreDelProyecto() {
-        return nombreDelProyecto;
+    @Column(name = "nombreProyecto")
+    public String getNombreProyecto() {
+        return nombreProyecto;
     }
 
-    public void setNombreDelProyecto(String nombreDelProyecto) {
-        this.nombreDelProyecto = nombreDelProyecto;
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
     }
 
     @Basic
-    @Column(name = "Descripción del Proyecto")
-    public String getDescripciónDelProyecto() {
-        return descripciónDelProyecto;
+    @Column(name = "descProyecto")
+    public String getDescProyecto() {
+        return descProyecto;
     }
 
-    public void setDescripciónDelProyecto(String descripciónDelProyecto) {
-        this.descripciónDelProyecto = descripciónDelProyecto;
+    public void setDescProyecto(String descProyecto) {
+        this.descProyecto = descProyecto;
     }
 
     @Basic
@@ -103,8 +103,8 @@ public class ProyectosLps {
         ProyectosLps that = (ProyectosLps) o;
         return idProyectoLps == that.idProyectoLps &&
                 idcliente == that.idcliente &&
-                Objects.equals(nombreDelProyecto, that.nombreDelProyecto) &&
-                Objects.equals(descripciónDelProyecto, that.descripciónDelProyecto) &&
+                Objects.equals(nombreProyecto, that.nombreProyecto) &&
+                Objects.equals(descProyecto, that.descProyecto) &&
                 Objects.equals(herramientas, that.herramientas) &&
                 Objects.equals(tipo, that.tipo) &&
                 Objects.equals(fechaInicio, that.fechaInicio) &&
@@ -114,6 +114,6 @@ public class ProyectosLps {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idProyectoLps, idcliente, nombreDelProyecto, descripciónDelProyecto, herramientas, tipo, fechaInicio, fechaFin);
+        return Objects.hash(idProyectoLps, idcliente, nombreProyecto, descProyecto, herramientas, tipo, fechaInicio, fechaFin);
     }
 }

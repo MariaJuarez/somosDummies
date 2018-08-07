@@ -8,7 +8,7 @@ public class EmpleadosRhpro {
     private int idEmpleadosRhpro;
     private String cliente;
     private double empleado;
-    private String apellidoYNombre;
+    private String nombreCompleto;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,13 +42,13 @@ public class EmpleadosRhpro {
     }
 
     @Basic
-    @Column(name = "Apellido y Nombre")
-    public String getApellidoYNombre() {
-        return apellidoYNombre;
+    @Column(name = "nombre_completo")
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public void setApellidoYNombre(String apellidoYNombre) {
-        this.apellidoYNombre = apellidoYNombre;
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     @Override
@@ -58,12 +58,12 @@ public class EmpleadosRhpro {
         EmpleadosRhpro that = (EmpleadosRhpro) o;
         return Double.compare(that.empleado, empleado) == 0 &&
                 Objects.equals(cliente, that.cliente) &&
-                Objects.equals(apellidoYNombre, that.apellidoYNombre);
+                Objects.equals(nombreCompleto, that.nombreCompleto);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(cliente, empleado, apellidoYNombre);
+        return Objects.hash(cliente, empleado, nombreCompleto);
     }
 }
