@@ -1,12 +1,15 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Empleado {
+public class Empleado implements Serializable {
     private int idEmpleado;
     private int legajo;
     private String nombres;
@@ -194,6 +197,7 @@ public class Empleado {
         return Objects.hash(idEmpleado, legajo, nombres, apellidos, responsable, fehaIngreso, fechaEgreso, domicilioLaboral, observaciones, promovidoLps, activo, email, telefono);
     }
 
+
     @ManyToOne
     @JoinColumn(name = "IdClienteActual", referencedColumnName = "IdCliente", nullable = false)
     public Cliente getClienteActual() {
@@ -234,6 +238,7 @@ public class Empleado {
         this.usuario = usuario;
     }
 
+    @Transient
     @OneToMany(mappedBy = "empleado")
     public List<ProyectoEmpleado> getProyectosEmpleado() {
         return proyectosEmpleado;

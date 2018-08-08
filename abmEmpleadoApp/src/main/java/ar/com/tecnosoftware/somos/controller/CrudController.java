@@ -95,7 +95,9 @@ public class CrudController {
     public List<Cargo> findAllCargos(){ return cargoService.buscarTodos();}
 
     @GetMapping (value = "/list/area")
-    public List<Area> findAllArea(){ return areaService.buscarTodos();}
+    public List<Area> findAllArea(){
+        return areaService.buscarTodos();
+    }
 
     @GetMapping (value = "/list/usuario")
     public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}

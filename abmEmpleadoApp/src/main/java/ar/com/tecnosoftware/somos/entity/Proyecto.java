@@ -1,12 +1,13 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Proyecto {
+public class Proyecto implements Serializable {
     private int idProyecto;
     private String jira;
     private int crm;
@@ -248,6 +249,7 @@ public class Proyecto {
         this.tipoProyecto = tipoProyecto;
     }
 
+    @Transient
     @OneToMany(mappedBy = "proyecto")
     public List<ProyectoEmpleado> getProyectosEmpleado() {
         return proyectosEmpleado;

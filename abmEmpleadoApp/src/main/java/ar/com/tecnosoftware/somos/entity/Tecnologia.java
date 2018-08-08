@@ -1,11 +1,12 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Tecnologia {
+public class Tecnologia implements Serializable {
     private int idTecnologia;
     private String descTecnologia;
     private TipoTecnologia tipoTecnologia;
@@ -58,7 +59,7 @@ public class Tecnologia {
     }
 
     @ManyToMany
-    @JoinTable(name = "ProyectoTecnologiaEmpleado", catalog = "Somos", schema = "dbo", joinColumns = @JoinColumn(name = "IdTecnologia", referencedColumnName = "IdTecnologia", nullable = false), inverseJoinColumns = @JoinColumn(name = "IdProyectoEmpleado", referencedColumnName = "IdProyectoEmpleado", nullable = false))
+    @JoinTable(name = "ProyectoTecnologiaEmpleado", joinColumns = @JoinColumn(name = "IdTecnologia", referencedColumnName = "IdTecnologia", nullable = false), inverseJoinColumns = @JoinColumn(name = "IdProyectoEmpleado", referencedColumnName = "IdProyectoEmpleado", nullable = false))
     public List<ProyectoEmpleado> getProyectosEmpleado() {
         return proyectosEmpleado;
     }

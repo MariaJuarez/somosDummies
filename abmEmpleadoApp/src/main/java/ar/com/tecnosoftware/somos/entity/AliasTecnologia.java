@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class AliasTecnologia {
+public class AliasTecnologia implements Serializable {
     private int idAliasTecnologia;
     private String descTecnologia;
     private int idTipoTecnologia;

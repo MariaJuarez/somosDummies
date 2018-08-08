@@ -1,11 +1,12 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class ProyectosLps {
+public class ProyectosLps implements Serializable {
     private int idProyectoLps;
     private int idcliente;
     private String nombreProyecto;

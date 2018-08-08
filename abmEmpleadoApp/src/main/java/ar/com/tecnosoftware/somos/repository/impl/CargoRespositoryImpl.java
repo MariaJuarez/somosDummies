@@ -26,7 +26,7 @@ public class CargoRespositoryImpl implements CargoRepository {
 
     @Override
     public List<Cargo> buscarTodos() {
-        String hql = "FROM Areas WHERE baja = false";
+        String hql = "FROM Cargo WHERE baja = false";
         return (List<Cargo>) entityManager.createQuery(hql).getResultList();
     }
 

@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class TipoProyecto {
+public class TipoProyecto implements Serializable {
     private int idTipoProyecto;
     private String descTipoProyecto;
     private Proyecto proyecto;
@@ -45,6 +46,7 @@ public class TipoProyecto {
         return Objects.hash(idTipoProyecto, descTipoProyecto);
     }
 
+    @Transient
     @OneToOne(mappedBy = "tipoProyecto")
     public Proyecto getProyecto() {
         return proyecto;

@@ -2,6 +2,7 @@ package ar.com.tecnosoftware.somos.repository.impl;
 
 import ar.com.tecnosoftware.somos.entity.Area;
 import ar.com.tecnosoftware.somos.repository.AreaRepository;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -26,8 +27,10 @@ public class AreaRepositoryImpl implements AreaRepository {
 
     @Override
     public List<Area> buscarTodos() {
-        String hql = "FROM Area WHERE baja = false";
-        return (List<Area>) entityManager.createQuery(hql).getResultList();
+
+        Query query = (Query) entityManager.createQuery("FROM Area WHERE baja = false");
+        List<Area> areas = query.list();
+        return areas;
     }
 
     @Override

@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Cuil {
+public class Cuil implements Serializable {
     private int idCuil;
     private double legajo;
     private String nombre;

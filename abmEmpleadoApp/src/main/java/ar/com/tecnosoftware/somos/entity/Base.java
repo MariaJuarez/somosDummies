@@ -1,11 +1,12 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class Base {
+public class Base implements Serializable {
     private int id;
     private double legajo;
     private String apellidos;

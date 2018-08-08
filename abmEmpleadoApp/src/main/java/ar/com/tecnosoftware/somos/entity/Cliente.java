@@ -1,11 +1,14 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
     private int idCliente;
     private String descCliente;
     private int idLds;
@@ -95,6 +98,7 @@ public class Cliente {
         return Objects.hash(idCliente, descCliente, idLds, descClienteLps, grupo);
     }
 
+    @Transient
     @OneToMany(mappedBy = "clienteActual")
     public List<Empleado> getEmpleadosCliente() {
         return empleadosCliente;
@@ -114,6 +118,7 @@ public class Cliente {
         this.rubro = rubro;
     }
 
+    @Transient
     @OneToOne(mappedBy = "cliente")
     public Proyecto getProyecto() {
         return proyecto;

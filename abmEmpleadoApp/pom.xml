@@ -68,7 +68,7 @@
 
 	<repositories>
 		<repository>
-			<idCuil>spring-snapshots</idCuil>
+			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
 			<url>https://repo.spring.io/snapshot</url>
 			<snapshots>
@@ -76,7 +76,7 @@
 			</snapshots>
 		</repository>
 		<repository>
-			<idCuil>spring-milestones</idCuil>
+			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
 			<snapshots>
@@ -87,7 +87,7 @@
 
 	<pluginRepositories>
 		<pluginRepository>
-			<idCuil>spring-snapshots</idCuil>
+			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
 			<url>https://repo.spring.io/snapshot</url>
 			<snapshots>
@@ -95,7 +95,7 @@
 			</snapshots>
 		</pluginRepository>
 		<pluginRepository>
-			<idCuil>spring-milestones</idCuil>
+			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/milestone</url>
 			<snapshots>

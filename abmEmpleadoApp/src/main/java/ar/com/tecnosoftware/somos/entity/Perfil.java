@@ -1,11 +1,12 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Perfil {
+public class Perfil implements Serializable {
     private int idPerfil;
     private String abrvPerfil;
     private String descPerfil;
@@ -58,6 +59,7 @@ public class Perfil {
         return Objects.hash(idPerfil, abrvPerfil, descPerfil);
     }
 
+    @Transient
     @OneToMany(mappedBy = "perfil")
     public List<ProyectoEmpleado> getProyectosEmpleado() {
         return proyectosEmpleado;

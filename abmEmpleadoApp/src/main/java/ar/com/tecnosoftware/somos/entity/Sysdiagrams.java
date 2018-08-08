@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Sysdiagrams {
+public class Sysdiagrams implements Serializable {
     private String name;
     private int principalId;
     private int diagramId;

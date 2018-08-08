@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Campo {
+public class Campo implements Serializable {
     private int idCampo;
     private String descCampo;
     private String tooltipCampo;

@@ -1,12 +1,13 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class ProyectoEmpleado {
+public class ProyectoEmpleado implements Serializable {
     private int idProyectoEmpleado;
     private int anioLps;
     private String tareasProyecto;
@@ -104,6 +105,7 @@ public class ProyectoEmpleado {
         this.perfil = perfil;
     }
 
+    @Transient
     @ManyToMany(mappedBy = "proyectosEmpleado")
     public List<Tecnologia> getTecnologias() {
         return tecnologias;

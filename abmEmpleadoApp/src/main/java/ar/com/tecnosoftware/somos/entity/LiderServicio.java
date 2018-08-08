@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class LiderServicio {
+public class LiderServicio implements Serializable {
     private short idLds;
     private String nombre;
 

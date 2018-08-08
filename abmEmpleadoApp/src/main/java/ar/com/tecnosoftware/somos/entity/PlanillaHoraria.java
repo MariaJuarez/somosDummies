@@ -1,11 +1,12 @@
 package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-public class PlanillaHoraria {
+public class PlanillaHoraria implements Serializable {
     private int idPlanillaHoraria;
     private String empleado;
     private int credencial;
