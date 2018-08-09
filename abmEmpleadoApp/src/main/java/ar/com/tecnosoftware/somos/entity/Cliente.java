@@ -1,118 +1,49 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 public class Cliente implements Serializable {
-    private int idCliente;
-    private String descCliente;
-    private int idLds;
-    private String descClienteLps;
-    private String grupo;
-    private boolean baja;
-    private List<Empleado> empleadosCliente;
-    private Rubro rubro;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCliente")
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
+    private int idCliente;
 
     @Basic
     @Column(name = "DescCliente")
-    public String getDescCliente() {
-        return descCliente;
-    }
-
-    public void setDescCliente(String descCliente) {
-        this.descCliente = descCliente;
-    }
+    private String descCliente;
 
     @Basic
     @Column(name = "IdLDS")
-    public int getIdLds() {
-        return idLds;
-    }
-
-    public void setIdLds(int idLds) {
-        this.idLds = idLds;
-    }
+    private int idLds;
 
     @Basic
     @Column(name = "DescClienteLPS")
-    public String getDescClienteLps() {
-        return descClienteLps;
-    }
-
-    public void setDescClienteLps(String descClienteLps) {
-        this.descClienteLps = descClienteLps;
-    }
+    private String descClienteLps;
 
     @Basic
     @Column(name = "Grupo")
-    public String getGrupo() {
-        return grupo;
-    }
-
-    public void setGrupo(String grupo) {
-        this.grupo = grupo;
-    }
+    private String grupo;
 
     @Basic
     @Column(name = "Baja")
-    public boolean isBaja() {
-        return baja;
-    }
-
-    public void setBaja(boolean baja) {
-        this.baja = baja;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return idCliente == cliente.idCliente &&
-                idLds == cliente.idLds &&
-                Objects.equals(descCliente, cliente.descCliente) &&
-                Objects.equals(descClienteLps, cliente.descClienteLps) &&
-                Objects.equals(grupo, cliente.grupo);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(idCliente, descCliente, idLds, descClienteLps, grupo);
-    }
+    private boolean baja;
 
     @OneToMany
-    @JoinColumn(name="idEmpleado")
-    public List<Empleado> getEmpleadosCliente() {
-        return empleadosCliente;
-    }
-
-    public void setEmpleadosCliente(List<Empleado> empleadosCliente) {
-        this.empleadosCliente = empleadosCliente;
-    }
+    @JoinColumn(name="IdEmpleado", referencedColumnName = "IdEmpleado")
+    private List<Empleado> empleadosCliente;
 
     @OneToOne
     @JoinColumn(name = "IdRubro", referencedColumnName = "IdRubro")
-    public Rubro getRubro() {
-        return rubro;
-    }
-
-    public void setRubro(Rubro rubro) {
-        this.rubro = rubro;
-    }
+    private Rubro rubro;
 
 }

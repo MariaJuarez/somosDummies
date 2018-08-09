@@ -1,58 +1,27 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 public class Area implements Serializable {
-    private int idCentroCosto;
-    private String descCentroCosto;
-    private boolean baja;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCentroCosto")
-    public int getIdCentroCosto() {
-        return idCentroCosto;
-    }
-
-    public void setIdCentroCosto(int idCentroCosto) {
-        this.idCentroCosto = idCentroCosto;
-    }
+    private int idCentroCosto;
 
     @Basic
     @Column(name = "DescCentroCosto")
-    public String getDescCentroCosto() {
-        return descCentroCosto;
-    }
-
-    public void setDescCentroCosto(String descCentroCosto) {
-        this.descCentroCosto = descCentroCosto;
-    }
+    private String descCentroCosto;
 
     @Basic
     @Column(name = "Baja")
-    public boolean isBaja() {
-        return baja;
-    }
-
-    public void setBaja(boolean baja) {
-        this.baja = baja;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Area area = (Area) o;
-        return idCentroCosto == area.idCentroCosto &&
-                Objects.equals(descCentroCosto, area.descCentroCosto);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idCentroCosto, descCentroCosto);
-    }
+    private boolean baja;
 
 }

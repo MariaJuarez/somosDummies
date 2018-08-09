@@ -1,60 +1,26 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 public class Perfil implements Serializable {
-    private int idPerfil;
-    private String abrvPerfil;
-    private String descPerfil;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdPerfil")
-    public int getIdPerfil() {
-        return idPerfil;
-    }
-
-    public void setIdPerfil(int idPerfil) {
-        this.idPerfil = idPerfil;
-    }
+    private int idPerfil;
 
     @Basic
     @Column(name = "AbrvPerfil")
-    public String getAbrvPerfil() {
-        return abrvPerfil;
-    }
-
-    public void setAbrvPerfil(String abrvPerfil) {
-        this.abrvPerfil = abrvPerfil;
-    }
+    private String abrvPerfil;
 
     @Basic
     @Column(name = "DescPerfil")
-    public String getDescPerfil() {
-        return descPerfil;
-    }
-
-    public void setDescPerfil(String descPerfil) {
-        this.descPerfil = descPerfil;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Perfil perfil = (Perfil) o;
-        return idPerfil == perfil.idPerfil &&
-                Objects.equals(abrvPerfil, perfil.abrvPerfil) &&
-                Objects.equals(descPerfil, perfil.descPerfil);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(idPerfil, abrvPerfil, descPerfil);
-    }
-
+    private String descPerfil;
 }
