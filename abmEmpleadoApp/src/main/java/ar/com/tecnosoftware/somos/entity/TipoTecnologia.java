@@ -2,14 +2,12 @@ package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class TipoTecnologia implements Serializable {
     private int idTipoTecnologia;
     private String descTipoTecnologia;
-    private List<Tecnologia> tecnologias;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,13 +45,4 @@ public class TipoTecnologia implements Serializable {
         return Objects.hash(idTipoTecnologia, descTipoTecnologia);
     }
 
-    @Transient
-    @OneToMany(mappedBy = "tipoTecnologia")
-    public List<Tecnologia> getTecnologias() {
-        return tecnologias;
-    }
-
-    public void setTecnologias(List<Tecnologia> tecnologias) {
-        this.tecnologias = tecnologias;
-    }
 }

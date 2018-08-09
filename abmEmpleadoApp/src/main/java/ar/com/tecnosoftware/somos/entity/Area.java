@@ -10,8 +10,6 @@ public class Area implements Serializable {
     private String descCentroCosto;
     private boolean baja;
 
-    private Empleado empleado;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCentroCosto")
@@ -57,13 +55,4 @@ public class Area implements Serializable {
         return Objects.hash(idCentroCosto, descCentroCosto);
     }
 
-    @Transient
-    @OneToOne(mappedBy = "area", fetch = FetchType.LAZY)
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
 }

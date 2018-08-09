@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Rubro implements Serializable {
     private int idRubro;
     private String descRubro;
-    private Cliente cliente;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,13 +45,4 @@ public class Rubro implements Serializable {
         return Objects.hash(idRubro, descRubro);
     }
 
-    @Transient
-    @OneToOne(mappedBy = "rubro")
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 }

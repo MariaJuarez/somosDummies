@@ -3,7 +3,6 @@ package ar.com.tecnosoftware.somos.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +14,6 @@ public class ProyectoEmpleado implements Serializable {
     private Empleado empleado;
     private Proyecto proyecto;
     private Perfil perfil;
-    private List<Tecnologia> tecnologias;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,13 +103,4 @@ public class ProyectoEmpleado implements Serializable {
         this.perfil = perfil;
     }
 
-    @Transient
-    @ManyToMany(mappedBy = "proyectosEmpleado")
-    public List<Tecnologia> getTecnologias() {
-        return tecnologias;
-    }
-
-    public void setTecnologias(List<Tecnologia> tecnologias) {
-        this.tecnologias = tecnologias;
-    }
 }

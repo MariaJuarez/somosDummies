@@ -1,7 +1,5 @@
 package ar.com.tecnosoftware.somos.entity;
 
-
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -14,21 +12,21 @@ public class Empleado implements Serializable {
     private int legajo;
     private String nombres;
     private String apellidos;
+    private String cuil;
     private String responsable;
     private Date fehaIngreso;
     private Date fechaEgreso;
     private String domicilioLaboral;
     private String observaciones;
     private boolean promovidoLps;
-    private boolean activo;
     private String email;
     private String telefono;
     private boolean baja;
-    private Cliente clienteActual;
     private Cargo cargo;
     private Area area;
     private Usuario usuario;
-    private List<ProyectoEmpleado> proyectosEmpleado;
+    private Senority senority;
+    private List<Tecnologia> tecnologias;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,6 +67,16 @@ public class Empleado implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    @Basic
+    @Column(name = "Cuil")
+    public String getCuil() {
+        return cuil;
+    }
+
+    public void setCuil(String cuil) {
+        this.cuil = cuil;
     }
 
     @Basic
@@ -132,16 +140,6 @@ public class Empleado implements Serializable {
     }
 
     @Basic
-    @Column(name = "Activo")
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
-
-    @Basic
     @Column(name = "Email")
     public String getEmail() {
         return email;
@@ -179,9 +177,10 @@ public class Empleado implements Serializable {
         return idEmpleado == empleado.idEmpleado &&
                 legajo == empleado.legajo &&
                 promovidoLps == empleado.promovidoLps &&
-                activo == empleado.activo &&
+                baja == empleado.baja &&
                 Objects.equals(nombres, empleado.nombres) &&
                 Objects.equals(apellidos, empleado.apellidos) &&
+                Objects.equals(cuil, empleado.cuil) &&
                 Objects.equals(responsable, empleado.responsable) &&
                 Objects.equals(fehaIngreso, empleado.fehaIngreso) &&
                 Objects.equals(fechaEgreso, empleado.fechaEgreso) &&
@@ -194,18 +193,7 @@ public class Empleado implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idEmpleado, legajo, nombres, apellidos, responsable, fehaIngreso, fechaEgreso, domicilioLaboral, observaciones, promovidoLps, activo, email, telefono);
-    }
-
-
-    @ManyToOne
-    @JoinColumn(name = "IdClienteActual", referencedColumnName = "IdCliente", nullable = false)
-    public Cliente getClienteActual() {
-        return clienteActual;
-    }
-
-    public void setClienteActual(Cliente clienteActual) {
-        this.clienteActual = clienteActual;
+        return Objects.hash(idEmpleado, legajo, nombres, apellidos, cuil, responsable, fehaIngreso, fechaEgreso, domicilioLaboral, observaciones, promovidoLps, baja, email, telefono);
     }
 
     @OneToOne
@@ -238,13 +226,25 @@ public class Empleado implements Serializable {
         this.usuario = usuario;
     }
 
-    @Transient
-    @OneToMany(mappedBy = "empleado")
-    public List<ProyectoEmpleado> getProyectosEmpleado() {
-        return proyectosEmpleado;
+    @Enumerated(EnumType.ORDINAL)
+    public Senority getSenority() {
+        return senority;
     }
 
-    public void setProyectosEmpleado(List<ProyectoEmpleado> proyectosEmpleado) {
-        this.proyectosEmpleado = proyectosEmpleado;
+    public void setSenority(Senority senority) {
+        this.senority = senority;
     }
+
+    @ManyToMany
+    @JoinTable(name = "empleadosTecnologias",
+            joinColumns = @JoinColumn(name = "idEmpleado"),
+            inverseJoinColumns = @JoinColumn(name = "idTecnologia"))
+    public List<Tecnologia> getTecnologias() {
+        return tecnologias;
+    }
+
+    public void setTecnologias(List<Tecnologia> tecnologias) {
+        this.tecnologias = tecnologias;
+    }
+
 }

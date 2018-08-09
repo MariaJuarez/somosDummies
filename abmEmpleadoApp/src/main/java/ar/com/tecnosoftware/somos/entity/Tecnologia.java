@@ -2,7 +2,6 @@ package ar.com.tecnosoftware.somos.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +9,7 @@ public class Tecnologia implements Serializable {
     private int idTecnologia;
     private String descTecnologia;
     private TipoTecnologia tipoTecnologia;
-    private List<ProyectoEmpleado> proyectosEmpleado;
+    private Senority senority;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,13 +57,13 @@ public class Tecnologia implements Serializable {
         this.tipoTecnologia = tipoTecnologia;
     }
 
-    @ManyToMany
-    @JoinTable(name = "ProyectoTecnologiaEmpleado", joinColumns = @JoinColumn(name = "IdTecnologia", referencedColumnName = "IdTecnologia", nullable = false), inverseJoinColumns = @JoinColumn(name = "IdProyectoEmpleado", referencedColumnName = "IdProyectoEmpleado", nullable = false))
-    public List<ProyectoEmpleado> getProyectosEmpleado() {
-        return proyectosEmpleado;
+    @Enumerated(EnumType.ORDINAL)
+    public Senority getSenority() {
+        return senority;
     }
 
-    public void setProyectosEmpleado(List<ProyectoEmpleado> proyectosEmpleado) {
-        this.proyectosEmpleado = proyectosEmpleado;
+    public void setSenority(Senority senority) {
+        this.senority = senority;
     }
+
 }

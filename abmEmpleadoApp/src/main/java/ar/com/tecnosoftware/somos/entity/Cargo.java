@@ -9,7 +9,6 @@ public class Cargo implements Serializable {
     private int idCargoRhpro;
     private String descCargoRhpro;
     private boolean baja;
-    private Empleado empleado;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,13 +56,4 @@ public class Cargo implements Serializable {
         return Objects.hash(idCargoRhpro, descCargoRhpro);
     }
 
-    @Transient
-    @OneToOne(mappedBy = "cargo")
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
 }

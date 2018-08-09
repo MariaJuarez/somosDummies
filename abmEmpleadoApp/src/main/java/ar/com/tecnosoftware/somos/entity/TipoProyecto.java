@@ -8,7 +8,6 @@ import java.util.Objects;
 public class TipoProyecto implements Serializable {
     private int idTipoProyecto;
     private String descTipoProyecto;
-    private Proyecto proyecto;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,15 +43,5 @@ public class TipoProyecto implements Serializable {
     public int hashCode() {
 
         return Objects.hash(idTipoProyecto, descTipoProyecto);
-    }
-
-    @Transient
-    @OneToOne(mappedBy = "tipoProyecto")
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
     }
 }

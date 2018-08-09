@@ -8,7 +8,6 @@ import java.util.Objects;
 public class Metodologia implements Serializable {
     private int idMetodologia;
     private String descMetodologia;
-    private Proyecto proyecto;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,13 +45,4 @@ public class Metodologia implements Serializable {
         return Objects.hash(idMetodologia, descMetodologia);
     }
 
-    @Transient
-    @OneToOne(mappedBy = "metodologia")
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
 }
