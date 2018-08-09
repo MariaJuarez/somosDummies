@@ -27,7 +27,7 @@ public class Proyecto implements Serializable {
     private Cliente cliente;
     private Metodologia metodologia;
     private TipoProyecto tipoProyecto;
-    private List<ProyectoEmpleado> proyectosEmpleado;
+    private List<Tecnologia> tecnologias;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -249,13 +249,16 @@ public class Proyecto implements Serializable {
         this.tipoProyecto = tipoProyecto;
     }
 
-    @Transient
-    @OneToMany(mappedBy = "proyecto")
-    public List<ProyectoEmpleado> getProyectosEmpleado() {
-        return proyectosEmpleado;
+    @ManyToMany
+    @JoinTable(name = "proyectosTecnologias",
+            joinColumns = @JoinColumn(name = "idProyecto"),
+            inverseJoinColumns = @JoinColumn(name = "idTecnologia"))
+    public List<Tecnologia> getTecnologias() {
+        return tecnologias;
     }
 
-    public void setProyectosEmpleado(List<ProyectoEmpleado> proyectosEmpleado) {
-        this.proyectosEmpleado = proyectosEmpleado;
+    public void setTecnologias(List<Tecnologia> tecnologias) {
+        this.tecnologias = tecnologias;
     }
+
 }

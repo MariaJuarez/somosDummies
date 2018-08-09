@@ -1,7 +1,5 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,8 +9,6 @@ public class Area implements Serializable {
     private int idCentroCosto;
     private String descCentroCosto;
     private boolean baja;
-
-    private Empleado empleado;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,13 +56,4 @@ public class Area implements Serializable {
         return Objects.hash(idCentroCosto, descCentroCosto);
     }
 
-    @Transient
-    @OneToOne(mappedBy = "area", fetch = FetchType.LAZY)
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
 }

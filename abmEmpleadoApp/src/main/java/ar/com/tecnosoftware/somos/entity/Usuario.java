@@ -9,7 +9,6 @@ public class Usuario implements Serializable {
     private int idUsuario;
     private String descUsuario;
     private boolean baja;
-    private Empleado empleado;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,15 +54,5 @@ public class Usuario implements Serializable {
     public int hashCode() {
 
         return Objects.hash(idUsuario, descUsuario);
-    }
-
-    @Transient
-    @OneToOne(mappedBy = "usuario")
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
     }
 }

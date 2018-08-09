@@ -31,7 +31,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void addEmpleado(Empleado empleado) {
-        empleado.setClienteActual(clienteRepository.buscar(empleado.getClienteActual().getIdCliente()));
+        //empleado.setClienteActual(clienteRepository.buscar(empleado.getClienteActual().getIdCliente()));
         empleado.setCargo(cargoRepository.buscar(empleado.getCargo().getIdCargoRhpro()));
         empleado.setArea(areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
         empleado.setUsuario(usuarioRepository.buscar(empleado.getUsuario().getIdUsuario()));
