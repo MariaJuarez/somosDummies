@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import javax.persistence.*;
 import java.io.Serializable;

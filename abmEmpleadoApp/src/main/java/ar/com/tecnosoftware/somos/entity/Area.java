@@ -1,7 +1,5 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -56,7 +54,6 @@ public class Area implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(idCentroCosto, descCentroCosto);
     }
 

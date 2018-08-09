@@ -36,13 +36,6 @@ mvnv
 *.jar
 *.rar
 
-### NetBeans ###
-/nbproject/private/
-/build/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
 
 # Maven
 log/
