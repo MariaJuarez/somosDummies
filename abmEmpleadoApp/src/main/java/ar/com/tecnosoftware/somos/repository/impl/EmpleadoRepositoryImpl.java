@@ -17,8 +17,8 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Empleado empleado) {
-        entityManager.persist(empleado);
+    public void guardar(Object entity) {
+        entityManager.persist(entity);
     }
 
     @Override
@@ -28,13 +28,13 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     @Override
     public List<Empleado> buscarTodos() {
-        Query query = (Query) entityManager.createQuery("FROM Empleado WHERE baja = false");
-        List<Empleado> empleados = query.list();
-        return empleados;
+        String hql = "FROM Empleado WHERE baja = false";
+        return (List<Empleado>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override
-    public void darBaja(Empleado empleado) {
+    public void darBaja(Object entity) {
+        Empleado empleado = (Empleado)entity;
         empleado.setBaja(true);
         entityManager.flush();
     }

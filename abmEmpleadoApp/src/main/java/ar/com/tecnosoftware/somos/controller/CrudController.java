@@ -50,7 +50,7 @@ public class CrudController {
      */
     @PostMapping (value = "/crear/empleado")
     public void addEmpleado(@Valid @RequestBody Empleado empleado) {
-        empleadoService.addEmpleado(empleado);
+        empleadoService.add(empleado);
     }
 
     /**
@@ -59,12 +59,12 @@ public class CrudController {
      */
     @PostMapping (value = "/crear/cliente")
     public void addCliente(@Valid @RequestBody Cliente cliente) {
-        clienteService.addCliente(cliente);
+        clienteService.add(cliente);
     }
 
     @PostMapping (value = "/crear/cargo")
     public void addCargo(@Valid @RequestBody Cargo cargo) {
-        cargoService.addCargo(cargo);
+        cargoService.add(cargo);
     }
 
     /**
@@ -73,7 +73,7 @@ public class CrudController {
      */
     @PostMapping (value = "/crear/area")
     public void addArea(@Valid @RequestBody Area area) {
-        areaService.addArea(area);
+        areaService.add(area);
     }
 
     /**
@@ -82,7 +82,7 @@ public class CrudController {
      */
     @PostMapping (value = "/crear/usuario")
     public void addUsuario(@Valid @RequestBody Usuario usuario) {
-        usuarioService.addUsuario(usuario);
+        usuarioService.add(usuario);
     }
 
     @GetMapping (value = "/list/empleado")

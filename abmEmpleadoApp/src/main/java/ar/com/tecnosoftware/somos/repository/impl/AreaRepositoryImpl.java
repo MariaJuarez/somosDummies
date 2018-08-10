@@ -16,8 +16,15 @@ public class AreaRepositoryImpl implements AreaRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Area area) {
-        entityManager.persist(area);
+    public void guardar(Object entity) {
+        entityManager.persist(entity);
+    }
+
+    @Override
+    public void darBaja(Object entity) {
+        Area area = (Area) entity;
+        area.setBaja(true);
+        entityManager.flush();
     }
 
     @Override
@@ -27,15 +34,7 @@ public class AreaRepositoryImpl implements AreaRepository {
 
     @Override
     public List<Area> buscarTodos() {
-
-        Query query = (Query) entityManager.createQuery("FROM Area WHERE baja = false");
-        List<Area> areas = query.list();
-        return areas;
-    }
-
-    @Override
-    public void darBaja(Area area) {
-        area.setBaja(true);
-        entityManager.flush();
+        String hql = "FROM Area WHERE baja = false";
+        return (List<Area>) entityManager.createQuery(hql).getResultList();
     }
 }

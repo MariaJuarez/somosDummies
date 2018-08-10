@@ -17,8 +17,13 @@ public class ClienteServiceImpl implements ClienteService {
     private ClienteRepository clienteRepository;
 
     @Override
-    public void addCliente(Cliente cliente) {
-        clienteRepository.guardar(cliente);
+    public void add(Object entity) {
+        clienteRepository.guardar((Cliente) entity);
+    }
+
+    @Override
+    public Object buscar(int id) {
+        return clienteRepository.buscar(id);
     }
 
     @Override
@@ -28,7 +33,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void darBaja(int id) {
-        Cliente cliente = clienteRepository.buscar(id);
+        Cliente cliente = (Cliente) clienteRepository.buscar(id);
         clienteRepository.darBaja(cliente);
     }
 }

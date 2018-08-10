@@ -17,8 +17,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public void addUsuario(Usuario usuario) {
-        usuarioRepository.guardar(usuario);
+    public void add(Object entity) {
+        usuarioRepository.guardar((Usuario) entity);
+    }
+
+    @Override
+    public Object buscar(int id) {
+        return usuarioRepository.buscar(id);
     }
 
     @Override
@@ -28,7 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void darBaja(int id) {
-        Usuario usuario = usuarioRepository.buscar(id);
+        Usuario usuario = (Usuario) usuarioRepository.buscar(id);
         usuarioRepository.darBaja(usuario);
     }
 }
