@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -39,7 +38,6 @@ public class Cliente implements Serializable {
     private boolean baja;
 
     @OneToMany
-    @JoinColumn(name="IdEmpleado", referencedColumnName = "IdEmpleado")
     private List<Empleado> empleadosCliente;
 
     @OneToOne
