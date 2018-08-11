@@ -6,18 +6,21 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
 @Getter
 @Setter
 @Entity
-public class TipoTecnologia implements Serializable {
-
+public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdTipoTecnologia")
-    private int idTipoTecnologia;
+    @Column(name = "IdCargorhpro")
+    private int idCargoRhpro;
 
     @Basic
-    @Column(name = "DescTipoTecnologia")
-    private String descTipoTecnologia;
+    @Column(name = "DescCargoRHPRO")
+    private String descCargoRhpro;
 
+    @Basic
+    @Column(name = "Baja")
+    private boolean baja;
 }

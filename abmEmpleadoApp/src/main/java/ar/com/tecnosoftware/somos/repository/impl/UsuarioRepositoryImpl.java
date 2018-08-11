@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
-import ar.com.tecnosoftware.somos.entityoOld.Usuario;
+import ar.com.tecnosoftware.somos.entity.Usuario;
 import ar.com.tecnosoftware.somos.repository.UsuarioRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +20,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public Usuario buscar(Usuario usuario) {
-        return entityManager.find(Usuario.class, usuario.getId());
+    public Usuario buscar(int id) {
+        return entityManager.find(Usuario.class, id);
     }
 
     @Override

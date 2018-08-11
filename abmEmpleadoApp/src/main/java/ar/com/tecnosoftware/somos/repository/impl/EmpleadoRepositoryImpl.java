@@ -1,7 +1,9 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
-import ar.com.tecnosoftware.somos.entityoOld.Empleado;
+import ar.com.tecnosoftware.somos.entity.Area;
+import ar.com.tecnosoftware.somos.entity.Empleado;
 import ar.com.tecnosoftware.somos.repository.EmpleadoRepository;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,19 +22,20 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public Empleado buscar(Empleado empleado) {
-        return entityManager.find(Empleado.class, empleado);
+    public Empleado buscar(int id) {
+        return entityManager.find(Empleado.class, id);
     }
 
     @Override
     public List<Empleado> buscarTodos() {
-        String hql = "FROM Empleado WHERE baja = false";
-        return (List<Empleado>) entityManager.createQuery(hql).getResultList();
+        Query query = (Query) entityManager.createQuery("FROM Empleado WHERE baja = false");
+        List<Empleado> empleados = query.list();
+        return empleados;
     }
 
     @Override
     public void darBaja(Empleado empleado) {
-        empleado.setBaja(false);
+        empleado.setBaja(true);
         entityManager.flush();
     }
 }

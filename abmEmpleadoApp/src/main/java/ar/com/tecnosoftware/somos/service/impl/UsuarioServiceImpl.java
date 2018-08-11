@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
-import ar.com.tecnosoftware.somos.entityoOld.Usuario;
+import ar.com.tecnosoftware.somos.entity.Usuario;
 import ar.com.tecnosoftware.somos.repository.UsuarioRepository;
 import ar.com.tecnosoftware.somos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void darBaja(Usuario usuario) {
-        usuarioRepository.darBaja(usuarioRepository.buscar(usuario));
+    public void darBaja(int id) {
+        Usuario usuario = usuarioRepository.buscar(id);
+        usuarioRepository.darBaja(usuario);
     }
 }
