@@ -1,10 +1,7 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 
-import ar.com.tecnosoftware.somos.entity.Area;
-import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.entity.Empleado;
-import ar.com.tecnosoftware.somos.entity.Usuario;
 import ar.com.tecnosoftware.somos.repository.*;
 import ar.com.tecnosoftware.somos.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +28,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void add(Object entity) {
-        Empleado empleado = (Empleado) entity;
-        empleado.setCargo((Cargo) cargoRepository.buscar(empleado.getCargo().getIdCargoRhpro()));
-        empleado.setArea((Area) areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
-        empleado.setUsuario((Usuario) usuarioRepository.buscar(empleado.getUsuario().getIdUsuario()));
-
-        empleadoRepository.guardar(empleado);
+        empleadoRepository.guardar((Empleado) entity);
     }
 
     @Override

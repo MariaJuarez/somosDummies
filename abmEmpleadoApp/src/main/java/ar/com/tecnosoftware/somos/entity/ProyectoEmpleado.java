@@ -26,6 +26,14 @@ public class ProyectoEmpleado implements Serializable {
     private String tareasProyecto;
 
     @Basic
+    @Column(name = "FechaInicio")
+    private Date fechaInicio;
+
+    @Basic
+    @Column(name = "FechaFin")
+    private Date fechaFin;
+
+    @Basic
     @Column(name = "FechaRelevamiento")
     private Date fechaRelevamiento;
 
@@ -38,7 +46,7 @@ public class ProyectoEmpleado implements Serializable {
     private Proyecto proyecto;
 
     @ManyToOne
-    @JoinColumn(name = "IdPerfil", referencedColumnName = "IdPerfil")
-    private Perfil perfil;
+    @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargo")
+    private Cargo cargo;
 
 }

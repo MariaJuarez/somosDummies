@@ -37,9 +37,6 @@ public class Cliente implements Serializable {
     @Column(name = "Baja")
     private boolean baja;
 
-    @OneToMany
-    private List<Empleado> empleadosCliente;
-
     @OneToOne
     @JoinColumn(name = "IdRubro", referencedColumnName = "IdRubro")
     private Rubro rubro;
