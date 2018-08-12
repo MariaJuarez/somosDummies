@@ -1,7 +1,10 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 
+import ar.com.tecnosoftware.somos.entity.Area;
+import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.entity.Empleado;
+import ar.com.tecnosoftware.somos.entity.Usuario;
 import ar.com.tecnosoftware.somos.repository.*;
 import ar.com.tecnosoftware.somos.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,6 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     private EmpleadoRepository empleadoRepository;
 
     @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Autowired
     private CargoRepository cargoRepository;
 
     @Autowired
@@ -30,13 +30,18 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public void addEmpleado(Empleado empleado) {
-        //empleado.setClienteActual(clienteRepository.buscar(empleado.getClienteActual().getIdCliente()));
-        empleado.setCargo(cargoRepository.buscar(empleado.getCargo().getIdCargoRhpro()));
-        empleado.setArea(areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
-        empleado.setUsuario(usuarioRepository.buscar(empleado.getUsuario().getIdUsuario()));
+    public void add(Object entity) {
+        Empleado empleado = (Empleado) entity;
+        empleado.setCargo((Cargo) cargoRepository.buscar(empleado.getCargo().getIdCargoRhpro()));
+        empleado.setArea((Area) areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
+        empleado.setUsuario((Usuario) usuarioRepository.buscar(empleado.getUsuario().getIdUsuario()));
 
         empleadoRepository.guardar(empleado);
+    }
+
+    @Override
+    public Object buscar(int id) {
+        return empleadoRepository.buscar(id);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void darBaja(int id) {
-        Empleado empleado = empleadoRepository.buscar(id);
+        Empleado empleado = (Empleado) empleadoRepository.buscar(id);
         empleadoRepository.darBaja(empleado);
     }
 }

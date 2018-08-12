@@ -15,8 +15,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Usuario usuario) {
-        entityManager.persist(usuario);
+    public void guardar(Object entity) {
+        entityManager.persist(entity);
     }
 
     @Override
@@ -31,7 +31,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public void darBaja(Usuario usuario) {
+    public void darBaja(Object entity) {
+        Usuario usuario = (Usuario) entity;
         usuario.setBaja(true);
         entityManager.flush();
     }

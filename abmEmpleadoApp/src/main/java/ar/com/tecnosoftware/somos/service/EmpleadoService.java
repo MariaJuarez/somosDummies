@@ -1,14 +1,5 @@
 package ar.com.tecnosoftware.somos.service;
 
+public interface EmpleadoService extends Service{
 
-import ar.com.tecnosoftware.somos.entity.Empleado;
-
-import java.util.List;
-
-public interface EmpleadoService {
-    public void addEmpleado(Empleado empleado);
-
-    public List<Empleado> buscarTodos();
-
-    public void darBaja(int id);
 }
