@@ -19,4 +19,8 @@ public class LiderServicio implements Serializable {
     @Basic
     @Column(name = "Nombre")
     private String nombre;
+
+    @Basic
+    @Column(name = "Baja")
+    private boolean baja;
 }

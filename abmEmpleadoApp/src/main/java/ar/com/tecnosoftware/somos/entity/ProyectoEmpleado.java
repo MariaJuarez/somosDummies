@@ -49,4 +49,6 @@ public class ProyectoEmpleado implements Serializable {
     @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargo")
     private Cargo cargo;
 
+
+
 }
