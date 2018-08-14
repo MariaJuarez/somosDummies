@@ -82,6 +82,9 @@ public class Empleado implements Serializable {
     @JoinColumn(name = "IdUsuario", referencedColumnName = "IdUsuario")
     private Usuario usuario;
 
+    @ManyToOne
+    private Cliente cliente;
+
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;
 
