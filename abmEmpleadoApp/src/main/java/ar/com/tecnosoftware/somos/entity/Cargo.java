@@ -1,59 +1,26 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
+
+@Getter
+@Setter
 @Entity
 public class Cargo implements Serializable {
-    private int idCargoRhpro;
-    private String descCargoRhpro;
-    private boolean baja;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdCargorhpro")
-    public int getIdCargoRhpro() {
-        return idCargoRhpro;
-    }
-
-    public void setIdCargoRhpro(int idCargoRhpro) {
-        this.idCargoRhpro = idCargoRhpro;
-    }
+    private int idCargoRhpro;
 
     @Basic
     @Column(name = "DescCargoRHPRO")
-    public String getDescCargoRhpro() {
-        return descCargoRhpro;
-    }
-
-    public void setDescCargoRhpro(String descCargoRhpro) {
-        this.descCargoRhpro = descCargoRhpro;
-    }
+    private String descCargoRhpro;
 
     @Basic
     @Column(name = "Baja")
-    public boolean isBaja() {
-        return baja;
-    }
-
-    public void setBaja(boolean baja) {
-        this.baja = baja;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cargo that = (Cargo) o;
-        return idCargoRhpro == that.idCargoRhpro &&
-                Objects.equals(descCargoRhpro, that.descCargoRhpro);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(idCargoRhpro, descCargoRhpro);
-    }
-
+    private boolean baja;
 }
