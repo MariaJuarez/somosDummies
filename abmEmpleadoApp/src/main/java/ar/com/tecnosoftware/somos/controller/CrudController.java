@@ -3,6 +3,14 @@ package ar.com.tecnosoftware.somos.controller;
 import ar.com.tecnosoftware.somos.entity.*;
 import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.service.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -86,7 +94,7 @@ public class CrudController {
     }
 
     @GetMapping (value = "/list/empleado")
-    public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
+    public List<Empleado> findAllEmpleado() throws JRException {return empleadoService.buscarTodos();}
 
     @GetMapping (value = "/list/cliente")
     public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
@@ -125,6 +133,12 @@ public class CrudController {
     @DeleteMapping (value = "/baja/usuario/{id}")
     public void bajaUsuario(@RequestParam int id) {
         usuarioService.darBaja(id);
+    }
+
+    @RequestMapping (value = "/reporte/empleado")
+    public void generarReporte(){
+
+
     }
 
     /**
