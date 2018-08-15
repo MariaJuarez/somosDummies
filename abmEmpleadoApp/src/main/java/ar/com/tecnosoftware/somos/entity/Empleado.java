@@ -70,11 +70,11 @@ public class Empleado implements Serializable {
     @Column(name = "Baja")
     private boolean baja;
 
-    @OneToOne
-    @JoinColumn(name = "IdCargorhpro", referencedColumnName = "IdCargorhpro")
-    private Cargo cargo;
+    @ManyToOne
+    @JoinColumn(name = "IdPerfil", referencedColumnName = "IdPerfil")
+    private Perfil perfil;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "IdCentroCosto", referencedColumnName = "IdCentroCosto")
     private Area area;
 

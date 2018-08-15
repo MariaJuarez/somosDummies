@@ -78,15 +78,15 @@ public class Proyecto implements Serializable {
     @Column(name = "PromovidoLPS")
     private boolean promovidoLps;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "IdCliente", referencedColumnName = "IdCliente")
     private Cliente cliente;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "IdMetodologia", referencedColumnName = "IdMetodologia")
     private Metodologia metodologia;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "IdTipoProyecto", referencedColumnName = "IdTipoProyecto")
     private TipoProyecto tipoProyecto;
 
