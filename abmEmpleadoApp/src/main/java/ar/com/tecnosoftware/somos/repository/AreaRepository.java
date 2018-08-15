@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.repository;
 
-public interface AreaRepository extends Repository {
+import ar.com.tecnosoftware.somos.entity.Area;
+
+public interface AreaRepository extends Repository<Area> {
 
 }

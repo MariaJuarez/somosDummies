@@ -15,8 +15,8 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Object entity) {
-        entityManager.persist(entity);
+    public void guardar(Cliente cliente) {
+        entityManager.persist(cliente);
     }
 
     @Override
@@ -31,8 +31,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     }
 
     @Override
-    public void darBaja(Object entity) {
-        Cliente cliente = (Cliente) entity;
+    public void darBaja(Cliente cliente) {
         cliente.setBaja(true);
         entityManager.flush();
     }

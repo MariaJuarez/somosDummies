@@ -17,12 +17,12 @@ public class AreaServiceImpl implements AreaService {
     private AreaRepository areaRepository;
 
     @Override
-    public void add(Object entity) {
-        areaRepository.guardar((Area) entity);
+    public void add(Area area) {
+        areaRepository.guardar(area);
     }
 
     @Override
-    public Object buscar(int id) {
+    public Area buscar(int id) {
         return areaRepository.buscar(id);
     }
 
@@ -33,7 +33,6 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public void darBaja(int id) {
-        Area area = (Area) areaRepository.buscar(id);
-        areaRepository.darBaja(area);
+        areaRepository.darBaja(areaRepository.buscar(id));
     }
 }

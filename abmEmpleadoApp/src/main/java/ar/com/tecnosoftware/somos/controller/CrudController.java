@@ -5,6 +5,7 @@ import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,6 +44,27 @@ public class CrudController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private PerfilService perfilService;
+
+    @Autowired
+    private RubroService rubroService;
+
+    @Autowired
+    private TecnologiaService tecnologiaService;
+
+    @Autowired
+    private TipoTecnologiaService tipoTecnologiaService;
+
+    @Autowired
+    private ProyectoService proyectoService;
+
+    @Autowired
+    private TipoProyectoService tipoProyectoService;
+
+    @Autowired
+    private MetodologiaService metodologiaService;
 
     /**
      *
@@ -85,46 +107,153 @@ public class CrudController {
         usuarioService.add(usuario);
     }
 
-    @GetMapping (value = "/list/empleado")
+    @PostMapping (value = "/crear/perfil")
+    public void addPerfil(@Valid @RequestBody Perfil perfil) {
+        perfilService.add(perfil);
+    }
+
+    @PostMapping (value = "/crear/rubro")
+    public void addRubro(@Valid @RequestBody Rubro rubro) {
+        rubroService.add(rubro);
+    }
+
+    @PostMapping (value = "/crear/tecnologia")
+    public void addTecnologia(@Valid @RequestBody Tecnologia tecnologia) {
+        tecnologiaService.add(tecnologia);
+    }
+
+    @PostMapping (value = "/crear/tipoTecnologia")
+    public void addTipoTecnologia(@Valid @RequestBody TipoTecnologia tipoTecnologia) {
+        tipoTecnologiaService.add(tipoTecnologia);
+    }
+
+    @PostMapping (value = "/crear/proyecto")
+    public void addProyecto(@Valid @RequestBody Proyecto proyecto) {
+        proyectoService.add(proyecto);
+    }
+
+    @PostMapping (value = "/crear/tipoProyecto")
+    public void addTipoProyecto(@Valid @RequestBody TipoProyecto tipoProyecto) {
+        tipoProyectoService.add(tipoProyecto);
+    }
+
+    @PostMapping (value = "/crear/metodologia")
+    public void addMetodologia(@Valid @RequestBody Metodologia metodologia) {
+        metodologiaService.add(metodologia);
+    }
+
+    @GetMapping (value = "/list/empleados")
     public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
 
-    @GetMapping (value = "/list/cliente")
+    @GetMapping (value = "/list/clientes")
     public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
 
-    @GetMapping (value = "/list/cargo")
+    @GetMapping (value = "/list/cargos")
     public List<Cargo> findAllCargos(){ return cargoService.buscarTodos();}
 
-    @GetMapping (value = "/list/area")
+    @GetMapping (value = "/list/areas")
     public List<Area> findAllArea(){
         return areaService.buscarTodos();
     }
 
-    @GetMapping (value = "/list/usuario")
+    @GetMapping (value = "/list/usuarios")
     public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
 
-    @DeleteMapping (value = "/baja/empleado/{id}")
-    public void bajaEmpleado(@RequestParam int id) {
+    @GetMapping (value = "/list/rubros")
+    public List<Rubro> findAllRubro(){
+        return rubroService.buscarTodos();
+    }
+
+    @GetMapping (value = "/list/perfiles")
+    public List<Perfil> findAllPerfil(){
+        return perfilService.buscarTodos();
+    }
+
+    @GetMapping (value = "/list/tecnologias")
+    public List<Tecnologia> findAllTecnologia(){
+        return tecnologiaService.buscarTodos();
+    }
+
+    @GetMapping (value = "/list/tiposTecnologia")
+    public List<TipoTecnologia> findAllTipoTecnologia(){
+        return tipoTecnologiaService.buscarTodos();
+    }
+
+    @GetMapping (value = "/list/proyectos")
+    public List<Proyecto> findAllProyecto(){
+        return proyectoService.buscarTodos();
+    }
+
+    @GetMapping (value = "/list/tiposProyecto")
+    public List<TipoProyecto> findAllTipoProyecto(){
+        return tipoProyectoService.buscarTodos();
+    }
+
+    @GetMapping (value = "/list/metodologias")
+    public List<Metodologia> findAllMetodologia(){
+        return metodologiaService.buscarTodos();
+    }
+
+    @PutMapping (value = "/baja/empleado/{id}")
+    public void bajaEmpleado(@PathVariable int id) {
         empleadoService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/cliente/{id}")
-    public void bajaCliente(@RequestParam int id) {
+    @PutMapping (value = "/baja/cliente/{id}")
+    public void bajaCliente(@PathVariable int id) {
         clienteService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/cargo/{id}")
-    public void bajaCargo(@RequestParam int id) {
+    @PutMapping (value = "/baja/cargo/{id}")
+    public void bajaCargo(@PathVariable int id) {
         cargoService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/area/{id}")
-    public void bajaArea(@RequestParam int id) {
+    @Transactional
+    @PutMapping (value = "/baja/area/{id}")
+    public void bajaArea(@PathVariable int id, @RequestBody List<Empleado> empleados) {
+        empleadoService.darBajaAreaDeEmpleados(empleados);
         areaService.darBaja(id);
     }
 
-    @DeleteMapping (value = "/baja/usuario/{id}")
-    public void bajaUsuario(@RequestParam int id) {
+    @PutMapping (value = "/baja/usuario/{id}")
+    public void bajaUsuario(@PathVariable int id) {
         usuarioService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/perfil/{id}")
+    public void bajaPerfil(@PathVariable int id) {
+        perfilService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/rubro/{id}")
+    public void bajaRubro(@PathVariable int id) {
+        rubroService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/tecnologia/{id}")
+    public void bajaTecnologia(@PathVariable int id) {
+        tecnologiaService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/tipoTecnologia/{id}")
+    public void bajaTipoTecnologia(@PathVariable int id) {
+        tipoTecnologiaService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/proyecto/{id}")
+    public void bajaProyecto(@PathVariable int id) {
+        proyectoService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/tipoProyecto/{id}")
+    public void bajaTipoProyecto(@PathVariable int id) {
+        tipoProyectoService.darBaja(id);
+    }
+
+    @PutMapping (value = "/baja/metodologia/{id}")
+    public void bajaMetodologia(@PathVariable int id) {
+        metodologiaService.darBaja(id);
     }
 
     /**

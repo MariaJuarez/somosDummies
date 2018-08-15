@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface UsuarioService extends Service{
+import ar.com.tecnosoftware.somos.entity.Usuario;
+
+public interface UsuarioService extends Service<Usuario> {
 
 }

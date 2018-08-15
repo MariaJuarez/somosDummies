@@ -20,4 +20,8 @@ public class TipoTecnologia implements Serializable {
     @Column(name = "DescTipoTecnologia")
     private String descTipoTecnologia;
 
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
+
 }

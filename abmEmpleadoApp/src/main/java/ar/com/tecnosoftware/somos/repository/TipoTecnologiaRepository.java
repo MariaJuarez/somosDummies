@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.repository;
 
-public interface TipoTecnologiaRepository {
+import ar.com.tecnosoftware.somos.entity.TipoTecnologia;
+
+public interface TipoTecnologiaRepository extends Repository<TipoTecnologia> {
 }

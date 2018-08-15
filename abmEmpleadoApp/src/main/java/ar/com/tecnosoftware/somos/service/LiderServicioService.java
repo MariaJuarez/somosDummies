@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface LiderService extends Service {
+import ar.com.tecnosoftware.somos.entity.LiderServicio;
+
+public interface LiderServicioService extends Service<LiderServicio> {
 }

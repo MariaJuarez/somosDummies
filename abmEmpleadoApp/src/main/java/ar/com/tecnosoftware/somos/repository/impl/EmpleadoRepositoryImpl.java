@@ -17,8 +17,8 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Object entity) {
-        entityManager.persist(entity);
+    public void guardar(Empleado empleado) {
+        entityManager.persist(empleado);
     }
 
     @Override
@@ -33,9 +33,20 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public void darBaja(Object entity) {
-        Empleado empleado = (Empleado)entity;
+    public void darBaja(Empleado empleado) {
         empleado.setBaja(true);
         entityManager.flush();
+    }
+
+    @Override
+    public List<Empleado> buscarEmpleadosConArea(int idArea) {
+        String hql = "FROM Empleado WHERE area = " + idArea;
+        return (List<Empleado>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBajaAreaDeEmpleado(Empleado empleado, Area area) {
+        empleado.setArea(area);
+        entityManager.merge(empleado);
     }
 }

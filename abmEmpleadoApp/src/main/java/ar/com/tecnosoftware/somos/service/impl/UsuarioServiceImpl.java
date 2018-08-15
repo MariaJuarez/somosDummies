@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.Usuario;
+import ar.com.tecnosoftware.somos.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.repository.UsuarioRepository;
 import ar.com.tecnosoftware.somos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
+
     @Override
-    public void add(Object entity) {
-        usuarioRepository.guardar((Usuario) entity);
+    public void add(Usuario usuario) {
+        usuario.setEmpleado(empleadoRepository.buscar(usuario.getEmpleado().getIdEmpleado()));
+        usuarioRepository.guardar(usuario);
     }
 
     @Override
-    public Object buscar(int id) {
+    public Usuario buscar(int id) {
         return usuarioRepository.buscar(id);
     }
 
@@ -33,7 +38,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void darBaja(int id) {
-        Usuario usuario = (Usuario) usuarioRepository.buscar(id);
-        usuarioRepository.darBaja(usuario);
+        usuarioRepository.darBaja(usuarioRepository.buscar(id));
     }
 }

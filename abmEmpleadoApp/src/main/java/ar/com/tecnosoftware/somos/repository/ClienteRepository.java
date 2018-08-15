@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.repository;
 
-public interface ClienteRepository extends Repository{
+import ar.com.tecnosoftware.somos.entity.Cliente;
+
+public interface ClienteRepository extends Repository<Cliente> {
 
 }

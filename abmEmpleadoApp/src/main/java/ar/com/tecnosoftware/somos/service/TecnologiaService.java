@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface TecnologiaService {
+import ar.com.tecnosoftware.somos.entity.Tecnologia;
+
+public interface TecnologiaService extends Service<Tecnologia> {
 }

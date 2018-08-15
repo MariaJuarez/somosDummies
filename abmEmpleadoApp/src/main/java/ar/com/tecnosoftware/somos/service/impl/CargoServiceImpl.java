@@ -22,12 +22,12 @@ public class CargoServiceImpl implements CargoService {
      */
 
     @Override
-    public void add(Object entity) {
-        cargoRepository.guardar((Cargo) entity);
+    public void add(Cargo cargo) {
+        cargoRepository.guardar(cargo);
     }
 
     @Override
-    public Object buscar(int id) {
+    public Cargo buscar(int id) {
         return cargoRepository.buscar(id);
     }
 
@@ -38,7 +38,6 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public void darBaja(int id) {
-        Cargo cargo = (Cargo) cargoRepository.buscar(id);
-        cargoRepository.darBaja(cargo);
+        cargoRepository.darBaja(cargoRepository.buscar(id));
     }
 }

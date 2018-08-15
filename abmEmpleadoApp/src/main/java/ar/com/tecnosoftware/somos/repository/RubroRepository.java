@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.repository;
 
-public interface RubroRepository {
+import ar.com.tecnosoftware.somos.entity.Rubro;
+
+public interface RubroRepository extends Repository<Rubro> {
 }

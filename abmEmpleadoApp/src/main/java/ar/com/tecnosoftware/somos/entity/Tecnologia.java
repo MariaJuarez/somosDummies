@@ -20,6 +20,10 @@ public class Tecnologia implements Serializable {
     @Column(name = "DescTecnologia")
     private String descTecnologia;
 
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
+
     @ManyToOne
     @JoinColumn(name = "IdTipoTecnologia", referencedColumnName = "IdTipoTecnologia", nullable = false)
     private TipoTecnologia tipoTecnologia;

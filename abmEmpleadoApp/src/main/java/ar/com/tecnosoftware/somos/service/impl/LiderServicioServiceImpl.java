@@ -1,35 +1,38 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.LiderServicio;
-import ar.com.tecnosoftware.somos.repository.LiderRepository;
-import ar.com.tecnosoftware.somos.service.LiderService;
+import ar.com.tecnosoftware.somos.repository.LiderServicioRepository;
+import ar.com.tecnosoftware.somos.service.LiderServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class LiderServiceImpl implements LiderService {
+@Service
+@Transactional
+public class LiderServicioServiceImpl implements LiderServicioService {
 
     @Autowired
-    private LiderRepository liderRepository;
+    private LiderServicioRepository liderServicioRepository;
 
     @Override
-    public void add(Object entity) {
-        liderRepository.guardar((LiderServicio) entity);
+    public void add(LiderServicio liderServicio) {
+        liderServicioRepository.guardar(liderServicio);
     }
 
     @Override
     public List<LiderServicio> buscarTodos() {
-        return liderRepository.buscarTodos();
+        return liderServicioRepository.buscarTodos();
     }
 
     @Override
     public void darBaja(int id) {
-        LiderServicio liderServicio = (LiderServicio) liderRepository.buscar(id);
-        liderRepository.darBaja(liderServicio);
+        liderServicioRepository.darBaja(liderServicioRepository.buscar(id));
     }
 
     @Override
-    public Object buscar(int id) {
-        return liderRepository.buscar(id);
+    public LiderServicio buscar(int id) {
+        return liderServicioRepository.buscar(id);
     }
 }

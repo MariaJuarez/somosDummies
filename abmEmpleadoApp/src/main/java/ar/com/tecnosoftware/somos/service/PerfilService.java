@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface PerfilService {
+import ar.com.tecnosoftware.somos.entity.Perfil;
+
+public interface PerfilService extends Service<Perfil> {
 }

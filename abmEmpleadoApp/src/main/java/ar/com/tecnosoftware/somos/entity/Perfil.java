@@ -23,4 +23,8 @@ public class Perfil implements Serializable {
     @Basic
     @Column(name = "DescPerfil")
     private String descPerfil;
+
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
 }

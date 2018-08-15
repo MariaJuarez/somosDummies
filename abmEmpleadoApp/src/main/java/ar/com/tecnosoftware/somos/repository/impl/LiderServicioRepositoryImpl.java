@@ -1,13 +1,15 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
 import ar.com.tecnosoftware.somos.entity.LiderServicio;
-import ar.com.tecnosoftware.somos.repository.LiderRepository;
+import ar.com.tecnosoftware.somos.repository.LiderServicioRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class LiderRepositoryImpl implements LiderRepository {
+@Repository
+public class LiderServicioRepositoryImpl implements LiderServicioRepository {
 
     @PersistenceContext
     private EntityManager entityManager;

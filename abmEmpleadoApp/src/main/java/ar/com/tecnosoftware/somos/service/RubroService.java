@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface RubroService {
+import ar.com.tecnosoftware.somos.entity.Rubro;
+
+public interface RubroService extends Service<Rubro> {
 }

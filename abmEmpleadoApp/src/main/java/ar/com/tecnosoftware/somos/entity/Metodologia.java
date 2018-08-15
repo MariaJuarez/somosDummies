@@ -19,4 +19,8 @@ public class Metodologia implements Serializable {
     @Basic
     @Column(name = "DescMetodologia")
     private String descMetodologia;
+
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
 }

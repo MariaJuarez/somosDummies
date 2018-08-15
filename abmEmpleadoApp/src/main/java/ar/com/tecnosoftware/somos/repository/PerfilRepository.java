@@ -1,4 +1,6 @@
 package ar.com.tecnosoftware.somos.repository;
 
-public interface PerfilRepository {
+import ar.com.tecnosoftware.somos.entity.Perfil;
+
+public interface PerfilRepository extends Repository<Perfil> {
 }

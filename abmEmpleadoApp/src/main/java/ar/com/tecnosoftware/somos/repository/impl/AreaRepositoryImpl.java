@@ -2,7 +2,6 @@ package ar.com.tecnosoftware.somos.repository.impl;
 
 import ar.com.tecnosoftware.somos.entity.Area;
 import ar.com.tecnosoftware.somos.repository.AreaRepository;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,13 +15,12 @@ public class AreaRepositoryImpl implements AreaRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Object entity) {
-        entityManager.persist(entity);
+    public void guardar(Area area) {
+        entityManager.persist(area);
     }
 
     @Override
-    public void darBaja(Object entity) {
-        Area area = (Area) entity;
+    public void darBaja(Area area) {
         area.setBaja(true);
         entityManager.flush();
     }
