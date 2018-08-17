@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
 import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entity.Rubro;
 import ar.com.tecnosoftware.somos.repository.ClienteRepository;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +35,17 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     public void darBaja(Cliente cliente) {
         cliente.setBaja(true);
         entityManager.flush();
+    }
+
+    @Override
+    public List<Cliente> buscarClientesConRubro(int idRubro) {
+        String hql = "FROM Cliente WHERE rubro = " +idRubro;
+        return (List<Cliente>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBajaRubroDeCliente(Cliente cliente, Rubro rubro) {
+        cliente.setRubro(rubro);
+        entityManager.merge(cliente);
     }
 }

@@ -7,10 +7,18 @@ import java.util.List;
 
 public interface EmpleadoService extends Service<Empleado>{
 
-    public List<Empleado> buscarEmpleadosConArea(int idArea);
+    List<Empleado> buscarEmpleadosConArea(int idArea);
 
-    public void darBajaAreaDeEmpleados(List<Empleado> empleados);
+    void darBajaAreaDeEmpleados(List<Empleado> empleados);
 
-    public List<Tecnologia>  setTecnologias(List<Tecnologia> tecnologias);
+    List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias);
+
+    List<Empleado> buscarEmpleadosConPerfil(int idPerfil);
+
+    void darBajaPerfilDeEmpleados(List<Empleado> empleados);
+
+    List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
+
+    void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia);
 
 }

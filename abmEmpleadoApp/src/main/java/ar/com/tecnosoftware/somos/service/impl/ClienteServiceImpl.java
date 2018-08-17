@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entity.Rubro;
 import ar.com.tecnosoftware.somos.repository.ClienteRepository;
 import ar.com.tecnosoftware.somos.repository.RubroRepository;
 import ar.com.tecnosoftware.somos.service.ClienteService;
@@ -39,5 +40,18 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void darBaja(int id) {
         clienteRepository.darBaja(clienteRepository.buscar(id));
+    }
+
+    @Override
+    public List<Cliente> buscarClientesConRubro(int idRubro) {
+        return clienteRepository.buscarClientesConRubro(idRubro);
+    }
+
+    @Override
+    public void darBajaRubroDeClientes(List<Cliente> clientes) {
+        Rubro rubro = rubroRepository.buscar(1);
+        for(Cliente cliente : clientes){
+            clienteRepository.darBajaRubroDeCliente(cliente, rubro);
+        }
     }
 }

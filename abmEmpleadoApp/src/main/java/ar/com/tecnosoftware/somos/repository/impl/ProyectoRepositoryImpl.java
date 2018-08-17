@@ -1,6 +1,9 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
+import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entity.Metodologia;
 import ar.com.tecnosoftware.somos.entity.Proyecto;
+import ar.com.tecnosoftware.somos.entity.TipoProyecto;
 import ar.com.tecnosoftware.somos.repository.ProyectoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +37,46 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     public void darBaja(Proyecto proyecto) {
         proyecto.setBaja(true);
         entityManager.flush();
+    }
+
+    @Override
+    public List<Proyecto> buscarProyectosConCliente(int idCliente) {
+        String hql = "FROM Proyecto WHERE cliente = " + idCliente;
+        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public List<Proyecto> buscarProyectosConMetodologia(int idMetodologia) {
+        String hql = "FROM Proyecto WHERE metodologia = " + idMetodologia;
+        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBajaMetodologiaDeProyecto(Proyecto proyecto, Metodologia metodologia) {
+        proyecto.setMetodologia(metodologia);
+        entityManager.merge(proyecto);
+    }
+
+    @Override
+    public List<Proyecto> buscarProyectosConTipoProyecto(int idTipoProyecto) {
+        String hql = "FROM Proyecto WHERE tipoProyecto = " + idTipoProyecto;
+        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBajaTipoProyectoDeProyecto(Proyecto proyecto, TipoProyecto tipoProyecto) {
+        proyecto.setTipoProyecto(tipoProyecto);
+        entityManager.merge(proyecto);
+    }
+
+    @Override
+    public List<Proyecto> buscarProyectosConTecnologia(int idTecnologia) {
+        String hql = "SELECT p FROM Proyecto p JOIN p.tecnologias t WHERE t.idTecnologia = " + idTecnologia;
+        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
+    }
+
+    @Override
+    public void darBajaTecnologiaDeProyecto(Proyecto proyecto) {
+        entityManager.merge(proyecto);
     }
 }

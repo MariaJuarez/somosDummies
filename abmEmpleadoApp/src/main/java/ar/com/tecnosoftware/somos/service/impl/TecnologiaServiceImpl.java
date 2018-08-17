@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.Tecnologia;
+import ar.com.tecnosoftware.somos.entity.TipoTecnologia;
 import ar.com.tecnosoftware.somos.repository.TecnologiaRepository;
 import ar.com.tecnosoftware.somos.repository.TipoTecnologiaRepository;
 import ar.com.tecnosoftware.somos.service.TecnologiaService;
@@ -39,5 +40,19 @@ public class TecnologiaServiceImpl implements TecnologiaService {
     @Override
     public Tecnologia buscar(int id) {
         return tecnologiaRepository.buscar(id);
+    }
+
+
+    @Override
+    public List<Tecnologia> buscarTecnologiasConTipoTecnologia(int idTipoTecnologia) {
+        return tecnologiaRepository.buscarTecnologiasConTipoTecnologia(idTipoTecnologia);
+    }
+
+    @Override
+    public void darBajaTipoTecnologiasDeTecnologias(List<Tecnologia> tecnologias) {
+        TipoTecnologia tipoTecnologia = tipoTecnologiaRepository.buscar(1);
+        for(Tecnologia tecnologia : tecnologias){
+            tecnologiaRepository.darBajaTipoTecnologiaDeTecnologia(tecnologia, tipoTecnologia);
+        }
     }
 }

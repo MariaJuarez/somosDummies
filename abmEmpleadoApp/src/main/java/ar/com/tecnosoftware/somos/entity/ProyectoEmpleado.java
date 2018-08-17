@@ -37,6 +37,10 @@ public class ProyectoEmpleado implements Serializable {
     @Column(name = "FechaRelevamiento")
     private Date fechaRelevamiento;
 
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
+
     @ManyToOne
     @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleado", nullable = false)
     private Empleado empleado;

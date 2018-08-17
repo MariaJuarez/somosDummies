@@ -40,4 +40,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void darBaja(int id) {
         usuarioRepository.darBaja(usuarioRepository.buscar(id));
     }
+
+    @Override
+    public Usuario buscarUsuarioConEmpleado(int idEmpleado) {
+        return usuarioRepository.buscarUsuarioConEmpleado(idEmpleado);
+    }
+
+    @Override
+    public void darBajaEmpleadoDeUsuario(Usuario usuario) {
+        usuarioRepository.darBajaEmpleadoDeUsuario(usuario, empleadoRepository.buscar(1));
+    }
 }

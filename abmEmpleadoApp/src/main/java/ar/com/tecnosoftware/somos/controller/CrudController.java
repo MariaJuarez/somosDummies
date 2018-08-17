@@ -5,7 +5,6 @@ import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -65,6 +64,9 @@ public class CrudController {
 
     @Autowired
     private MetodologiaService metodologiaService;
+
+    @Autowired
+    private ProyectoEmpleadoService proyectoEmpleadoService;
 
     /**
      *
@@ -142,6 +144,11 @@ public class CrudController {
         metodologiaService.add(metodologia);
     }
 
+    @PostMapping (value = "/crear/proyectoEmpleado")
+    public void addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) {
+        proyectoEmpleadoService.add(proyectoEmpleado);
+    }
+
     @GetMapping (value = "/list/empleados")
     public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
 
@@ -189,27 +196,44 @@ public class CrudController {
         return tipoProyectoService.buscarTodos();
     }
 
+    @GetMapping (value = "/list/proyectosEmpleados")
+    public List<ProyectoEmpleado> findAllProyectoEmpleado(){
+        return proyectoEmpleadoService.buscarTodos();
+    }
+
     @GetMapping (value = "/list/metodologias")
     public List<Metodologia> findAllMetodologia(){
         return metodologiaService.buscarTodos();
     }
 
     @PutMapping (value = "/baja/empleado/{id}")
-    public void bajaEmpleado(@PathVariable int id) {
+    public void bajaEmpleado(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados) {
+        proyectoEmpleadoService.darBajaProyectosEmpleados(proyectoEmpleados);
         empleadoService.darBaja(id);
     }
 
+    @PutMapping (value = "/baja/empleadoDeUsuario")
+    public void bajaUsuarioConEmpleado(@RequestBody Usuario usuario) {
+        usuarioService.darBajaEmpleadoDeUsuario(usuario);
+    }
+
     @PutMapping (value = "/baja/cliente/{id}")
-    public void bajaCliente(@PathVariable int id) {
+    public void bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
+        proyectoService.darBajaProyectos(proyectos);
         clienteService.darBaja(id);
     }
 
     @PutMapping (value = "/baja/cargo/{id}")
-    public void bajaCargo(@PathVariable int id) {
+    public void bajaCargo(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados) {
+        proyectoEmpleadoService.darBajaCargoDeProyectosEmpleados(proyectoEmpleados);
         cargoService.darBaja(id);
     }
 
-    @Transactional
+    @PutMapping (value = "/baja/proyectoEmpleado/{id}")
+    public void bajaProyectoEmpleado(@PathVariable int id) {
+        proyectoEmpleadoService.darBaja(id);
+    }
+
     @PutMapping (value = "/baja/area/{id}")
     public void bajaArea(@PathVariable int id, @RequestBody List<Empleado> empleados) {
         empleadoService.darBajaAreaDeEmpleados(empleados);
@@ -222,37 +246,49 @@ public class CrudController {
     }
 
     @PutMapping (value = "/baja/perfil/{id}")
-    public void bajaPerfil(@PathVariable int id) {
+    public void bajaPerfil(@PathVariable int id, @RequestBody List<Empleado> empleados) {
+        empleadoService.darBajaPerfilDeEmpleados(empleados);
         perfilService.darBaja(id);
     }
 
     @PutMapping (value = "/baja/rubro/{id}")
-    public void bajaRubro(@PathVariable int id) {
+    public void bajaRubro(@PathVariable int id, @RequestBody List<Cliente> clientes) {
+        clienteService.darBajaRubroDeClientes(clientes);
         rubroService.darBaja(id);
     }
 
     @PutMapping (value = "/baja/tecnologia/{id}")
-    public void bajaTecnologia(@PathVariable int id) {
+    public void bajaTecnologia(@PathVariable int id, @RequestBody List<Empleado> empleados) {
+        empleadoService.darBajaTecnologiaDeEmpleados(empleados, id);
         tecnologiaService.darBaja(id);
     }
 
+    @PutMapping (value = "/baja/tecnologiaConProyecto/{id}")
+    public void bajaTecnologiaDeProyecto(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
+        proyectoService.darBajaTecnologiaDeProyectos(proyectos, id);
+    }
+
     @PutMapping (value = "/baja/tipoTecnologia/{id}")
-    public void bajaTipoTecnologia(@PathVariable int id) {
+    public void bajaTipoTecnologia(@PathVariable int id, @RequestBody List<Tecnologia> tecnologias) {
+        tecnologiaService.darBajaTipoTecnologiasDeTecnologias(tecnologias);
         tipoTecnologiaService.darBaja(id);
     }
 
     @PutMapping (value = "/baja/proyecto/{id}")
-    public void bajaProyecto(@PathVariable int id) {
+    public void bajaProyecto(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectosEmpleados) {
+        proyectoEmpleadoService.darBajaProyectosEmpleados(proyectosEmpleados);
         proyectoService.darBaja(id);
     }
 
     @PutMapping (value = "/baja/tipoProyecto/{id}")
-    public void bajaTipoProyecto(@PathVariable int id) {
+    public void bajaTipoProyecto(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
+        proyectoService.darBajaTipoProyectoDeProyectos(proyectos);
         tipoProyectoService.darBaja(id);
     }
 
     @PutMapping (value = "/baja/metodologia/{id}")
-    public void bajaMetodologia(@PathVariable int id) {
+    public void bajaMetodologia(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
+        proyectoService.darBajaMetodologiaDeProyectos(proyectos);
         metodologiaService.darBaja(id);
     }
 

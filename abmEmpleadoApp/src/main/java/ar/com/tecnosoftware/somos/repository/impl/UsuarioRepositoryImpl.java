@@ -1,5 +1,6 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
+import ar.com.tecnosoftware.somos.entity.Empleado;
 import ar.com.tecnosoftware.somos.entity.Usuario;
 import ar.com.tecnosoftware.somos.repository.UsuarioRepository;
 import org.springframework.stereotype.Repository;
@@ -27,12 +28,24 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     @Override
     public List<Usuario> buscarTodos() {
         String hql = "FROM Usuario WHERE baja = false";
-        return entityManager.createQuery(hql).getResultList();
+        return (List<Usuario>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override
     public void darBaja(Usuario usuario) {
         usuario.setBaja(true);
         entityManager.flush();
+    }
+
+    @Override
+    public Usuario buscarUsuarioConEmpleado(int idEmpleado) {
+        String hql = "FROM Usuario WHERE empleado = " + idEmpleado;
+        return (Usuario) entityManager.createQuery(hql).getSingleResult();
+    }
+
+    @Override
+    public void darBajaEmpleadoDeUsuario(Usuario usuario, Empleado empleado) {
+        usuario.setEmpleado(empleado);
+        entityManager.merge(usuario);
     }
 }

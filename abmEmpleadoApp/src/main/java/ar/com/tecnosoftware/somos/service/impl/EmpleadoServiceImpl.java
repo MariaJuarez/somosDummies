@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.Area;
 import ar.com.tecnosoftware.somos.entity.Empleado;
+import ar.com.tecnosoftware.somos.entity.Perfil;
 import ar.com.tecnosoftware.somos.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.repository.*;
 import ar.com.tecnosoftware.somos.service.EmpleadoService;
@@ -26,9 +27,13 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Autowired
     private TecnologiaRepository tecnologiaRepository;
 
+    @Autowired
+    private PerfilRepository perfilRepository;
+
     @Override
     public void add(Empleado empleado) {
         empleado.setArea(areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
+        empleado.setTecnologias(setTecnologias(empleado.getTecnologias()));
         empleadoRepository.guardar(empleado);
     }
 
@@ -55,7 +60,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public void darBajaAreaDeEmpleados(List<Empleado> empleados) {
         Area area = areaRepository.buscar(1);
-        for(Empleado empleado :  empleados){
+        for(Empleado empleado : empleados){
             empleadoRepository.darBajaAreaDeEmpleado(empleado, area);
         }
     }
@@ -72,6 +77,33 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         }
 
         return tecnologiasEnBD;
+    }
+
+    @Override
+    public List<Empleado> buscarEmpleadosConPerfil(int idPerfil) {
+        return empleadoRepository.buscarEmpleadosConPerfil(idPerfil);
+    }
+
+    @Override
+    public void darBajaPerfilDeEmpleados(List<Empleado> empleados) {
+        Perfil perfil = perfilRepository.buscar(1);
+        for(Empleado empleado : empleados){
+            empleadoRepository.darBajaPerfilDeEmpleado(empleado, perfil);
+        }
+    }
+
+    @Override
+    public List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia) {
+        return empleadoRepository.buscarEmpleadosConTecnologia(idTecnologia);
+    }
+
+    @Override
+    public void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia) {
+        Tecnologia tecnologia = tecnologiaRepository.buscar(idTecnologia);
+        for (Empleado empleado : empleados){
+            empleado.getTecnologias().remove(tecnologia);
+            empleadoRepository.darBajaTecnologiaDeEmpleado(empleado);
+        }
     }
 }
 
