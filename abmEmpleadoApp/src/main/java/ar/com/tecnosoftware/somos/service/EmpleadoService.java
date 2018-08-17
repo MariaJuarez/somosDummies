@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.service;
 
-import ar.com.tecnosoftware.somos.entityoOld.Empleado;
+
+import ar.com.tecnosoftware.somos.entity.Empleado;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ public interface EmpleadoService {
 
     public List<Empleado> buscarTodos();
 
-    public void darBaja(Empleado empleado);
+    public void darBaja(int id);
 }

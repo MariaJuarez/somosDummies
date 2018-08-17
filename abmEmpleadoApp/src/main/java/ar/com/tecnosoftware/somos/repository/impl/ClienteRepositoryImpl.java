@@ -1,6 +1,6 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
-import ar.com.tecnosoftware.somos.entityoOld.Cliente;
+import ar.com.tecnosoftware.somos.entity.Cliente;
 import ar.com.tecnosoftware.somos.repository.ClienteRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +20,8 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     }
 
     @Override
-    public Cliente buscar(Cliente cliente) {
-        return entityManager.find(Cliente.class, cliente.getId());
+    public Cliente buscar(int id) {
+        return entityManager.find(Cliente.class, id);
     }
 
     @Override

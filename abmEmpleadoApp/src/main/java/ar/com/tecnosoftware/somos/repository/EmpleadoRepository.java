@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.repository;
 
-import ar.com.tecnosoftware.somos.entityoOld.Empleado;
+import ar.com.tecnosoftware.somos.entity.Cargo;
+import ar.com.tecnosoftware.somos.entity.Empleado;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,8 +13,7 @@ public interface EmpleadoRepository {
 
     public List<Empleado> buscarTodos();
 
-    public Empleado buscar(Empleado empleado);
+    public Empleado buscar(int id);
 
     public void darBaja(Empleado empleado);
-
 }
