@@ -4,13 +4,6 @@ import ar.com.tecnosoftware.somos.entity.*;
 import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.service.*;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.export.SimpleExporterInput;
-import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
-import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
-import net.sf.jasperreports.view.JasperViewer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -30,7 +23,6 @@ import java.util.Map;
  * @version: 25/07/2018/A
 
  */
-
 
 @RestController
 @CrossOrigin

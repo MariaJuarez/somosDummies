@@ -13,15 +13,15 @@ public class Area implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdCentroCosto")
-    private int idCentroCosto;
+    @Column(name = "id_centro_costo")
+    private int id_centro_costo;
 
     @Basic
-    @Column(name = "DescCentroCosto")
-    private String descCentroCosto;
+    @Column(name = "desc_centro_costo")
+    private String desc_centro_costo;
 
     @Basic
-    @Column(name = "Baja")
+    @Column(name = "baja")
     private boolean baja;
 
 }
