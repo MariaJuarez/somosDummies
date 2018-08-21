@@ -1,7 +1,9 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entity.Rubro;
 import ar.com.tecnosoftware.somos.repository.ClienteRepository;
+import ar.com.tecnosoftware.somos.repository.RubroRepository;
 import ar.com.tecnosoftware.somos.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,18 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private RubroRepository rubroRepository;
+
     @Override
-    public void addCliente(Cliente cliente) {
+    public void add(Cliente cliente) {
+        cliente.setRubro(rubroRepository.buscar(cliente.getRubro().getIdRubro()));
         clienteRepository.guardar(cliente);
+    }
+
+    @Override
+    public Cliente buscar(int id) {
+        return clienteRepository.buscar(id);
     }
 
     @Override
@@ -28,7 +39,19 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void darBaja(int id) {
-        Cliente cliente = clienteRepository.buscar(id);
-        clienteRepository.darBaja(cliente);
+        clienteRepository.darBaja(clienteRepository.buscar(id));
+    }
+
+    @Override
+    public List<Cliente> buscarClientesConRubro(int idRubro) {
+        return clienteRepository.buscarClientesConRubro(idRubro);
+    }
+
+    @Override
+    public void darBajaRubroDeClientes(List<Cliente> clientes) {
+        Rubro rubro = rubroRepository.buscar(1);
+        for(Cliente cliente : clientes){
+            clienteRepository.darBajaRubroDeCliente(cliente, rubro);
+        }
     }
 }

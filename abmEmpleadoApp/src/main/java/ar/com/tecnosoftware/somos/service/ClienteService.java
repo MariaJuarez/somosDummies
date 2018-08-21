@@ -4,12 +4,10 @@ import ar.com.tecnosoftware.somos.entity.Cliente;
 
 import java.util.List;
 
-public interface ClienteService {
+public interface ClienteService extends Service<Cliente> {
 
-    public void addCliente(Cliente cliente);
+    List<Cliente> buscarClientesConRubro(int idRubro);
 
-    public List<Cliente> buscarTodos();
-
-    public void darBaja(int id);
+    void darBajaRubroDeClientes(List<Cliente> clientes);
 
 }

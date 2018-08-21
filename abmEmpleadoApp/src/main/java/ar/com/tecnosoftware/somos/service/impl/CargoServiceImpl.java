@@ -20,9 +20,15 @@ public class CargoServiceImpl implements CargoService {
      * Metodo para añadir cargo a la DB
      *
      */
+
     @Override
-    public void addCargo(Cargo cargo) {
+    public void add(Cargo cargo) {
         cargoRepository.guardar(cargo);
+    }
+
+    @Override
+    public Cargo buscar(int id) {
+        return cargoRepository.buscar(id);
     }
 
     @Override
@@ -32,7 +38,6 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public void darBaja(int id) {
-        Cargo cargo = cargoRepository.buscar(id);
-        cargoRepository.darBaja(cargo);
+        cargoRepository.darBaja(cargoRepository.buscar(id));
     }
 }

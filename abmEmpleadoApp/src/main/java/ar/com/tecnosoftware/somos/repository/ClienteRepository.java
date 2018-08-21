@@ -1,17 +1,14 @@
 package ar.com.tecnosoftware.somos.repository;
 
 import ar.com.tecnosoftware.somos.entity.Cliente;
+import ar.com.tecnosoftware.somos.entity.Rubro;
 
 import java.util.List;
 
-public interface ClienteRepository {
+public interface ClienteRepository extends Repository<Cliente> {
 
-    public void guardar(Cliente cliente);
+    List<Cliente> buscarClientesConRubro(int idRubro);
 
-    public Cliente buscar(int id);
-
-    public List<Cliente> buscarTodos();
-
-    public void darBaja(Cliente cliente);
+    void darBajaRubroDeCliente(Cliente cliente, Rubro rubro);
 
 }

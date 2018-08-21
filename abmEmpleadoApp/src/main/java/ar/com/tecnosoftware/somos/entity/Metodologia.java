@@ -1,58 +1,26 @@
 package ar.com.tecnosoftware.somos.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 public class Metodologia implements Serializable {
-    private int idMetodologia;
-    private String descMetodologia;
-    private Proyecto proyecto;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdMetodologia")
-    public int getIdMetodologia() {
-        return idMetodologia;
-    }
-
-    public void setIdMetodologia(int idMetodologia) {
-        this.idMetodologia = idMetodologia;
-    }
+    private int idMetodologia;
 
     @Basic
     @Column(name = "DescMetodologia")
-    public String getDescMetodologia() {
-        return descMetodologia;
-    }
+    private String descMetodologia;
 
-    public void setDescMetodologia(String descMetodologia) {
-        this.descMetodologia = descMetodologia;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Metodologia that = (Metodologia) o;
-        return idMetodologia == that.idMetodologia &&
-                Objects.equals(descMetodologia, that.descMetodologia);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(idMetodologia, descMetodologia);
-    }
-
-    @Transient
-    @OneToOne(mappedBy = "metodologia")
-    public Proyecto getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
-    }
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
 }

@@ -17,8 +17,13 @@ public class AreaServiceImpl implements AreaService {
     private AreaRepository areaRepository;
 
     @Override
-    public void addArea(Area area) {
+    public void add(Area area) {
         areaRepository.guardar(area);
+    }
+
+    @Override
+    public Area buscar(int id) {
+        return areaRepository.buscar(id);
     }
 
     @Override
@@ -28,7 +33,6 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public void darBaja(int id) {
-        Area area = areaRepository.buscar(id);
-        areaRepository.darBaja(area);
+        areaRepository.darBaja(areaRepository.buscar(id));
     }
 }

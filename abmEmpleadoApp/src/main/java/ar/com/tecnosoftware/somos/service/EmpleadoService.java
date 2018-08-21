@@ -1,14 +1,24 @@
 package ar.com.tecnosoftware.somos.service;
 
-
 import ar.com.tecnosoftware.somos.entity.Empleado;
+import ar.com.tecnosoftware.somos.entity.Tecnologia;
 
 import java.util.List;
 
-public interface EmpleadoService {
-    public void addEmpleado(Empleado empleado);
+public interface EmpleadoService extends Service<Empleado>{
 
-    public List<Empleado> buscarTodos();
+    List<Empleado> buscarEmpleadosConArea(int idArea);
 
-    public void darBaja(int id);
+    void darBajaAreaDeEmpleados(List<Empleado> empleados);
+
+    List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias);
+
+    List<Empleado> buscarEmpleadosConPerfil(int idPerfil);
+
+    void darBajaPerfilDeEmpleados(List<Empleado> empleados);
+
+    List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
+
+    void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia);
+
 }

@@ -1,19 +1,23 @@
 package ar.com.tecnosoftware.somos.repository;
 
-import ar.com.tecnosoftware.somos.entity.Cargo;
+import ar.com.tecnosoftware.somos.entity.Area;
 import ar.com.tecnosoftware.somos.entity.Empleado;
-import org.springframework.stereotype.Repository;
+import ar.com.tecnosoftware.somos.entity.Perfil;
+import ar.com.tecnosoftware.somos.entity.Tecnologia;
 
 import java.util.List;
 
-@Repository
-public interface EmpleadoRepository {
+public interface EmpleadoRepository extends Repository <Empleado> {
 
-    public void guardar(Empleado empleado);
+    List<Empleado> buscarEmpleadosConArea(int idArea);
 
-    public List<Empleado> buscarTodos();
+    void darBajaAreaDeEmpleado(Empleado empleado, Area area);
 
-    public Empleado buscar(int id);
+    List<Empleado> buscarEmpleadosConPerfil(int idPerfil);
 
-    public void darBaja(Empleado empleado);
+    void darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil);
+
+    List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
+
+    void darBajaTecnologiaDeEmpleado(Empleado empleado);
 }
