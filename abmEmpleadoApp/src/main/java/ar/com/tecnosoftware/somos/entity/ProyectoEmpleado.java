@@ -37,16 +37,20 @@ public class ProyectoEmpleado implements Serializable {
     @Column(name = "FechaRelevamiento")
     private Date fechaRelevamiento;
 
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
+
     @ManyToOne
-    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleado")
+    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleado", nullable = false)
     private Empleado empleado;
 
     @ManyToOne
-    @JoinColumn(name = "IdProyecto", referencedColumnName = "IdProyecto")
+    @JoinColumn(name = "IdProyecto", referencedColumnName = "IdProyecto", nullable = false)
     private Proyecto proyecto;
 
     @ManyToOne
-    @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargo")
+    @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargo", nullable = false)
     private Cargo cargo;
 
 }

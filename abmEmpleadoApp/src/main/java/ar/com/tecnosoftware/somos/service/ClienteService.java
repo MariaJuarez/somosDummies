@@ -1,5 +1,13 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface ClienteService extends Service{
+import ar.com.tecnosoftware.somos.entity.Cliente;
+
+import java.util.List;
+
+public interface ClienteService extends Service<Cliente> {
+
+    List<Cliente> buscarClientesConRubro(int idRubro);
+
+    void darBajaRubroDeClientes(List<Cliente> clientes);
 
 }

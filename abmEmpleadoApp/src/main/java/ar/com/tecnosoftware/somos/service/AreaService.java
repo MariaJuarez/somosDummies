@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface AreaService extends Service{
+import ar.com.tecnosoftware.somos.entity.Area;
+
+public interface AreaService extends Service<Area>{
 
 }

@@ -19,4 +19,8 @@ public class Rubro implements Serializable {
     @Basic
     @Column(name = "DescRubro")
     private String descRubro;
+
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
 }

@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.service;
 
-public interface CargoService extends Service{
+import ar.com.tecnosoftware.somos.entity.Cargo;
+
+public interface CargoService extends Service<Cargo> {
 
 }

@@ -23,4 +23,8 @@ public class Usuario implements Serializable {
     @Basic
     @Column(name = "Baja")
     private boolean baja;
+
+    @OneToOne
+    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleado")
+    private Empleado empleado;
 }

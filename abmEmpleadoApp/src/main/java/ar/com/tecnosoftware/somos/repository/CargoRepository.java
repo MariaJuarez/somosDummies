@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.repository;
 
-public interface CargoRepository extends Repository{
+import ar.com.tecnosoftware.somos.entity.Cargo;
+
+public interface CargoRepository extends Repository<Cargo> {
 
 }

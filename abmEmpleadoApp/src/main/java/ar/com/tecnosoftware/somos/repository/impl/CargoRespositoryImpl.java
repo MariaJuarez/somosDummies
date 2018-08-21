@@ -15,8 +15,8 @@ public class CargoRespositoryImpl implements CargoRepository {
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Object entity) {
-        entityManager.persist(entity);
+    public void guardar(Cargo cargo) {
+        entityManager.persist(cargo);
     }
 
     @Override
@@ -31,8 +31,7 @@ public class CargoRespositoryImpl implements CargoRepository {
     }
 
     @Override
-    public void darBaja(Object entity) {
-        Cargo cargo = (Cargo) entity;
+    public void darBaja(Cargo cargo) {
         cargo.setBaja(true);
         entityManager.flush();
     }

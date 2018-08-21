@@ -1,13 +1,10 @@
 package ar.com.tecnosoftware.somos.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Tecnologia implements Serializable {
 
@@ -19,6 +16,10 @@ public class Tecnologia implements Serializable {
     @Basic
     @Column(name = "DescTecnologia")
     private String descTecnologia;
+
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
 
     @ManyToOne
     @JoinColumn(name = "IdTipoTecnologia", referencedColumnName = "IdTipoTecnologia", nullable = false)

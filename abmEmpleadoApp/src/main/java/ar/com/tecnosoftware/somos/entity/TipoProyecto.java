@@ -19,4 +19,8 @@ public class TipoProyecto implements Serializable {
     @Basic
     @Column(name = "DescTipoProyecto")
     private String descTipoProyecto;
+
+    @Basic
+    @Column(name = "baja")
+    private boolean baja;
 }

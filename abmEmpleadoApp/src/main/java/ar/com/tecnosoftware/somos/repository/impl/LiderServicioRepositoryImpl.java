@@ -1,24 +1,26 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
 import ar.com.tecnosoftware.somos.entity.LiderServicio;
-import ar.com.tecnosoftware.somos.repository.LiderRepository;
+import ar.com.tecnosoftware.somos.repository.LiderServicioRepository;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class LiderRepositoryImpl implements LiderRepository {
+@Repository
+public class LiderServicioRepositoryImpl implements LiderServicioRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void guardar(Object entity) {
-        entityManager.persist(entity);
+    public void guardar(LiderServicio liderServicio) {
+        entityManager.persist(liderServicio);
     }
 
     @Override
-    public Object buscar(int id) {
+    public LiderServicio buscar(int id) {
         return entityManager.find(LiderServicio.class,id);
     }
 
@@ -29,8 +31,7 @@ public class LiderRepositoryImpl implements LiderRepository {
     }
 
     @Override
-    public void darBaja(Object entity) {
-        LiderServicio liderServicio = (LiderServicio) entity;
+    public void darBaja(LiderServicio liderServicio) {
         liderServicio.setBaja(true);
         entityManager.flush();
     }

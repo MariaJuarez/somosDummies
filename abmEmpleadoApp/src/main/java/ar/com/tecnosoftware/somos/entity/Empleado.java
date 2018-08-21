@@ -78,10 +78,6 @@ public class Empleado implements Serializable {
     @JoinColumn(name = "IdCentroCosto", referencedColumnName = "IdCentroCosto")
     private Area area;
 
-    @OneToOne
-    @JoinColumn(name = "IdUsuario", referencedColumnName = "IdUsuario")
-    private Usuario usuario;
-
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;
 

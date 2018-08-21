@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Service<T> {
 
-    void add(T entity);
+    void add(T t);
 
     List<T> buscarTodos();
 
