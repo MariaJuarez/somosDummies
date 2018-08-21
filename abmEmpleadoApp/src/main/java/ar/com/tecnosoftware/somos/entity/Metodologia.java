@@ -13,12 +13,12 @@ public class Metodologia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdMetodologia")
+    @Column(name = "id_metodologia")
     private int idMetodologia;
 
     @Basic
-    @Column(name = "DescMetodologia")
-    private String descMetodologia;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
     @Column(name = "baja")

@@ -11,12 +11,12 @@ public class TipoTecnologia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdTipoTecnologia")
-    private int idTipoTecnologia;
+    @Column(name = "id_tipo_tecnologia")
+    private int id;
 
     @Basic
-    @Column(name = "DescTipoTecnologia")
-    private String descTipoTecnologia;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
     @Column(name = "baja")

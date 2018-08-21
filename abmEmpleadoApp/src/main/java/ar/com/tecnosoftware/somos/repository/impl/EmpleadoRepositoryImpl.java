@@ -47,7 +47,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     @Override
     public void darBajaAreaDeEmpleado(Empleado empleado, Area area) {
-        empleado.setArea(area);
+      //  empleado.setArea(area);
         entityManager.merge(empleado);
     }
 

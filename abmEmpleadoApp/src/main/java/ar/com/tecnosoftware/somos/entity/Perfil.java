@@ -13,16 +13,16 @@ public class Perfil implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdPerfil")
-    private int idPerfil;
+    @Column(name = "id_perfil")
+    private int id;
 
     @Basic
-    @Column(name = "AbrvPerfil")
-    private String abrvPerfil;
+    @Column(name = "abreviatura_perfil")
+    private String abreviatura;
 
     @Basic
-    @Column(name = "DescPerfil")
-    private String descPerfil;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
     @Column(name = "baja")

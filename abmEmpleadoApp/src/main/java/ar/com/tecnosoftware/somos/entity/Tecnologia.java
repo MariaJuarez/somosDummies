@@ -10,20 +10,20 @@ public class Tecnologia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdTecnologia")
-    private int idTecnologia;
+    @Column(name = "id_tecnologia")
+    private int id;
 
     @Basic
-    @Column(name = "DescTecnologia")
-    private String descTecnologia;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
     @Column(name = "baja")
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "IdTipoTecnologia", referencedColumnName = "IdTipoTecnologia", nullable = false)
-    private TipoTecnologia tipoTecnologia;
+    @JoinColumn(name = "id_tipo_tecnologia", referencedColumnName = "id_tipo_tecnologia", nullable = false)
+    private TipoTecnologia tipo;
 
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;

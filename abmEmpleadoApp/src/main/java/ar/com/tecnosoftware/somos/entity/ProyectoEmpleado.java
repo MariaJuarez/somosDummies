@@ -14,43 +14,43 @@ public class ProyectoEmpleado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdProyectoEmpleado")
-    private int idProyectoEmpleado;
+    @Column(name = "id_proyecto_empleado")
+    private int id;
 
     @Basic
-    @Column(name = "AnioLPS")
-    private int anioLps;
+    @Column(name = "anio_LPS")
+    private int anio;
 
     @Basic
-    @Column(name = "TareasProyecto")
-    private String tareasProyecto;
+    @Column(name = "tareas_proyecto")
+    private String tareas;
 
     @Basic
-    @Column(name = "FechaInicio")
-    private Date fechaInicio;
+    @Column(name = "fecha_inicio")
+    private Date inicio;
 
     @Basic
-    @Column(name = "FechaFin")
-    private Date fechaFin;
+    @Column(name = "fecha_fin")
+    private Date fin;
 
     @Basic
-    @Column(name = "FechaRelevamiento")
-    private Date fechaRelevamiento;
+    @Column(name = "fecha_relevamiento")
+    private Date relevamiento;
 
     @Basic
     @Column(name = "baja")
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleado", nullable = false)
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", nullable = false)
     private Empleado empleado;
 
     @ManyToOne
-    @JoinColumn(name = "IdProyecto", referencedColumnName = "IdProyecto", nullable = false)
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false)
     private Proyecto proyecto;
 
     @ManyToOne
-    @JoinColumn(name = "IdCargo", referencedColumnName = "IdCargo", nullable = false)
+    @JoinColumn(name = "id_cargo", referencedColumnName = "id_cargo", nullable = false)
     private Cargo cargo;
 
 }

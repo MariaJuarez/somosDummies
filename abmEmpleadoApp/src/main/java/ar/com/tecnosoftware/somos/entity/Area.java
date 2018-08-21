@@ -14,11 +14,10 @@ public class Area implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_centro_costo")
-    private int id_centro_costo;
-
+    private int id;
     @Basic
-    @Column(name = "desc_centro_costo")
-    private String desc_centro_costo;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
     @Column(name = "baja")

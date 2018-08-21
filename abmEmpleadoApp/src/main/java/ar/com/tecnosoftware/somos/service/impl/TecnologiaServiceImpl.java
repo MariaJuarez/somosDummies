@@ -23,7 +23,7 @@ public class TecnologiaServiceImpl implements TecnologiaService {
 
     @Override
     public void add(Tecnologia tecnologia) {
-        tecnologia.setTipoTecnologia(tipoTecnologiaRepository.buscar(tecnologia.getTipoTecnologia().getIdTipoTecnologia()));
+        tecnologia.setTipo(tipoTecnologiaRepository.buscar(tecnologia.getTipo().getId()));
         tecnologiaRepository.guardar(tecnologia);
     }
 

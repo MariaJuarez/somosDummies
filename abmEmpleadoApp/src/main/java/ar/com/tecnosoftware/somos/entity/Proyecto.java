@@ -15,8 +15,8 @@ public class Proyecto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdProyecto")
-    private int idProyecto;
+    @Column(name = "id_proyecto")
+    private int id;
 
     @Basic
     @Column(name = "JIRA")
@@ -27,77 +27,81 @@ public class Proyecto implements Serializable {
     private int crm;
 
     @Basic
-    @Column(name = "Nombre")
+    @Column(name = "nombre")
     private String nombre;
 
     @Basic
-    @Column(name = "Lider")
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @Basic
+    @Column(name = "lider")
     private String lider;
 
     @Basic
-    @Column(name = "Objetivo")
+    @Column(name = "objetivo")
     private String objetivo;
 
     @Basic
-    @Column(name = "Externo")
+    @Column(name = "externo")
     private boolean externo;
 
     @Basic
-    @Column(name = "EquipoTrabajo")
-    private String equipoTrabajo;
+    @Column(name = "equipo_trabajo")
+    private String equipo;
 
     @Basic
-    @Column(name = "FechaInicio")
-    private Date fechaInicio;
+    @Column(name = "fecha_inicio")
+    private Date inicio;
 
     @Basic
-    @Column(name = "FechaFin")
-    private Date fechaFin;
+    @Column(name = "fecha_fin")
+    private Date fin;
 
     @Basic
-    @Column(name = "Usuarios")
+    @Column(name = "usuarios")
     private String usuarios;
 
     @Basic
-    @Column(name = "AreaSolicitante")
-    private String areaSolicitante;
+    @Column(name = "area_solicitante")
+    private String solicitante;
 
     @Basic
-    @Column(name = "Roles")
+    @Column(name = "roles")
     private String roles;
 
     @Basic
-    @Column(name = "ReqFuncional")
-    private String reqFuncional;
+    @Column(name = "requerimiento_funcional")
+    private String requerimiento;
 
     @Basic
-    @Column(name = "Observaciones")
+    @Column(name = "observaciones")
     private String observaciones;
 
     @Basic
-    @Column(name = "PromovidoLPS")
-    private boolean promovidoLps;
+    @Column(name = "promovido_lps")
+    private boolean promovido;
 
     @Basic
     @Column(name = "baja")
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "IdCliente", referencedColumnName = "IdCliente")
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "IdMetodologia", referencedColumnName = "IdMetodologia")
+    @JoinColumn(name = "id_metodologia", referencedColumnName = "id_metodologia")
     private Metodologia metodologia;
 
     @ManyToOne
-    @JoinColumn(name = "IdTipoProyecto", referencedColumnName = "IdTipoProyecto")
-    private TipoProyecto tipoProyecto;
+    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
+    private TipoProyecto tipo;
 
     @ManyToMany
-    @JoinTable(name = "proyectosTecnologias",
-            joinColumns = @JoinColumn(name = "idProyecto"),
-            inverseJoinColumns = @JoinColumn(name = "idTecnologia"))
+    @JoinTable(name = "proyectos_tecnologias",
+            joinColumns = @JoinColumn(name = "id_proyecto"),
+            inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))
     private List<Tecnologia> tecnologias;
 
 }

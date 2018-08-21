@@ -16,11 +16,6 @@ public class CargoServiceImpl implements CargoService {
     @Autowired
     private CargoRepository cargoRepository;
 
-    /**
-     * Metodo para añadir cargo a la DB
-     *
-     */
-
     @Override
     public void add(Cargo cargo) {
         cargoRepository.guardar(cargo);

@@ -13,12 +13,12 @@ public class Rubro implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdRubro")
-    private int idRubro;
+    @Column(name = "id_rubro")
+    private int id;
 
     @Basic
-    @Column(name = "DescRubro")
-    private String descRubro;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
     @Column(name = "baja")

@@ -32,7 +32,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public void add(Empleado empleado) {
-        empleado.setArea(areaRepository.buscar(empleado.getArea().getIdCentroCosto()));
+        empleado.setArea(areaRepository.buscar(empleado.getArea().getId()));
         empleado.setTecnologias(setTecnologias(empleado.getTecnologias()));
         empleadoRepository.guardar(empleado);
     }
@@ -70,7 +70,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
         for (Tecnologia tecnologia : tecnologias){
-            Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getIdTecnologia());
+            Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
             if(temp != null){
                 tecnologiasEnBD.add(temp);
             }

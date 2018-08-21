@@ -13,18 +13,18 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdUsuario")
-    private int idUsuario;
+    @Column(name = "id_usuario")
+    private int id;
 
     @Basic
-    @Column(name = "DescUsuario")
-    private String descUsuario;
+    @Column(name = "nombre")
+    private String nombre;
 
     @Basic
-    @Column(name = "Baja")
+    @Column(name = "baja")
     private boolean baja;
 
     @OneToOne
-    @JoinColumn(name = "IdEmpleado", referencedColumnName = "IdEmpleado")
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
     private Empleado empleado;
 }
