@@ -1,12 +1,12 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.proyectoEmpleado.service.impl;
 
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
-import ar.com.tecnosoftware.somos.repository.CargoRepository;
-import ar.com.tecnosoftware.somos.repository.EmpleadoRepository;
-import ar.com.tecnosoftware.somos.repository.ProyectoEmpleadoRepository;
-import ar.com.tecnosoftware.somos.repository.ProyectoRepository;
-import ar.com.tecnosoftware.somos.service.ProyectoEmpleadoService;
+import ar.com.tecnosoftware.somos.cargo.repository.CargoRepository;
+import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.repository.ProyectoEmpleadoRepository;
+import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

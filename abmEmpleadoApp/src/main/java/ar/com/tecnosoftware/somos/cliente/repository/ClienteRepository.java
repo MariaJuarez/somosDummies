@@ -1,6 +1,7 @@
-package ar.com.tecnosoftware.somos.repository;
+package ar.com.tecnosoftware.somos.cliente.repository;
 
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
+import ar.com.tecnosoftware.somos.repository.Repository;
 import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
 
 import java.util.List;

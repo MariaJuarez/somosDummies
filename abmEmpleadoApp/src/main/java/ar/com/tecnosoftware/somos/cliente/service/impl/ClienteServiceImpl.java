@@ -1,9 +1,9 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.cliente.service.impl;
 
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
-import ar.com.tecnosoftware.somos.repository.ClienteRepository;
-import ar.com.tecnosoftware.somos.repository.RubroRepository;
+import ar.com.tecnosoftware.somos.cliente.repository.ClienteRepository;
+import ar.com.tecnosoftware.somos.rubro.repository.RubroRepository;
 import ar.com.tecnosoftware.somos.cliente.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

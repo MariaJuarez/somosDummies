@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.tipoProyecto;
+package ar.com.tecnosoftware.somos.tipoProyecto.entity;
 
 import lombok.Getter;
 import lombok.Setter;

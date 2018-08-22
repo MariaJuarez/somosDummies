@@ -1,7 +1,7 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.liderServicio.repository.impl;
 
 import ar.com.tecnosoftware.somos.liderServicio.entity.LiderServicio;
-import ar.com.tecnosoftware.somos.repository.LiderServicioRepository;
+import ar.com.tecnosoftware.somos.liderServicio.repository.LiderServicioRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

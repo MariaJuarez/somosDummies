@@ -1,5 +1,6 @@
-package ar.com.tecnosoftware.somos.repository;
+package ar.com.tecnosoftware.somos.tecnologia.repository;
 
+import ar.com.tecnosoftware.somos.repository.Repository;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
 

@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.perfil.service.impl;
 
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
-import ar.com.tecnosoftware.somos.repository.PerfilRepository;
-import ar.com.tecnosoftware.somos.service.PerfilService;
+import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
+import ar.com.tecnosoftware.somos.perfil.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

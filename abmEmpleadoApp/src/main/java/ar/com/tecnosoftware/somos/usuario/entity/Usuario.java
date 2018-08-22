@@ -1,6 +1,6 @@
-package ar.com.tecnosoftware.somos.usuario;
+package ar.com.tecnosoftware.somos.usuario.entity;
 
-import ar.com.tecnosoftware.somos.empleado.Empleado;
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import lombok.Getter;
 import lombok.Setter;
 

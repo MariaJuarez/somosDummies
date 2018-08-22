@@ -1,11 +1,12 @@
-package ar.com.tecnosoftware.somos.service;
+package ar.com.tecnosoftware.somos.empleado.service;
 
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.service.Service;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 
 import java.util.List;
 
-public interface EmpleadoService extends Service<Empleado>{
+public interface EmpleadoService extends Service<Empleado> {
 
     List<Empleado> buscarEmpleadosConArea(int idArea);
 

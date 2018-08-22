@@ -1,9 +1,9 @@
 package ar.com.tecnosoftware.somos.empleado.entity;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
-import ar.com.tecnosoftware.somos.perfil.Perfil;
+import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.senority.Senority;
-import ar.com.tecnosoftware.somos.tecnologia.Tecnologia;
+import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import lombok.Getter;
 import lombok.Setter;
 

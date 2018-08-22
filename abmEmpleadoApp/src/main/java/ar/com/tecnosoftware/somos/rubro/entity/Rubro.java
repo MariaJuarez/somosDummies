@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.rubro;
+package ar.com.tecnosoftware.somos.rubro.entity;
 
 import lombok.Getter;
 import lombok.Setter;

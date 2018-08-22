@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.cargo;
+package ar.com.tecnosoftware.somos.cargo.entity;
 
 import lombok.Getter;
 import lombok.Setter;

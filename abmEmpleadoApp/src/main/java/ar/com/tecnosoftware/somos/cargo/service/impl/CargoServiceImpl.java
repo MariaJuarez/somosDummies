@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.cargo.service.impl;
 
-import ar.com.tecnosoftware.somos.cargo.Cargo;
-import ar.com.tecnosoftware.somos.repository.CargoRepository;
-import ar.com.tecnosoftware.somos.service.CargoService;
+import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
+import ar.com.tecnosoftware.somos.cargo.repository.CargoRepository;
+import ar.com.tecnosoftware.somos.cargo.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

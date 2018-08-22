@@ -1,6 +1,7 @@
-package ar.com.tecnosoftware.somos.service;
+package ar.com.tecnosoftware.somos.proyecto.service;
 
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.service.Service;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 
 import java.util.List;

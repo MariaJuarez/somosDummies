@@ -1,6 +1,6 @@
-package ar.com.tecnosoftware.somos.cliente;
+package ar.com.tecnosoftware.somos.cliente.entity;
 
-import ar.com.tecnosoftware.somos.rubro.Rubro;
+import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
 import lombok.Getter;
 import lombok.Setter;
 

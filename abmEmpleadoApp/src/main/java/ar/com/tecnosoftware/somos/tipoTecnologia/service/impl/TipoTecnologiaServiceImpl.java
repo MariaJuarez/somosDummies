@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.tipoTecnologia.service.impl;
 
 import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
-import ar.com.tecnosoftware.somos.repository.TipoTecnologiaRepository;
-import ar.com.tecnosoftware.somos.service.TipoTecnologiaService;
+import ar.com.tecnosoftware.somos.tipoTecnologia.repository.TipoTecnologiaRepository;
+import ar.com.tecnosoftware.somos.tipoTecnologia.service.TipoTecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

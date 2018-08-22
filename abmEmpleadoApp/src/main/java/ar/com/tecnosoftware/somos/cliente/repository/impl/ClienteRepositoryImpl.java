@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.cliente.repository.impl;
 
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
-import ar.com.tecnosoftware.somos.repository.ClienteRepository;
+import ar.com.tecnosoftware.somos.cliente.repository.ClienteRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

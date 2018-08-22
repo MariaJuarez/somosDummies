@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.liderServicio.service.impl;
 
 import ar.com.tecnosoftware.somos.liderServicio.entity.LiderServicio;
-import ar.com.tecnosoftware.somos.repository.LiderServicioRepository;
-import ar.com.tecnosoftware.somos.service.LiderServicioService;
+import ar.com.tecnosoftware.somos.liderServicio.repository.LiderServicioRepository;
+import ar.com.tecnosoftware.somos.liderServicio.service.LiderServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

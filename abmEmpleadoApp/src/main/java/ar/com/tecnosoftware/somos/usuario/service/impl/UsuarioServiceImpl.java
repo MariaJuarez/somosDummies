@@ -1,9 +1,9 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.usuario.service.impl;
 
 import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
-import ar.com.tecnosoftware.somos.repository.EmpleadoRepository;
-import ar.com.tecnosoftware.somos.repository.UsuarioRepository;
-import ar.com.tecnosoftware.somos.service.UsuarioService;
+import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
+import ar.com.tecnosoftware.somos.usuario.repository.UsuarioRepository;
+import ar.com.tecnosoftware.somos.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

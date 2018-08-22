@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.liderServicio;
+package ar.com.tecnosoftware.somos.liderServicio.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.perfil;
+package ar.com.tecnosoftware.somos.perfil.entity;
 
 import lombok.Getter;
 import lombok.Setter;
