@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.tipoTecnologia;
+package ar.com.tecnosoftware.somos.tipoTecnologia.entity;
 
 import lombok.Data;
 

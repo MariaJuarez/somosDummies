@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.metodologia;
+package ar.com.tecnosoftware.somos.metodologia.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,7 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.metodologia.repository.impl;
 
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
-import ar.com.tecnosoftware.somos.repository.MetodologiaRepository;
+import ar.com.tecnosoftware.somos.metodologia.repository.MetodologiaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

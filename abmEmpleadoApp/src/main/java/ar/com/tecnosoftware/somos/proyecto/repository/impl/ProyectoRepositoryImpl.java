@@ -1,9 +1,9 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.proyecto.repository.impl;
 
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
-import ar.com.tecnosoftware.somos.repository.ProyectoRepository;
+import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

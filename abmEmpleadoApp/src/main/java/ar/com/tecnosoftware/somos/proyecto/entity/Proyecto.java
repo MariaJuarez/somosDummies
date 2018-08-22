@@ -1,9 +1,9 @@
-package ar.com.tecnosoftware.somos.proyecto;
+package ar.com.tecnosoftware.somos.proyecto.entity;
 
-import ar.com.tecnosoftware.somos.cliente.Cliente;
-import ar.com.tecnosoftware.somos.metodologia.Metodologia;
-import ar.com.tecnosoftware.somos.tecnologia.Tecnologia;
-import ar.com.tecnosoftware.somos.tipoProyecto.TipoProyecto;
+import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
+import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
+import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
+import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import lombok.Getter;
 import lombok.Setter;
 

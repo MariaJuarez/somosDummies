@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.metodologia.service.impl;
 
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
-import ar.com.tecnosoftware.somos.repository.MetodologiaRepository;
-import ar.com.tecnosoftware.somos.service.MetodologiaService;
+import ar.com.tecnosoftware.somos.metodologia.repository.MetodologiaRepository;
+import ar.com.tecnosoftware.somos.metodologia.service.MetodologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

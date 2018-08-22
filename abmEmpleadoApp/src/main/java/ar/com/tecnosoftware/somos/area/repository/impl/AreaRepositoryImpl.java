@@ -1,7 +1,7 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.area.repository.impl;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
-import ar.com.tecnosoftware.somos.repository.AreaRepository;
+import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

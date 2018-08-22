@@ -1,7 +1,7 @@
-package ar.com.tecnosoftware.somos.tecnologia;
+package ar.com.tecnosoftware.somos.tecnologia.entity;
 
 import ar.com.tecnosoftware.somos.senority.Senority;
-import ar.com.tecnosoftware.somos.tipoTecnologia.TipoTecnologia;
+import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
 import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;

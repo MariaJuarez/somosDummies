@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.service.impl;
+package ar.com.tecnosoftware.somos.area.service.impl;
 
-import ar.com.tecnosoftware.somos.area.Area;
-import ar.com.tecnosoftware.somos.repository.AreaRepository;
-import ar.com.tecnosoftware.somos.service.AreaService;
+import ar.com.tecnosoftware.somos.area.entity.Area;
+import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
+import ar.com.tecnosoftware.somos.area.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

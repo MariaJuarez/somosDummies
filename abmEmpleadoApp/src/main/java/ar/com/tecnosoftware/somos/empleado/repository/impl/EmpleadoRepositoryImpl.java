@@ -1,9 +1,9 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.empleado.repository.impl;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
-import ar.com.tecnosoftware.somos.repository.EmpleadoRepository;
+import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.area;
+package ar.com.tecnosoftware.somos.area.entity;
 
 import lombok.Getter;
 import lombok.Setter;

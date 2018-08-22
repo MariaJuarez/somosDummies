@@ -1,7 +1,7 @@
-package ar.com.tecnosoftware.somos.repository.impl;
+package ar.com.tecnosoftware.somos.perfil.repository.impl;
 
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
-import ar.com.tecnosoftware.somos.repository.PerfilRepository;
+import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

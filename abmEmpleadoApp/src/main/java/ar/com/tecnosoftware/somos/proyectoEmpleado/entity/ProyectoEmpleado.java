@@ -1,8 +1,8 @@
-package ar.com.tecnosoftware.somos.proyectoEmpleado;
+package ar.com.tecnosoftware.somos.proyectoEmpleado.entity;
 
-import ar.com.tecnosoftware.somos.cargo.Cargo;
-import ar.com.tecnosoftware.somos.empleado.Empleado;
-import ar.com.tecnosoftware.somos.proyecto.Proyecto;
+import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import lombok.Getter;
 import lombok.Setter;
 

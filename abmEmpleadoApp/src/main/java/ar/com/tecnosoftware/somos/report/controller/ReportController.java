@@ -1,8 +1,8 @@
 package ar.com.tecnosoftware.somos.report.controller;
 
-import ar.com.tecnosoftware.somos.entity.Area;
+import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.report.ReporteUtil;
-import ar.com.tecnosoftware.somos.repository.AreaRepository;
+import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.juli.logging.Log;
