@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SomosApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SomosApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SomosApplication.class, args);
+    }
 }

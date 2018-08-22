@@ -15,6 +15,7 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 import net.sf.jasperreports.export.SimpleWriterExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -59,7 +60,7 @@ public class SimpleReportExporter {
         try {
             exporter.exportReport();
         } catch (JRException ex) {
-            Logger.getLogger(SimpleReportFiller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -77,7 +78,7 @@ public class SimpleReportExporter {
         try {
             exporter.exportReport();
         } catch (JRException ex) {
-            Logger.getLogger(SimpleReportFiller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +91,7 @@ public class SimpleReportExporter {
         try {
             exporter.exportReport();
         } catch (JRException ex) {
-            Logger.getLogger(SimpleReportFiller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -103,7 +104,7 @@ public class SimpleReportExporter {
         try {
             exporter.exportReport();
         } catch (JRException ex) {
-            Logger.getLogger(SimpleReportFiller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReporteUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
