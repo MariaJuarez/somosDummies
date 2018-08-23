@@ -23,7 +23,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void add(Cliente cliente) {
-        cliente.setRubro(rubroRepository.buscar(cliente.getRubro().getIdRubro()));
+        cliente.setRubro(rubroRepository.buscar(cliente.getRubro().getId()));
         clienteRepository.guardar(cliente);
     }
 

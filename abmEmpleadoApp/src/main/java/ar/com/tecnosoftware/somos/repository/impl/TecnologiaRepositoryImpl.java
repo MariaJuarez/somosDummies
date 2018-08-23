@@ -39,13 +39,13 @@ public class TecnologiaRepositoryImpl implements TecnologiaRepository {
 
     @Override
     public List<Tecnologia> buscarTecnologiasConTipoTecnologia(int idTipoTecnologia) {
-        String hql = "FROM Tecnologia WHERE tipoTecnologia = " + idTipoTecnologia;
+        String hql = "FROM Tecnologia WHERE tipo = " + idTipoTecnologia;
         return (List<Tecnologia>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override
     public void darBajaTipoTecnologiaDeTecnologia(Tecnologia tecnologia, TipoTecnologia tipoTecnologia) {
-        tecnologia.setTipoTecnologia(tipoTecnologia);
+        tecnologia.setTipo(tipoTecnologia);
         entityManager.merge(tecnologia);
     }
 }

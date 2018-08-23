@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.controller;
 import ar.com.tecnosoftware.somos.entity.*;
 import ar.com.tecnosoftware.somos.entity.Cargo;
 import ar.com.tecnosoftware.somos.service.*;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -22,7 +23,6 @@ import java.util.Map;
  * @version: 25/07/2018/A
 
  */
-
 
 @RestController
 @CrossOrigin
@@ -150,7 +150,7 @@ public class CrudController {
     }
 
     @GetMapping (value = "/list/empleados")
-    public List<Empleado> findAllEmpleado(){ return empleadoService.buscarTodos();}
+    public List<Empleado> findAllEmpleado() throws JRException {return empleadoService.buscarTodos();}
 
     @GetMapping (value = "/list/clientes")
     public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
@@ -290,6 +290,12 @@ public class CrudController {
     public void bajaMetodologia(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
         proyectoService.darBajaMetodologiaDeProyectos(proyectos);
         metodologiaService.darBaja(id);
+    }
+
+    @RequestMapping (value = "/reporte/empleado")
+    public void generarReporte(){
+
+
     }
 
     /**

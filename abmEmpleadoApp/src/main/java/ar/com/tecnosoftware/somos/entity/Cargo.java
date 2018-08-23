@@ -12,14 +12,14 @@ import java.io.Serializable;
 public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdCargo")
-    private int idCargo;
+    @Column(name = "id_cargo")
+    private int id;
 
     @Basic
-    @Column(name = "DescCargo")
-    private String descCargo;
+    @Column(name = "descripcion")
+    private String descripcion;
 
     @Basic
-    @Column(name = "Baja")
+    @Column(name = "baja")
     private boolean baja;
 }

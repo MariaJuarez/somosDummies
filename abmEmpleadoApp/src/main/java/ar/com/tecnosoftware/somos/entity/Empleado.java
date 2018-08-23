@@ -15,76 +15,76 @@ public class Empleado implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdEmpleado")
-    private int idEmpleado;
+    @Column(name = "id_empleado")
+    private int id;
 
     @Basic
-    @Column(name = "Legajo")
+    @Column(name = "legajo")
     private int legajo;
 
     @Basic
-    @Column(name = "Nombres")
+    @Column(name = "nombres")
     private String nombres;
 
     @Basic
-    @Column(name = "Apellidos")
+    @Column(name = "apellidos")
     private String apellidos;
 
     @Basic
-    @Column(name = "Cuil")
+    @Column(name = "cuil")
     private String cuil;
 
     @Basic
-    @Column(name = "Responsable")
+    @Column(name = "responsable")
     private String responsable;
 
     @Basic
-    @Column(name = "FehaIngreso")
-    private Date fehaIngreso;
+    @Column(name = "fecha_ingreso")
+    private Date ingreso;
 
     @Basic
-    @Column(name = "FechaEgreso")
-    private Date fechaEgreso;
+    @Column(name = "fecha_egreso")
+    private Date egreso;
 
     @Basic
-    @Column(name = "DomicilioLaboral")
-    private String domicilioLaboral;
+    @Column(name = "domicilio")
+    private String domicilio;
 
     @Basic
-    @Column(name = "Observaciones")
+    @Column(name = "observaciones")
     private String observaciones;
 
     @Basic
-    @Column(name = "PromovidoLPS")
-    private boolean promovidoLps;
+    @Column(name = "promovido_lps")
+    private boolean promovido;
 
     @Basic
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
 
     @Basic
-    @Column(name = "Telefono")
+    @Column(name = "telefono")
     private String telefono;
 
     @Basic
-    @Column(name = "Baja")
+    @Column(name = "baja")
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "IdPerfil", referencedColumnName = "IdPerfil")
+    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
     private Perfil perfil;
 
     @ManyToOne
-    @JoinColumn(name = "IdCentroCosto", referencedColumnName = "IdCentroCosto")
+    @JoinColumn(name = "id_centro_costo", referencedColumnName = "id_centro_costo")
     private Area area;
 
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;
 
     @ManyToMany
-    @JoinTable(name = "empleadosTecnologias",
-            joinColumns = @JoinColumn(name = "idEmpleado"),
-            inverseJoinColumns = @JoinColumn(name = "idTecnologia"))
+    @JoinTable(name = "empleados_tecnologias",
+            joinColumns = @JoinColumn(name = "id_empleado"),
+            inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))
     private List<Tecnologia> tecnologias;
 
 }

@@ -1,6 +1,5 @@
 package ar.com.tecnosoftware.somos.repository.impl;
 
-import ar.com.tecnosoftware.somos.entity.Cliente;
 import ar.com.tecnosoftware.somos.entity.Metodologia;
 import ar.com.tecnosoftware.somos.entity.Proyecto;
 import ar.com.tecnosoftware.somos.entity.TipoProyecto;
@@ -59,13 +58,13 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
 
     @Override
     public List<Proyecto> buscarProyectosConTipoProyecto(int idTipoProyecto) {
-        String hql = "FROM Proyecto WHERE tipoProyecto = " + idTipoProyecto;
+        String hql = "FROM Proyecto WHERE tipo = " + idTipoProyecto;
         return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override
     public void darBajaTipoProyectoDeProyecto(Proyecto proyecto, TipoProyecto tipoProyecto) {
-        proyecto.setTipoProyecto(tipoProyecto);
+        proyecto.setTipo(tipoProyecto);
         entityManager.merge(proyecto);
     }
 

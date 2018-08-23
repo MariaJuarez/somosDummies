@@ -22,7 +22,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void add(Usuario usuario) {
-        usuario.setEmpleado(empleadoRepository.buscar(usuario.getEmpleado().getIdEmpleado()));
+        usuario.setEmpleado(empleadoRepository.buscar(usuario.getEmpleado().getId()));
         usuarioRepository.guardar(usuario);
     }
 

@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Getter
 @Setter
@@ -14,31 +13,27 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdCliente")
-    private int idCliente;
+    @Column(name = "id_cliente")
+    private int id;
 
     @Basic
-    @Column(name = "DescCliente")
-    private String descCliente;
+    @Column(name = "nombre")
+    private String nombre;
 
     @Basic
-    @Column(name = "IdLDS")
-    private int idLds;
+    @Column(name = "descripcion_cliente")
+    private String descripcion;
 
     @Basic
-    @Column(name = "DescClienteLPS")
-    private String descClienteLps;
-
-    @Basic
-    @Column(name = "Grupo")
+    @Column(name = "grupo")
     private String grupo;
 
     @Basic
-    @Column(name = "Baja")
+    @Column(name = "baja")
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "IdRubro", referencedColumnName = "IdRubro")
+    @JoinColumn(name = "id_rubro", referencedColumnName = "id_rubro")
     private Rubro rubro;
 
 }

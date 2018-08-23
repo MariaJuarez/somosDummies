@@ -31,8 +31,8 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public void add(Proyecto proyecto) {
-        proyecto.setTipoProyecto(tipoProyectoRepository.buscar(proyecto.getTipoProyecto().getIdTipoProyecto()));
-        proyecto.setCliente(clienteRepository.buscar(proyecto.getCliente().getIdCliente()));
+        proyecto.setTipo(tipoProyectoRepository.buscar(proyecto.getTipo().getId()));
+        proyecto.setCliente(clienteRepository.buscar(proyecto.getCliente().getId()));
         proyecto.setMetodologia(metodologiaRepository.buscar(proyecto.getMetodologia().getIdMetodologia()));
         proyecto.setTecnologias(setTecnologias(proyecto.getTecnologias()));
         proyectoRepository.guardar(proyecto);
@@ -58,7 +58,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
         for (Tecnologia tecnologia : tecnologias){
-            Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getIdTecnologia());
+            Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
             if(temp != null){
                 tecnologiasEnBD.add(temp);
             }

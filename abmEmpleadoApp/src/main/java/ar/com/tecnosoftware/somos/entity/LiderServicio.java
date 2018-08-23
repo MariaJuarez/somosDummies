@@ -13,14 +13,14 @@ public class LiderServicio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdLDS")
+    @Column(name = "id_lds")
     private short idLds;
 
     @Basic
-    @Column(name = "Nombre")
+    @Column(name = "nombre")
     private String nombre;
 
     @Basic
-    @Column(name = "Baja")
+    @Column(name = "baja")
     private boolean baja;
 }

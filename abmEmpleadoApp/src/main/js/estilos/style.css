@@ -1,0 +1,244 @@
+
+@font-face {
+
+font-family: Bradley Hand ITC;
+font-style:normal;
+font-weight: 700;
+src: URL(../../BRADLEY0.eot);
+}
+@font-face {
+
+font-family: Formal436 BT;
+font-style:normal;
+font-weight: normal;
+src: URL(../../FORMALB0.eot);
+}
+
+.navbar-header a{
+  color: #dedede!important;
+}
+.navbar-nav li a{
+  color: #dedede!important;
+} 
+
+a.letra{
+  font-family:"Bradley Hand ITC", Arial, Helvetica, sans-serif;
+  font-style:italic;
+  font-size: 24px;
+}
+
+.navbar{
+  width: 100%;
+}
+.opcionNav{
+  color: green;
+  text-decoration: none !important;
+  
+  padding: 5%;
+  text-align: center;
+}
+.opcionNav.active{
+  color: orange;
+   background-color: red;
+}
+.coloractivo{
+  background-color: green !important;
+  color:white!important;
+}
+.collapse ul  li  a:hover{
+    background-color: green !important;
+}
+.buttonMarginBottom{
+  margin-bottom: 1em;
+}
+
+.form-inline .form-group.enLinea{
+  width: 100%;
+
+}
+.sc-bwzfXH.kGGIis{
+  width: 94%;
+  border-color: #ccc;
+  
+}
+.sc-ifAKCX.gmTeoB{
+  z-index: 2 !important
+}
+.form-inline .form-group{
+  margin-left:1em;
+  width: 47%;
+  margin-bottom: 0.2em;
+  margin-top: 0.2em;
+
+}
+.control-label{
+  width: 100%;
+}
+.form-control{
+  width: 94% !important ;
+  
+}
+
+
+.titulo{
+  padding-left: 0.5em;
+  text-align: center;
+}
+.text-center{
+	text-align: center;
+}
+
+html,
+body {
+  height: 100%;
+  position: relative;
+  padding-top: 4em;
+}
+.tabla {
+  min-height: 80vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 10%; /* height of your footer */
+}
+.footer-copyright-with {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: #333333;
+  text-align: center;
+  color: white;
+}
+
+.imagenTecno{
+ margin-top: 0.5%;
+ width:240px;
+}
+
+
+@media all and (max-width: 767px){
+  .logoHeader{
+    width: 200px;
+    margin: auto;
+  }
+  .imagenTecno{
+    position: center !important;
+    width:150px;
+    margin-left: 10%;
+    padding: 0;
+
+  }
+  .navbar-fixed-top{
+    margin-bottom: 20%;
+  }
+  /*
+  .relleno{
+    margin-bottom: 16em;
+  }*/
+  .navbar-brand{
+    display: inline;
+    margin: auto;
+  }
+  .nav.navbar-nav{
+    padding: 0;
+  }
+  .navbar-header a{
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 25%;
+  }
+  .navbar-toggle .collapsed{
+    width: 25%;
+  }
+  .navbar-nav li a{
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+  }
+  .navbar-right {
+    width: 100%;
+    text-align: center;
+  }
+  .login-page {
+  width: 90% !important;
+  padding: 8% 0 0;
+  margin: auto;
+  }
+  .coloractivo{
+    background-color: transparent!important;
+  }
+  .form-inline .form-group{
+  width: 100%;
+  
+  }
+  .form-inline .form-group.promovidoLPS{
+  margin-bottom: 2em;
+  }
+
+ }
+
+
+.login-page {
+  width: 30em;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #2f8b39;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.form-inline .form-group{
+  margin-bottom: 0.5em;
+  
+}
+
+

@@ -1,7 +1,6 @@
 package ar.com.tecnosoftware.somos.service.impl;
 
 import ar.com.tecnosoftware.somos.entity.Cargo;
-import ar.com.tecnosoftware.somos.entity.Proyecto;
 import ar.com.tecnosoftware.somos.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.repository.CargoRepository;
 import ar.com.tecnosoftware.somos.repository.EmpleadoRepository;
@@ -32,9 +31,9 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Override
     public void add(ProyectoEmpleado proyectoEmpleado) {
-        proyectoEmpleado.setEmpleado(empleadoRepository.buscar(proyectoEmpleado.getEmpleado().getIdEmpleado()));
-        proyectoEmpleado.setProyecto(proyectoRepository.buscar(proyectoEmpleado.getProyecto().getIdProyecto()));
-        proyectoEmpleado.setCargo(cargoRepository.buscar(proyectoEmpleado.getCargo().getIdCargo()));
+        proyectoEmpleado.setEmpleado(empleadoRepository.buscar(proyectoEmpleado.getEmpleado().getId()));
+        proyectoEmpleado.setProyecto(proyectoRepository.buscar(proyectoEmpleado.getProyecto().getId()));
+        proyectoEmpleado.setCargo(cargoRepository.buscar(proyectoEmpleado.getCargo().getId()));
         proyectoEmpleadoRepository.guardar(proyectoEmpleado);
     }
 
