@@ -41,10 +41,7 @@ import java.util.List;
         }),
         @FilterDef(name = "filtroArea", parameters = {
                 @ParamDef(name = "idArea", type = "integer")
-        }),
-        @FilterDef(name = "filtroTecnologias", parameters = {
-                @ParamDef(name = "tecnologias", type = "integer")
-        })/*,
+        })/*
         @FilterDef(name = "filtroRubro", parameters = {
                 @ParamDef(name = "idRubro", type = "integer")
         }),
@@ -69,8 +66,7 @@ import java.util.List;
         @Filter(name = "filtroFechaIngreso", condition = ":fechaIngreso = fecha_ingreso"),
         @Filter(name = "filtroFechaEgreso", condition = ":fechaEgreso = fecha_egreso"),
         @Filter(name = "filtroPromovido", condition = ":promovido = promovido_lps"),
-        @Filter(name = "filtroArea", condition = ":idArea = id_centro_costo"),
-        //@Filter(name = "filtroTecnologias", condition = "id_tecnologia in (:tecnologias)"),
+        @Filter(name = "filtroArea", condition = ":idArea = id_centro_costo")
        /* @Filter(name = "filtroRubro", condition = ":idArea = id_centro_costo"),
         @Filter(name = "filtroTipoProyecto", condition = ":legajo = legajo"),
         @Filter(name = "filtroCliente", condition = ":idArea = id_centro_costo"),
@@ -151,7 +147,6 @@ public class Empleado implements Serializable {
     @JoinTable(name = "empleados_tecnologias",
             joinColumns = @JoinColumn(name = "id_empleado2"),
             inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))
-    @FilterJoinTable(name="filtroTecnologias", condition="id_tecnologia = (:tecnologias)")
     private List<Tecnologia> tecnologias;
 
 }

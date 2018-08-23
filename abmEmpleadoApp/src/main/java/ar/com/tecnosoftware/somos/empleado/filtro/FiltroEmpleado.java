@@ -4,6 +4,7 @@ import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
+import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,8 +32,9 @@ public class FiltroEmpleado {
 
     private Area area = null;
 
-    //Debe pasar una lista con los Id de las tecnologias deseadas
-    private List<Integer> tecnologias = null;
+    //Debe pasar una lista con el objeto COMPLETO de la tecnologias deseadas
+    //Si no se envia algun atributo de tecnologia, no hará correctamente el filtro
+    private List<Tecnologia> tecnologias = null;
 
     //Proyecto
     private Rubro rubro = null;

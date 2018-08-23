@@ -5,12 +5,14 @@ import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
+import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -31,7 +33,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     @Override
     public List<Empleado> buscar(String extension) {
-        String hql = "FROM Empleado" + extension;
+        String hql = "FROM Empleado " + extension;
         return (List<Empleado>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -73,9 +75,14 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
         desactivarFiltros(session);
 
+        if(filtroEmpleado.getTecnologias() != null){
+            empleados = filtrarPorTecnologia(empleados, filtroEmpleado.getTecnologias());
+        }
+
         return empleados;
     }
 
+    @Override
     public void activarFiltros(FiltroEmpleado filtroEmpleado, Session session){
         if(filtroEmpleado.getLegajo() != null){
             session.enableFilter("filtroLegajo").setParameter("legajo",filtroEmpleado.getLegajo());
@@ -108,12 +115,9 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
         if(filtroEmpleado.getPromovidoLps() != null){
             session.enableFilter("filtroPromovido").setParameter("promovido",filtroEmpleado.getPromovidoLps());
         }
-
-        if(filtroEmpleado.getTecnologias() != null){
-            session.enableFilter("filtroTecnologias").setParameterList("tecnologias",filtroEmpleado.getTecnologias());
-        }
     }
 
+    @Override
     public void desactivarFiltros(Session session){
         session.disableFilter("filtroLegajo");
         session.disableFilter("filtroArea");
@@ -123,6 +127,27 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
         session.disableFilter("filtroFechaIngreso");
         session.disableFilter("filtroFechaEgreso");
         session.disableFilter("filtroPromovido");
-        session.disableFilter("filtroTecnologias");
+    }
+
+    @Override
+    public List<Empleado> filtrarPorTecnologia(List<Empleado> empleados, List<Tecnologia> tecnologias) {
+        List<Empleado> nuevaLista = new ArrayList<>();
+        boolean tieneTecnologias = true;
+
+        for (Empleado empleado : empleados) {
+            tieneTecnologias = true;
+
+            for(Tecnologia tecnologia : tecnologias){
+                if(!empleado.getTecnologias().contains(tecnologia)){
+                    tieneTecnologias = false;
+                    break;
+                }
+            }
+            if (tieneTecnologias){
+                nuevaLista.add(empleado);
+            }
+        }
+
+        return nuevaLista;
     }
 }

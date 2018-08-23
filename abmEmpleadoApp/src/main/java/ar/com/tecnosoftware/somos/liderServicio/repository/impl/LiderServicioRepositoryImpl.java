@@ -26,7 +26,7 @@ public class LiderServicioRepositoryImpl implements LiderServicioRepository {
 
     @Override
     public List buscar(String extension) {
-        String hql = "FROM LiderServicio" + extension;
+        String hql = "FROM LiderServicio " + extension;
         return (List<LiderServicio>) entityManager.createQuery(hql).getResultList();
     }
 
