@@ -1,0 +1,42 @@
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+idea/
+External Libraries/
+wrapper/
+libraries/
+.idea/
+.idea
+*.iws
+*.iml
+*.ipr
+.mvn
+mvnv
+.cmd
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.jar
+*.rar
+
+
+# Maven
+log/
+target/
