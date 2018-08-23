@@ -26,7 +26,10 @@ public class CargoController {
         cargoService.add(cargo);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Cargo> findCargosActivos(){ return cargoService.buscarNoBajas();}
+
+    @GetMapping (value = "/listarTodos")
     public List<Cargo> findAllCargos(){ return cargoService.buscarTodos();}
 
     @PutMapping (value = "/baja/{id}")

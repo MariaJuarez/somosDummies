@@ -28,7 +28,12 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public List<Cargo> buscarTodos() {
-        return cargoRepository.buscarTodos();
+        return cargoRepository.buscar("");
+    }
+
+    @Override
+    public List<Cargo> buscarNoBajas() {
+        return cargoRepository.buscar("WHERE baja = false");
     }
 
     @Override

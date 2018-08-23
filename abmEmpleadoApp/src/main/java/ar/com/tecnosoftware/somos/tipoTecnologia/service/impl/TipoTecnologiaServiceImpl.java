@@ -23,7 +23,7 @@ public class TipoTecnologiaServiceImpl implements TipoTecnologiaService {
 
     @Override
     public List<TipoTecnologia> buscarTodos() {
-        return tipoTecnologiaRepository.buscarTodos();
+        return tipoTecnologiaRepository.buscar("");
     }
 
     @Override
@@ -34,5 +34,10 @@ public class TipoTecnologiaServiceImpl implements TipoTecnologiaService {
     @Override
     public TipoTecnologia buscar(int id) {
         return tipoTecnologiaRepository.buscar(id);
+    }
+
+    @Override
+    public List<TipoTecnologia> buscarNoBajas() {
+        return tipoTecnologiaRepository.buscar("WHERE baja = false");
     }
 }

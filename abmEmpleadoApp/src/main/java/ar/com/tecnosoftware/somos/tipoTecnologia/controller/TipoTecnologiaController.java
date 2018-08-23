@@ -26,7 +26,12 @@ public class TipoTecnologiaController {
         tipoTecnologiaService.add(tipoTecnologia);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<TipoTecnologia> findTipoTecnologiaActivos(){
+        return tipoTecnologiaService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<TipoTecnologia> findAllTipoTecnologia(){
         return tipoTecnologiaService.buscarTodos();
     }

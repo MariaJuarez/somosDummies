@@ -23,7 +23,7 @@ public class RubroServiceImpl implements RubroService {
 
     @Override
     public List<Rubro> buscarTodos() {
-        return rubroRepository.buscarTodos();
+        return rubroRepository.buscar("");
     }
 
     @Override
@@ -34,5 +34,10 @@ public class RubroServiceImpl implements RubroService {
     @Override
     public Rubro buscar(int id) {
         return rubroRepository.buscar(id);
+    }
+
+    @Override
+    public List<Rubro> buscarNoBajas() {
+        return rubroRepository.buscar("WHERE baja = false");
     }
 }

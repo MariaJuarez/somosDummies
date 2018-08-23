@@ -47,7 +47,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public List<Proyecto> buscarTodos() {
-        return proyectoRepository.buscarTodos();
+        return proyectoRepository.buscar("");
     }
 
     @Override
@@ -58,6 +58,11 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public Proyecto buscar(int id) {
         return proyectoRepository.buscar(id);
+    }
+
+    @Override
+    public List<Proyecto> buscarNoBajas() {
+        return proyectoRepository.buscar("WHERE baja = false");
     }
 
     @Override
@@ -76,7 +81,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public List<Proyecto> buscarProyectosConCliente(int idCliente) {
-        return proyectoRepository.buscarProyectosConCliente(idCliente);
+        return proyectoRepository.buscar("WHERE cliente = " + idCliente);
     }
 
     @Override
@@ -88,7 +93,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public List<Proyecto> buscarProyectosConMetodologia(int idMetodologia) {
-        return proyectoRepository.buscarProyectosConMetodologia(idMetodologia);
+        return proyectoRepository.buscar("WHERE metodologia = " + idMetodologia);
     }
 
     @Override
@@ -101,7 +106,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public List<Proyecto> buscarProyectosConTipoProyecto(int idTipoProyecto) {
-        return proyectoRepository.buscarProyectosConTipoProyecto(idTipoProyecto);
+        return proyectoRepository.buscar("WHERE tipo = " + idTipoProyecto);
     }
 
     @Override

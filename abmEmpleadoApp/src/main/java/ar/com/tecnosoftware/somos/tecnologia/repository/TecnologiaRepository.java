@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface TecnologiaRepository extends Repository<Tecnologia> {
 
-    List<Tecnologia> buscarTecnologiasConTipoTecnologia(int idTipoTecnologia);
-
     void darBajaTipoTecnologiaDeTecnologia(Tecnologia tecnologia, TipoTecnologia tipoTecnologia);
 
 }

@@ -26,7 +26,12 @@ public class RubroController {
         rubroService.add(rubro);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Rubro> findRubroActivo(){
+        return rubroService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<Rubro> findAllRubro(){
         return rubroService.buscarTodos();
     }

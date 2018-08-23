@@ -23,7 +23,7 @@ public class PerfilServiceImpl implements PerfilService {
 
     @Override
     public List<Perfil> buscarTodos() {
-        return perfilRepository.buscarTodos();
+        return perfilRepository.buscar("");
     }
 
     @Override
@@ -34,5 +34,10 @@ public class PerfilServiceImpl implements PerfilService {
     @Override
     public Perfil buscar(int id) {
         return perfilRepository.buscar(id);
+    }
+
+    @Override
+    public List<Perfil> buscarNoBajas() {
+        return perfilRepository.buscar("WHERE baja = false");
     }
 }

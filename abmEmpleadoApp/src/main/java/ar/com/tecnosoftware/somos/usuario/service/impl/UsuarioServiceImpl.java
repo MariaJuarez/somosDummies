@@ -32,8 +32,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public List<Usuario> buscarNoBajas() {
+        return usuarioRepository.buscar("WHERE baja = false");
+    }
+
+    @Override
     public List<Usuario> buscarTodos() {
-        return usuarioRepository.buscarTodos();
+        return usuarioRepository.buscar("");
     }
 
     @Override

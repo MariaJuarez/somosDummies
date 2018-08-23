@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ClienteRepository extends Repository<Cliente> {
 
-    List<Cliente> buscarClientesConRubro(int idRubro);
-
     void darBajaRubroDeCliente(Cliente cliente, Rubro rubro);
 
 }

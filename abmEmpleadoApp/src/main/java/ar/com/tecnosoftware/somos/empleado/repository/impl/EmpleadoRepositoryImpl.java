@@ -2,8 +2,11 @@ package ar.com.tecnosoftware.somos.empleado.repository.impl;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -27,8 +30,8 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public List<Empleado> buscarTodos() {
-        String hql = "FROM empleado WHERE baja = false";
+    public List<Empleado> buscar(String extension) {
+        String hql = "FROM Empleado" + extension;
         return (List<Empleado>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -39,21 +42,8 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public List<Empleado> buscarEmpleadosConArea(int idArea) {
-        String hql = "FROM empleado WHERE area = " + idArea;
-        return (List<Empleado>) entityManager.createQuery(hql).getResultList();
-    }
-
-    @Override
     public void darBajaAreaDeEmpleado(Empleado empleado, Area area) {
-      //  empleado.setArea(area);
         entityManager.merge(empleado);
-    }
-
-    @Override
-    public List<Empleado> buscarEmpleadosConPerfil(int idPerfil) {
-        String hql = "FROM empleado WHERE perfil = " + idPerfil;
-        return (List<Empleado>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override
@@ -64,12 +54,75 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     @Override
     public List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia) {
-        String hql = "SELECT e FROM empleado e JOIN e.tecnologias t WHERE t.idTecnologia = " + idTecnologia;
+        String hql = "SELECT e FROM Empleado e JOIN e.tecnologias t WHERE t.idTecnologia = " + idTecnologia;
         return (List<Empleado>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override
     public void darBajaTecnologiaDeEmpleado(Empleado empleado) {
         entityManager.merge(empleado);
+    }
+
+    @Override
+    public List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado) {
+        Session session = entityManager.unwrap(Session.class);
+
+        activarFiltros(filtroEmpleado, session);
+
+        List<Empleado> empleados = buscar("");
+
+        desactivarFiltros(session);
+
+        return empleados;
+    }
+
+    public void activarFiltros(FiltroEmpleado filtroEmpleado, Session session){
+        if(filtroEmpleado.getLegajo() != null){
+            session.enableFilter("filtroLegajo").setParameter("legajo",filtroEmpleado.getLegajo());
+        }
+
+        if(filtroEmpleado.getArea() != null){
+            session.enableFilter("filtroArea").setParameter("idArea",filtroEmpleado.getArea().getId());
+        }
+
+        if(filtroEmpleado.getBaja() != null){
+            session.enableFilter("filtroBaja").setParameter("baja",filtroEmpleado.getBaja());
+        }
+
+        if(filtroEmpleado.getNombres()!= null){
+            session.enableFilter("filtroNombres").setParameter("nombres",filtroEmpleado.getNombres());
+        }
+
+        if(filtroEmpleado.getApellidos() != null){
+            session.enableFilter("filtroApellidos").setParameter("apellidos",filtroEmpleado.getApellidos());
+        }
+
+        if(filtroEmpleado.getFechaIngreso() != null){
+            session.enableFilter("filtroFechaIngreso").setParameter("fechaIngreso",filtroEmpleado.getFechaIngreso());
+        }
+
+        if(filtroEmpleado.getFechaEgreso() != null){
+            session.enableFilter("filtroFechaEgreso").setParameter("fechaEgreso",filtroEmpleado.getFechaEgreso());
+        }
+
+        if(filtroEmpleado.getPromovidoLps() != null){
+            session.enableFilter("filtroPromovido").setParameter("promovido",filtroEmpleado.getPromovidoLps());
+        }
+
+        if(filtroEmpleado.getTecnologias() != null){
+            session.enableFilter("filtroTecnologias").setParameterList("tecnologias",filtroEmpleado.getTecnologias());
+        }
+    }
+
+    public void desactivarFiltros(Session session){
+        session.disableFilter("filtroLegajo");
+        session.disableFilter("filtroArea");
+        session.disableFilter("filtroBaja");
+        session.disableFilter("filtroNombres");
+        session.disableFilter("filtroApellidos");
+        session.disableFilter("filtroFechaIngreso");
+        session.disableFilter("filtroFechaEgreso");
+        session.disableFilter("filtroPromovido");
+        session.disableFilter("filtroTecnologias");
     }
 }

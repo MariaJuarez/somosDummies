@@ -33,8 +33,13 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public List<Cliente> buscarNoBajas() {
+        return clienteRepository.buscar("WHERE baja = false");
+    }
+
+    @Override
     public List<Cliente> buscarTodos() {
-        return clienteRepository.buscarTodos();
+        return clienteRepository.buscar("");
     }
 
     @Override
@@ -44,7 +49,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<Cliente> buscarClientesConRubro(int idRubro) {
-        return clienteRepository.buscarClientesConRubro(idRubro);
+        return clienteRepository.buscar("WHERE rubro = " +idRubro);
     }
 
     @Override

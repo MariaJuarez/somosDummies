@@ -25,8 +25,8 @@ public class TipoProyectoRepositoryImpl implements TipoProyectoRepository {
     }
 
     @Override
-    public List<TipoProyecto> buscarTodos() {
-        String hql = "FROM tipoProyecto WHERE baja = false";
+    public List<TipoProyecto> buscar(String extension) {
+        String hql = "FROM TipoProyecto " + extension;
         return (List<TipoProyecto>) entityManager.createQuery(hql).getResultList();
     }
 

@@ -26,8 +26,8 @@ public class ProyectoEmpleadoRepositoryImpl implements ProyectoEmpleadoRepositor
     }
 
     @Override
-    public List<ProyectoEmpleado> buscarTodos() {
-        String hql = "FROM proyectoEmpleado WHERE baja = false";
+    public List<ProyectoEmpleado> buscar(String extension) {
+        String hql = "FROM ProyectoEmpleado " + extension ;
         return (List<ProyectoEmpleado>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -35,24 +35,6 @@ public class ProyectoEmpleadoRepositoryImpl implements ProyectoEmpleadoRepositor
     public void darBaja(ProyectoEmpleado proyectoEmpleado) {
         proyectoEmpleado.setBaja(true);
         entityManager.flush();
-    }
-
-    @Override
-    public List<ProyectoEmpleado> buscarProyectosEmpleadosConEmpleado(int idEmpleado) {
-        String hql = "FROM proyectoEmpleado WHERE empleado = " + idEmpleado;
-        return (List<ProyectoEmpleado>) entityManager.createQuery(hql).getResultList();
-    }
-
-    @Override
-    public List<ProyectoEmpleado> buscarProyectosEmpleadosConProyecto(int idProyecto) {
-        String hql = "FROM proyectoEmpleado WHERE proyecto = " + idProyecto;
-        return (List<ProyectoEmpleado>) entityManager.createQuery(hql).getResultList();
-    }
-
-    @Override
-    public List<ProyectoEmpleado> buscarProyectosEmpleadosConCargo(int idCargo) {
-        String hql = "FROM proyectoEmpleado WHERE cargo = " + idCargo;
-        return (List<ProyectoEmpleado>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override

@@ -29,7 +29,7 @@ public class TecnologiaServiceImpl implements TecnologiaService {
 
     @Override
     public List<Tecnologia> buscarTodos() {
-        return tecnologiaRepository.buscarTodos();
+        return tecnologiaRepository.buscar("");
     }
 
     @Override
@@ -42,10 +42,14 @@ public class TecnologiaServiceImpl implements TecnologiaService {
         return tecnologiaRepository.buscar(id);
     }
 
+    @Override
+    public List<Tecnologia> buscarNoBajas() {
+        return tecnologiaRepository.buscar("WHERE baja = false");
+    }
 
     @Override
     public List<Tecnologia> buscarTecnologiasConTipoTecnologia(int idTipoTecnologia) {
-        return tecnologiaRepository.buscarTecnologiasConTipoTecnologia(idTipoTecnologia);
+        return tecnologiaRepository.buscar("WHERE tipo = " + idTipoTecnologia);
     }
 
     @Override

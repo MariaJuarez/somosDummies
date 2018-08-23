@@ -6,8 +6,10 @@ import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -15,6 +17,66 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@FilterDefs({
+        @FilterDef(name = "filtroBaja", parameters = {
+                @ParamDef(name = "baja", type = "boolean")
+        }),
+        @FilterDef(name = "filtroLegajo", parameters = {
+                @ParamDef(name = "legajo", type = "integer")
+        }),
+        @FilterDef(name = "filtroNombres", parameters = {
+                @ParamDef(name = "nombres", type = "string")
+        }),
+        @FilterDef(name = "filtroApellidos", parameters = {
+                @ParamDef(name = "apellidos", type = "string")
+        }),
+        @FilterDef(name = "filtroFechaIngreso", parameters = {
+                @ParamDef(name = "fechaIngreso", type = "date")
+        }),
+        @FilterDef(name = "filtroFechaEgreso", parameters = {
+                @ParamDef(name = "fechaEgreso", type = "date")
+        }),
+        @FilterDef(name = "filtroPromovido", parameters = {
+                @ParamDef(name = "promovido", type = "boolean")
+        }),
+        @FilterDef(name = "filtroArea", parameters = {
+                @ParamDef(name = "idArea", type = "integer")
+        }),
+        @FilterDef(name = "filtroTecnologias", parameters = {
+                @ParamDef(name = "tecnologias", type = "integer")
+        })/*,
+        @FilterDef(name = "filtroRubro", parameters = {
+                @ParamDef(name = "idRubro", type = "integer")
+        }),
+        @FilterDef(name = "filtroTipoProyecto", parameters = {
+                @ParamDef(name = "idTipoProyecto", type = "integer")
+        }),
+        @FilterDef(name = "filtroCliente", parameters = {
+                @ParamDef(name = "idCliente", type = "integer")
+        }),
+        @FilterDef(name = "filtroProyecto", parameters = {
+                @ParamDef(name = "idProyecto", type = "integer")
+        }),
+        @FilterDef(name = "filtroAnioLps", parameters = {
+                @ParamDef(name = "anioLps", type = "date")
+        })*/
+})
+@Filters({
+        @Filter(name = "filtroBaja", condition = ":baja = baja"),
+        @Filter(name = "filtroLegajo", condition = ":legajo = legajo"),
+        @Filter(name = "filtroNombres", condition = ":nombres = nombres"),
+        @Filter(name = "filtroApellidos", condition = ":apellidos = apellidos"),
+        @Filter(name = "filtroFechaIngreso", condition = ":fechaIngreso = fecha_ingreso"),
+        @Filter(name = "filtroFechaEgreso", condition = ":fechaEgreso = fecha_egreso"),
+        @Filter(name = "filtroPromovido", condition = ":promovido = promovido_lps"),
+        @Filter(name = "filtroArea", condition = ":idArea = id_centro_costo"),
+        //@Filter(name = "filtroTecnologias", condition = "id_tecnologia in (:tecnologias)"),
+       /* @Filter(name = "filtroRubro", condition = ":idArea = id_centro_costo"),
+        @Filter(name = "filtroTipoProyecto", condition = ":legajo = legajo"),
+        @Filter(name = "filtroCliente", condition = ":idArea = id_centro_costo"),
+        @Filter(name = "filtroProyecto", condition = ":legajo = legajo"),
+        @Filter(name = "filtroAnioLps", condition = ":idArea = id_centro_costo")*/
+})
 public class Empleado implements Serializable {
 
     @Id
@@ -87,8 +149,9 @@ public class Empleado implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "empleados_tecnologias",
-            joinColumns = @JoinColumn(name = "id_empleado"),
+            joinColumns = @JoinColumn(name = "id_empleado2"),
             inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))
+    @FilterJoinTable(name="filtroTecnologias", condition="id_tecnologia = (:tecnologias)")
     private List<Tecnologia> tecnologias;
 
 }

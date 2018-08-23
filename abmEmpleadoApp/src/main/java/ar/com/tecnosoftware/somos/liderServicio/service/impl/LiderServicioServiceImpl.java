@@ -23,7 +23,7 @@ public class LiderServicioServiceImpl implements LiderServicioService {
 
     @Override
     public List<LiderServicio> buscarTodos() {
-        return liderServicioRepository.buscarTodos();
+        return liderServicioRepository.buscar("");
     }
 
     @Override
@@ -34,5 +34,10 @@ public class LiderServicioServiceImpl implements LiderServicioService {
     @Override
     public LiderServicio buscar(int id) {
         return liderServicioRepository.buscar(id);
+    }
+
+    @Override
+    public List<LiderServicio> buscarNoBajas() {
+        return liderServicioRepository.buscar("WHERE baja = false");
     }
 }

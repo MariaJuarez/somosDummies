@@ -26,7 +26,12 @@ public class PerfilController {
         perfilService.add(perfil);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Perfil> findPerfilActivos(){
+        return perfilService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<Perfil> findAllPerfil(){
         return perfilService.buscarTodos();
     }

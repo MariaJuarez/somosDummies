@@ -26,7 +26,12 @@ public class MetodologiaController {
         metodologiaService.add(metodologia);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Metodologia> findMetodologiaActivos(){
+        return metodologiaService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<Metodologia> findAllMetodologia(){
         return metodologiaService.buscarTodos();
     }

@@ -26,7 +26,12 @@ public class TipoProyectoController {
         tipoProyectoService.add(tipoProyecto);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<TipoProyecto> findTipoProyectoActivos(){
+        return tipoProyectoService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<TipoProyecto> findAllTipoProyecto(){
         return tipoProyectoService.buscarTodos();
     }

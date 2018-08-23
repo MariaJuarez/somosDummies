@@ -27,8 +27,8 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     }
 
     @Override
-    public List<Proyecto> buscarTodos() {
-        String hql = "FROM proyecto WHERE baja = false";
+    public List<Proyecto> buscar(String extension) {
+        String hql = "FROM Proyecto "+ extension;
         return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -39,27 +39,9 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     }
 
     @Override
-    public List<Proyecto> buscarProyectosConCliente(int idCliente) {
-        String hql = "FROM proyecto WHERE cliente = " + idCliente;
-        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
-    }
-
-    @Override
-    public List<Proyecto> buscarProyectosConMetodologia(int idMetodologia) {
-        String hql = "FROM proyecto WHERE metodologia = " + idMetodologia;
-        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
-    }
-
-    @Override
     public void darBajaMetodologiaDeProyecto(Proyecto proyecto, Metodologia metodologia) {
         proyecto.setMetodologia(metodologia);
         entityManager.merge(proyecto);
-    }
-
-    @Override
-    public List<Proyecto> buscarProyectosConTipoProyecto(int idTipoProyecto) {
-        String hql = "FROM proyecto WHERE tipo = " + idTipoProyecto;
-        return (List<Proyecto>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override

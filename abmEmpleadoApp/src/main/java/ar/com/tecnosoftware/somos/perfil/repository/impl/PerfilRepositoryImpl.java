@@ -25,8 +25,8 @@ public class PerfilRepositoryImpl implements PerfilRepository {
     }
 
     @Override
-    public List<Perfil> buscarTodos() {
-        String hql = "FROM perfil WHERE baja = false";
+    public List<Perfil> buscar(String extension) {
+        String hql = "FROM Perfil " + extension;
         return (List<Perfil>) entityManager.createQuery(hql).getResultList();
     }
 

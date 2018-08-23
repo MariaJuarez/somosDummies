@@ -23,7 +23,7 @@ public class MetodologiaServiceImpl implements MetodologiaService {
 
     @Override
     public List<Metodologia> buscarTodos() {
-        return metodologiaRepository.buscarTodos();
+        return metodologiaRepository.buscar("");
     }
 
     @Override
@@ -34,5 +34,10 @@ public class MetodologiaServiceImpl implements MetodologiaService {
     @Override
     public Metodologia buscar(int id) {
         return metodologiaRepository.buscar(id);
+    }
+
+    @Override
+    public List<Metodologia> buscarNoBajas() {
+        return metodologiaRepository.buscar("WHERE baja = false");
     }
 }

@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.empleado.controller;
 
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
@@ -27,13 +28,28 @@ public class EmpleadoController {
         empleadoService.add(empleado);
     }
 
-    @GetMapping (value = "/listar")
-    public List<Empleado> findAllEmpleado() throws JRException {return empleadoService.buscarTodos();}
+    @GetMapping (value = "/listarActivos")
+    public List<Empleado> findEmpleadoActivos() {return empleadoService.buscarNoBajas();}
+
+    @GetMapping (value = "/listarTodos")
+    public List<Empleado> findAllEmpleado() {return empleadoService.buscarTodos();}
 
     @PutMapping (value = "/baja/{id}")
     public void bajaEmpleado(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados) {
         proyectoEmpleadoService.darBajaProyectosEmpleados(proyectoEmpleados);
         empleadoService.darBaja(id);
+    }
+
+    @PostMapping(value = "/listarFiltro")
+    public List<Empleado> buscarEmpleado(@RequestBody FiltroEmpleado filtroEmpleado){
+        if((filtroEmpleado != null) &&
+                (filtroEmpleado.getLegajo()) != null || (filtroEmpleado.getArea() != null) || (filtroEmpleado.getBaja() != null) || (filtroEmpleado.getNombres() != null) ||
+                (filtroEmpleado.getApellidos() != null) || (filtroEmpleado.getFechaIngreso() != null) || (filtroEmpleado.getFechaEgreso() != null) || (filtroEmpleado.getPromovidoLps() != null) ||
+                (filtroEmpleado.getTecnologias() != null)){
+            return empleadoService.buscarPorFiltro(filtroEmpleado);
+        }
+
+        return empleadoService.buscarTodos();
     }
 
 }

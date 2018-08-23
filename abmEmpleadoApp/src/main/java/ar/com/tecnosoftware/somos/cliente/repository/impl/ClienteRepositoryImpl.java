@@ -26,8 +26,8 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     }
 
     @Override
-    public List<Cliente> buscarTodos() {
-        String hql = "FROM cliente WHERE baja = false";
+    public List<Cliente> buscar(String extension) {
+        String hql = "FROM Cliente " + extension;
         return (List<Cliente>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -35,12 +35,6 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     public void darBaja(Cliente cliente) {
         cliente.setBaja(true);
         entityManager.flush();
-    }
-
-    @Override
-    public List<Cliente> buscarClientesConRubro(int idRubro) {
-        String hql = "FROM cliente WHERE rubro = " +idRubro;
-        return (List<Cliente>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override

@@ -31,8 +31,8 @@ public class AreaRepositoryImpl implements AreaRepository {
     }
 
     @Override
-    public List<Area> buscarTodos() {
-        String hql = "FROM area WHERE baja = false";
+    public List<Area> buscar(String extension) {
+        String hql = "FROM Area " + extension;
         return (List<Area>) entityManager.createQuery(hql).getResultList();
     }
 }

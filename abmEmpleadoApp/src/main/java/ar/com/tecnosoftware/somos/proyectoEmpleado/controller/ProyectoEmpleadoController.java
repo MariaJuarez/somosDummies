@@ -21,7 +21,12 @@ public class ProyectoEmpleadoController {
         proyectoEmpleadoService.add(proyectoEmpleado);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<ProyectoEmpleado> findProyectoEmpleadoActivos(){
+        return proyectoEmpleadoService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<ProyectoEmpleado> findAllProyectoEmpleado(){
         return proyectoEmpleadoService.buscarTodos();
     }

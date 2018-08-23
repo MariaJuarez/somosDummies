@@ -28,7 +28,12 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public List<Area> buscarTodos() {
-        return areaRepository.buscarTodos();
+        return areaRepository.buscar("");
+    }
+
+    @Override
+    public List<Area> buscarNoBajas() {
+        return areaRepository.buscar("WHERE baja = false");
     }
 
     @Override

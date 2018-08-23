@@ -4,6 +4,7 @@ package ar.com.tecnosoftware.somos.empleado.service.impl;
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
@@ -46,8 +47,13 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
+    public List<Empleado> buscarNoBajas() {
+        return empleadoRepository.buscar("WHERE baja = false");
+    }
+
+    @Override
     public List<Empleado> buscarTodos() {
-        return empleadoRepository.buscarTodos();
+        return empleadoRepository.buscar("");
     }
 
     @Override
@@ -57,7 +63,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public List<Empleado> buscarEmpleadosConArea(int idArea) {
-        return empleadoRepository.buscarEmpleadosConArea(idArea);
+        return empleadoRepository.buscar("WHERE area = " + idArea);
     }
 
     @Override
@@ -84,7 +90,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Override
     public List<Empleado> buscarEmpleadosConPerfil(int idPerfil) {
-        return empleadoRepository.buscarEmpleadosConPerfil(idPerfil);
+        return empleadoRepository.buscar("WHERE perfil = " +idPerfil);
     }
 
     @Override
@@ -107,6 +113,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
             empleado.getTecnologias().remove(tecnologia);
             empleadoRepository.darBajaTecnologiaDeEmpleado(empleado);
         }
+    }
+
+    @Override
+    public List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado) {
+        return empleadoRepository.buscarPorFiltro(filtroEmpleado);
     }
 }
 

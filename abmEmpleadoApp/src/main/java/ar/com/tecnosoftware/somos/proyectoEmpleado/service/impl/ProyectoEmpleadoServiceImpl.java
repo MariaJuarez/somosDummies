@@ -39,7 +39,12 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Override
     public List<ProyectoEmpleado> buscarTodos() {
-        return proyectoEmpleadoRepository.buscarTodos();
+        return proyectoEmpleadoRepository.buscar("");
+    }
+
+    @Override
+    public List<ProyectoEmpleado> buscarNoBajas() {
+        return proyectoEmpleadoRepository.buscar("WHERE baja = false");
     }
 
     @Override
@@ -54,17 +59,17 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Override
     public List<ProyectoEmpleado> buscarProyectosEmpleadosConEmpleado(int idEmpleado) {
-        return proyectoEmpleadoRepository.buscarProyectosEmpleadosConEmpleado(idEmpleado);
+        return proyectoEmpleadoRepository.buscar("WHERE empleado = " + idEmpleado);
     }
 
     @Override
     public List<ProyectoEmpleado> buscarProyectosEmpleadosConProyecto(int idProyecto) {
-        return proyectoEmpleadoRepository.buscarProyectosEmpleadosConProyecto(idProyecto);
+        return proyectoEmpleadoRepository.buscar("WHERE proyecto = " +idProyecto);
     }
 
     @Override
     public List<ProyectoEmpleado> buscarProyectosEmpleadosConCargo(int idCargo) {
-        return proyectoEmpleadoRepository.buscarProyectosEmpleadosConCargo(idCargo);
+        return proyectoEmpleadoRepository.buscar("WHERE cargo = " + idCargo);
     }
 
     @Override

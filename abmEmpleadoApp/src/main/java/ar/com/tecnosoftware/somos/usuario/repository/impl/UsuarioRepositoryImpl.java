@@ -26,8 +26,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public List<Usuario> buscarTodos() {
-        String hql = "FROM usuario WHERE baja = false";
+    public List<Usuario> buscar(String extension) {
+        String hql = "FROM Usuario " + extension;
         return (List<Usuario>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -39,7 +39,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Override
     public Usuario buscarUsuarioConEmpleado(int idEmpleado) {
-        String hql = "FROM usuario WHERE empleado = " + idEmpleado;
+        String hql = "FROM Usuario WHERE empleado = " + idEmpleado;
         return (Usuario) entityManager.createQuery(hql).getSingleResult();
     }
 

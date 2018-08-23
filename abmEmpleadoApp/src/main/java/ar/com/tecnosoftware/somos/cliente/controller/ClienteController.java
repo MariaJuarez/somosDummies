@@ -26,7 +26,10 @@ public class ClienteController {
         clienteService.add(cliente);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Cliente> findClienteActivos(){ return clienteService.buscarNoBajas();}
+
+    @GetMapping (value = "/listarTodos")
     public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
 
     @PutMapping (value = "/baja/{id}")

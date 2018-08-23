@@ -34,7 +34,7 @@ public class ReportController {
         reporteUtil.setReportFileName(reportFileName);
         LOG.info("METHOD: getPdf -- Obteniendo Reporte de "+reportFileName);
         reporteUtil.compileReport();
-        List<Area> areas = (List<Area>) areaRepository.buscarTodos();
+        List<Area> areas = (List<Area>) areaRepository.buscar("");
         JRDataSource dataSource = new JRBeanCollectionDataSource(areas);
         reporteUtil.fillReport(response, dataSource);
     }

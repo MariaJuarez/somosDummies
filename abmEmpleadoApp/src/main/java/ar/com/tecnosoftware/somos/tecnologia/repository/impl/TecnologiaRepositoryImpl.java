@@ -26,8 +26,8 @@ public class TecnologiaRepositoryImpl implements TecnologiaRepository {
     }
 
     @Override
-    public List<Tecnologia> buscarTodos() {
-        String hql = "FROM tecnologia WHERE baja = false";
+    public List<Tecnologia> buscar(String extension) {
+        String hql = "FROM Tecnologia " + extension;
         return (List<Tecnologia>) entityManager.createQuery(hql).getResultList();
     }
 
@@ -35,12 +35,6 @@ public class TecnologiaRepositoryImpl implements TecnologiaRepository {
     public void darBaja(Tecnologia tecnologia) {
         tecnologia.setBaja(true);
         entityManager.flush();
-    }
-
-    @Override
-    public List<Tecnologia> buscarTecnologiasConTipoTecnologia(int idTipoTecnologia) {
-        String hql = "FROM tecnologia WHERE tipo = " + idTipoTecnologia;
-        return (List<Tecnologia>) entityManager.createQuery(hql).getResultList();
     }
 
     @Override

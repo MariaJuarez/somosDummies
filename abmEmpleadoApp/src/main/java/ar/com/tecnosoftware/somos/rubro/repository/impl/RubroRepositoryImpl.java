@@ -25,8 +25,8 @@ public class RubroRepositoryImpl implements RubroRepository {
     }
 
     @Override
-    public List<Rubro> buscarTodos() {
-        String hql = "FROM rubro WHERE baja = false";
+    public List<Rubro> buscar(String extension) {
+        String hql = "FROM Rubro " + extension;
         return (List<Rubro>) entityManager.createQuery(hql).getResultList();
     }
 

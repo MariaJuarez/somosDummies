@@ -21,7 +21,10 @@ public class UsuarioController {
         usuarioService.add(usuario);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Usuario> findUsuarioActivos(){ return usuarioService.buscarNoBajas();}
+
+    @GetMapping (value = "/listarTodos")
     public List<Usuario> findAllUsuario(){ return usuarioService.buscarTodos();}
 
     @PutMapping (value = "/baja/{id}")

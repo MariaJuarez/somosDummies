@@ -26,7 +26,12 @@ public class AreaController {
         areaService.add(area);
     }
 
-    @GetMapping (value = "/listar")
+    @GetMapping (value = "/listarActivos")
+    public List<Area> findAreasActivas(){
+        return areaService.buscarNoBajas();
+    }
+
+    @GetMapping (value = "/listarTodos")
     public List<Area> findAllArea(){
         return areaService.buscarTodos();
     }

@@ -8,7 +8,7 @@ public interface Repository<T>{
 
     T buscar(int id);
 
-    List<T> buscarTodos();
+    List<T> buscar(String extension);
 
     void darBaja(T t);
 

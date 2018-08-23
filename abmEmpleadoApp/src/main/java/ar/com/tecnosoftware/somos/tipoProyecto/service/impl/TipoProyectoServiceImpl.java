@@ -23,7 +23,7 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
 
     @Override
     public List<TipoProyecto> buscarTodos() {
-        return tipoProyectoRepository.buscarTodos();
+        return tipoProyectoRepository.buscar("");
     }
 
     @Override
@@ -34,5 +34,10 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     @Override
     public TipoProyecto buscar(int id) {
         return tipoProyectoRepository.buscar(id);
+    }
+
+    @Override
+    public List<TipoProyecto> buscarNoBajas() {
+        return tipoProyectoRepository.buscar("WHERE baja = false");
     }
 }

@@ -25,8 +25,8 @@ public class MetodologiaRepositoryImpl implements MetodologiaRepository {
     }
 
     @Override
-    public List<Metodologia> buscarTodos() {
-        String hql = "FROM metodologia WHERE baja = false";
+    public List<Metodologia> buscar(String extension) {
+        String hql = "FROM Metodologia " + extension;
         return (List<Metodologia>) entityManager.createQuery(hql).getResultList();
     }
 

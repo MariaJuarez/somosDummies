@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.empleado.service;
 
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.service.Service;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 
@@ -21,5 +22,7 @@ public interface EmpleadoService extends Service<Empleado> {
     List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
 
     void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia);
+
+    List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado);
 
 }
