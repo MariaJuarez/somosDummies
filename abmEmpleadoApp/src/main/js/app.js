@@ -1,13 +1,16 @@
-//app.js
-//console.log("hola, mundo");
 import React from "react"
 import ReactDOM from "react-dom"
-import App from "./layout/App.js"
+import App from "./layout/App"
+import {Provider}  from "react-redux"
+import store from "./api/store"
 
-/*
-JSX
-*/
 ReactDOM.render(
-	<App/>,
-	document.getElementById("app")
-	);
+    //<ComponenteDeReact/>
+    //document.getElementBy
+    <Provider store={store}>
+        <App/>
+
+    </Provider>
+    ,
+    document.getElementById("app")
+)

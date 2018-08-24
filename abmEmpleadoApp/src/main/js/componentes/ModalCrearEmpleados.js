@@ -8,7 +8,6 @@ class Home extends React.Component{
     super(props, context);
 
     this.handleHide = this.handleHide.bind(this);
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       	show: false, 
@@ -41,23 +40,19 @@ class Home extends React.Component{
 					idTecnologia : 3
 				}
 			]
-		}  
-  
+    }
 
-         
+
+
     };
     
   	}
-  	onChange = (e) => {
-        // Because we named the inputs to match their corresponding values in state, it's
-        // super easy to update the state
-        this.setState({ [e.target.empleado]: e.target.value });
-      }
 
-	onSubmit = (e) => {
+	onSubmit(e){
 	    e.preventDefault();
 	    // get our form data out of state
-	    const {empleado} = this.state;
+		console.log(this.state.empleado);
+	    const {empleado} = this.state.empleado;
 
 	    axios.post('https://localhost:8080/crud/crearEmpleado', {empleado})
 	      .then((result) => {
@@ -82,16 +77,6 @@ class Home extends React.Component{
 			<div className='container'>
 			
 			<div className="modal-container" >
-		        <div className="buttonMarginBottom">
-			        <Button
-			          bsStyle="primary"
-			          bsSize="sm"
-			          onClick={() => this.setState({ show: true })}
-			        >
-			          Nuevo
-			        </Button>
-		        </div>
-
 		        <Modal
 		          show={this.state.show}
 		          onHide={this.handleHide}
@@ -104,7 +89,7 @@ class Home extends React.Component{
 		            </Modal.Title>
 		          </Modal.Header>
 		          <Modal.Body>
-		           	<FormularioEmpleado empleado={empleado} onChange={this.onChange} onSubmit={this.onSubmit}/>
+		           	<FormularioEmpleado empleado={this.state.empleado} onSubmit={this.onSubmit}/>
 		          </Modal.Body>
 		          <Modal.Footer>
 		            <Button onClick={this.handleHide}>Cerrar</Button>
