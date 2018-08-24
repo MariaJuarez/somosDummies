@@ -2,8 +2,10 @@ package ar.com.tecnosoftware.somos.proyecto.repository.impl;
 
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -59,5 +61,40 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     @Override
     public void darBajaTecnologiaDeProyecto(Proyecto proyecto) {
         entityManager.merge(proyecto);
+    }
+
+    @Override
+    public List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto) {
+        Session session = entityManager.unwrap(Session.class);
+
+        activarFiltros(filtroProyecto, session);
+
+        List<Proyecto> proyectos = buscar("");
+
+        desactivarFiltros(session);
+
+        return proyectos;
+    }
+
+    @Override
+    public void activarFiltros(FiltroProyecto filtroProyecto, Session session){
+        if(filtroProyecto.getFechaInicio() != null){
+            session.enableFilter("filtroFechaInicio").setParameter("fechaInicio",filtroProyecto.getFechaInicio());
+        }
+
+        if(filtroProyecto.getFechaFin() != null){
+            session.enableFilter("filtroFechaFin").setParameter("fechaFin",filtroProyecto.getFechaFin());
+        }
+
+        if(filtroProyecto.getCliente() != null){
+            session.enableFilter("filtroCliente").setParameter("idCliente",filtroProyecto.getCliente().getId());
+        }
+    }
+
+    @Override
+    public void desactivarFiltros(Session session){
+        session.disableFilter("filtroFechaInicio");
+        session.disableFilter("filtroFechaFin");
+        session.disableFilter("filtroCliente");
     }
 }

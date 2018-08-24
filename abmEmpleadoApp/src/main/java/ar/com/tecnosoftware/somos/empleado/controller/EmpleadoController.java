@@ -40,7 +40,7 @@ public class EmpleadoController {
     }
 
     @PostMapping(value = "/listarFiltro")
-    public List<Empleado> buscarEmpleado(@RequestBody FiltroEmpleado filtroEmpleado){
+    public List<Empleado> buscarEmpleados(@RequestBody FiltroEmpleado filtroEmpleado){
         if((filtroEmpleado != null) &&
                 (filtroEmpleado.getLegajo()) != null || (filtroEmpleado.getArea() != null) || (filtroEmpleado.getBaja() != null) || (filtroEmpleado.getNombres() != null) ||
                 (filtroEmpleado.getApellidos() != null) || (filtroEmpleado.getFechaIngreso() != null) || (filtroEmpleado.getFechaEgreso() != null) || (filtroEmpleado.getPromovidoLps() != null) ||

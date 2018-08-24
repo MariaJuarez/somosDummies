@@ -4,6 +4,7 @@ import ar.com.tecnosoftware.somos.cliente.repository.ClienteRepository;
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.metodologia.repository.MetodologiaRepository;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tecnologia.repository.TecnologiaRepository;
@@ -129,5 +130,10 @@ public class ProyectoServiceImpl implements ProyectoService {
             proyecto.getTecnologias().remove(tecnologia);
             proyectoRepository.darBajaTecnologiaDeProyecto(proyecto);
         }
+    }
+
+    @Override
+    public List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto) {
+        return proyectoRepository.buscarPorFiltro(filtroProyecto);
     }
 }

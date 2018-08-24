@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.proyecto.controller;
 
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
@@ -45,6 +46,16 @@ public class ProyectoController {
     @PutMapping (value = "/baja/tecnologiaConProyecto/{id}")
     public void bajaTecnologiaDeProyecto(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
         proyectoService.darBajaTecnologiaDeProyectos(proyectos, id);
+    }
+
+    @PostMapping(value = "/listarFiltro")
+    public List<Proyecto> buscarProyectos(@RequestBody FiltroProyecto filtroProyecto){
+        if((filtroProyecto != null) &&
+                (filtroProyecto.getFechaInicio()) != null || (filtroProyecto.getFechaFin() != null) || (filtroProyecto.getCliente() != null)){
+            return proyectoService.buscarPorFiltro(filtroProyecto);
+        }
+
+        return proyectoService.buscarTodos();
     }
 
 }

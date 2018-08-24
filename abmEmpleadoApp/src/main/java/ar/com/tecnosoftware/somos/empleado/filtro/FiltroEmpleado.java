@@ -44,6 +44,4 @@ public class FiltroEmpleado {
     private Cliente cliente = null;
 
     private Proyecto proyecto = null;
-
-    private Date anioLps = null;
 }

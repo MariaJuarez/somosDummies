@@ -6,8 +6,10 @@ import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -15,6 +17,26 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@FilterDefs({
+        @FilterDef(name = "filtroFechaInicio", parameters = {
+                @ParamDef(name = "fechaInicio", type = "date")
+        }),
+        @FilterDef(name = "filtroFechaFin", parameters = {
+                @ParamDef(name = "fechaFin", type = "date")
+        }),
+        @FilterDef(name = "filtroAnioLps", parameters = {
+                @ParamDef(name = "anioLps", type = "date")
+        }),
+        @FilterDef(name = "filtroCliente", parameters = {
+                @ParamDef(name = "idCliente", type = "integer")
+        })
+})
+@Filters({
+        @Filter(name = "filtroFechaInicio", condition = ":fechaInicio = fecha_inicio"),
+        @Filter(name = "filtroFechaFin", condition = ":fechaFin = fecha_fin"),
+        @Filter(name = "filtroAnioLps", condition = ":anioLps = nombres"),
+        @Filter(name = "filtroCliente", condition = ":idCliente = id_cliente")
+})
 public class Proyecto implements Serializable {
 
     @Id

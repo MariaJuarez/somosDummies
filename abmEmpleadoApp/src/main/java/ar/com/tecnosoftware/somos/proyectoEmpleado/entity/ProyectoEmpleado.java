@@ -21,10 +21,6 @@ public class ProyectoEmpleado implements Serializable {
     private int id;
 
     @Basic
-    @Column(name = "anio_LPS")
-    private int anio;
-
-    @Basic
     @Column(name = "tareas_proyecto")
     private String tareas;
 

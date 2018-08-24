@@ -145,7 +145,7 @@ public class Empleado implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "empleados_tecnologias",
-            joinColumns = @JoinColumn(name = "id_empleado2"),
+            joinColumns = @JoinColumn(name = "id_empleado"),
             inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))
     private List<Tecnologia> tecnologias;
 

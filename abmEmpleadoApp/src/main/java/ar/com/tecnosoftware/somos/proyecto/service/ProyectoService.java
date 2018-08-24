@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.proyecto.service;
 
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.service.Service;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 
@@ -25,5 +26,7 @@ public interface ProyectoService extends Service<Proyecto> {
     List<Proyecto> buscarProyectosConTecnologia(int idTecnologia);
 
     void darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, int idTecnologia);
+
+    List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto);
 
 }
