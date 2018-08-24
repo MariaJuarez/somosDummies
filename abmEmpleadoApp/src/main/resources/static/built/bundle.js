@@ -20375,7 +20375,7 @@
 	
 	var _Empleados2 = _interopRequireDefault(_Empleados);
 	
-	var _Proyectos = __webpack_require__(555);
+	var _Proyectos = __webpack_require__(553);
 	
 	var _Proyectos2 = _interopRequireDefault(_Proyectos);
 	
@@ -49275,10 +49275,6 @@
 	
 	var _ModalCrearEmpleados2 = _interopRequireDefault(_ModalCrearEmpleados);
 	
-	var _ModalCrearProyecto = __webpack_require__(553);
-	
-	var _ModalCrearProyecto2 = _interopRequireDefault(_ModalCrearProyecto);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49307,7 +49303,6 @@
 						{ className: "titulo" },
 						"Empleados"
 					),
-					_react2.default.createElement(_ModalCrearProyecto2.default, null),
 					_react2.default.createElement(_ModalCrearEmpleados2.default, null),
 					_react2.default.createElement(_Tablas2.default, null)
 				);
@@ -49326,7 +49321,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -49341,7 +49336,13 @@
 	
 	var _FormularioEmpleado2 = _interopRequireDefault(_FormularioEmpleado);
 	
+	var _axios = __webpack_require__(352);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -49350,133 +49351,156 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Home = function (_React$Component) {
-		_inherits(Home, _React$Component);
+	    _inherits(Home, _React$Component);
 	
-		function Home(props, context) {
-			_classCallCheck(this, Home);
+	    function Home(props, context) {
+	        _classCallCheck(this, Home);
 	
-			var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props, context));
+	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props, context));
 	
-			_this.handleHide = _this.handleHide.bind(_this);
-			_this.onSubmit = _this.onSubmit.bind(_this);
-			_this.state = {
-				show: false,
-				empleado: {
+	        _this.handleHide = _this.handleHide.bind(_this);
+	        _this.onChange = _this.onChange.bind(_this);
+	        _this.onSubmit = _this.onSubmit.bind(_this);
+	        _this.state = {
+	            show: false,
+	            empleado: {
 	
-					legajo: 2,
-					nombres: "Daniel Wilber",
-					apellidos: "Martinez Rojas",
-					cuil: "20-879765-2",
-					responsable: "Juan Carlos",
-					fechaIngreso: null,
-					fechaEgreso: null,
-					domicilioLaboral: "HIT",
-					observaciones: "Viejo",
-					promovidoLps: false,
-					email: "rrojas@tecno.com",
-					telefono: "1125746993",
-					perfil: {
-						idPerfil: 2
-					},
+	                legajo: 2,
+	                nombres: "Daniel Wilber",
+	                apellidos: "Martinez Rojas",
+	                cuil: "20-879765-2",
+	                responsable: "Juan Carlos",
+	                fechaIngreso: null,
+	                fechaEgreso: null,
+	                domicilioLaboral: "HIT",
+	                observaciones: "Viejo",
+	                promovidoLps: false,
+	                email: "rrojas@tecno.com",
+	                telefono: "1125746993",
+	                perfil: {
+	                    idPerfil: 2
+	                },
 	
-					area: {
-						idCentroCosto: 2
-					},
-					senority: 3,
-					tecnologias: [{
-						idTecnologia: 1
-					}, {
-						idTecnologia: 3
-					}]
-				}
+	                area: {
+	                    idCentroCosto: 2
+	                },
+	                senority: 3,
+	                tecnologias: [{
+	                    idTecnologia: 1
+	                }, {
+	                    idTecnologia: 3
+	                }]
+	            }
 	
-			};
+	        };
 	
-			return _this;
-		}
+	        return _this;
+	    }
 	
-		_createClass(Home, [{
-			key: "onSubmit",
-			value: function onSubmit(e) {
-				e.preventDefault();
-				// get our form data out of state
-				console.log(this.state.empleado);
-				var empleado = this.state.empleado.empleado;
+	    _createClass(Home, [{
+	        key: "onChange",
+	        value: function onChange(e) {
+	            this.setState(_defineProperty({}, e.target.empleado, e.target.value));
+	        }
+	    }, {
+	        key: "onSubmit",
+	        value: function onSubmit(e) {
+	            console.log("ssss");
+	            e.preventDefault();
+	            var empleado = this.state.empleado;
 	
 	
-				axios.post('https://localhost:8080/crud/crearEmpleado', { empleado: empleado }).then(function (result) {
-					console.log(result);
-				});
-			}
-		}, {
-			key: "handleHide",
-			value: function handleHide() {
-				this.setState({ show: false });
-			}
-		}, {
-			key: "render",
-			value: function render() {
+	            _axios2.default.post('http://localhost:8080/crud/empleado', { empleado: empleado }).then(function (result) {
+	                console.log(result);
+	            }).catch(function (error) {
+	                console.log(error);
+	            });
+	        }
+	    }, {
+	        key: "handleHide",
+	        value: function handleHide() {
+	            this.setState({ show: false });
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _this2 = this;
 	
-				var popover = _react2.default.createElement(
-					_reactBootstrap.Popover,
-					{ id: "modal-popover", title: "popover" },
-					"very popover. such engagement"
-				);
+	            var popover = _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                { id: "modal-popover", title: "popover" },
+	                "very popover. such engagement"
+	            );
 	
-				var tooltip = _react2.default.createElement(
-					_reactBootstrap.Tooltip,
-					{ id: "modal-tooltip" },
-					"wow."
-				);
-				return _react2.default.createElement(
-					"div",
-					{ className: "container" },
-					_react2.default.createElement(
-						"div",
-						{ className: "modal-container" },
-						_react2.default.createElement(
-							_reactBootstrap.Modal,
-							{
-								show: this.state.show,
-								onHide: this.handleHide,
-								container: this,
-								"aria-labelledby": "contained-modal-title"
-							},
-							_react2.default.createElement(
-								_reactBootstrap.Modal.Header,
-								{ closeButton: true },
-								_react2.default.createElement(
-									_reactBootstrap.Modal.Title,
-									{ id: "contained-modal-title" },
-									"Crear Empleado"
-								)
-							),
-							_react2.default.createElement(
-								_reactBootstrap.Modal.Body,
-								null,
-								_react2.default.createElement(_FormularioEmpleado2.default, { empleado: this.state.empleado, onSubmit: this.onSubmit })
-							),
-							_react2.default.createElement(
-								_reactBootstrap.Modal.Footer,
-								null,
-								_react2.default.createElement(
-									_reactBootstrap.Button,
-									{ onClick: this.handleHide },
-									"Cerrar"
-								),
-								_react2.default.createElement(
-									_reactBootstrap.Button,
-									{ type: "submit", bsStyle: "primary" },
-									"Crear"
-								)
-							)
-						)
-					)
-				);
-			}
-		}]);
+	            var tooltip = _react2.default.createElement(
+	                _reactBootstrap.Tooltip,
+	                { id: "modal-tooltip" },
+	                "wow."
+	            );
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "container" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "modal-container" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "buttonMarginBottom" },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Button,
+	                            {
+	                                bsStyle: "primary",
+	                                bsSize: "sm",
+	                                onClick: function onClick() {
+	                                    return _this2.setState({ show: true });
+	                                }
+	                            },
+	                            "Nuevo"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal,
+	                        {
+	                            show: this.state.show,
+	                            onHide: this.handleHide,
+	                            container: this,
+	                            "aria-labelledby": "contained-modal-title"
+	                        },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Header,
+	                            { closeButton: true },
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Modal.Title,
+	                                { id: "contained-modal-title" },
+	                                "Crear Empleado"
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Body,
+	                            null,
+	                            _react2.default.createElement(_FormularioEmpleado2.default, { empleado: this.state.empleado, onChange: this.onChange, onSubmit: this.onSubmit })
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Footer,
+	                            null,
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Button,
+	                                { onClick: this.handleHide },
+	                                "Cerrar"
+	                            ),
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Button,
+	                                { onClick: this.onSubmit, type: "submit", bsStyle: "primary" },
+	                                "Crear"
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
 	
-		return Home;
+	    return Home;
 	}(_react2.default.Component);
 	
 	exports.default = Home;
@@ -49488,7 +49512,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -49520,246 +49544,247 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var FormularioEmpleado = function (_React$Component) {
-		_inherits(FormularioEmpleado, _React$Component);
+	    _inherits(FormularioEmpleado, _React$Component);
 	
-		function FormularioEmpleado() {
-			_classCallCheck(this, FormularioEmpleado);
+	    function FormularioEmpleado() {
+	        _classCallCheck(this, FormularioEmpleado);
 	
-			return _possibleConstructorReturn(this, (FormularioEmpleado.__proto__ || Object.getPrototypeOf(FormularioEmpleado)).call(this));
-		}
+	        return _possibleConstructorReturn(this, (FormularioEmpleado.__proto__ || Object.getPrototypeOf(FormularioEmpleado)).call(this));
+	    }
 	
-		_createClass(FormularioEmpleado, [{
-			key: 'render',
-			value: function render() {
-				var empleado = this.props.empleado;
+	    _createClass(FormularioEmpleado, [{
+	        key: 'render',
+	        value: function render() {
+	            var empleado = this.props.empleado;
+	            var onSubmit = this.props.onSubmit;
 	
-				return _react2.default.createElement(
-					_reactBootstrap.Form,
-					{ inline: true },
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'promovidoLPS' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Promovido LPS'
-						),
-						_react2.default.createElement(_reactBootstrap.Checkbox, { inline: true, value: empleado.promovidoLps, onChange: this.onChange })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'legajo' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Legajo'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero de legajo', value: empleado.legajo, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'cuil' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Cuil'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero Cuil sin guiones', value: empleado.cuil, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'formControlPromovidoLPS' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Senioriti'
-						),
-						_react2.default.createElement(
-							_reactBootstrap.FormControl,
-							{ componentClass: 'select', placeholder: 'select', value: empleado.senioriti, onChange: this.onChange },
-							_react2.default.createElement(
-								'option',
-								{ value: 'select' },
-								'seleccionar'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'other' },
-								'...'
-							)
-						)
-					),
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'nombres', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Nombres'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombres', value: empleado.nombres, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'apellidos', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Apellidos'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'apellidos', value: empleado.apellidos, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'email', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Email'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'mail@ejemplo.com', value: empleado.email, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'fechaIngreso', className: 'inputCalendar', disabled: true },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Fecha Ingreso'
-						),
-						' ',
-						_react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
-							dateFormat: 'DD-MM-YYYY',
-							timeFormat: false, value: empleado.fechaIngreso, onChange: this.onChange
-						})
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'fechaEgreso', className: 'inputCalendar', disabled: true },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Fecha Ingreso'
-						),
-						' ',
-						_react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
-							dateFormat: 'DD-MM-YYYY',
-							timeFormat: false, value: empleado.fechaIngreso, onChange: this.onChange
-						})
-					),
-					' ',
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'telefono' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Telefono'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'ej 1122232425', value: empleado.telefono, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'centroDeCosto' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'\xC1rea'
-						),
-						_react2.default.createElement(
-							_reactBootstrap.FormControl,
-							{ componentClass: 'select', placeholder: 'select', value: empleado.area, onChange: this.onChange },
-							_react2.default.createElement(
-								'option',
-								{ value: 'select' },
-								'seleccionar'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'other' },
-								'...'
-							)
-						)
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'perfil' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Perfil'
-						),
-						_react2.default.createElement(
-							_reactBootstrap.FormControl,
-							{ componentClass: 'select', placeholder: 'select', value: empleado.perfil, onChange: this.onChange },
-							_react2.default.createElement(
-								'option',
-								{ value: 'select' },
-								'seleccionar'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'other' },
-								'...'
-							)
-						)
-					),
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'domicilioLaboral', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Domicilio Laboral'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'lugar de trabajo', value: empleado.domicilioLaboral, onChange: this.onChange })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'observaciones', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Observaciones'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa una breve observacion', value: empleado.observaciones, onChange: this.onChange })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'responsable', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Responsable'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombre de responsable', value: empleado.responsable, onChange: this.onChange })
-					),
-					' '
-				);
-			}
-		}]);
+	            return _react2.default.createElement(
+	                _reactBootstrap.Form,
+	                { inline: true, onSubmit: onSubmit },
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'promovidoLPS' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Promovido LPS'
+	                    ),
+	                    _react2.default.createElement(_reactBootstrap.Checkbox, { inline: true, defaultValue: empleado.promovidoLps, onChange: this.onChange })
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'legajo' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Legajo'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero de legajo', defaultValue: empleado.legajo, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'cuil' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Cuil'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero Cuil sin guiones', defaultValue: empleado.cuil, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'formControlPromovidoLPS' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Senioriti'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormControl,
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senioriti, onChange: this.onChange },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'select' },
+	                            'seleccionar'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'other' },
+	                            '...'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'nombres', className: 'enLinea' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Nombres'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombres', defaultValue: empleado.nombres, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'apellidos', className: 'enLinea' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Apellidos'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'apellidos', defaultValue: empleado.apellidos, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'email', className: 'enLinea' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Email'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'mail@ejemplo.com', defaultValue: empleado.email, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'fechaIngreso', className: 'inputCalendar', disabled: true },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Fecha Ingreso'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
+	                        dateFormat: 'DD-MM-YYYY',
+	                        timeFormat: false, onChange: this.onChange
+	                    })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'fechaEgreso', className: 'inputCalendar', disabled: true },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Fecha Ingreso'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
+	                        dateFormat: 'DD-MM-YYYY',
+	                        timeFormat: false, onChange: this.onChange
+	                    })
+	                ),
+	                ' ',
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'telefono' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Telefono'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'ej 1122232425', defaultValue: empleado.telefono, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'centroDeCosto' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        '\xC1rea'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormControl,
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.area, onChange: this.onChange },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'select' },
+	                            'seleccionar'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'other' },
+	                            '...'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'perfil' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Perfil'
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormControl,
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.perfil, onChange: this.onChange },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'select' },
+	                            'seleccionar'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { value: 'other' },
+	                            '...'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement('hr', null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'domicilioLaboral', className: 'enLinea' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Domicilio Laboral'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'lugar de trabajo', defaultValue: empleado.domicilioLaboral, onChange: this.onChange })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'observaciones', className: 'enLinea' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Observaciones'
+	                    ),
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa una breve observacion', defaultValue: empleado.observaciones, onChange: this.onChange })
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: 'responsable', className: 'enLinea' },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        'Responsable'
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombre de responsable', defaultValue: empleado.responsable, onChange: this.onChange })
+	                ),
+	                ' '
+	            );
+	        }
+	    }]);
 	
-		return FormularioEmpleado;
+	    return FormularioEmpleado;
 	}(_react2.default.Component);
 	
 	exports.default = FormularioEmpleado;
@@ -69069,447 +69094,6 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactBootstrap = __webpack_require__(71);
-	
-	var _FormularioProyecto = __webpack_require__(554);
-	
-	var _FormularioProyecto2 = _interopRequireDefault(_FormularioProyecto);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Home = function (_React$Component) {
-			_inherits(Home, _React$Component);
-	
-			function Home(props, context) {
-					_classCallCheck(this, Home);
-	
-					var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props, context));
-	
-					_this.handleHide = _this.handleHide.bind(_this);
-	
-					_this.state = {
-							show: false
-					};
-					return _this;
-			}
-	
-			_createClass(Home, [{
-					key: "handleHide",
-					value: function handleHide() {
-							this.setState({ show: false });
-					}
-			}, {
-					key: "render",
-					value: function render() {
-							var _this2 = this;
-	
-							var popover = _react2.default.createElement(
-									_reactBootstrap.Popover,
-									{ id: "modal-popover", title: "popover" },
-									"very popover. such engagement"
-							);
-							var tooltip = _react2.default.createElement(
-									_reactBootstrap.Tooltip,
-									{ id: "modal-tooltip" },
-									"wow."
-							);
-							return _react2.default.createElement(
-									"div",
-									{ className: "container" },
-									_react2.default.createElement(
-											"div",
-											{ className: "modal-container" },
-											_react2.default.createElement(
-													"div",
-													{ className: "buttonMarginBottom" },
-													_react2.default.createElement(
-															_reactBootstrap.Button,
-															{
-																	bsStyle: "primary",
-																	bsSize: "sm",
-																	onClick: function onClick() {
-																			return _this2.setState({ show: true });
-																	}
-															},
-															"Nuevo"
-													)
-											),
-											_react2.default.createElement(
-													_reactBootstrap.Modal,
-													{
-															show: this.state.show,
-															onHide: this.handleHide,
-															container: this,
-															"aria-labelledby": "contained-modal-title"
-													},
-													_react2.default.createElement(
-															_reactBootstrap.Modal.Header,
-															{ closeButton: true },
-															_react2.default.createElement(
-																	_reactBootstrap.Modal.Title,
-																	{ id: "contained-modal-title" },
-																	"Contained Modal"
-															)
-													),
-													_react2.default.createElement(
-															_reactBootstrap.Modal.Body,
-															null,
-															_react2.default.createElement(_FormularioProyecto2.default, null)
-													),
-													_react2.default.createElement(
-															_reactBootstrap.Modal.Footer,
-															null,
-															_react2.default.createElement(
-																	_reactBootstrap.Button,
-																	{ onClick: this.handleHide },
-																	"Close"
-															),
-															_react2.default.createElement(
-																	_reactBootstrap.Button,
-																	{ bsStyle: "primary" },
-																	"Save changes"
-															)
-													)
-											)
-									)
-							);
-					}
-			}]);
-	
-			return Home;
-	}(_react2.default.Component);
-	
-	exports.default = Home;
-
-/***/ }),
-/* 554 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactBootstrap = __webpack_require__(71);
-	
-	__webpack_require__(414);
-	
-	var _moment = __webpack_require__(539);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _reactDatetime = __webpack_require__(541);
-	
-	var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
-	
-	__webpack_require__(551);
-	
-	__webpack_require__(344);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var FormularioProyecto = function (_React$Component) {
-		_inherits(FormularioProyecto, _React$Component);
-	
-		function FormularioProyecto() {
-			_classCallCheck(this, FormularioProyecto);
-	
-			return _possibleConstructorReturn(this, (FormularioProyecto.__proto__ || Object.getPrototypeOf(FormularioProyecto)).apply(this, arguments));
-		}
-	
-		_createClass(FormularioProyecto, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					_reactBootstrap.Form,
-					{ inline: true },
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ className: 'promovidoLPS' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Promovido LPS'
-						),
-						_react2.default.createElement(_reactBootstrap.Checkbox, { inline: true })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						null,
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Externo'
-						),
-						_react2.default.createElement(_reactBootstrap.Checkbox, { inline: true })
-					),
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'Jira' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Jira'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombre en jira' })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'crm' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'CRM'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'c\xF3digo CRM' })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'nombreProyecto', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Nombre De Proyecto'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'mail@ejemplo.com' })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'lider', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Lider'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'mail@ejemplo.com' })
-					),
-					' ',
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'fechaInicio', className: 'inputCalendar', disabled: true },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Fecha Inicio'
-						),
-						' ',
-						_react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
-							dateFormat: 'DD-MM-YYYY',
-							timeFormat: false
-						})
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'fechaFin', className: 'inputCalendar', disabled: true },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Fecha Fin'
-						),
-						' ',
-						_react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
-							dateFormat: 'DD-MM-YYYY',
-							timeFormat: false
-						})
-					),
-					' ',
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'TipoProyecto' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Tipo de Proyecto'
-						),
-						_react2.default.createElement(
-							_reactBootstrap.FormControl,
-							{ componentClass: 'select', placeholder: 'select' },
-							_react2.default.createElement(
-								'option',
-								{ value: 'select' },
-								'seleccionar'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'other' },
-								'...'
-							)
-						)
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'cliente' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Cliente'
-						),
-						_react2.default.createElement(
-							_reactBootstrap.FormControl,
-							{ componentClass: 'select', placeholder: 'select' },
-							_react2.default.createElement(
-								'option',
-								{ value: 'select' },
-								'seleccionar'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'other' },
-								'...'
-							)
-						)
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'metodologia' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Metodologia'
-						),
-						_react2.default.createElement(
-							_reactBootstrap.FormControl,
-							{ componentClass: 'select', placeholder: 'select' },
-							_react2.default.createElement(
-								'option',
-								{ value: 'select' },
-								'seleccionar'
-							),
-							_react2.default.createElement(
-								'option',
-								{ value: 'other' },
-								'...'
-							)
-						)
-					),
-					_react2.default.createElement('hr', null),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'areaSolicitante', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'\xC1rea solicitante'
-						),
-						' ',
-						_react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: '\xE1rea de destino del proyecto' })
-					),
-					' ',
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'equipotDeTrabajo', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Equipo de Trabajo'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'breve descripcion de los empleados requeridos para el proyecto' })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'objetivo', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Objetivo'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: ' descripcion de proyecto' })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'requerimientoFuncional', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Requerimiento Funcional'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa el requerimiento funcional' })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'usuarios', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Usuarios'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa los usuarios del proyecto' })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'areasInvolucradas', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Roles o \xC1reas Involucradas'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'una breve descripcion de roles' })
-					),
-					_react2.default.createElement(
-						_reactBootstrap.FormGroup,
-						{ controlId: 'observaciones', className: 'enLinea' },
-						_react2.default.createElement(
-							_reactBootstrap.ControlLabel,
-							null,
-							'Observaciones'
-						),
-						_react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa una breve observacion' })
-					)
-				);
-			}
-		}]);
-	
-		return FormularioProyecto;
-	}(_react2.default.Component);
-	
-	exports.default = FormularioProyecto;
-
-/***/ }),
-/* 555 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	
@@ -69525,7 +69109,7 @@
 	
 	var _reactBootstrap = __webpack_require__(71);
 	
-	var _ModalCrearProyecto = __webpack_require__(553);
+	var _ModalCrearProyecto = __webpack_require__(554);
 	
 	var _ModalCrearProyecto2 = _interopRequireDefault(_ModalCrearProyecto);
 	
@@ -69567,6 +69151,396 @@
 	}(_react2.default.Component);
 	
 	exports.default = Proyectos;
+
+/***/ }),
+/* 554 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactBootstrap = __webpack_require__(71);
+	
+	var _FormularioProyecto = __webpack_require__(555);
+	
+	var _FormularioProyecto2 = _interopRequireDefault(_FormularioProyecto);
+	
+	var _axios = __webpack_require__(352);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Home = function (_React$Component) {
+	    _inherits(Home, _React$Component);
+	
+	    function Home(props, context) {
+	        _classCallCheck(this, Home);
+	
+	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props, context));
+	
+	        _this.handleHide = _this.handleHide.bind(_this);
+	
+	        _this.state = {
+	            show: false
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(Home, [{
+	        key: "handleHide",
+	        value: function handleHide() {
+	            this.setState({ show: false });
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _this2 = this;
+	
+	            var popover = _react2.default.createElement(
+	                _reactBootstrap.Popover,
+	                { id: "modal-popover", title: "popover" },
+	                "very popover. such engagement"
+	            );
+	            var tooltip = _react2.default.createElement(
+	                _reactBootstrap.Tooltip,
+	                { id: "modal-tooltip" },
+	                "wow."
+	            );
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "container" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "modal-container" },
+	                    _react2.default.createElement(
+	                        "div",
+	                        { className: "buttonMarginBottom" },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Button,
+	                            {
+	                                bsStyle: "primary",
+	                                bsSize: "sm",
+	                                onClick: function onClick() {
+	                                    return _this2.setState({ show: true });
+	                                }
+	                            },
+	                            "Nuevo"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.Modal,
+	                        {
+	                            show: this.state.show,
+	                            onHide: this.handleHide,
+	                            container: this,
+	                            "aria-labelledby": "contained-modal-title"
+	                        },
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Header,
+	                            { closeButton: true },
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Modal.Title,
+	                                { id: "contained-modal-title" },
+	                                "Contained Modal"
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Body,
+	                            null,
+	                            _react2.default.createElement(_FormularioProyecto2.default, { onChange: this.onChange, onSubmit: this.onSubmit })
+	                        ),
+	                        _react2.default.createElement(
+	                            _reactBootstrap.Modal.Footer,
+	                            null,
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Button,
+	                                { onClick: this.handleHide },
+	                                "Cerrar"
+	                            ),
+	                            _react2.default.createElement(
+	                                _reactBootstrap.Button,
+	                                { onClick: this.onSubmit, type: "submit", bsStyle: "primary" },
+	                                "Crear"
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Home;
+	}(_react2.default.Component);
+	
+	exports.default = Home;
+
+/***/ }),
+/* 555 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactBootstrap = __webpack_require__(71);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FormularioProyecto = function (_React$Component) {
+	    _inherits(FormularioProyecto, _React$Component);
+	
+	    function FormularioProyecto() {
+	        _classCallCheck(this, FormularioProyecto);
+	
+	        return _possibleConstructorReturn(this, (FormularioProyecto.__proto__ || Object.getPrototypeOf(FormularioProyecto)).call(this));
+	    }
+	
+	    _createClass(FormularioProyecto, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                _reactBootstrap.Form,
+	                { inline: true },
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formControlsSelect" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Promovido LPS"
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormControl,
+	                        { componentClass: "select", placeholder: "select" },
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "select" },
+	                            "seleccionar"
+	                        ),
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "other" },
+	                            "..."
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Legajo"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Numero de legajo" })
+	                ),
+	                ' ',
+	                _react2.default.createElement("hr", null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName", className: "enLinea" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Nombres"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineEmail", className: "enLinea" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Apellidos"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "email", placeholder: "jane.doe@example.com" })
+	                ),
+	                ' ',
+	                _react2.default.createElement("br", null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formControlsSelect" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Fecha Ingreso"
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormControl,
+	                        { componentClass: "select", placeholder: "select" },
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "select" },
+	                            "seleccionar"
+	                        ),
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "other" },
+	                            "..."
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formControlsSelect" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Fecha Egreso"
+	                    ),
+	                    _react2.default.createElement(
+	                        _reactBootstrap.FormControl,
+	                        { componentClass: "select", placeholder: "select" },
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "select" },
+	                            "seleccionar"
+	                        ),
+	                        _react2.default.createElement(
+	                            "option",
+	                            { value: "other" },
+	                            "..."
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement("hr", null),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Email"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Cargo RHPRO"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Centro de Costo"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineEmail" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Email"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "email", placeholder: "jane.doe@example.com" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Name"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formControlsTextarea" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Textarea"
+	                    ),
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: "textarea", placeholder: "textarea" })
+	                ),
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Name"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' ',
+	                _react2.default.createElement(
+	                    _reactBootstrap.FormGroup,
+	                    { controlId: "formInlineName" },
+	                    _react2.default.createElement(
+	                        _reactBootstrap.ControlLabel,
+	                        null,
+	                        "Name"
+	                    ),
+	                    ' ',
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Jane Doe" })
+	                ),
+	                ' '
+	            );
+	        }
+	    }]);
+	
+	    return FormularioProyecto;
+	}(_react2.default.Component);
+	
+	exports.default = FormularioProyecto;
 
 /***/ }),
 /* 556 */
