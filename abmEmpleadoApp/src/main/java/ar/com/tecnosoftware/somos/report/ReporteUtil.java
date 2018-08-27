@@ -7,8 +7,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import ar.com.tecnosoftware.somos.report.conexion.Conexion;
+import lombok.Data;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.util.JRSaver;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
@@ -17,8 +20,11 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletResponse;
 
+@Data
 @Component
 public class ReporteUtil {
+
+    private final Log LOG = LogFactory.getLog(ReporteUtil.class);
 
     private String reportFileName;
 
@@ -28,8 +34,15 @@ public class ReporteUtil {
 
     private Resource resource;
 
+    private JRDataSource dataSource;
+
+    private String imagen="/imagenes/logo.jpg";
+
     @Autowired
     ApplicationContext context;
+
+    @Autowired
+    private Conexion conexion;
 
     private Map<String, Object> parameters;
 
@@ -37,59 +50,36 @@ public class ReporteUtil {
         parameters = new HashMap<>();
     }
 
-    public void prepareReport() {
-        compileReport();
-    }
-
-    public void compileReport() {
+    public void generarReportePdf(HttpServletResponse response) {
         try {
-            Resource resource = context.getResource("classpath:reportes/".concat(reportFileName).concat(".jrxml"));
+            Resource resource = context.getResource("classpath:reportes/".concat(reportFileName).concat(".jasper"));
             InputStream inputStream = resource.getInputStream();
-            jasperReport = JasperCompileManager.compileReport(inputStream);
-            JRSaver.saveObject(jasperReport, reportFileName.replace(".jrxml", ".jasper"));
-        } catch (JRException | IOException e) {
-            Logger.getLogger(ReporteUtil.class.getName()).log(Level.SEVERE, null, e);
+            parameters.put("logo", this.getClass().getResourceAsStream(imagen));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, parameters, conexion.conectar());
+           // response.setContentType(MediaType.APPLICATION_PDF_VALUE);
+            JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+            LOG.info("METHOD generarReporte --- Reporte generado Exitosamente");
+        } catch (JRException ex) {
+            LOG.error("JRException");
+            ex.printStackTrace();
+        } catch (IOException e) {
+            LOG.error("IOException --- No existe el reporte o la ubicacion ingresada");
         }
     }
 
-    public void fillReport(HttpServletResponse response, JRDataSource dataSource) {
+    public void generarReporteExcel(HttpServletResponse response) {
         try {
-            parameters.put("datasource",dataSource);
-            jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-            response.setContentType(MediaType.APPLICATION_PDF_VALUE);
-            JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
+            Resource resource = context.getResource("classpath:reportes/".concat(reportFileName).concat(".jasper"));
+            InputStream inputStream = resource.getInputStream();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, null, conexion.conectar());
+            response.setContentType(MediaType.ALL_VALUE);
+            JasperExportManager.exportReportToXmlStream(jasperPrint, response.getOutputStream());
+
+                  //s  exportReportToPdfStream(jasperPrint, response.getOutputStream());
+            LOG.info("METHOD generarReporte --- Reporte generado Exitosamente");
         } catch (JRException ex) {
             Logger.getLogger(ReporteUtil.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Map<String, Object> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(Map<String, Object> parameters) {
-        this.parameters = parameters;
-    }
-
-    public String getReportFileName() {
-        return reportFileName;
-    }
-
-    public void setReportFileName(String reportFileName) {
-        this.reportFileName = reportFileName;
-    }
-
-    public JasperPrint getJasperPrint() {
-        return jasperPrint;
-    }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
+            LOG.error("IOException --- No existe el reporte o la ubicacion ingresada");        }
     }
 }

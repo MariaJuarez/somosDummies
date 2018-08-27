@@ -1,10 +1,6 @@
 package ar.com.tecnosoftware.somos.report.controller;
 
-import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.report.ReporteUtil;
-import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 @RestController
 @RequestMapping("/report")
@@ -23,20 +18,22 @@ public class ReportController {
     ApplicationContext context;
 
     @Autowired
-    AreaRepository areaRepository;
-
-    @Autowired
     ReporteUtil reporteUtil;
 
     @GetMapping(path = "/pdf/{reportFileName}")
     @ResponseBody
-    public void getPdf(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws Exception {
-        reporteUtil.setReportFileName(reportFileName);
-        LOG.info("METHOD: getPdf -- Obteniendo Reporte de "+reportFileName);
-        reporteUtil.compileReport();
-        List<Area> areas = (List<Area>) areaRepository.buscarTodos();
-        JRDataSource dataSource = new JRBeanCollectionDataSource(areas);
-        reporteUtil.fillReport(response, dataSource);
-    }
+    public void getPdf(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) {
+                LOG.info("METHOD: getPdf --- Obteniendo el reporte de ".concat(reportFileName));
+                reporteUtil.setReportFileName(reportFileName);
+                reporteUtil.generarReportePdf(response);
+        }
 
+    @GetMapping(path = "/excel/{reportFileName}")
+    @ResponseBody
+    public void getExcel(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) {
+        LOG.info("METHOD: getExcel --- Obteniendo el reporte de ".concat(reportFileName));
+        reporteUtil.setReportFileName(reportFileName);
+        reporteUtil.generarReporteExcel(response);
+    }
 }
+
