@@ -1,7 +1,11 @@
 package ar.com.tecnosoftware.somos.proyectoEmpleado.util;
 
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ProyectoEmpleadoFiltroUtil {
@@ -44,7 +48,7 @@ public class ProyectoEmpleadoFiltroUtil {
 
     public String armarQuery(int tipoFiltro){
 
-        String hql = "SELECT DISTINCT pe.empleado FROM ProyectoEmpleado pe ";
+        String hql = "SELECT DISTINCT (pe.empleado) FROM ProyectoEmpleado pe ";
 
         switch (tipoFiltro){
             case 1:
@@ -87,6 +91,12 @@ public class ProyectoEmpleadoFiltroUtil {
         }
 
         return hql;
+    }
+
+    public List<Empleado> filtroPorEmpleadoPorProyecto(List<Empleado> filtroPorEmpleado, List<Empleado> filtroPorProyecto){
+        List<Empleado> resultado = new ArrayList<>(filtroPorProyecto);
+        resultado.retainAll(filtroPorEmpleado);
+        return resultado;
     }
 
 }

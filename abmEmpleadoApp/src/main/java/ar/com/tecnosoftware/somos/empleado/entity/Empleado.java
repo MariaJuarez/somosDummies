@@ -39,22 +39,7 @@ import java.util.List;
         }),
         @FilterDef(name = "filtroArea", parameters = {
                 @ParamDef(name = "idArea", type = "integer")
-        })/*
-        @FilterDef(name = "filtroRubro", parameters = {
-                @ParamDef(name = "idRubro", type = "integer")
-        }),
-        @FilterDef(name = "filtroTipoProyecto", parameters = {
-                @ParamDef(name = "idTipoProyecto", type = "integer")
-        }),
-        @FilterDef(name = "filtroCliente", parameters = {
-                @ParamDef(name = "idCliente", type = "integer")
-        }),
-        @FilterDef(name = "filtroProyecto", parameters = {
-                @ParamDef(name = "idProyecto", type = "integer")
-        }),
-        @FilterDef(name = "filtroAnioLps", parameters = {
-                @ParamDef(name = "anioLps", type = "date")
-        })*/
+        })
 })
 @Filters({
         @Filter(name = "filtroBaja", condition = ":baja = baja"),
@@ -65,11 +50,6 @@ import java.util.List;
         @Filter(name = "filtroFechaEgreso", condition = ":fechaEgreso = fecha_egreso"),
         @Filter(name = "filtroPromovido", condition = ":promovido = promovido_lps"),
         @Filter(name = "filtroArea", condition = ":idArea = id_centro_costo")
-       /* @Filter(name = "filtroRubro", condition = ":idArea = id_centro_costo"),
-        @Filter(name = "filtroTipoProyecto", condition = ":legajo = legajo"),
-        @Filter(name = "filtroCliente", condition = ":idArea = id_centro_costo"),
-        @Filter(name = "filtroProyecto", condition = ":legajo = legajo"),
-        @Filter(name = "filtroAnioLps", condition = ":idArea = id_centro_costo")*/
 })
 public class Empleado implements Serializable {
 

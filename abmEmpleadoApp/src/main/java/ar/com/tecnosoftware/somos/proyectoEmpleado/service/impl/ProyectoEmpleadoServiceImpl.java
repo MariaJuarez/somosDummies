@@ -2,7 +2,7 @@ package ar.com.tecnosoftware.somos.proyectoEmpleado.service.impl;
 
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.cargo.repository.CargoRepository;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;

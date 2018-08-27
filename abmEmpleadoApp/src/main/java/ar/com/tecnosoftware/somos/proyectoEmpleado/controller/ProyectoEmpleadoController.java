@@ -1,10 +1,11 @@
 package ar.com.tecnosoftware.somos.proyectoEmpleado.controller;
 
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.util.ProyectoEmpleadoFiltroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,9 @@ public class ProyectoEmpleadoController {
 
     @Autowired
     private EmpleadoService empleadoService;
+
+    @Autowired
+    private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
 
     @PostMapping(value = "/crear")
     public void addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) {
@@ -42,13 +46,34 @@ public class ProyectoEmpleadoController {
         proyectoEmpleadoService.darBaja(id);
     }
 
-    //Los atributos deben venir con los objetos completos para realizar bien el filtro.
     @PostMapping (value = "/filtrarEmpleados")
     public List<Empleado> buscarEmpleadosPorFiltro(@RequestBody FiltroEmpleado filtroEmpleado){
 
+        List<Empleado> filtroPorEmpleado = null;
+        List<Empleado> filtroPorProyecto = null;
+
+        if((filtroEmpleado != null) &&
+                (filtroEmpleado.getLegajo()) != null || (filtroEmpleado.getArea() != null) || (filtroEmpleado.getBaja() != null) || (filtroEmpleado.getNombres() != null) ||
+                (filtroEmpleado.getApellidos() != null) || (filtroEmpleado.getFechaIngreso() != null) || (filtroEmpleado.getFechaEgreso() != null) || (filtroEmpleado.getPromovidoLps() != null) ||
+                (filtroEmpleado.getTecnologias() != null)){
+            filtroPorEmpleado = empleadoService.buscarPorFiltro(filtroEmpleado);
+        }
+
         if((filtroEmpleado != null) &&
                 (filtroEmpleado.getRubro() != null) || (filtroEmpleado.getTipoProyecto() != null) || (filtroEmpleado.getClientes() != null) || (filtroEmpleado.getProyecto()!= null)){
-            return proyectoEmpleadoService.buscarEmpleadosPorFiltro(filtroEmpleado);
+            filtroPorProyecto = proyectoEmpleadoService.buscarEmpleadosPorFiltro(filtroEmpleado);
+        }
+
+        if(filtroPorEmpleado != null && filtroPorProyecto != null){
+            return proyectoEmpleadoFiltroUtil.filtroPorEmpleadoPorProyecto(filtroPorEmpleado,filtroPorProyecto);
+        } else {
+            if(filtroPorEmpleado != null){
+                return filtroPorEmpleado;
+            } else {
+                if(filtroPorProyecto != null){
+                    return filtroPorProyecto;
+                }
+            }
         }
 
         return empleadoService.buscarTodos();

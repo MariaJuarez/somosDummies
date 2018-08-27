@@ -1,7 +1,7 @@
 package ar.com.tecnosoftware.somos.proyecto.controller;
 
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
-import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
+import ar.com.tecnosoftware.somos.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;

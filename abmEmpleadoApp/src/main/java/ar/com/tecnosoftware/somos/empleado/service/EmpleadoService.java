@@ -1,8 +1,7 @@
 package ar.com.tecnosoftware.somos.empleado.service;
 
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
-import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.service.Service;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 

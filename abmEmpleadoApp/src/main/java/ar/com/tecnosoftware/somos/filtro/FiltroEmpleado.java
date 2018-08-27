@@ -1,4 +1,4 @@
-package ar.com.tecnosoftware.somos.empleado.filtro;
+package ar.com.tecnosoftware.somos.filtro;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;

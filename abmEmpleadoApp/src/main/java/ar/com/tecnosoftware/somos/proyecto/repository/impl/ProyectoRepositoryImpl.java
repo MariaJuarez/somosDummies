@@ -2,7 +2,7 @@ package ar.com.tecnosoftware.somos.proyecto.repository.impl;
 
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
-import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
+import ar.com.tecnosoftware.somos.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
 import org.hibernate.Session;

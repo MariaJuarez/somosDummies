@@ -4,7 +4,7 @@ package ar.com.tecnosoftware.somos.empleado.service.impl;
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
