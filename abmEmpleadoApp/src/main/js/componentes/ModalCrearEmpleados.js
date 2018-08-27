@@ -14,32 +14,28 @@ class Home extends React.Component{
         this.state = {
             show: false,
             empleado:{
-
-                legajo : 2,
-                nombres: "Daniel Wilber",
-                apellidos: "Martinez Rojas",
-                cuil:"20-879765-2",
-                responsable : "Juan Carlos",
-                fechaIngreso : null,
-                fechaEgreso : null,
-                domicilioLaboral : "HIT",
-                observaciones : "Viejo",
-                promovidoLps : false,
-                email: "rrojas@tecno.com",
-                telefono:"1125746993",
-                perfil: {
-                    idPerfil: 2
+                "legajo" : 3,
+                "nombres": "unico Wilber",
+                "apellidos": "Martinez Rojas",
+                "cuil":"20-879765-2",
+                "responsable" : "Juan Carlos",
+                "fechaIngreso" : null,
+                "fechaEgreso" : null,
+                "domicilioLaboral" : "HIT",
+                "observaciones" : "Viejo",
+                "promovidoLps" : false,
+                "email": "rrojas@tecno.com",
+                "telefono":"1125746993",
+                "perfil": {
+                    "id": 2
                 },
-
-                area: {
-                    idCentroCosto : 2
+                "area": {
+                    "id" : 1
                 },
-                senority: 3,
-                tecnologias:[
+                "senority":3,
+                "tecnologias":[
                     {
-                        idTecnologia : 1
-                    },{
-                        idTecnologia : 3
+                        "id" : 1
                     }
                 ]
             }
@@ -58,14 +54,14 @@ class Home extends React.Component{
         e.preventDefault();
         const {empleado} = this.state;
 
-        axios.post('http://localhost:8080/crud/empleado', {empleado})
+        axios.post('http://localhost:8080/empleado/crear', this.state.empleado)
             .then((result) => {
                 console.log(result)
             })
             .catch(error => {
                 console.log(error)
-            })
-        ;
+            });
+
     }
 
     handleHide() {

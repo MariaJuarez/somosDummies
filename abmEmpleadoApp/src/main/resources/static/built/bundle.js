@@ -45225,7 +45225,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -45259,142 +45259,270 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var Tablas = function (_Component) {
-	  _inherits(Tablas, _Component);
+	    _inherits(Tablas, _Component);
 	
-	  function Tablas(props) {
-	    _classCallCheck(this, Tablas);
+	    function Tablas(props) {
+	        _classCallCheck(this, Tablas);
 	
-	    var _this = _possibleConstructorReturn(this, (Tablas.__proto__ || Object.getPrototypeOf(Tablas)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Tablas.__proto__ || Object.getPrototypeOf(Tablas)).call(this, props));
 	
-	    _this.state = {
-	      username: [],
-	      persons: [],
-	      activePage: 1,
-	      itemPerPage: 9,
-	      productList: [],
-	      duplicateProductList: []
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(Tablas, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-	
-	      {/* */}
-	
-	      _axios2.default.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
-	        var persons = response.data;
-	        _this2.setState({ persons: persons,
-	          projectList: persons,
-	          duplicateProductList: persons
-	        });
-	      });
-	
-	      {/* */}
+	        _this.state = {
+	            username: [],
+	            persons: [],
+	            activePage: 1,
+	            itemPerPage: 9,
+	            productList: [],
+	            duplicateProductList: []
+	        };
+	        return _this;
 	    }
-	  }, {
-	    key: 'handlePageChange',
-	    value: function handlePageChange(pageNumber) {
-	      this.setState({ activePage: pageNumber });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _state = this.state,
-	          persons = _state.persons,
-	          activePage = _state.activePage,
-	          itemPerPage = _state.itemPerPage;
+	
+	    _createClass(Tablas, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            {/* */}
+	
+	            _axios2.default.get('http://localhost:8080/empleado/listarTodos').then(function (response) {
+	                var persons = response.data;
+	                _this2.setState({ persons: persons,
+	                    projectList: persons,
+	                    duplicateProductList: persons
+	                });
+	            });
+	
+	            {/* */}
+	        }
+	    }, {
+	        key: 'handlePageChange',
+	        value: function handlePageChange(pageNumber) {
+	            this.setState({ activePage: pageNumber });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _state = this.state,
+	                persons = _state.persons,
+	                activePage = _state.activePage,
+	                itemPerPage = _state.itemPerPage;
 	
 	
-	      var indexOfLastTodo = activePage * itemPerPage;
-	      var indexOfFirstTodo = indexOfLastTodo - itemPerPage;
-	      var renderedProjects = persons.slice(indexOfFirstTodo, indexOfLastTodo);
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container tabla' },
-	        _react2.default.createElement(
-	          _reactBootstrap.Table,
-	          { striped: true, bordered: true, condensed: true, hover: true, className: 'margenes' },
-	          _react2.default.createElement(
-	            'thead',
-	            null,
-	            _react2.default.createElement(
-	              'tr',
-	              null,
-	              _react2.default.createElement(
-	                'th',
-	                { className: 'text-center' },
-	                'UserId'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                { className: 'text-center' },
-	                'Id'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                { className: 'text-center' },
-	                'Title'
-	              ),
-	              _react2.default.createElement(
-	                'th',
-	                { className: 'text-center' },
-	                'Body'
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'tbody',
-	            null,
-	            renderedProjects.map(function (person, i) {
-	              return _react2.default.createElement(
-	                'tr',
-	                { key: i },
+	            var indexOfLastTodo = activePage * itemPerPage;
+	            var indexOfFirstTodo = indexOfLastTodo - itemPerPage;
+	            var renderedProjects = persons.slice(indexOfFirstTodo, indexOfLastTodo);
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'container tabla' },
 	                _react2.default.createElement(
-	                  'td',
-	                  { key: 'user' + i },
-	                  person.userId
+	                    _reactBootstrap.Table,
+	                    { responsive: true, striped: true, bordered: true, condensed: true, hover: true, className: 'margenes' },
+	                    _react2.default.createElement(
+	                        'thead',
+	                        null,
+	                        _react2.default.createElement(
+	                            'tr',
+	                            null,
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Legajo'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Nombres'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Apellidos'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Cuil'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Responsable'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Ingreso'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Egreso'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Domicilio'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Observaciones'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Promovido'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Email'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Telefono'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Senority'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Perfil'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Area'
+	                            ),
+	                            _react2.default.createElement(
+	                                'th',
+	                                { className: 'text-center' },
+	                                'Tecnologias'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'tbody',
+	                        null,
+	                        renderedProjects.map(function (person, i) {
+	                            return _react2.default.createElement(
+	                                'tr',
+	                                { key: i },
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'legajo' + i },
+	                                    person.legajo
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'nombres' + i },
+	                                    person.nombres
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'apellidos' + i },
+	                                    person.apellidos
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'cuil' + i },
+	                                    person.cuil
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'responsable' + i },
+	                                    person.responsable
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'ingreso' + i },
+	                                    person.ingreso
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'egreso' + i },
+	                                    person.egreso
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'domicilio' + i },
+	                                    person.domicilio
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'observaciones' + i },
+	                                    person.observaciones
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'promovido' + i },
+	                                    person.promovido
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'email' + i },
+	                                    person.email
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'telefono' + i },
+	                                    person.telefono
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'senority' + i },
+	                                    person.senority
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'perfil' + i },
+	                                    person.perfil.descripcion
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'area' + i },
+	                                    person.area.descripcion
+	                                ),
+	                                _react2.default.createElement(
+	                                    'td',
+	                                    { key: 'tecnologias' + i },
+	                                    person.tecnologias.map(function (tecnos, t) {
+	                                        return _react2.default.createElement(
+	                                            'div',
+	                                            { key: 'tecnos' + t },
+	                                            tecnos.tipo.descripcion,
+	                                            ' ',
+	                                            tecnos.senority
+	                                        );
+	                                    })
+	                                )
+	                            );
+	                        })
+	                    )
 	                ),
 	                _react2.default.createElement(
-	                  'td',
-	                  { key: 'id' + i },
-	                  person.id
-	                ),
-	                _react2.default.createElement(
-	                  'td',
-	                  { key: 'title' + i },
-	                  person.title
-	                ),
-	                _react2.default.createElement(
-	                  'td',
-	                  { key: 'body' + i },
-	                  person.body
+	                    'div',
+	                    { className: 'titulo' },
+	                    _react2.default.createElement(_reactJsPagination2.default, {
+	                        prevPageText: 'Anterior',
+	                        nextPageText: 'Siguiente',
+	                        firstPageText: 'Primera',
+	                        lastPageText: '\xDAltima',
+	                        activePage: this.state.activePage,
+	                        itemsCountPerPage: this.state.itemPerPage,
+	                        totalItemsCount: this.state.duplicateProductList.length,
+	                        pageRangeDisplayed: 5,
+	                        onChange: this.handlePageChange.bind(this) })
 	                )
-	              );
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'titulo' },
-	          _react2.default.createElement(_reactJsPagination2.default, {
-	            prevPageText: 'Anterior',
-	            nextPageText: 'Siguiente',
-	            firstPageText: 'Primera',
-	            lastPageText: '\xDAltima',
-	            activePage: this.state.activePage,
-	            itemsCountPerPage: this.state.itemPerPage,
-	            totalItemsCount: this.state.duplicateProductList.length,
-	            pageRangeDisplayed: 5,
-	            onChange: this.handlePageChange.bind(this) })
-	        )
-	      );
-	    }
-	  }]);
+	            );
+	        }
+	    }]);
 	
-	  return Tablas;
+	    return Tablas;
 	}(_react.Component);
 	
 	exports.default = Tablas;
@@ -49364,31 +49492,27 @@
 	        _this.state = {
 	            show: false,
 	            empleado: {
-	
-	                legajo: 2,
-	                nombres: "Daniel Wilber",
-	                apellidos: "Martinez Rojas",
-	                cuil: "20-879765-2",
-	                responsable: "Juan Carlos",
-	                fechaIngreso: null,
-	                fechaEgreso: null,
-	                domicilioLaboral: "HIT",
-	                observaciones: "Viejo",
-	                promovidoLps: false,
-	                email: "rrojas@tecno.com",
-	                telefono: "1125746993",
-	                perfil: {
-	                    idPerfil: 2
+	                "legajo": 3,
+	                "nombres": "unico Wilber",
+	                "apellidos": "Martinez Rojas",
+	                "cuil": "20-879765-2",
+	                "responsable": "Juan Carlos",
+	                "fechaIngreso": null,
+	                "fechaEgreso": null,
+	                "domicilioLaboral": "HIT",
+	                "observaciones": "Viejo",
+	                "promovidoLps": false,
+	                "email": "rrojas@tecno.com",
+	                "telefono": "1125746993",
+	                "perfil": {
+	                    "id": 2
 	                },
-	
-	                area: {
-	                    idCentroCosto: 2
+	                "area": {
+	                    "id": 1
 	                },
-	                senority: 3,
-	                tecnologias: [{
-	                    idTecnologia: 1
-	                }, {
-	                    idTecnologia: 3
+	                "senority": 3,
+	                "tecnologias": [{
+	                    "id": 1
 	                }]
 	            }
 	
@@ -49410,7 +49534,7 @@
 	            var empleado = this.state.empleado;
 	
 	
-	            _axios2.default.post('http://localhost:8080/crud/empleado', { empleado: empleado }).then(function (result) {
+	            _axios2.default.post('http://localhost:8080/empleado/crear', this.state.empleado).then(function (result) {
 	                console.log(result);
 	            }).catch(function (error) {
 	                console.log(error);
