@@ -4,8 +4,7 @@ import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -14,8 +13,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @FilterDefs({
         @FilterDef(name = "filtroBaja", parameters = {

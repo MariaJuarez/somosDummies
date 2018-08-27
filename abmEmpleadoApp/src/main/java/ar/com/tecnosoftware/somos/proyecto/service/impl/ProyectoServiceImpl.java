@@ -82,7 +82,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public List<Proyecto> buscarProyectosConCliente(int idCliente) {
-        return proyectoRepository.buscar("WHERE cliente = " + idCliente);
+        return proyectoRepository.buscar("WHERE clientes = " + idCliente);
     }
 
     @Override

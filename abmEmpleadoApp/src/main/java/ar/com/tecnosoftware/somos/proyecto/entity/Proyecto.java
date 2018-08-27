@@ -4,8 +4,7 @@ import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -14,8 +13,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @FilterDefs({
         @FilterDef(name = "filtroFechaInicio", parameters = {

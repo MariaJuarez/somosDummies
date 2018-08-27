@@ -1,12 +1,15 @@
 package ar.com.tecnosoftware.somos.proyectoEmpleado.service.impl;
 
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.cargo.repository.CargoRepository;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.repository.ProyectoEmpleadoRepository;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.util.ProyectoEmpleadoFiltroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +31,9 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Autowired
     private CargoRepository cargoRepository;
+
+    @Autowired
+    private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
 
     @Override
     public void add(ProyectoEmpleado proyectoEmpleado) {
@@ -85,5 +91,14 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
         for (ProyectoEmpleado proyectoEmpleado : proyectoEmpleados) {
             proyectoEmpleadoRepository.darBaja(proyectoEmpleado);
         }
+    }
+
+    @Override
+    public List<Empleado> buscarEmpleadosPorFiltro(FiltroEmpleado filtroEmpleado) {
+
+        int tipoFiltro = proyectoEmpleadoFiltroUtil.filtrosProyectoEmpleado(filtroEmpleado);
+        String hql = proyectoEmpleadoFiltroUtil.armarQuery(tipoFiltro);
+
+        return proyectoEmpleadoRepository.buscarEmpleadosPorFiltro(hql, filtroEmpleado, tipoFiltro);
     }
 }

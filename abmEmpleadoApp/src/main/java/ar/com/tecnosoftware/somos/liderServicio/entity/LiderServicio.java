@@ -1,13 +1,11 @@
 package ar.com.tecnosoftware.somos.liderServicio.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class LiderServicio implements Serializable {
 

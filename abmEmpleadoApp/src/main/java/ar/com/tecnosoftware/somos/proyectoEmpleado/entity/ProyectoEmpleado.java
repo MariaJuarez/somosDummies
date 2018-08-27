@@ -3,15 +3,13 @@ package ar.com.tecnosoftware.somos.proyectoEmpleado.entity;
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class ProyectoEmpleado implements Serializable {
 
