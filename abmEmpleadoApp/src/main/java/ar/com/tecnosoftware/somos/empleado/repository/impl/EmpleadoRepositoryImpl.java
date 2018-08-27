@@ -28,7 +28,9 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
     @Override
     public List<Empleado> buscarTodos() {
-        String hql = "FROM empleado WHERE baja = false";
+        String hql = "FROM Empleado WHERE baja = false ";
+
+
         return (List<Empleado>) entityManager.createQuery(hql).getResultList();
     }
 
