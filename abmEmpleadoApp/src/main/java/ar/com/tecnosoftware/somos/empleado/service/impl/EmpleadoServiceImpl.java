@@ -8,10 +8,16 @@ import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
+import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.tecnologia.repository.TecnologiaRepository;
+import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
+import ar.com.tecnosoftware.somos.tipoTecnologia.repository.TipoTecnologiaRepository;
+import ar.com.tecnosoftware.somos.tipoTecnologia.repository.impl.TipoTecnologiaRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +39,77 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
     @Autowired
     private PerfilRepository perfilRepository;
+
+    @EventListener
+    public void appReady(ApplicationReadyEvent event) {
+        /*Para la carga previa*/
+        /*TipoTecno*/
+        /*
+        TipoTecnologia tipotec= new TipoTecnologia();
+        tipotec.setDescripcion("java");
+        tipotec.setBaja(false);
+
+        //tipoTecnologiaRepository.guardar(tipotec);
+
+        /*Perfil*/
+        /*
+        Perfil per=new Perfil();
+        per.setAbreviatura("abreviatura");
+        per.setDescripcion("desc");
+        per.setBaja(false);
+        per.setId(1);
+        //perfilRepository.guardar(per);
+
+        /*Area*/
+        /*
+        Area area=new Area();
+        per.setDescripcion("desc");
+        per.setBaja(false);
+        area.setId(1);
+        //areaRepository.guardar(area);
+
+        /*Tecnologia*/
+        /*
+        Tecnologia tec=new Tecnologia();
+        tec.setDescripcion("desc");
+        tec.setBaja(false);
+
+        tipotec.setId(1);
+        tec.setTipo(tipotec);
+        tec.setSenority(Senority.JUNIOR);
+        tec.setId(1);
+        //tecnologiaRepository.guardar(tec);
+
+
+
+        /*Empleado*/
+        /*
+        Empleado emp=new Empleado();
+        emp.setLegajo(1);
+        emp.setNombres("nombres");
+        emp.setApellidos("apellidos");
+        emp.setCuil("cuil");
+        emp.setResponsable("responsable");
+        emp.setIngreso(null);
+        emp.setEgreso(null);
+        emp.setDomicilio("domicilio");
+        emp.setObservaciones("observaciones");
+        emp.setPromovido(false);
+        emp.setEmail("email");
+        emp.setTelefono("telefono");
+        emp.setBaja(false);
+        emp.setPerfil(per);
+        emp.setArea(area);
+        emp.setSenority(Senority.JUNIOR);
+        ArrayList<Tecnologia> tecs= new ArrayList<>();
+        tecs.add(tec);
+        emp.setTecnologias(tecs);
+
+
+        empleadoRepository.guardar(emp);
+        */
+
+    }
 
     @Override
     public void add(Empleado empleado) {
