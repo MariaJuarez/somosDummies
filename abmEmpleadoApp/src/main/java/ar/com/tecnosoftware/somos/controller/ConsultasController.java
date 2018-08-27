@@ -1,7 +1,17 @@
 package ar.com.tecnosoftware.somos.controller;
 
-import ar.com.tecnosoftware.somos.entity.*;
-import ar.com.tecnosoftware.somos.service.*;
+import ar.com.tecnosoftware.somos.cliente.service.ClienteService;
+import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
+import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
+import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
+import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
+import ar.com.tecnosoftware.somos.tecnologia.service.TecnologiaService;
+import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
+import ar.com.tecnosoftware.somos.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
