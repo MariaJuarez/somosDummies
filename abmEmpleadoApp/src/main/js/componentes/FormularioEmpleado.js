@@ -31,12 +31,12 @@ class FormularioEmpleado extends React.Component{
 
                 <FormGroup controlId="cuil">
                     <ControlLabel>Cuil</ControlLabel>{' '}
-                    <FormControl type="number" placeholder="Numero Cuil sin guiones" defaultValue={empleado.cuil} onChange={this.onChange} />
+                    <FormControl type="text" placeholder="Numero de cuil" defaultValue={empleado.cuil} onChange={this.onChange} />
                 </FormGroup>{' '}
 
                 <FormGroup controlId="formControlPromovidoLPS">
                     <ControlLabel>Senioriti</ControlLabel>
-                    <FormControl componentClass="select" placeholder="select" defaultValue={empleado.senioriti} onChange={this.onChange}>
+                    <FormControl componentClass="select" placeholder="select" defaultValue={empleado.senority} onChange={this.onChange}>
                         <option value="select">seleccionar</option>
                         <option value="other">...</option>
                     </FormControl>

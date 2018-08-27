@@ -49492,27 +49492,27 @@
 	        _this.state = {
 	            show: false,
 	            empleado: {
-	                "legajo": 3,
-	                "nombres": "unico Wilber",
-	                "apellidos": "Martinez Rojas",
-	                "cuil": "20-879765-2",
-	                "responsable": "Juan Carlos",
-	                "fechaIngreso": null,
-	                "fechaEgreso": null,
-	                "domicilioLaboral": "HIT",
-	                "observaciones": "Viejo",
-	                "promovidoLps": false,
-	                "email": "rrojas@tecno.com",
-	                "telefono": "1125746993",
-	                "perfil": {
-	                    "id": 2
+	                legajo: 3,
+	                nombres: "unico Wilber",
+	                apellidos: "Martinez Rojas",
+	                cuil: "20-879765-2",
+	                responsable: "Juan Carlos",
+	                fechaIngreso: null,
+	                fechaEgreso: null,
+	                domicilioLaboral: "HIT",
+	                observaciones: "Viejo",
+	                promovidoLps: false,
+	                email: "rrojas@tecno.com",
+	                telefono: "1125746993",
+	                perfil: {
+	                    id: 2
 	                },
-	                "area": {
-	                    "id": 1
+	                area: {
+	                    id: 1
 	                },
-	                "senority": 3,
-	                "tecnologias": [{
-	                    "id": 1
+	                senority: 3,
+	                tecnologias: [{
+	                    id: 1
 	                }]
 	            }
 	
@@ -49524,17 +49524,16 @@
 	    _createClass(Home, [{
 	        key: "onChange",
 	        value: function onChange(e) {
-	            this.setState(_defineProperty({}, e.target.empleado, e.target.value));
+	            this.setState(_defineProperty({}, e.target.name, e.target.value));
 	        }
 	    }, {
 	        key: "onSubmit",
 	        value: function onSubmit(e) {
 	            console.log("ssss");
 	            e.preventDefault();
-	            var empleado = this.state.empleado;
+	            var nuevoEmpleado = this.state.empleado;
 	
-	
-	            _axios2.default.post('http://localhost:8080/empleado/crear', this.state.empleado).then(function (result) {
+	            _axios2.default.post('http://localhost:8080/empleado/crear', nuevoEmpleado).then(function (result) {
 	                console.log(result);
 	            }).catch(function (error) {
 	                console.log(error);
@@ -49716,7 +49715,7 @@
 	                        'Cuil'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero Cuil sin guiones', defaultValue: empleado.cuil, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Numero de cuil', defaultValue: empleado.cuil, onChange: this.onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49729,7 +49728,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormControl,
-	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senioriti, onChange: this.onChange },
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senority, onChange: this.onChange },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: 'select' },

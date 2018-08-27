@@ -14,28 +14,28 @@ class Home extends React.Component{
         this.state = {
             show: false,
             empleado:{
-                "legajo" : 3,
-                "nombres": "unico Wilber",
-                "apellidos": "Martinez Rojas",
-                "cuil":"20-879765-2",
-                "responsable" : "Juan Carlos",
-                "fechaIngreso" : null,
-                "fechaEgreso" : null,
-                "domicilioLaboral" : "HIT",
-                "observaciones" : "Viejo",
-                "promovidoLps" : false,
-                "email": "rrojas@tecno.com",
-                "telefono":"1125746993",
-                "perfil": {
-                    "id": 2
+                legajo: 3,
+                nombres: "unico Wilber",
+                apellidos: "Martinez Rojas",
+                cuil:"20-879765-2",
+                responsable : "Juan Carlos",
+                fechaIngreso : null,
+                fechaEgreso : null,
+                domicilioLaboral : "HIT",
+                observaciones : "Viejo",
+                promovidoLps : false,
+                email: "rrojas@tecno.com",
+                telefono:"1125746993",
+                perfil: {
+                    id: 2
                 },
-                "area": {
-                    "id" : 1
+                area: {
+                    id : 1
                 },
-                "senority":3,
-                "tecnologias":[
+                senority:3,
+                tecnologias:[
                     {
-                        "id" : 1
+                        id : 1
                     }
                 ]
             }
@@ -46,16 +46,17 @@ class Home extends React.Component{
 
     }
     onChange (e){
-        this.setState({ [e.target.empleado]: e.target.value });
+        this.setState({ [e.target.empleado]: e.target.defaultValue });
     }
 
     onSubmit(e){
         console.log("ssss")
         e.preventDefault();
-        const {empleado} = this.state;
+        const nuevoEmpleado = this.state.empleado;
 
-        axios.post('http://localhost:8080/empleado/crear', this.state.empleado)
+        axios.post('http://localhost:8080/empleado/crear', nuevoEmpleado)
             .then((result) => {
+                console.log(nuevoEmpleado.nombres);
                 console.log(result)
             })
             .catch(error => {
