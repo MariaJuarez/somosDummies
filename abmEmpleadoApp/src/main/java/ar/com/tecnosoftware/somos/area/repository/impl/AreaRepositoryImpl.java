@@ -32,7 +32,7 @@ public class AreaRepositoryImpl implements AreaRepository {
 
     @Override
     public List<Area> buscarTodos() {
-        String hql = "FROM area WHERE baja = false";
+        String hql = "FROM Area WHERE baja = false";
         return (List<Area>) entityManager.createQuery(hql).getResultList();
     }
 }

@@ -15,6 +15,7 @@ public class Area implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_centro_costo")
     private int id;
+
     @Basic
     @Column(name = "descripcion")
     private String descripcion;
@@ -22,5 +23,4 @@ public class Area implements Serializable {
     @Basic
     @Column(name = "baja")
     private boolean baja;
-
 }

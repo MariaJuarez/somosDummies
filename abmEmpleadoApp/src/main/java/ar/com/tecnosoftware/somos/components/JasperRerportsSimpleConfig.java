@@ -1,7 +1,7 @@
 package ar.com.tecnosoftware.somos.components;
 
-import ar.com.tecnosoftware.somos.report.SimpleReportExporter;
 import ar.com.tecnosoftware.somos.report.ReporteUtil;
+import ar.com.tecnosoftware.somos.report.SimpleReportExporter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,14 +15,13 @@ public class JasperRerportsSimpleConfig {
         return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).addScript("classpath:empleados-tabla.sql").build();
     }*/
 
-    @Bean
+   /* @Bean
     public ReporteUtil reportFiller() {
         return new ReporteUtil();
     }
 
     @Bean
     public SimpleReportExporter reportExporter() {
-        return new SimpleReportExporter();
+        return new SimpleReportExporter();*/
     }
 
-}

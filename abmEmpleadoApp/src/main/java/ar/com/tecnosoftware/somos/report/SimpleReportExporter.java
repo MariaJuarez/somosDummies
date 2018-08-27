@@ -2,6 +2,7 @@ package ar.com.tecnosoftware.somos.report;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.HtmlExporter;
@@ -15,7 +16,6 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 import net.sf.jasperreports.export.SimpleWriterExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsxReportConfiguration;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component

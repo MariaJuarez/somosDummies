@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empleado" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f8ff0e5-e498-4973-a964-f62967d44cad">
+	<property name="ireport.zoom" value="1.464100000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="ireport.background.image" value="C:\Users\mjuarez\Documents\somosTecno\abmEmpleadoApp\src\main\resources\reportes\imagenes\logo.png"/>
+	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[SELECT
+     proyecto_empleado.`tareas_proyecto` AS proyecto_empleado_tareas_proyecto,
+     empleado.`apellidos` AS empleado_apellidos,
+     empleado.`nombres` AS empleado_nombres,
+     proyecto.`descripcion` AS proyecto_descripcion,
+     proyecto_empleado.`fecha_fin` AS proyecto_empleado_fecha_fin,
+     proyecto_empleado.`fecha_inicio` AS proyecto_empleado_fecha_inicio,
+     cliente.`descripcion_cliente` AS cliente_descripcion_cliente,
+     proyecto_empleado.`id_empleado` AS proyecto_empleado_id_empleado,
+     proyecto_empleado.`id_proyecto` AS proyecto_empleado_id_proyecto,
+     proyecto_empleado.`id_proyecto_empleado` AS proyecto_empleado_id_proyecto_empleado,
+     cargo.`descripcion` AS cargo_descripcion
+FROM
+     `proyecto_empleado` proyecto_empleado INNER JOIN `cargo` cargo ON proyecto_empleado.`id_cargo` = cargo.`id_cargo`
+     INNER JOIN `empleado` empleado ON proyecto_empleado.`id_empleado` = empleado.`id_empleado`
+     INNER JOIN `proyecto` proyecto ON proyecto_empleado.`id_proyecto` = proyecto.`id_proyecto`
+     INNER JOIN `cliente` cliente ON proyecto.`id_cliente` = cliente.`id_cliente`]]>
+	</queryString>
+	<field name="proyecto_empleado_tareas_proyecto" class="java.lang.String"/>
+	<field name="empleado_apellidos" class="java.lang.String"/>
+	<field name="empleado_nombres" class="java.lang.String"/>
+	<field name="proyecto_descripcion" class="java.lang.String"/>
+	<field name="proyecto_empleado_fecha_fin" class="java.sql.Date"/>
+	<field name="proyecto_empleado_fecha_inicio" class="java.sql.Date"/>
+	<field name="cliente_descripcion_cliente" class="java.lang.String"/>
+	<field name="proyecto_empleado_id_empleado" class="java.lang.Integer"/>
+	<field name="proyecto_empleado_id_proyecto" class="java.lang.Integer"/>
+	<field name="proyecto_empleado_id_proyecto_empleado" class="java.lang.Integer"/>
+	<field name="cargo_descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="632" y="2" width="170" height="33" forecolor="#006600" uuid="470009a7-7ea2-484e-a156-c6c297afa0b4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Constantia"/>
+				</textElement>
+				<text><![CDATA[SOMOS TSSA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="265" y="68" width="308" height="22" forecolor="#000000" uuid="e187307b-95a3-4f5d-88e1-1dbbf1c89089"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Empleados-Proyectos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="2" width="273" height="46" uuid="97e9aa40-e546-4e3b-bf83-c33a647f94f7"/>
+				<imageExpression><![CDATA["C:\\Users\\mjuarez\\Documents\\somosTecno\\abmEmpleadoApp\\src\\main\\resources\\reportes\\imagenes\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="24" height="20" uuid="ed3bb18b-04ff-42a8-af1e-0f6b4b0f4f18"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="0" width="27" height="20" uuid="c0ef46a3-7316-4be1-a067-06a2d8630b80"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID-E]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="0" width="64" height="20" uuid="7b4933b4-07e2-4400-98d8-d2b375f212ee"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="0" width="66" height="20" uuid="373028de-3225-4b48-9de4-c3baf266dba2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="0" width="82" height="20" uuid="4c65764e-82aa-4188-a6e1-8637e348b81a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="0" width="28" height="20" uuid="74e02ea1-0f05-47ff-91fe-199ea80e1c3e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID-P]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="0" width="126" height="20" uuid="47464d25-4b58-4fa2-80b5-b8e8031fb997"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Proyecto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="0" width="168" height="20" uuid="95fd113a-6fdd-4059-a3fe-d72eeef57f3e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tareas del empleado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="587" y="0" width="100" height="20" uuid="eb97b0b3-6182-4a27-864f-51a76e59444b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="687" y="1" width="54" height="20" uuid="27a9312c-af42-4459-a926-c87adbcedb61"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="741" y="0" width="61" height="20" uuid="bf16ad85-4efd-4b8d-b90d-8689b7b3707b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fin]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="802" height="1" uuid="9919747d-8a6a-4a3f-b6d6-c455a9e5074a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="2" y="1" width="24" height="35" uuid="37f305bb-a738-48e1-9541-5a2b32ef5348"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_empleado_id_proyecto_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="1" width="27" height="35" uuid="dc97d5f9-3c5e-4b84-8dde-a24cbe9f8146"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_empleado_id_empleado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="1" width="64" height="35" uuid="ae719bf2-783c-4d65-ba51-2fd1fc3db966"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{empleado_apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="1" width="66" height="35" uuid="ff99f1e9-d946-4343-a564-f42ccbfc707b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{empleado_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="183" y="1" width="82" height="35" uuid="75894663-2d48-4479-8b64-55d2d8decb5d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cargo_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="1" width="28" height="35" uuid="4cfcf664-fef6-4299-bf2f-31acc09cfba8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_empleado_id_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="1" width="126" height="35" uuid="94e706e6-48ba-415f-a403-a7a17fc986dd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="1" width="168" height="35" uuid="4d56b74c-a09a-4c7c-9bea-1c1f7d3430b0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_empleado_tareas_proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="587" y="1" width="100" height="35" uuid="04efc906-8017-47a6-a7f6-86ade91b21ad"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cliente_descripcion_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="687" y="0" width="54" height="36" uuid="5b749314-0589-409e-8bb7-519fa6554162"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_empleado_fecha_fin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="741" y="1" width="61" height="35" uuid="e52f1af6-b7a2-4829-bd00-b3fbbf5e4aee"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{proyecto_empleado_fecha_inicio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="5d5c6d80-f51a-4950-8435-50be27c5ff3c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="311" y="0" width="80" height="20" forecolor="#000000" uuid="ac0b821a-4b3b-4769-8454-d2f538bea71e"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="391" y="0" width="40" height="20" forecolor="#000000" uuid="4f236aef-882b-4bdd-a188-5fb085b03646"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" forecolor="#000000" uuid="b768c1bf-9e41-4a75-9b0f-f4373272640f"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
