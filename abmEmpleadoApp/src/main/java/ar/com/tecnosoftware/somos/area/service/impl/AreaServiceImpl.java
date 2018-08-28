@@ -40,4 +40,13 @@ public class AreaServiceImpl implements AreaService {
     public void darBaja(int id) {
         areaRepository.darBaja(areaRepository.buscar(id));
     }
+
+    @Override
+    public void editar(Area area) {
+        if(areaRepository.buscar(area.getId()) == null){
+            //ERROR
+            return;
+        }
+        areaRepository.editar(area);
+    }
 }

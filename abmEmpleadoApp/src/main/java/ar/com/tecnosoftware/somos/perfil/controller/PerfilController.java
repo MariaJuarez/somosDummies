@@ -42,4 +42,9 @@ public class PerfilController {
         perfilService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarPerfil(@RequestBody Perfil perfil){
+        perfilService.editar(perfil);
+    }
+
 }

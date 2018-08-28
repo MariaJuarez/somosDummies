@@ -42,4 +42,9 @@ public class MetodologiaController {
         metodologiaService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarMetodologia(@RequestBody Metodologia metodologia){
+        metodologiaService.editar(metodologia);
+    }
+
 }

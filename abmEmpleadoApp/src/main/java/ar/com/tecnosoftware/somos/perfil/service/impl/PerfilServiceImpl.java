@@ -40,4 +40,12 @@ public class PerfilServiceImpl implements PerfilService {
     public List<Perfil> buscarNoBajas() {
         return perfilRepository.buscar("WHERE baja = false");
     }
+
+    @Override
+    public void editar(Perfil perfil) {
+        if (perfilRepository.buscar(perfil.getId()) == null){
+            return;
+        }
+        perfilRepository.editar(perfil);
+    }
 }

@@ -58,4 +58,9 @@ public class ProyectoController {
         return proyectoService.buscarTodos();
     }
 
+    @PutMapping(value = "/editar")
+    public void editarProyecto(@RequestBody Proyecto proyecto){
+        proyectoService.editar(proyecto);
+    }
+
 }

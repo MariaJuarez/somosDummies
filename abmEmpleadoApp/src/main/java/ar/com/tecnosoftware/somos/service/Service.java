@@ -14,4 +14,6 @@ public interface Service<T> {
 
     List<T> buscarNoBajas();
 
+    void editar(T t);
+
 }

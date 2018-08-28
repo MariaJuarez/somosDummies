@@ -40,4 +40,13 @@ public class RubroServiceImpl implements RubroService {
     public List<Rubro> buscarNoBajas() {
         return rubroRepository.buscar("WHERE baja = false");
     }
+
+    @Override
+    public void editar(Rubro rubro) {
+        if (rubroRepository.buscar(rubro.getId()) == null){
+            return;
+        }
+
+        rubroRepository.editar(rubro);
+    }
 }

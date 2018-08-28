@@ -35,4 +35,9 @@ public class TipoProyectoRepositoryImpl implements TipoProyectoRepository {
         tipoProyecto.setBaja(true);
         entityManager.flush();
     }
+
+    @Override
+    public void editar(TipoProyecto tipoProyecto) {
+        entityManager.merge(tipoProyecto);
+    }
 }

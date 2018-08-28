@@ -35,4 +35,9 @@ public class CargoRespositoryImpl implements CargoRepository {
         cargo.setBaja(true);
         entityManager.flush();
     }
+
+    @Override
+    public void editar(Cargo cargo) {
+        entityManager.merge(cargo);
+    }
 }

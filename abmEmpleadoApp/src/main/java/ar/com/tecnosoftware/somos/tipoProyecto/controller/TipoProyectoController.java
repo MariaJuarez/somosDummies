@@ -42,4 +42,9 @@ public class TipoProyectoController {
         tipoProyectoService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarTipoProyecto(@RequestBody TipoProyecto tipoProyecto){
+        tipoProyectoService.editar(tipoProyecto);
+    }
+
 }

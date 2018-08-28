@@ -40,4 +40,12 @@ public class LiderServicioServiceImpl implements LiderServicioService {
     public List<LiderServicio> buscarNoBajas() {
         return liderServicioRepository.buscar("WHERE baja = false");
     }
+
+    @Override
+    public void editar(LiderServicio liderServicio) {
+        if (liderServicioRepository.buscar(liderServicio.getIdLds()) == null){
+            return;
+        }
+        liderServicioRepository.editar(liderServicio);
+    }
 }

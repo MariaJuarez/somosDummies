@@ -39,4 +39,9 @@ public class EmpleadoController {
         empleadoService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarEmpleado(@RequestBody Empleado empleado){
+        empleadoService.editar(empleado);
+    }
+
 }

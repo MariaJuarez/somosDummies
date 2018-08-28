@@ -97,4 +97,9 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
         session.disableFilter("filtroFechaFin");
         session.disableFilter("filtroCliente");
     }
+
+    @Override
+    public void editar(Proyecto proyecto) {
+        entityManager.merge(proyecto);
+    }
 }

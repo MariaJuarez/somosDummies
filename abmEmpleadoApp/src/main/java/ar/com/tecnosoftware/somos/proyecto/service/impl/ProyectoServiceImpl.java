@@ -41,7 +41,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     public void add(Proyecto proyecto) {
         proyecto.setTipo(tipoProyectoRepository.buscar(proyecto.getTipo().getId()));
         proyecto.setCliente(clienteRepository.buscar(proyecto.getCliente().getId()));
-        proyecto.setMetodologia(metodologiaRepository.buscar(proyecto.getMetodologia().getIdMetodologia()));
+        proyecto.setMetodologia(metodologiaRepository.buscar(proyecto.getMetodologia().getId()));
         proyecto.setTecnologias(setTecnologias(proyecto.getTecnologias()));
         proyectoRepository.guardar(proyecto);
     }
@@ -135,5 +135,13 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto) {
         return proyectoRepository.buscarPorFiltro(filtroProyecto);
+    }
+
+    @Override
+    public void editar(Proyecto proyecto) {
+        if (proyectoRepository.buscar(proyecto.getId()) == null){
+            return;
+        }
+        proyectoRepository.editar(proyecto);
     }
 }

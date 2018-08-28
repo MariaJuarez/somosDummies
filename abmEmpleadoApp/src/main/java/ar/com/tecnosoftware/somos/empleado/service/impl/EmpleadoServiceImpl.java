@@ -119,6 +119,14 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado) {
         return empleadoRepository.buscarPorFiltro(filtroEmpleado);
     }
+
+    @Override
+    public void editar(Empleado empleado) {
+        if (empleadoRepository.buscar(empleado.getId()) == null){
+            return;
+        }
+        empleadoRepository.editar(empleado);
+    }
 }
 
 

@@ -38,4 +38,8 @@ public class CargoController {
         cargoService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarCargo(@RequestBody Cargo cargo){
+        cargoService.editar(cargo);
+    }
 }

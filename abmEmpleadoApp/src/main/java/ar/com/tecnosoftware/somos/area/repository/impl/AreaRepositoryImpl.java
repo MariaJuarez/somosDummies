@@ -35,4 +35,9 @@ public class AreaRepositoryImpl implements AreaRepository {
         String hql = "FROM Area " + extension;
         return (List<Area>) entityManager.createQuery(hql).getResultList();
     }
+
+    @Override
+    public void editar(Area area) {
+        entityManager.merge(area);
+    }
 }

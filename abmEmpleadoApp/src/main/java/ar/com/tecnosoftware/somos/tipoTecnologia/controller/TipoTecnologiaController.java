@@ -42,4 +42,9 @@ public class TipoTecnologiaController {
         tipoTecnologiaService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarTipoTecnologia(@RequestBody TipoTecnologia tipoTecnologia){
+        tipoTecnologiaService.editar(tipoTecnologia);
+    }
+
 }

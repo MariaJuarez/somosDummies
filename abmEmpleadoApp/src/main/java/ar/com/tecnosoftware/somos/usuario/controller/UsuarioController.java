@@ -36,4 +36,9 @@ public class UsuarioController {
     public void bajaUsuarioConEmpleado(@RequestBody Usuario usuario) {
         usuarioService.darBajaEmpleadoDeUsuario(usuario);
     }
+
+    @PutMapping(value = "/editar")
+    public void editarUsuario(@RequestBody Usuario usuario){
+        usuarioService.editar(usuario);
+    }
 }

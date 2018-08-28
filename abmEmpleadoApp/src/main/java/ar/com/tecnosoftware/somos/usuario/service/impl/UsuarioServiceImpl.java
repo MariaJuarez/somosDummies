@@ -55,4 +55,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void darBajaEmpleadoDeUsuario(Usuario usuario) {
         usuarioRepository.darBajaEmpleadoDeUsuario(usuario, empleadoRepository.buscar(1));
     }
+
+    @Override
+    public void editar(Usuario usuario) {
+        if (usuarioRepository.buscar(usuario.getId()) == null){
+            return;
+        }
+        usuarioRepository.editar(usuario);
+    }
 }

@@ -40,4 +40,12 @@ public class MetodologiaServiceImpl implements MetodologiaService {
     public List<Metodologia> buscarNoBajas() {
         return metodologiaRepository.buscar("WHERE baja = false");
     }
+
+    @Override
+    public void editar(Metodologia metodologia) {
+        if (metodologiaRepository.buscar(metodologia.getId()) == null){
+            return;
+        }
+        metodologiaRepository.editar(metodologia);
+    }
 }

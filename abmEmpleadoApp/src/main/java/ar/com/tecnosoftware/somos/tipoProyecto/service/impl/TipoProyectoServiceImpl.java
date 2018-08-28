@@ -40,4 +40,12 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     public List<TipoProyecto> buscarNoBajas() {
         return tipoProyectoRepository.buscar("WHERE baja = false");
     }
+
+    @Override
+    public void editar(TipoProyecto tipoProyecto) {
+        if (tipoProyectoRepository.buscar(tipoProyecto.getId()) == null) {
+            return;
+        }
+        tipoProyectoRepository.editar(tipoProyecto);
+    }
 }

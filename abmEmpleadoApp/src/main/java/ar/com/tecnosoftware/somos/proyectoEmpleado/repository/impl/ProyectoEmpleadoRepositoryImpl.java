@@ -84,4 +84,9 @@ public class ProyectoEmpleadoRepositoryImpl implements ProyectoEmpleadoRepositor
 
         return (List<Empleado>) query.getResultList();
     }
+
+    @Override
+    public void editar(ProyectoEmpleado proyectoEmpleado) {
+        entityManager.merge(proyectoEmpleado);
+    }
 }

@@ -59,4 +59,12 @@ public class TecnologiaServiceImpl implements TecnologiaService {
             tecnologiaRepository.darBajaTipoTecnologiaDeTecnologia(tecnologia, tipoTecnologia);
         }
     }
+
+    @Override
+    public void editar(Tecnologia tecnologia) {
+        if (tecnologiaRepository.buscar(tecnologia.getId()) == null){
+            return;
+        }
+        tecnologiaRepository.editar(tecnologia);
+    }
 }

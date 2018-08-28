@@ -12,4 +12,6 @@ public interface Repository<T>{
 
     void darBaja(T t);
 
+    void editar(T t);
+
 }

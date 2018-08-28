@@ -35,4 +35,9 @@ public class PerfilRepositoryImpl implements PerfilRepository {
         perfil.setBaja(true);
         entityManager.flush();
     }
+
+    @Override
+    public void editar(Perfil perfil) {
+        entityManager.merge(perfil);
+    }
 }

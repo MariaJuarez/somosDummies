@@ -101,4 +101,12 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
         return proyectoEmpleadoRepository.buscarEmpleadosPorFiltro(hql, filtroEmpleado, tipoFiltro);
     }
+
+    @Override
+    public void editar(ProyectoEmpleado proyectoEmpleado) {
+        if (proyectoEmpleadoRepository.buscar(proyectoEmpleado.getId()) == null){
+            return;
+        }
+        proyectoEmpleadoRepository.editar(proyectoEmpleado);
+    }
 }

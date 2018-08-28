@@ -79,4 +79,9 @@ public class ProyectoEmpleadoController {
         return empleadoService.buscarTodos();
     }
 
+    @PutMapping(value = "/editar")
+    public void editarProyectoEmpleado(@RequestBody ProyectoEmpleado proyectoEmpleado){
+        proyectoEmpleadoService.editar(proyectoEmpleado);
+    }
+
 }

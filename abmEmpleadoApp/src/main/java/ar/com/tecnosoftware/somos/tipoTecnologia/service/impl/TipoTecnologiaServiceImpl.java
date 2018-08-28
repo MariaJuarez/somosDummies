@@ -40,4 +40,13 @@ public class TipoTecnologiaServiceImpl implements TipoTecnologiaService {
     public List<TipoTecnologia> buscarNoBajas() {
         return tipoTecnologiaRepository.buscar("WHERE baja = false");
     }
+
+    @Override
+    public void editar(TipoTecnologia tipoTecnologia) {
+        if (tipoTecnologiaRepository.buscar(tipoTecnologia.getId()) == null){
+            return;
+        }
+
+        tipoTecnologiaRepository.editar(tipoTecnologia);
+    }
 }

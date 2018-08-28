@@ -48,4 +48,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         usuario.setEmpleado(empleado);
         entityManager.merge(usuario);
     }
+
+    @Override
+    public void editar(Usuario usuario) {
+        entityManager.merge(usuario);
+    }
 }

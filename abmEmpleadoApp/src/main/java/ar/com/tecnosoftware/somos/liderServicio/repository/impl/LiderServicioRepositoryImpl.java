@@ -35,4 +35,9 @@ public class LiderServicioRepositoryImpl implements LiderServicioRepository {
         liderServicio.setBaja(true);
         entityManager.flush();
     }
+
+    @Override
+    public void editar(LiderServicio liderServicio) {
+        entityManager.merge(liderServicio);
+    }
 }

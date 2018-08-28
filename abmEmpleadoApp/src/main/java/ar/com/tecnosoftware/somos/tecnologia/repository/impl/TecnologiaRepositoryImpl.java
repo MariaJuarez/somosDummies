@@ -42,4 +42,9 @@ public class TecnologiaRepositoryImpl implements TecnologiaRepository {
         tecnologia.setTipo(tipoTecnologia);
         entityManager.merge(tecnologia);
     }
+
+    @Override
+    public void editar(Tecnologia tecnologia) {
+        entityManager.merge(tecnologia);
+    }
 }

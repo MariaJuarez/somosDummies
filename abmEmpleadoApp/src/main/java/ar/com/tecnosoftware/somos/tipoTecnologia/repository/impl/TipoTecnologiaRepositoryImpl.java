@@ -35,4 +35,9 @@ public class TipoTecnologiaRepositoryImpl implements TipoTecnologiaRepository {
         tipoTecnologia.setBaja(true);
         entityManager.flush();
     }
+
+    @Override
+    public void editar(TipoTecnologia tipoTecnologia) {
+        entityManager.merge(tipoTecnologia);
+    }
 }

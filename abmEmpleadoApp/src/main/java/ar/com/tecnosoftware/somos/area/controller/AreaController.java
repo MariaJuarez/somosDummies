@@ -42,4 +42,9 @@ public class AreaController {
         areaService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarArea(@RequestBody Area area){
+        areaService.editar(area);
+    }
+
 }

@@ -149,4 +149,9 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
 
         return nuevaLista;
     }
+
+    @Override
+    public void editar(Empleado empleado) {
+        entityManager.merge(empleado);
+    }
 }

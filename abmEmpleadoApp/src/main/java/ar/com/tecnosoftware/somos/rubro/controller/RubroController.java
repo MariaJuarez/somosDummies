@@ -42,4 +42,9 @@ public class RubroController {
         rubroService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarRubro(@RequestBody Rubro rubro){
+        rubroService.editar(rubro);
+    }
+
 }

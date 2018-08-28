@@ -35,4 +35,9 @@ public class MetodologiaRepositoryImpl implements MetodologiaRepository {
         metodologia.setBaja(true);
         entityManager.flush();
     }
+
+    @Override
+    public void editar(Metodologia metodologia) {
+        entityManager.merge(metodologia);
+    }
 }

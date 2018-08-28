@@ -40,4 +40,12 @@ public class CargoServiceImpl implements CargoService {
     public void darBaja(int id) {
         cargoRepository.darBaja(cargoRepository.buscar(id));
     }
+
+    @Override
+    public void editar(Cargo cargo) {
+        if (cargoRepository.buscar(cargo.getId()) == null){
+            return;
+        }
+        cargoRepository.editar(cargo);
+    }
 }

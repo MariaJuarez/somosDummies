@@ -59,4 +59,12 @@ public class ClienteServiceImpl implements ClienteService {
             clienteRepository.darBajaRubroDeCliente(cliente, rubro);
         }
     }
+
+    @Override
+    public void editar(Cliente cliente) {
+        if (clienteRepository.buscar(cliente.getId()) == null){
+            return;
+        }
+        clienteRepository.editar(cliente);
+    }
 }

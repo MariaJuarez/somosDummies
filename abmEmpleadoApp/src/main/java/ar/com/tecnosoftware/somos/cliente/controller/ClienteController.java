@@ -38,4 +38,9 @@ public class ClienteController {
         clienteService.darBaja(id);
     }
 
+    @PutMapping(value = "/editar")
+    public void editarCliente(@RequestBody Cliente cliente){
+        clienteService.editar(cliente);
+    }
+
 }

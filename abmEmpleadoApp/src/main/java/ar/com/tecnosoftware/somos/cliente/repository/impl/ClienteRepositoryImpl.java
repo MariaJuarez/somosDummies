@@ -42,4 +42,9 @@ public class ClienteRepositoryImpl implements ClienteRepository {
         cliente.setRubro(rubro);
         entityManager.merge(cliente);
     }
+
+    @Override
+    public void editar(Cliente cliente) {
+        entityManager.merge(cliente);
+    }
 }
