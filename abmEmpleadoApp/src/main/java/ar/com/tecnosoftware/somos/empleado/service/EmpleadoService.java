@@ -11,17 +11,17 @@ public interface EmpleadoService extends Service<Empleado> {
 
     List<Empleado> buscarEmpleadosConArea(int idArea);
 
-    void darBajaAreaDeEmpleados(List<Empleado> empleados);
+    Boolean darBajaAreaDeEmpleados(List<Empleado> empleados);
 
     List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias);
 
     List<Empleado> buscarEmpleadosConPerfil(int idPerfil);
 
-    void darBajaPerfilDeEmpleados(List<Empleado> empleados);
+    Boolean darBajaPerfilDeEmpleados(List<Empleado> empleados);
 
     List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
 
-    void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia);
+    Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia);
 
     List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado);
 

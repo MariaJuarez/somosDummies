@@ -15,17 +15,17 @@ public interface ProyectoService extends Service<Proyecto> {
 
     List<Proyecto> buscarProyectosConMetodologia(int idMetodologia);
 
-    void darBajaMetodologiaDeProyectos(List<Proyecto> proyectos);
+    Boolean darBajaMetodologiaDeProyectos(List<Proyecto> proyectos);
 
     List<Proyecto> buscarProyectosConTipoProyecto(int idTipoProyecto);
 
-    void darBajaTipoProyectoDeProyectos(List<Proyecto> proyectos);
+    Boolean darBajaTipoProyectoDeProyectos(List<Proyecto> proyectos);
 
-    void darBajaProyectos(List<Proyecto> proyectos);
+    Boolean darBajaProyectos(List<Proyecto> proyectos);
 
     List<Proyecto> buscarProyectosConTecnologia(int idTecnologia);
 
-    void darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, int idTecnologia);
+    Boolean darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, int idTecnologia);
 
     List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto);
 

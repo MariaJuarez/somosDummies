@@ -35,21 +35,21 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     }
 
     @Override
-    public void darBaja(Proyecto proyecto) {
+    public Proyecto darBaja(Proyecto proyecto) {
         proyecto.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(proyecto);
     }
 
     @Override
-    public void darBajaMetodologiaDeProyecto(Proyecto proyecto, Metodologia metodologia) {
+    public Proyecto darBajaMetodologiaDeProyecto(Proyecto proyecto, Metodologia metodologia) {
         proyecto.setMetodologia(metodologia);
-        entityManager.merge(proyecto);
+        return entityManager.merge(proyecto);
     }
 
     @Override
-    public void darBajaTipoProyectoDeProyecto(Proyecto proyecto, TipoProyecto tipoProyecto) {
+    public Proyecto darBajaTipoProyectoDeProyecto(Proyecto proyecto, TipoProyecto tipoProyecto) {
         proyecto.setTipo(tipoProyecto);
-        entityManager.merge(proyecto);
+        return entityManager.merge(proyecto);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     }
 
     @Override
-    public void darBajaTecnologiaDeProyecto(Proyecto proyecto) {
-        entityManager.merge(proyecto);
+    public Proyecto darBajaTecnologiaDeProyecto(Proyecto proyecto) {
+        return entityManager.merge(proyecto);
     }
 
     @Override
@@ -99,7 +99,7 @@ public class ProyectoRepositoryImpl implements ProyectoRepository {
     }
 
     @Override
-    public void editar(Proyecto proyecto) {
-        entityManager.merge(proyecto);
+    public Proyecto editar(Proyecto proyecto) {
+        return entityManager.merge(proyecto);
     }
 }

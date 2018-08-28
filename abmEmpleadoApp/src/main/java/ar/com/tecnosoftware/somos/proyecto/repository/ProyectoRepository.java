@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface ProyectoRepository extends Repository<Proyecto> {
 
-    void darBajaMetodologiaDeProyecto(Proyecto proyecto, Metodologia metodologia);
+    Proyecto darBajaMetodologiaDeProyecto(Proyecto proyecto, Metodologia metodologia);
 
-    void darBajaTipoProyectoDeProyecto(Proyecto proyecto, TipoProyecto tipoProyecto);
+    Proyecto darBajaTipoProyectoDeProyecto(Proyecto proyecto, TipoProyecto tipoProyecto);
 
     List<Proyecto> buscarProyectosConTecnologia(int idTecnologia);
 
-    void darBajaTecnologiaDeProyecto(Proyecto proyecto);
+    Proyecto darBajaTecnologiaDeProyecto(Proyecto proyecto);
 
     List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto);
 

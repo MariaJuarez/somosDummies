@@ -20,9 +20,9 @@ public class AreaRepositoryImpl implements AreaRepository {
     }
 
     @Override
-    public void darBaja(Area area) {
+    public Area darBaja(Area area) {
         area.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(area);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AreaRepositoryImpl implements AreaRepository {
     }
 
     @Override
-    public void editar(Area area) {
-        entityManager.merge(area);
+    public Area editar(Area area) {
+        return entityManager.merge(area);
     }
 }

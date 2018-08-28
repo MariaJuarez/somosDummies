@@ -32,19 +32,19 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     }
 
     @Override
-    public void darBaja(Cliente cliente) {
+    public Cliente darBaja(Cliente cliente) {
         cliente.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(cliente);
     }
 
     @Override
-    public void darBajaRubroDeCliente(Cliente cliente, Rubro rubro) {
+    public Cliente darBajaRubroDeCliente(Cliente cliente, Rubro rubro) {
         cliente.setRubro(rubro);
-        entityManager.merge(cliente);
+        return entityManager.merge(cliente);
     }
 
     @Override
-    public void editar(Cliente cliente) {
-        entityManager.merge(cliente);
+    public Cliente editar(Cliente cliente) {
+        return entityManager.merge(cliente);
     }
 }

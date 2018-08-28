@@ -37,16 +37,19 @@ public class AreaServiceImpl implements AreaService {
     }
 
     @Override
-    public void darBaja(int id) {
-        areaRepository.darBaja(areaRepository.buscar(id));
+    public Area darBaja(int id) {
+        Area area = areaRepository.buscar(id);
+        if (area == null){
+            return null;
+        }
+        return areaRepository.darBaja(area);
     }
 
     @Override
-    public void editar(Area area) {
+    public Area editar(Area area) {
         if(areaRepository.buscar(area.getId()) == null){
-            //ERROR
-            return;
+            return null;
         }
-        areaRepository.editar(area);
+        return areaRepository.editar(area);
     }
 }

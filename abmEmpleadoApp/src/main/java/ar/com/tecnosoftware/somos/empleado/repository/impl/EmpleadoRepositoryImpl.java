@@ -37,20 +37,21 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public void darBaja(Empleado empleado) {
+    public Empleado darBaja(Empleado empleado) {
         empleado.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(empleado);
     }
 
     @Override
-    public void darBajaAreaDeEmpleado(Empleado empleado, Area area) {
-        entityManager.merge(empleado);
+    public Empleado darBajaAreaDeEmpleado(Empleado empleado, Area area) {
+        empleado.setArea(area);
+        return entityManager.merge(empleado);
     }
 
     @Override
-    public void darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil) {
+    public Empleado darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil) {
         empleado.setPerfil(perfil);
-        entityManager.merge(empleado);
+        return entityManager.merge(empleado);
     }
 
     @Override
@@ -60,8 +61,8 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public void darBajaTecnologiaDeEmpleado(Empleado empleado) {
-        entityManager.merge(empleado);
+    public Empleado darBajaTecnologiaDeEmpleado(Empleado empleado) {
+        return entityManager.merge(empleado);
     }
 
     @Override
@@ -151,7 +152,7 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public void editar(Empleado empleado) {
-        entityManager.merge(empleado);
+    public Empleado editar(Empleado empleado) {
+        return entityManager.merge(empleado);
     }
 }

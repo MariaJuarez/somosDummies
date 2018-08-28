@@ -57,8 +57,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        empleadoRepository.darBaja(empleadoRepository.buscar(id));
+    public Empleado darBaja(int id) {
+        Empleado empleado = empleadoRepository.buscar(id);
+        if(empleado == null){
+            return null;
+        }
+        return empleadoRepository.darBaja(empleado);
     }
 
     @Override
@@ -67,11 +71,14 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBajaAreaDeEmpleados(List<Empleado> empleados) {
+    public Boolean darBajaAreaDeEmpleados(List<Empleado> empleados) {
         Area area = areaRepository.buscar(1);
         for(Empleado empleado : empleados){
-            empleadoRepository.darBajaAreaDeEmpleado(empleado, area);
+            if (empleadoRepository.darBajaAreaDeEmpleado(empleado, area) == null){
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
@@ -94,11 +101,14 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBajaPerfilDeEmpleados(List<Empleado> empleados) {
+    public Boolean darBajaPerfilDeEmpleados(List<Empleado> empleados) {
         Perfil perfil = perfilRepository.buscar(1);
         for(Empleado empleado : empleados){
-            empleadoRepository.darBajaPerfilDeEmpleado(empleado, perfil);
+            if(empleadoRepository.darBajaPerfilDeEmpleado(empleado, perfil) == null){
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
@@ -107,12 +117,15 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia) {
+    public Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia) {
         Tecnologia tecnologia = tecnologiaRepository.buscar(idTecnologia);
         for (Empleado empleado : empleados){
             empleado.getTecnologias().remove(tecnologia);
-            empleadoRepository.darBajaTecnologiaDeEmpleado(empleado);
+            if(empleadoRepository.darBajaTecnologiaDeEmpleado(empleado) == null){
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
@@ -121,11 +134,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void editar(Empleado empleado) {
+    public Empleado editar(Empleado empleado) {
         if (empleadoRepository.buscar(empleado.getId()) == null){
-            return;
+            return null;
         }
-        empleadoRepository.editar(empleado);
+        return empleadoRepository.editar(empleado);
     }
 }
 

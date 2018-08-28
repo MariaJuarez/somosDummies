@@ -27,8 +27,12 @@ public class MetodologiaServiceImpl implements MetodologiaService {
     }
 
     @Override
-    public void darBaja(int id) {
-        metodologiaRepository.darBaja(metodologiaRepository.buscar(id));
+    public Metodologia darBaja(int id) {
+        Metodologia metodologia = metodologiaRepository.buscar(id);
+        if (metodologia == null){
+            return null;
+        }
+        return metodologiaRepository.darBaja(metodologia);
     }
 
     @Override
@@ -42,10 +46,10 @@ public class MetodologiaServiceImpl implements MetodologiaService {
     }
 
     @Override
-    public void editar(Metodologia metodologia) {
+    public Metodologia editar(Metodologia metodologia) {
         if (metodologiaRepository.buscar(metodologia.getId()) == null){
-            return;
+            return null;
         }
-        metodologiaRepository.editar(metodologia);
+        return metodologiaRepository.editar(metodologia);
     }
 }

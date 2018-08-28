@@ -43,8 +43,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void darBaja(int id) {
-        clienteRepository.darBaja(clienteRepository.buscar(id));
+    public Cliente darBaja(int id) {
+        Cliente cliente = clienteRepository.buscar(id);
+        if(cliente == null){
+            return null;
+        }
+        return clienteRepository.darBaja(cliente);
     }
 
     @Override
@@ -53,18 +57,21 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void darBajaRubroDeClientes(List<Cliente> clientes) {
+    public Boolean darBajaRubroDeClientes(List<Cliente> clientes) {
         Rubro rubro = rubroRepository.buscar(1);
         for(Cliente cliente : clientes){
-            clienteRepository.darBajaRubroDeCliente(cliente, rubro);
+            if(clienteRepository.darBajaRubroDeCliente(cliente, rubro) == null){
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
-    public void editar(Cliente cliente) {
+    public Cliente editar(Cliente cliente) {
         if (clienteRepository.buscar(cliente.getId()) == null){
-            return;
+            return null;
         }
-        clienteRepository.editar(cliente);
+        return clienteRepository.editar(cliente);
     }
 }

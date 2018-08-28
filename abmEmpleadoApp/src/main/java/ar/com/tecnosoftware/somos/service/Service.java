@@ -8,12 +8,12 @@ public interface Service<T> {
 
     List<T> buscarTodos();
 
-    void darBaja(int id);
+    T darBaja(int id);
 
     T buscar(int id);
 
     List<T> buscarNoBajas();
 
-    void editar(T t);
+    T editar(T t);
 
 }

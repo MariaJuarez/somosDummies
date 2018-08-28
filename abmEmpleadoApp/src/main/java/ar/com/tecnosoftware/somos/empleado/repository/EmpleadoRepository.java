@@ -12,13 +12,13 @@ import java.util.List;
 
 public interface EmpleadoRepository extends Repository<Empleado> {
 
-    void darBajaAreaDeEmpleado(Empleado empleado, Area area);
+    Empleado darBajaAreaDeEmpleado(Empleado empleado, Area area);
 
-    void darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil);
+    Empleado darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil);
 
     List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
 
-    void darBajaTecnologiaDeEmpleado(Empleado empleado);
+    Empleado darBajaTecnologiaDeEmpleado(Empleado empleado);
 
     List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado);
 

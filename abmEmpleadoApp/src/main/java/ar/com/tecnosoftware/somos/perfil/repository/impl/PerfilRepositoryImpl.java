@@ -31,13 +31,13 @@ public class PerfilRepositoryImpl implements PerfilRepository {
     }
 
     @Override
-    public void darBaja(Perfil perfil) {
+    public Perfil darBaja(Perfil perfil) {
         perfil.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(perfil);
     }
 
     @Override
-    public void editar(Perfil perfil) {
-        entityManager.merge(perfil);
+    public Perfil editar(Perfil perfil) {
+        return entityManager.merge(perfil);
     }
 }

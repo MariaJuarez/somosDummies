@@ -1,14 +1,23 @@
 package ar.com.tecnosoftware.somos.cliente.controller;
 
+import ar.com.tecnosoftware.somos.cargo.exception.CargoErrorException;
+import ar.com.tecnosoftware.somos.cargo.exception.CargoNotFoundException;
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
+import ar.com.tecnosoftware.somos.cliente.exception.ClienteNotFoundException;
+import ar.com.tecnosoftware.somos.cliente.exception.ClienterErrorException;
 import ar.com.tecnosoftware.somos.cliente.service.ClienteService;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -27,20 +36,63 @@ public class ClienteController {
     }
 
     @GetMapping (value = "/listarActivos")
-    public List<Cliente> findClienteActivos(){ return clienteService.buscarNoBajas();}
+    public ResponseEntity<List<Cliente>> findClienteActivos() throws ClienterErrorException{
+        List<Cliente> clientes = clienteService.buscarNoBajas();
+
+        if(clientes == null){
+            throw new ClienterErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
+        }
+
+        return ResponseEntity.ok(clientes);
+    }
 
     @GetMapping (value = "/listarTodos")
-    public List<Cliente> findAllCliente(){ return clienteService.buscarTodos();}
+    public ResponseEntity<List<Cliente>> findAllCliente() throws ClienterErrorException{
+        List<Cliente> clientes = clienteService.buscarTodos();
+
+        if(clientes == null){
+            throw new ClienterErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
+        }
+
+        return ResponseEntity.ok(clientes);
+    }
 
     @PutMapping (value = "/baja/{id}")
-    public void bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) {
-        proyectoService.darBajaProyectos(proyectos);
-        clienteService.darBaja(id);
+    @Transactional
+    public ResponseEntity<Cliente> bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws ClienterErrorException, ClienteNotFoundException{
+
+        Cliente cliente = clienteService.darBaja(id);
+
+        if(cliente == null){
+            throw new ClienteNotFoundException("No se encontró el cliente con id " + id);
+        }
+
+        if(!proyectoService.darBajaProyectos(proyectos)){
+            throw new ClienterErrorException("Hubo un error al dar de baja al cliente por la relación con los proyectos");
+        }
+
+        return ResponseEntity.ok(cliente);
     }
 
     @PutMapping(value = "/editar")
-    public void editarCliente(@RequestBody Cliente cliente){
-        clienteService.editar(cliente);
+    public ResponseEntity<Cliente> editarCliente(@RequestBody Cliente cliente) throws ClienteNotFoundException{
+        Cliente clienteEditado = clienteService.editar(cliente);
+        if(clienteEditado == null){
+            throw new ClienteNotFoundException("No se encontró el cliente con el id " + cliente.getId());
+        }
+        return ResponseEntity.ok(cliente);
+    }
+
+    @ExceptionHandler(CargoNotFoundException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public Map<String, String> notFoundException(CargoNotFoundException e) {
+        return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(CargoErrorException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, String> errorException(CargoErrorException e) {
+        return Collections.singletonMap("mensaje", e.getMessage());
     }
 
 }

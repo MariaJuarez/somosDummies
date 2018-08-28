@@ -27,8 +27,12 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
     @Override
-    public void darBaja(int id) {
-        perfilRepository.darBaja(perfilRepository.buscar(id));
+    public Perfil darBaja(int id) {
+        Perfil perfil = perfilRepository.buscar(id);
+        if(perfil == null){
+            return null;
+        }
+        return perfilRepository.darBaja(perfil);
     }
 
     @Override
@@ -42,10 +46,10 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
     @Override
-    public void editar(Perfil perfil) {
+    public Perfil editar(Perfil perfil) {
         if (perfilRepository.buscar(perfil.getId()) == null){
-            return;
+            return null;
         }
-        perfilRepository.editar(perfil);
+        return perfilRepository.editar(perfil);
     }
 }

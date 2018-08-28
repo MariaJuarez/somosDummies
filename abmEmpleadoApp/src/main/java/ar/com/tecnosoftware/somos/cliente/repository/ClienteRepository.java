@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ClienteRepository extends Repository<Cliente> {
 
-    void darBajaRubroDeCliente(Cliente cliente, Rubro rubro);
+    Cliente darBajaRubroDeCliente(Cliente cliente, Rubro rubro);
 
 }
