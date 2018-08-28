@@ -1,7 +1,6 @@
 package ar.com.tecnosoftware.somos.report;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -10,6 +9,12 @@ import java.util.logging.Logger;
 import ar.com.tecnosoftware.somos.report.conexion.Conexion;
 import lombok.Data;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsExporterConfiguration;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +23,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 @Data
@@ -82,4 +88,50 @@ public class ReporteUtil {
         } catch (IOException e) {
             LOG.error("IOException --- No existe el reporte o la ubicacion ingresada");        }
     }
+
+    //exporta a xls
+    public void exportXls(HttpServletResponse response) throws IOException
+    {
+        try{
+            Resource resource = context.getResource("classpath:reportes/".concat(reportFileName).concat(".jasper"));
+            InputStream inputStream = resource.getInputStream();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, null, conexion.conectar());
+            ByteArrayOutputStream output = new ByteArrayOutputStream ();
+            OutputStream outputfile = new FileOutputStream(new File ("classpath:reportes/".concat(reportFileName).concat(".xls")));
+
+            // coding For Excel:
+            JRXlsExporter exporterXLS = new JRXlsExporter();
+            exporterXLS.setExporterInput(new SimpleExporterInput(jasperPrint));
+            exporterXLS.setExporterOutput(new SimpleOutputStreamExporterOutput(output));
+            SimpleXlsReportConfiguration xlsReportConfiguration = new SimpleXlsReportConfiguration();
+
+            xlsReportConfiguration.setOnePagePerSheet(false);
+            xlsReportConfiguration.setRemoveEmptySpaceBetweenRows(true);
+            xlsReportConfiguration.setDetectCellType(true);
+            xlsReportConfiguration.setWhitePageBackground(false);
+
+            exporterXLS.exportReport();
+            outputfile.write(output.toByteArray());
+         /*   Resource resource = context.getResource("classpath:reportes/".concat(reportFileName).concat(".jasper"));
+            InputStream inputStream = resource.getInputStream();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, null, conexion.conectar());
+            JRXlsExporter xlsExporter = new JRXlsExporter();
+            xlsExporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+            xlsExporter.setExporterOutput(new SimpleOutputStreamExporterOutput(reportFileName));
+            SimpleXlsReportConfiguration xlsReportConfiguration = new SimpleXlsReportConfiguration();
+            SimpleXlsExporterConfiguration xlsExporterConfiguration = new SimpleXlsExporterConfiguration();
+            xlsReportConfiguration.setOnePagePerSheet(false);
+            xlsReportConfiguration.setRemoveEmptySpaceBetweenRows(true);
+            xlsReportConfiguration.setDetectCellType(true);
+            xlsReportConfiguration.setWhitePageBackground(false);
+            xlsExporter.setConfiguration(xlsReportConfiguration);
+            xlsExporter.exportReport();*/
+            
+        }catch(JRException e)
+        {
+            System.out.println(e);
+        }
+
+    }
+
 }

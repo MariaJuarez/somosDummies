@@ -1,10 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empleado" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f8ff0e5-e498-4973-a964-f62967d44cad">
-	<property name="ireport.zoom" value="1.6105100000000039"/>
+	<property name="ireport.zoom" value="1.331000000000003"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.background.image" value="C:\Users\mjuarez\Documents\somosTecno\abmEmpleadoApp\src\main\resources\reportes\imagenes\logo.png"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
+	<property name="net.sf.jasperreports.export.csv.field.delimiter" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.names.{arbitrary_name}" value=""/>
+	<property name="net.sf.jasperreports.virtual.page.element.size" value=""/>
+	<property name="net.sf.jasperreports.export.xls.column.names" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.header.right" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.header.left" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.header.center" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.footer.right" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.footer.left" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.footer.center" value=""/>
+	<property name="net.sf.jasperreports.export.xls.sheet.direction" value=""/>
+	<property name="net.sf.jasperreports.export.xls.password" value=""/>
+	<property name="net.sf.jasperreports.export.xls.freeze.row" value=""/>
+	<property name="net.sf.jasperreports.export.xls.freeze.column" value=""/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value=""/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value=""/>
+	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet" value=""/>
+	<property name="net.sf.jasperreports.export.xls.max.rows.per.sheet" value=""/>
+	<property name="net.sf.jasperreports.export.xls.image.border.fix.enabled" value=""/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value=""/>
+	<property name="net.sf.jasperreports.export.xls.ignore.cell.border" value=""/>
+	<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value=""/>
+	<property name="net.sf.jasperreports.export.xls.font.size.fix.enabled" value=""/>
+	<property name="net.sf.jasperreports.export.xls.fit.width" value=""/>
+	<property name="net.sf.jasperreports.export.xls.fit.height" value=""/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value=""/>
+	<property name="net.sf.jasperreports.export.xls.create.custom.palette" value=""/>
+	<property name="net.sf.jasperreports.export.xls.collapse.row.span" value=""/>
+	<property name="net.sf.jasperreports.export.flash.element.allow.script.access" value=""/>
+	<property name="net.sf.jasperreports.export.xls.freeze.row.edge" value=""/>
+	<property name="net.sf.jasperreports.export.xls.freeze.column.edge" value=""/>
+	<property name="net.sf.jasperreports.export.xls.wrap.text" value=""/>
+	<property name="net.sf.jasperreports.export.xls.cell.locked" value=""/>
+	<property name="net.sf.jasperreports.export.xls.cell.hidden" value=""/>
+	<property name="net.sf.jasperreports.export.xls.column.width.ratio" value=""/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -151,9 +186,9 @@ FROM
 				<textFieldExpression><![CDATA[$F{empleado_apellidos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="275" y="1" width="128" height="20" uuid="044b88c1-fe1d-47b6-8db3-b0eeb68db618"/>
+				<reportElement x="275" y="1" width="128" height="20" forecolor="#006666" uuid="044b88c1-fe1d-47b6-8db3-b0eeb68db618"/>
 				<textElement textAlignment="Center">
-					<font size="12"/>
+					<font size="12" isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{empleado_email}]]></textFieldExpression>
 			</textField>
