@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empleado" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f8ff0e5-e498-4973-a964-f62967d44cad">
-	<property name="ireport.zoom" value="1.6105100000000039"/>
-	<property name="ireport.x" value="44"/>
+	<property name="ireport.zoom" value="1.4641000000000035"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.background.image" value="C:\Users\mjuarez\Documents\somosTecno\abmEmpleadoApp\src\main\resources\reportes\imagenes\logo.png"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
-	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
-	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
-	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
-	<property name="net.sf.jasperreports.export.xls.sheet.names.all" value="Data/Footnotes"/>
-	<property name="net.sf.jasperreports.export.xls.freeze.row" value="3"/>
-	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
-	<property name="net.sf.jasperreports.exports.xls.font.size.fix.enabled" value="false"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -48,7 +37,7 @@ FROM
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="99" splitType="Stretch">
+		<band height="124" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="632" y="2" width="170" height="33" forecolor="#006600" uuid="470009a7-7ea2-484e-a156-c6c297afa0b4"/>
 				<textElement verticalAlignment="Middle">
@@ -82,7 +71,7 @@ FROM
 				<text><![CDATA[ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="275" y="0" width="140" height="20" uuid="99658a24-efc4-4b83-92cd-e65f27a4d758"/>
+				<reportElement x="275" y="0" width="128" height="20" uuid="99658a24-efc4-4b83-92cd-e65f27a4d758"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -103,14 +92,14 @@ FROM
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="560" y="0" width="112" height="20" uuid="e298e0de-505a-4853-8371-e5e1297001ae"/>
+				<reportElement x="560" y="0" width="102" height="20" uuid="e298e0de-505a-4853-8371-e5e1297001ae"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telefono]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="414" y="0" width="146" height="20" uuid="791a158a-9762-4777-a33b-ce44e7091350"/>
+				<reportElement x="414" y="0" width="139" height="20" uuid="791a158a-9762-4777-a33b-ce44e7091350"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -124,7 +113,7 @@ FROM
 				<text><![CDATA[Apellido]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="158" y="0" width="117" height="20" uuid="c4fabd24-a615-43eb-9896-25a2cf768e1d"/>
+				<reportElement x="158" y="0" width="105" height="20" uuid="c4fabd24-a615-43eb-9896-25a2cf768e1d"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -141,14 +130,14 @@ FROM
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="414" y="0" width="146" height="20" uuid="1ab3a95c-7c08-4502-b13a-930a918b130c"/>
+				<reportElement x="414" y="1" width="139" height="20" uuid="1ab3a95c-7c08-4502-b13a-930a918b130c"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{empleado_domicilio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="158" y="1" width="116" height="20" uuid="d4d3ddbf-76e5-4734-9343-cd0531ea27d3"/>
+				<reportElement x="158" y="1" width="105" height="20" uuid="d4d3ddbf-76e5-4734-9343-cd0531ea27d3"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -162,9 +151,9 @@ FROM
 				<textFieldExpression><![CDATA[$F{empleado_apellidos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="274" y="0" width="140" height="20" forecolor="#006666" uuid="044b88c1-fe1d-47b6-8db3-b0eeb68db618"/>
+				<reportElement x="275" y="1" width="128" height="20" uuid="044b88c1-fe1d-47b6-8db3-b0eeb68db618"/>
 				<textElement textAlignment="Center">
-					<font size="12" isUnderline="true"/>
+					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{empleado_email}]]></textFieldExpression>
 			</textField>
@@ -183,7 +172,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{empleado_id_empleado}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="560" y="1" width="112" height="20" uuid="f87f1287-e64d-422f-a27f-c7bf897e215c"/>
+				<reportElement x="560" y="1" width="102" height="20" uuid="f87f1287-e64d-422f-a27f-c7bf897e215c"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
