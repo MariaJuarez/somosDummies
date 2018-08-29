@@ -17,8 +17,9 @@ public class RubroServiceImpl implements RubroService {
     private RubroRepository rubroRepository;
 
     @Override
-    public void add(Rubro rubro) {
+    public String add(Rubro rubro) {
         rubroRepository.guardar(rubro);
+        return "";
     }
 
     @Override

@@ -35,10 +35,16 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     private PerfilRepository perfilRepository;
 
     @Override
-    public void add(Empleado empleado) {
-        empleado.setArea(areaRepository.buscar(empleado.getArea().getId()));
+    public String add(Empleado empleado) {
+
+        Area area = areaRepository.buscar(empleado.getArea().getId());
+        if(area == null){
+            return "No existe el Area con id " + empleado.getArea().getId();
+        }
+        empleado.setArea(area);
         empleado.setTecnologias(setTecnologias(empleado.getTecnologias()));
         empleadoRepository.guardar(empleado);
+        return "";
     }
 
     @Override

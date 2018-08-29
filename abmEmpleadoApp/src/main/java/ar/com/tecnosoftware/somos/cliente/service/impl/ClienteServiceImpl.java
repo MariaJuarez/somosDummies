@@ -22,9 +22,26 @@ public class ClienteServiceImpl implements ClienteService {
     private RubroRepository rubroRepository;
 
     @Override
-    public void add(Cliente cliente) {
-        cliente.setRubro(rubroRepository.buscar(cliente.getRubro().getId()));
+    public String add(Cliente cliente) {
+        String resultado = "No existe el Rubro ";
+        Rubro rubro;
+        if(cliente.getRubro() == null){
+            rubro = rubroRepository.buscar(1);
+            if(rubro == null){
+                resultado += "por defecto.";
+                return resultado;
+            }
+            cliente.setRubro(rubro);
+        } else {
+            rubro = rubroRepository.buscar(cliente.getRubro().getId());
+            if(rubro == null){
+                resultado += "con id " + cliente.getRubro().getId();
+                return resultado;
+            }
+            cliente.setRubro(rubro);
+        }
         clienteRepository.guardar(cliente);
+        return "";
     }
 
     @Override

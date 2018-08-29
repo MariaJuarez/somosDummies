@@ -22,9 +22,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     private EmpleadoRepository empleadoRepository;
 
     @Override
-    public void add(Usuario usuario) {
-        usuario.setEmpleado(empleadoRepository.buscar(usuario.getEmpleado().getId()));
+    public String add(Usuario usuario) {
+        Empleado empleado = empleadoRepository.buscar(usuario.getEmpleado().getId());
+        if(empleado == null){
+            return "No existe el Empleado con id " + usuario.getEmpleado().getId();
+        }
+        usuario.setEmpleado(empleado);
         usuarioRepository.guardar(usuario);
+        return "";
     }
 
     @Override

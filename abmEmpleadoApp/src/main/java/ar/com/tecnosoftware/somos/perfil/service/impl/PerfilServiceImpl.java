@@ -17,8 +17,9 @@ public class PerfilServiceImpl implements PerfilService {
     private PerfilRepository perfilRepository;
 
     @Override
-    public void add(Perfil perfil) {
+    public String add(Perfil perfil) {
         perfilRepository.guardar(perfil);
+        return "";
     }
 
     @Override

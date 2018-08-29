@@ -24,6 +24,6 @@ public class Usuario implements Serializable {
     private boolean baja;
 
     @OneToOne
-    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", nullable = false)
     private Empleado empleado;
 }

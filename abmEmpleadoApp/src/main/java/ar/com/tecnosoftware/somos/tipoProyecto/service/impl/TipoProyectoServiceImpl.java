@@ -17,8 +17,9 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     private TipoProyectoRepository tipoProyectoRepository;
 
     @Override
-    public void add(TipoProyecto tipoProyecto) {
+    public String add(TipoProyecto tipoProyecto) {
         tipoProyectoRepository.guardar(tipoProyecto);
+        return "";
     }
 
     @Override
@@ -29,7 +30,7 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     @Override
     public TipoProyecto darBaja(int id) {
         TipoProyecto tipoProyecto = tipoProyectoRepository.buscar(id);
-        if(tipoProyecto == null){
+        if (tipoProyecto == null) {
             return null;
         }
         return tipoProyectoRepository.darBaja(tipoProyecto);

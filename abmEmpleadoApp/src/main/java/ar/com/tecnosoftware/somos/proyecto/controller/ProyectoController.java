@@ -2,7 +2,7 @@ package ar.com.tecnosoftware.somos.proyecto.controller;
 
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.filtro.FiltroProyecto;
-import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoErrorExcetion;
+import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoErrorException;
 import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoNotFoundException;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
@@ -30,31 +30,35 @@ public class ProyectoController {
     private ProyectoEmpleadoService proyectoEmpleadoService;
 
     @PostMapping(value = "/crear")
-    public void addProyecto(@Valid @RequestBody Proyecto proyecto) {
-        proyectoService.add(proyecto);
+    public void addProyecto(@Valid @RequestBody Proyecto proyecto) throws ProyectoErrorException {
+
+        String resultado = proyectoService.add(proyecto);
+        if(!resultado.equals("")){
+            throw new ProyectoErrorException(resultado);
+        }
     }
 
     @GetMapping(value = "/listarActivos")
-    public ResponseEntity<List<Proyecto>> findProyectoActivos() throws ProyectoErrorExcetion {
+    public ResponseEntity<List<Proyecto>> findProyectoActivos() throws ProyectoErrorException {
         List<Proyecto> proyectos = proyectoService.buscarNoBajas();
         if (proyectos == null) {
-            throw new ProyectoErrorExcetion("Hubo un error al cargar la BD. Revise su conexión a la BD");
+            throw new ProyectoErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(proyectos);
     }
 
     @GetMapping(value = "/listarTodos")
-    public ResponseEntity<List<Proyecto>> findAllProyecto() throws ProyectoErrorExcetion {
+    public ResponseEntity<List<Proyecto>> findAllProyecto() throws ProyectoErrorException {
         List<Proyecto> proyectos = proyectoService.buscarTodos();
         if (proyectos == null) {
-            throw new ProyectoErrorExcetion("Hubo un error al cargar la BD. Revise su conexión a la BD");
+            throw new ProyectoErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(proyectos);
     }
 
     @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Proyecto> bajaProyecto(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectosEmpleados) throws ProyectoErrorExcetion, ProyectoNotFoundException {
+    public ResponseEntity<Proyecto> bajaProyecto(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectosEmpleados) throws ProyectoErrorException, ProyectoNotFoundException {
 
         Proyecto proyecto = proyectoService.darBaja(id);
 
@@ -63,7 +67,7 @@ public class ProyectoController {
         }
 
         if (!proyectoEmpleadoService.darBajaProyectosEmpleados(proyectosEmpleados)) {
-            throw new ProyectoErrorExcetion("Hubo un error al dar de baja al proyecto por la relación con los ProyectoEmpleado");
+            throw new ProyectoErrorException("Hubo un error al dar de baja al proyecto por la relación con los ProyectoEmpleado");
         }
 
         return ResponseEntity.ok(proyecto);
@@ -97,9 +101,9 @@ public class ProyectoController {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 
-    @ExceptionHandler(ProyectoErrorExcetion.class)
+    @ExceptionHandler(ProyectoErrorException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public Map<String, String> errorException(ProyectoErrorExcetion e) {
+    public Map<String, String> errorException(ProyectoErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 

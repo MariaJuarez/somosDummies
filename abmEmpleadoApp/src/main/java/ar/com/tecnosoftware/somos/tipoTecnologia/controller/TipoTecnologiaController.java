@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class TipoTecnologiaController {
     private TecnologiaService tecnologiaService;
 
     @PostMapping(value = "/crear")
-    public void addTipoTecnologia(@Valid @RequestBody TipoTecnologia tipoTecnologia) {
+    public void addTipoTecnologia(@RequestBody TipoTecnologia tipoTecnologia) {
         tipoTecnologiaService.add(tipoTecnologia);
     }
 

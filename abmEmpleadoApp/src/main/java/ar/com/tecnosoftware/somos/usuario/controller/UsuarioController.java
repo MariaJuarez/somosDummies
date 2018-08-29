@@ -23,8 +23,11 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping(value = "/crear")
-    public void addUsuario(@Valid @RequestBody Usuario usuario) {
-        usuarioService.add(usuario);
+    public void addUsuario(@Valid @RequestBody Usuario usuario) throws UsuarioErrorException {
+        String resultado = usuarioService.add(usuario);
+        if(resultado == null){
+            throw new UsuarioErrorException(resultado);
+        }
     }
 
     @GetMapping(value = "/listarActivos")

@@ -1,5 +1,6 @@
 package ar.com.tecnosoftware.somos.proyecto.service.impl;
 
+import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.cliente.repository.ClienteRepository;
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.metodologia.repository.MetodologiaRepository;
@@ -38,12 +39,37 @@ public class ProyectoServiceImpl implements ProyectoService {
     private MetodologiaRepository metodologiaRepository;
 
     @Override
-    public void add(Proyecto proyecto) {
-        proyecto.setTipo(tipoProyectoRepository.buscar(proyecto.getTipo().getId()));
-        proyecto.setCliente(clienteRepository.buscar(proyecto.getCliente().getId()));
-        proyecto.setMetodologia(metodologiaRepository.buscar(proyecto.getMetodologia().getId()));
+    public String add(Proyecto proyecto) {
+        String resultado = "No existe ";
+        TipoProyecto tipoProyecto = tipoProyectoRepository.buscar(proyecto.getTipo().getId());
+        if (tipoProyecto == null) {
+            resultado += " el Tipo de Proyecto con id " + proyecto.getTipo().getId();
+            return resultado;
+        }
+        proyecto.setTipo(tipoProyecto);
+
+        Cliente cliente = clienteRepository.buscar(proyecto.getCliente().getId());
+        if (cliente == null) {
+            resultado += "el Cliente con id " + proyecto.getCliente().getId();
+            return resultado;
+        }
+        proyecto.setCliente(cliente);
+
+        Metodologia metodologia = metodologiaRepository.buscar(proyecto.getMetodologia().getId());
+        if (metodologia == null) {
+            resultado += "la Metodologia con id " + proyecto.getMetodologia().getId();
+            return resultado;
+        }
+        proyecto.setMetodologia(metodologia);
+
+        if (proyecto.getTecnologias().size() == 0) {
+            resultado += "Debe introducir al menos una tecnología.";
+            return resultado;
+        }
         proyecto.setTecnologias(setTecnologias(proyecto.getTecnologias()));
+
         proyectoRepository.guardar(proyecto);
+        return "";
     }
 
     @Override
@@ -107,7 +133,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public Boolean darBajaMetodologiaDeProyectos(List<Proyecto> proyectos) {
         Metodologia metodologia = metodologiaRepository.buscar(1);
-        if(metodologia == null){
+        if (metodologia == null) {
             return false;
         }
         for (Proyecto proyecto : proyectos) {

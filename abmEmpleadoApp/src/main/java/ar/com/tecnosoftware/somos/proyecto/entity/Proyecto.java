@@ -111,15 +111,15 @@ public class Proyecto implements Serializable {
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", nullable = false)
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "id_metodologia", referencedColumnName = "id_metodologia")
+    @JoinColumn(name = "id_metodologia", referencedColumnName = "id_metodologia", nullable = false)
     private Metodologia metodologia;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
+    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto", nullable = false)
     private TipoProyecto tipo;
 
     @ManyToMany

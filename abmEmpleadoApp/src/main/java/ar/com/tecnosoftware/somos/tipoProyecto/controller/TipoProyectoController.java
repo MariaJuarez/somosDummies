@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class TipoProyectoController {
     private ProyectoService proyectoService;
 
     @PostMapping(value = "/crear")
-    public void addTipoProyecto(@Valid @RequestBody TipoProyecto tipoProyecto) {
+    public void addTipoProyecto(@RequestBody TipoProyecto tipoProyecto) {
         tipoProyectoService.add(tipoProyecto);
     }
 

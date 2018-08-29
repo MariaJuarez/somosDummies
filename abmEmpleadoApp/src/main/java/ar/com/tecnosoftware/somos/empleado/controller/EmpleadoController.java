@@ -34,41 +34,46 @@ public class EmpleadoController {
     private UsuarioService usuarioService;
 
     @PostMapping(value = "/crear")
-    public void addEmpleado(@Valid @RequestBody Empleado empleado) {
-        empleadoService.add(empleado);
+    public void addEmpleado(@Valid @RequestBody Empleado empleado) throws EmpleadoErrorException {
+
+        String resultado = empleadoService.add(empleado);
+
+        if (!resultado.equals("")) {
+            throw new EmpleadoErrorException(resultado);
+        }
     }
 
-    @GetMapping (value = "/listarActivos")
-    public ResponseEntity<List<Empleado>> findEmpleadoActivos() throws EmpleadoErrorException{
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<Empleado>> findEmpleadoActivos() throws EmpleadoErrorException {
         List<Empleado> empleados = empleadoService.buscarNoBajas();
-        if(empleados == null){
+        if (empleados == null) {
             throw new EmpleadoErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(empleados);
     }
 
-    @GetMapping (value = "/listarTodos")
+    @GetMapping(value = "/listarTodos")
     public ResponseEntity<List<Empleado>> findAllEmpleado() throws EmpleadoErrorException {
         List<Empleado> empleados = empleadoService.buscarTodos();
-        if(empleados == null){
+        if (empleados == null) {
             throw new EmpleadoErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(empleados);
     }
 
-    @PutMapping (value = "/baja/{id}")
+    @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Empleado> bajaEmpleado(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados, @RequestBody Usuario usuario) throws EmpleadoErrorException, EmpleadoNotFoundException{
+    public ResponseEntity<Empleado> bajaEmpleado(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados, @RequestBody Usuario usuario) throws EmpleadoErrorException, EmpleadoNotFoundException {
         Empleado empleado = empleadoService.darBaja(id);
-        if(empleado == null){
+        if (empleado == null) {
             throw new EmpleadoNotFoundException("No se encontró el empleado con id " + id);
         }
 
-        if (!proyectoEmpleadoService.darBajaProyectosEmpleados(proyectoEmpleados)){
+        if (!proyectoEmpleadoService.darBajaProyectosEmpleados(proyectoEmpleados)) {
             throw new EmpleadoErrorException("Hubo un error al dar de baja al empleado por la relación con los ProyectoEmpleados");
         }
 
-        if((usuario != null) && !usuarioService.darBajaEmpleadoDeUsuario(usuario)){
+        if ((usuario != null) && !usuarioService.darBajaEmpleadoDeUsuario(usuario)) {
             throw new EmpleadoErrorException("Hubo un error al dar de baja al empleado por la relación con los usuarios. Puede que no exista el Empleado por defecto");
         }
 
@@ -76,11 +81,11 @@ public class EmpleadoController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Empleado> editarEmpleado(@RequestBody Empleado empleado) throws EmpleadoNotFoundException{
+    public ResponseEntity<Empleado> editarEmpleado(@RequestBody Empleado empleado) throws EmpleadoNotFoundException {
 
         Empleado empleadoEditado = empleadoService.editar(empleado);
 
-        if(empleadoEditado == null){
+        if (empleadoEditado == null) {
             throw new EmpleadoNotFoundException("No se encontró el empleado con id " + empleado.getId());
         }
 

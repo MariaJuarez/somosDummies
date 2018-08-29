@@ -4,7 +4,7 @@ import ar.com.tecnosoftware.somos.cargo.exception.CargoErrorException;
 import ar.com.tecnosoftware.somos.cargo.exception.CargoNotFoundException;
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.cliente.exception.ClienteNotFoundException;
-import ar.com.tecnosoftware.somos.cliente.exception.ClienterErrorException;
+import ar.com.tecnosoftware.somos.cliente.exception.ClienteErrorException;
 import ar.com.tecnosoftware.somos.cliente.service.ClienteService;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
@@ -31,27 +31,31 @@ public class ClienteController {
     private ProyectoService proyectoService;
 
     @PostMapping(value = "/crear")
-    public void addCliente(@Valid @RequestBody Cliente cliente) {
-        clienteService.add(cliente);
+    public void addCliente(@Valid @RequestBody Cliente cliente) throws ClienteErrorException {
+
+        String resultado = clienteService.add(cliente);
+        if (!resultado.equals("")) {
+            throw new ClienteErrorException(resultado);
+        }
     }
 
     @GetMapping(value = "/listarActivos")
-    public ResponseEntity<List<Cliente>> findClienteActivos() throws ClienterErrorException {
+    public ResponseEntity<List<Cliente>> findClienteActivos() throws ClienteErrorException {
         List<Cliente> clientes = clienteService.buscarNoBajas();
 
         if (clientes == null) {
-            throw new ClienterErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
+            throw new ClienteErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
 
         return ResponseEntity.ok(clientes);
     }
 
     @GetMapping(value = "/listarTodos")
-    public ResponseEntity<List<Cliente>> findAllCliente() throws ClienterErrorException {
+    public ResponseEntity<List<Cliente>> findAllCliente() throws ClienteErrorException {
         List<Cliente> clientes = clienteService.buscarTodos();
 
         if (clientes == null) {
-            throw new ClienterErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
+            throw new ClienteErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
 
         return ResponseEntity.ok(clientes);
@@ -59,7 +63,7 @@ public class ClienteController {
 
     @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Cliente> bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws ClienterErrorException, ClienteNotFoundException {
+    public ResponseEntity<Cliente> bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws ClienteErrorException, ClienteNotFoundException {
 
         Cliente cliente = clienteService.darBaja(id);
 
@@ -68,7 +72,7 @@ public class ClienteController {
         }
 
         if (!proyectoService.darBajaProyectos(proyectos)) {
-            throw new ClienterErrorException("Hubo un error al dar de baja al cliente y a sus respectivos proyectos.");
+            throw new ClienteErrorException("Hubo un error al dar de baja al cliente y a sus respectivos proyectos.");
         }
 
         return ResponseEntity.ok(cliente);

@@ -17,8 +17,9 @@ public class LiderServicioServiceImpl implements LiderServicioService {
     private LiderServicioRepository liderServicioRepository;
 
     @Override
-    public void add(LiderServicio liderServicio) {
+    public String add(LiderServicio liderServicio) {
         liderServicioRepository.guardar(liderServicio);
+        return "";
     }
 
     @Override

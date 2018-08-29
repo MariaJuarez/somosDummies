@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class CargoController {
     private ProyectoEmpleadoService proyectoEmpleadoService;
 
     @PostMapping(value = "/crear")
-    public void addCargo(@Valid @RequestBody Cargo cargo) {
+    public void addCargo(@RequestBody Cargo cargo) {
         cargoService.add(cargo);
     }
 

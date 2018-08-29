@@ -3,7 +3,7 @@ package ar.com.tecnosoftware.somos.proyectoEmpleado.controller;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
-import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoErrorExcetion;
+import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoErrorException;
 import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoNotFoundException;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.exception.ProyectoEmpleadoErrorException;
@@ -35,8 +35,11 @@ public class ProyectoEmpleadoController {
     private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
 
     @PostMapping(value = "/crear")
-    public void addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) {
-        proyectoEmpleadoService.add(proyectoEmpleado);
+    public void addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) throws ProyectoEmpleadoErrorException {
+        String resultado = proyectoEmpleadoService.add(proyectoEmpleado);
+        if (!resultado.equals("")) {
+            throw new ProyectoEmpleadoErrorException(resultado);
+        }
     }
 
     @GetMapping(value = "/listarActivos")
@@ -116,9 +119,9 @@ public class ProyectoEmpleadoController {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 
-    @ExceptionHandler(ProyectoErrorExcetion.class)
+    @ExceptionHandler(ProyectoErrorException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public Map<String, String> errorException(ProyectoErrorExcetion e) {
+    public Map<String, String> errorException(ProyectoErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 

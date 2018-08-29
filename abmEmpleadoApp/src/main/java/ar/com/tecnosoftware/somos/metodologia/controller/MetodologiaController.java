@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class MetodologiaController {
     private ProyectoService proyectoService;
 
     @PostMapping(value = "/crear")
-    public void addMetodologia(@Valid @RequestBody Metodologia metodologia) {
+    public void addMetodologia(@RequestBody Metodologia metodologia) {
         metodologiaService.add(metodologia);
     }
 

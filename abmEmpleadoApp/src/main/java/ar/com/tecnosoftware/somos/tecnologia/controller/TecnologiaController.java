@@ -34,8 +34,11 @@ public class TecnologiaController {
     private ProyectoService proyectoService;
 
     @PostMapping(value = "/crear")
-    public void addTecnologia(@Valid @RequestBody Tecnologia tecnologia) {
-        tecnologiaService.add(tecnologia);
+    public void addTecnologia(@Valid @RequestBody Tecnologia tecnologia) throws TecnologiaErrorException {
+        String resultado = tecnologiaService.add(tecnologia);
+        if (!resultado.equals("")) {
+            throw new TecnologiaErrorException(resultado);
+        }
     }
 
     @GetMapping(value = "/listarActivos")

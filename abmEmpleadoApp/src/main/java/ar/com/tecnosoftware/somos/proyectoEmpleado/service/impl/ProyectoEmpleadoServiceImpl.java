@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.proyectoEmpleado.service.impl;
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.cargo.repository.CargoRepository;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
@@ -36,11 +37,32 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
 
     @Override
-    public void add(ProyectoEmpleado proyectoEmpleado) {
-        proyectoEmpleado.setEmpleado(empleadoRepository.buscar(proyectoEmpleado.getEmpleado().getId()));
-        proyectoEmpleado.setProyecto(proyectoRepository.buscar(proyectoEmpleado.getProyecto().getId()));
-        proyectoEmpleado.setCargo(cargoRepository.buscar(proyectoEmpleado.getCargo().getId()));
+    public String add(ProyectoEmpleado proyectoEmpleado) {
+        String resultado = "No existe el";
+
+        Empleado empleado = empleadoRepository.buscar(proyectoEmpleado.getEmpleado().getId());
+        if (empleado == null) {
+            resultado += "Empleado con id " + proyectoEmpleado.getEmpleado().getId();
+            return resultado;
+        }
+        proyectoEmpleado.setEmpleado(empleado);
+
+        Proyecto proyecto = proyectoRepository.buscar(proyectoEmpleado.getProyecto().getId());
+        if (proyecto == null) {
+            resultado += "Proyecto con id " + proyectoEmpleado.getProyecto().getId();
+            return resultado;
+        }
+        proyectoEmpleado.setProyecto(proyecto);
+
+        Cargo cargo = cargoRepository.buscar(proyectoEmpleado.getCargo().getId());
+        if (proyecto == null) {
+            resultado += "Cargo con id " + proyectoEmpleado.getCargo().getId();
+            return resultado;
+        }
+        proyectoEmpleado.setCargo(cargo);
+
         proyectoEmpleadoRepository.guardar(proyectoEmpleado);
+        return "";
     }
 
     @Override

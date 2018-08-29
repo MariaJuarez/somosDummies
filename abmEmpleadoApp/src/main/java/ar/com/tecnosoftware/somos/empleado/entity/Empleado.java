@@ -111,11 +111,11 @@ public class Empleado implements Serializable {
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
+    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil", nullable = false)
     private Perfil perfil;
 
     @ManyToOne
-    @JoinColumn(name = "id_centro_costo", referencedColumnName = "id_centro_costo")
+    @JoinColumn(name = "id_centro_costo", referencedColumnName = "id_centro_costo", nullable = false)
     private Area area;
 
     @Enumerated(EnumType.ORDINAL)

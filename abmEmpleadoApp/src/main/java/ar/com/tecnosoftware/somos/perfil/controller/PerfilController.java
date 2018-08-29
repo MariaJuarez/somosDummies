@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class PerfilController {
     private EmpleadoService empleadoService;
 
     @PostMapping(value = "/crear")
-    public void addPerfil(@Valid @RequestBody Perfil perfil) {
+    public void addPerfil(@RequestBody Perfil perfil) {
         perfilService.add(perfil);
     }
 

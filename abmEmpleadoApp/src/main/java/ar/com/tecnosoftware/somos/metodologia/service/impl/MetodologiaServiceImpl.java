@@ -17,8 +17,9 @@ public class MetodologiaServiceImpl implements MetodologiaService {
     private MetodologiaRepository metodologiaRepository;
 
     @Override
-    public void add(Metodologia metodologia) {
+    public String add(Metodologia metodologia) {
         metodologiaRepository.guardar(metodologia);
+        return "";
     }
 
     @Override
