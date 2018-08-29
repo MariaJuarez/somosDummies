@@ -32,19 +32,19 @@ public class TecnologiaRepositoryImpl implements TecnologiaRepository {
     }
 
     @Override
-    public void darBaja(Tecnologia tecnologia) {
+    public Tecnologia darBaja(Tecnologia tecnologia) {
         tecnologia.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(tecnologia);
     }
 
     @Override
-    public void darBajaTipoTecnologiaDeTecnologia(Tecnologia tecnologia, TipoTecnologia tipoTecnologia) {
+    public Tecnologia darBajaTipoTecnologiaDeTecnologia(Tecnologia tecnologia, TipoTecnologia tipoTecnologia) {
         tecnologia.setTipo(tipoTecnologia);
-        entityManager.merge(tecnologia);
+        return entityManager.merge(tecnologia);
     }
 
     @Override
-    public void editar(Tecnologia tecnologia) {
-        entityManager.merge(tecnologia);
+    public Tecnologia editar(Tecnologia tecnologia) {
+        return entityManager.merge(tecnologia);
     }
 }

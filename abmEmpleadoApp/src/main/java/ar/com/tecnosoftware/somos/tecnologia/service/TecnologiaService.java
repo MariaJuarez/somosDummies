@@ -9,6 +9,6 @@ public interface TecnologiaService extends Service<Tecnologia> {
 
     List<Tecnologia> buscarTecnologiasConTipoTecnologia(int idTipoTecnologia);
 
-    void darBajaTipoTecnologiasDeTecnologias(List<Tecnologia> tecnologias);
+    Boolean darBajaTipoTecnologiasDeTecnologias(List<Tecnologia> tecnologias);
 
 }

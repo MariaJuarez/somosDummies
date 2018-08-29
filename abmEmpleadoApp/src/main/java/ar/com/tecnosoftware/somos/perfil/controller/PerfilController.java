@@ -9,6 +9,7 @@ import ar.com.tecnosoftware.somos.perfil.service.PerfilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -51,27 +52,28 @@ public class PerfilController {
     }
 
     @PutMapping(value = "/baja/{id}")
-    public ResponseEntity<Perfil> bajaPerfil(@PathVariable int id, @RequestBody List<Empleado> empleados) throws PerfilErrorException, PerfilNotFoundException{
+    @Transactional
+    public ResponseEntity<Perfil> bajaPerfil(@PathVariable int id, @RequestBody List<Empleado> empleados) throws PerfilErrorException, PerfilNotFoundException {
         empleadoService.darBajaPerfilDeEmpleados(empleados);
 
         Perfil perfil = perfilService.darBaja(id);
 
-        if(perfil == null){
+        if (perfil == null) {
             throw new PerfilNotFoundException("No se encontró el perfil con id " + id);
         }
 
-        if (!empleadoService.darBajaAreaDeEmpleados(empleados)){
-            throw new PerfilErrorException("Hubo un error al dar de baja al perfil por la relación con los empleados");
+        if (!empleadoService.darBajaPerfilDeEmpleados(empleados)) {
+            throw new PerfilErrorException("Hubo un error al dar de baja al perfil por la relación con los empleados. Puede que no exista el Perfil por defecto.");
         }
 
         return ResponseEntity.ok(perfil);
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Perfil> editarPerfil(@RequestBody Perfil perfil) throws PerfilNotFoundException{
+    public ResponseEntity<Perfil> editarPerfil(@RequestBody Perfil perfil) throws PerfilNotFoundException {
         Perfil perfil1Editado = perfilService.editar(perfil);
 
-        if(perfil1Editado == null){
+        if (perfil1Editado == null) {
             throw new PerfilNotFoundException("No se encontró el perfil con id " + perfil.getId());
         }
 

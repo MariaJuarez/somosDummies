@@ -15,9 +15,9 @@ public interface ProyectoEmpleadoService extends Service<ProyectoEmpleado> {
 
     List<ProyectoEmpleado> buscarProyectosEmpleadosConCargo(int idCargo);
 
-    void darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados);
+    Boolean darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados);
 
-    void darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados);
+    Boolean darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados);
 
     List<Empleado> buscarEmpleadosPorFiltro(FiltroEmpleado filtroEmpleado);
 

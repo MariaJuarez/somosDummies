@@ -27,8 +27,12 @@ public class TipoTecnologiaServiceImpl implements TipoTecnologiaService {
     }
 
     @Override
-    public void darBaja(int id) {
-        tipoTecnologiaRepository.darBaja(tipoTecnologiaRepository.buscar(id));
+    public TipoTecnologia darBaja(int id) {
+        TipoTecnologia tipoTecnologia = tipoTecnologiaRepository.buscar(id);
+        if(tipoTecnologia == null){
+            return null;
+        }
+        return tipoTecnologiaRepository.darBaja(tipoTecnologia);
     }
 
     @Override
@@ -42,11 +46,11 @@ public class TipoTecnologiaServiceImpl implements TipoTecnologiaService {
     }
 
     @Override
-    public void editar(TipoTecnologia tipoTecnologia) {
+    public TipoTecnologia editar(TipoTecnologia tipoTecnologia) {
         if (tipoTecnologiaRepository.buscar(tipoTecnologia.getId()) == null){
-            return;
+            return null;
         }
 
-        tipoTecnologiaRepository.editar(tipoTecnologia);
+        return tipoTecnologiaRepository.editar(tipoTecnologia);
     }
 }

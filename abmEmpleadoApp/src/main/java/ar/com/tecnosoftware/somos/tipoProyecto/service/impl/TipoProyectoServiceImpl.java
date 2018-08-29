@@ -27,8 +27,12 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        tipoProyectoRepository.darBaja(tipoProyectoRepository.buscar(id));
+    public TipoProyecto darBaja(int id) {
+        TipoProyecto tipoProyecto = tipoProyectoRepository.buscar(id);
+        if(tipoProyecto == null){
+            return null;
+        }
+        return tipoProyectoRepository.darBaja(tipoProyecto);
     }
 
     @Override
@@ -42,10 +46,10 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     }
 
     @Override
-    public void editar(TipoProyecto tipoProyecto) {
+    public TipoProyecto editar(TipoProyecto tipoProyecto) {
         if (tipoProyectoRepository.buscar(tipoProyecto.getId()) == null) {
-            return;
+            return null;
         }
-        tipoProyectoRepository.editar(tipoProyecto);
+        return tipoProyectoRepository.editar(tipoProyecto);
     }
 }

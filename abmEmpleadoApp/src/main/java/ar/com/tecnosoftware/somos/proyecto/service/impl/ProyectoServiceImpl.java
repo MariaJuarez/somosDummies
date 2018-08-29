@@ -54,7 +54,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public Proyecto darBaja(int id) {
         Proyecto proyecto = proyectoRepository.buscar(id);
-        if(proyecto == null){
+        if (proyecto == null) {
             return null;
         }
         return proyectoRepository.darBaja(proyecto);
@@ -74,9 +74,9 @@ public class ProyectoServiceImpl implements ProyectoService {
     public List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias) {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
-        for (Tecnologia tecnologia : tecnologias){
+        for (Tecnologia tecnologia : tecnologias) {
             Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
-            if(temp != null){
+            if (temp != null) {
                 tecnologiasEnBD.add(temp);
             }
         }
@@ -92,7 +92,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public Boolean darBajaProyectos(List<Proyecto> proyectos) {
         for (Proyecto proyecto : proyectos) {
-            if(proyectoRepository.darBaja(proyecto) == null){
+            if (proyectoRepository.darBaja(proyecto) == null) {
                 return false;
             }
         }
@@ -107,8 +107,11 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public Boolean darBajaMetodologiaDeProyectos(List<Proyecto> proyectos) {
         Metodologia metodologia = metodologiaRepository.buscar(1);
-        for(Proyecto proyecto : proyectos){
-            if(proyectoRepository.darBajaMetodologiaDeProyecto(proyecto, metodologia) == null){
+        if(metodologia == null){
+            return false;
+        }
+        for (Proyecto proyecto : proyectos) {
+            if (proyectoRepository.darBajaMetodologiaDeProyecto(proyecto, metodologia) == null) {
                 return false;
             }
         }
@@ -123,8 +126,11 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public Boolean darBajaTipoProyectoDeProyectos(List<Proyecto> proyectos) {
         TipoProyecto tipoProyecto = tipoProyectoRepository.buscar(1);
-        for(Proyecto proyecto : proyectos){
-            if(proyectoRepository.darBajaTipoProyectoDeProyecto(proyecto, tipoProyecto) == null){
+        if (tipoProyecto == null) {
+            return false;
+        }
+        for (Proyecto proyecto : proyectos) {
+            if (proyectoRepository.darBajaTipoProyectoDeProyecto(proyecto, tipoProyecto) == null) {
                 return false;
             }
         }
@@ -137,11 +143,11 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public Boolean darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, int idTecnologia) {
-        Tecnologia tecnologia = tecnologiaRepository.buscar(idTecnologia);
-        for (Proyecto proyecto : proyectos){
+    public Boolean darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, Tecnologia tecnologia) {
+
+        for (Proyecto proyecto : proyectos) {
             proyecto.getTecnologias().remove(tecnologia);
-            if(proyectoRepository.darBajaTecnologiaDeProyecto(proyecto) == null){
+            if (proyectoRepository.darBajaTecnologiaDeProyecto(proyecto) == null) {
                 return false;
             }
         }
@@ -155,7 +161,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public Proyecto editar(Proyecto proyecto) {
-        if (proyectoRepository.buscar(proyecto.getId()) == null){
+        if (proyectoRepository.buscar(proyecto.getId()) == null) {
             return null;
         }
         return proyectoRepository.editar(proyecto);

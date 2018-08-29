@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProyectoEmpleadoRepository extends Repository<ProyectoEmpleado> {
 
-    void darBajaCargoDeProyectoEmpleado(ProyectoEmpleado proyectoEmpleado, Cargo cargo);
+    ProyectoEmpleado darBajaCargoDeProyectoEmpleado(ProyectoEmpleado proyectoEmpleado, Cargo cargo);
 
     List<Empleado> buscarEmpleadosPorFiltro(String hql, FiltroEmpleado filtroEmpleado, int tipoFiltro);
 }

@@ -1,5 +1,6 @@
 package ar.com.tecnosoftware.somos.usuario.service.impl;
 
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.usuario.repository.UsuarioRepository;
@@ -42,8 +43,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void darBaja(int id) {
-        usuarioRepository.darBaja(usuarioRepository.buscar(id));
+    public Usuario darBaja(int id) {
+        Usuario usuario = usuarioRepository.buscar(id);
+        if(usuario == null){
+            return null;
+        }
+        return usuarioRepository.darBaja(usuario);
     }
 
     @Override
@@ -52,15 +57,23 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void darBajaEmpleadoDeUsuario(Usuario usuario) {
-        usuarioRepository.darBajaEmpleadoDeUsuario(usuario, empleadoRepository.buscar(1));
+    public Boolean darBajaEmpleadoDeUsuario(Usuario usuario) {
+        Empleado empleado = empleadoRepository.buscar(1);
+        if(empleado == null){
+            return false;
+        }
+
+        if(usuarioRepository.darBajaEmpleadoDeUsuario(usuario, empleado) == null){
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void editar(Usuario usuario) {
+    public Usuario editar(Usuario usuario) {
         if (usuarioRepository.buscar(usuario.getId()) == null){
-            return;
+            return null;
         }
-        usuarioRepository.editar(usuario);
+        return usuarioRepository.editar(usuario);
     }
 }

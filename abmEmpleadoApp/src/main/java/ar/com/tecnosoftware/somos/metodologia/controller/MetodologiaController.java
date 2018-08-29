@@ -33,36 +33,36 @@ public class MetodologiaController {
         metodologiaService.add(metodologia);
     }
 
-    @GetMapping (value = "/listarActivos")
-    public ResponseEntity<List<Metodologia>> findMetodologiaActivos() throws MetodologiaErrorException{
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<Metodologia>> findMetodologiaActivos() throws MetodologiaErrorException {
         List<Metodologia> metodologias = metodologiaService.buscarNoBajas();
-        if(metodologias == null){
+        if (metodologias == null) {
             throw new MetodologiaErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(metodologias);
     }
 
-    @GetMapping (value = "/listarTodos")
-    public ResponseEntity<List<Metodologia>> findAllMetodologia() throws MetodologiaErrorException{
+    @GetMapping(value = "/listarTodos")
+    public ResponseEntity<List<Metodologia>> findAllMetodologia() throws MetodologiaErrorException {
 
         List<Metodologia> metodologias = metodologiaService.buscarTodos();
-        if(metodologias == null){
+        if (metodologias == null) {
             throw new MetodologiaErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(metodologias);
     }
 
-    @PutMapping (value = "/baja/{id}")
+    @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Metodologia> bajaMetodologia(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws MetodologiaNotFoundException, MetodologiaErrorException{
+    public ResponseEntity<Metodologia> bajaMetodologia(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws MetodologiaNotFoundException, MetodologiaErrorException {
         Metodologia metodologia = metodologiaService.darBaja(id);
 
-        if(metodologia == null){
+        if (metodologia == null) {
             throw new MetodologiaNotFoundException("No se encontró la metodologia con id " + id);
         }
 
-        if (!proyectoService.darBajaMetodologiaDeProyectos(proyectos)){
-            throw new MetodologiaErrorException("Hubo un error al dar de baja a la metodologia por la relación con los proyectos");
+        if (!proyectoService.darBajaMetodologiaDeProyectos(proyectos)) {
+            throw new MetodologiaErrorException("Hubo un error al dar de baja a la metodologia por la relación con los proyectos. Puede que la Metodologia por defecto no existe.");
         }
 
         return ResponseEntity.ok(metodologia);
@@ -70,10 +70,10 @@ public class MetodologiaController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Metodologia> editarMetodologia(@RequestBody Metodologia metodologia) throws MetodologiaNotFoundException{
+    public ResponseEntity<Metodologia> editarMetodologia(@RequestBody Metodologia metodologia) throws MetodologiaNotFoundException {
 
         Metodologia metodologiaEditado = metodologiaService.editar(metodologia);
-        if(metodologiaEditado == null){
+        if (metodologiaEditado == null) {
             throw new MetodologiaNotFoundException("No se encontró la metodologia con id " + metodologia.getId());
         }
         return ResponseEntity.ok(metodologia);

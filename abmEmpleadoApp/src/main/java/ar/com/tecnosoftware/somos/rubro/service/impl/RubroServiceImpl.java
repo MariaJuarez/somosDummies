@@ -27,8 +27,12 @@ public class RubroServiceImpl implements RubroService {
     }
 
     @Override
-    public void darBaja(int id) {
-        rubroRepository.darBaja(rubroRepository.buscar(id));
+    public Rubro darBaja(int id) {
+        Rubro rubro = rubroRepository.buscar(id);
+        if (rubro == null){
+            return null;
+        }
+        return rubroRepository.darBaja(rubro);
     }
 
     @Override
@@ -42,11 +46,11 @@ public class RubroServiceImpl implements RubroService {
     }
 
     @Override
-    public void editar(Rubro rubro) {
+    public Rubro editar(Rubro rubro) {
         if (rubroRepository.buscar(rubro.getId()) == null){
-            return;
+            return null;
         }
 
-        rubroRepository.editar(rubro);
+        return rubroRepository.editar(rubro);
     }
 }

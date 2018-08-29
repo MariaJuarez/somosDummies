@@ -35,15 +35,15 @@ public class ProyectoEmpleadoRepositoryImpl implements ProyectoEmpleadoRepositor
     }
 
     @Override
-    public void darBaja(ProyectoEmpleado proyectoEmpleado) {
+    public ProyectoEmpleado darBaja(ProyectoEmpleado proyectoEmpleado) {
         proyectoEmpleado.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(proyectoEmpleado);
     }
 
     @Override
-    public void darBajaCargoDeProyectoEmpleado(ProyectoEmpleado proyectoEmpleado, Cargo cargo) {
+    public ProyectoEmpleado darBajaCargoDeProyectoEmpleado(ProyectoEmpleado proyectoEmpleado, Cargo cargo) {
         proyectoEmpleado.setCargo(cargo);
-        entityManager.merge(proyectoEmpleado);
+        return entityManager.merge(proyectoEmpleado);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class ProyectoEmpleadoRepositoryImpl implements ProyectoEmpleadoRepositor
     }
 
     @Override
-    public void editar(ProyectoEmpleado proyectoEmpleado) {
-        entityManager.merge(proyectoEmpleado);
+    public ProyectoEmpleado editar(ProyectoEmpleado proyectoEmpleado) {
+        return entityManager.merge(proyectoEmpleado);
     }
 }

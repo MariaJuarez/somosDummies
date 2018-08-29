@@ -34,56 +34,45 @@ public class ProyectoController {
         proyectoService.add(proyecto);
     }
 
-    @GetMapping (value = "/listarActivos")
-    public ResponseEntity<List<Proyecto>> findProyectoActivos() throws ProyectoErrorExcetion{
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<Proyecto>> findProyectoActivos() throws ProyectoErrorExcetion {
         List<Proyecto> proyectos = proyectoService.buscarNoBajas();
-        if(proyectos == null){
+        if (proyectos == null) {
             throw new ProyectoErrorExcetion("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(proyectos);
     }
 
-    @GetMapping (value = "/listarTodos")
-    public ResponseEntity<List<Proyecto>> findAllProyecto() throws ProyectoErrorExcetion{
+    @GetMapping(value = "/listarTodos")
+    public ResponseEntity<List<Proyecto>> findAllProyecto() throws ProyectoErrorExcetion {
         List<Proyecto> proyectos = proyectoService.buscarTodos();
-        if(proyectos == null){
+        if (proyectos == null) {
             throw new ProyectoErrorExcetion("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(proyectos);
     }
 
-    //Se debe llamar este metodo primero para dar de baja
-    @PutMapping (value = "/baja/proyecto/{id}")
+    @PutMapping(value = "/baja/{id}")
     @Transactional
     public ResponseEntity<Proyecto> bajaProyecto(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectosEmpleados) throws ProyectoErrorExcetion, ProyectoNotFoundException {
 
         Proyecto proyecto = proyectoService.darBaja(id);
 
-        if(proyecto == null){
+        if (proyecto == null) {
             throw new ProyectoNotFoundException("No se encontró el proyecto con id " + id);
         }
 
-        if (!proyectoEmpleadoService.darBajaProyectosEmpleados(proyectosEmpleados)){
+        if (!proyectoEmpleadoService.darBajaProyectosEmpleados(proyectosEmpleados)) {
             throw new ProyectoErrorExcetion("Hubo un error al dar de baja al proyecto por la relación con los ProyectoEmpleado");
         }
 
         return ResponseEntity.ok(proyecto);
     }
 
-    //Se debe llamar este metodo despues del metodo bajaProyecto
-    @PutMapping (value = "/baja/tecnologiaConProyecto/{id}")
-    @Transactional
-    public void bajaTecnologiaDeProyecto(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws ProyectoErrorExcetion {
-
-        if(!proyectoService.darBajaTecnologiaDeProyectos(proyectos, id)){
-            throw new ProyectoErrorExcetion("Hubo un error al dar de baja al proyecto por la relación con Tecnologia");
-        }
-    }
-
     @PostMapping(value = "/listarFiltro")
-    public List<Proyecto> buscarProyectos(@RequestBody FiltroProyecto filtroProyecto){
-        if((filtroProyecto != null) &&
-                (filtroProyecto.getFechaInicio()) != null || (filtroProyecto.getFechaFin() != null) || (filtroProyecto.getCliente() != null)){
+    public List<Proyecto> buscarProyectos(@RequestBody FiltroProyecto filtroProyecto) {
+        if ((filtroProyecto != null) &&
+                (filtroProyecto.getFechaInicio()) != null || (filtroProyecto.getFechaFin() != null) || (filtroProyecto.getCliente() != null)) {
             return proyectoService.buscarPorFiltro(filtroProyecto);
         }
 
@@ -91,10 +80,10 @@ public class ProyectoController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Proyecto> editarProyecto(@RequestBody Proyecto proyecto) throws ProyectoNotFoundException{
+    public ResponseEntity<Proyecto> editarProyecto(@RequestBody Proyecto proyecto) throws ProyectoNotFoundException {
         Proyecto proyectoEditado = proyectoService.editar(proyecto);
 
-        if(proyecto == null){
+        if (proyecto == null) {
             throw new ProyectoNotFoundException("No se encontró el proyecto con id " + proyecto.getId());
         }
 

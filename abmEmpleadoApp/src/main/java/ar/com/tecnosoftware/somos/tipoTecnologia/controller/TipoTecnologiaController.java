@@ -3,12 +3,19 @@ package ar.com.tecnosoftware.somos.tipoTecnologia.controller;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tecnologia.service.TecnologiaService;
 import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
+import ar.com.tecnosoftware.somos.tipoTecnologia.exception.TipoTecnologiaErrorException;
+import ar.com.tecnosoftware.somos.tipoTecnologia.exception.TipoTecnologiaNotFoundException;
 import ar.com.tecnosoftware.somos.tipoTecnologia.service.TipoTecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -26,25 +33,61 @@ public class TipoTecnologiaController {
         tipoTecnologiaService.add(tipoTecnologia);
     }
 
-    @GetMapping (value = "/listarActivos")
-    public List<TipoTecnologia> findTipoTecnologiaActivos(){
-        return tipoTecnologiaService.buscarNoBajas();
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<TipoTecnologia>> findTipoTecnologiaActivos() throws TipoTecnologiaErrorException {
+        List<TipoTecnologia> tipoTecnologias = tipoTecnologiaService.buscarNoBajas();
+        if (tipoTecnologias == null) {
+            throw new TipoTecnologiaErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
+        }
+        return ResponseEntity.ok(tipoTecnologias);
     }
 
-    @GetMapping (value = "/listarTodos")
-    public List<TipoTecnologia> findAllTipoTecnologia(){
-        return tipoTecnologiaService.buscarTodos();
+    @GetMapping(value = "/listarTodos")
+    public ResponseEntity<List<TipoTecnologia>> findAllTipoTecnologia() throws TipoTecnologiaErrorException {
+        List<TipoTecnologia> tipoTecnologias = tipoTecnologiaService.buscarTodos();
+        if (tipoTecnologias == null) {
+            throw new TipoTecnologiaErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
+        }
+        return ResponseEntity.ok(tipoTecnologias);
     }
 
-    @PutMapping (value = "/baja/tipoTecnologia/{id}")
-    public void bajaTipoTecnologia(@PathVariable int id, @RequestBody List<Tecnologia> tecnologias) {
-        tecnologiaService.darBajaTipoTecnologiasDeTecnologias(tecnologias);
-        tipoTecnologiaService.darBaja(id);
+    @PutMapping(value = "/baja/{id}")
+    @Transactional
+    public ResponseEntity<TipoTecnologia> bajaTipoTecnologia(@PathVariable int id, @RequestBody List<Tecnologia> tecnologias) throws TipoTecnologiaErrorException, TipoTecnologiaNotFoundException {
+
+        TipoTecnologia tipoTecnologia = tipoTecnologiaService.darBaja(id);
+
+        if (tipoTecnologia == null) {
+            throw new TipoTecnologiaNotFoundException("No se encontró el tipo de tecnologia con id " + id);
+        }
+
+        if (!tecnologiaService.darBajaTipoTecnologiasDeTecnologias(tecnologias)) {
+            throw new TipoTecnologiaErrorException("Hubo un error al dar de baja al tipo de tecnologia por la relación con las tecnologias. Puede que no exista el Tipo de Tecnologia por defecto.");
+        }
+
+        return ResponseEntity.ok(tipoTecnologia);
     }
 
     @PutMapping(value = "/editar")
-    public void editarTipoTecnologia(@RequestBody TipoTecnologia tipoTecnologia){
-        tipoTecnologiaService.editar(tipoTecnologia);
+    public ResponseEntity<TipoTecnologia> editarTipoTecnologia(@RequestBody TipoTecnologia tipoTecnologia) throws TipoTecnologiaNotFoundException {
+        TipoTecnologia editado = tipoTecnologiaService.editar(tipoTecnologia);
+
+        if (tipoTecnologia == null) {
+            throw new TipoTecnologiaNotFoundException("No se encontró el tipo de tecnologia con id " + tipoTecnologia.getId());
+        }
+        return ResponseEntity.ok(editado);
+    }
+
+    @ExceptionHandler(TipoTecnologiaNotFoundException.class)
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public Map<String, String> notFoundException(TipoTecnologiaNotFoundException e) {
+        return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(TipoTecnologiaErrorException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, String> errorException(TipoTecnologiaErrorException e) {
+        return Collections.singletonMap("mensaje", e.getMessage());
     }
 
 }

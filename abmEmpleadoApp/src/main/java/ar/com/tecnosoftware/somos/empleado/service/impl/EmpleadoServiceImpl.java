@@ -73,6 +73,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public Boolean darBajaAreaDeEmpleados(List<Empleado> empleados) {
         Area area = areaRepository.buscar(1);
+        if(area == null){
+            return false;
+        }
+
         for(Empleado empleado : empleados){
             if (empleadoRepository.darBajaAreaDeEmpleado(empleado, area) == null){
                 return false;
@@ -103,6 +107,10 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public Boolean darBajaPerfilDeEmpleados(List<Empleado> empleados) {
         Perfil perfil = perfilRepository.buscar(1);
+        if(perfil == null){
+            return false;
+        }
+
         for(Empleado empleado : empleados){
             if(empleadoRepository.darBajaPerfilDeEmpleado(empleado, perfil) == null){
                 return false;
@@ -117,8 +125,8 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia) {
-        Tecnologia tecnologia = tecnologiaRepository.buscar(idTecnologia);
+    public Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, Tecnologia tecnologia) {
+
         for (Empleado empleado : empleados){
             empleado.getTecnologias().remove(tecnologia);
             if(empleadoRepository.darBajaTecnologiaDeEmpleado(empleado) == null){

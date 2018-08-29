@@ -45,7 +45,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Cliente darBaja(int id) {
         Cliente cliente = clienteRepository.buscar(id);
-        if(cliente == null){
+        if (cliente == null) {
             return null;
         }
         return clienteRepository.darBaja(cliente);
@@ -53,14 +53,17 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<Cliente> buscarClientesConRubro(int idRubro) {
-        return clienteRepository.buscar("WHERE rubro = " +idRubro);
+        return clienteRepository.buscar("WHERE rubro = " + idRubro);
     }
 
     @Override
     public Boolean darBajaRubroDeClientes(List<Cliente> clientes) {
         Rubro rubro = rubroRepository.buscar(1);
-        for(Cliente cliente : clientes){
-            if(clienteRepository.darBajaRubroDeCliente(cliente, rubro) == null){
+        if (rubro == null) {
+            return false;
+        }
+        for (Cliente cliente : clientes) {
+            if (clienteRepository.darBajaRubroDeCliente(cliente, rubro) == null) {
                 return false;
             }
         }
@@ -69,7 +72,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente editar(Cliente cliente) {
-        if (clienteRepository.buscar(cliente.getId()) == null){
+        if (clienteRepository.buscar(cliente.getId()) == null) {
             return null;
         }
         return clienteRepository.editar(cliente);

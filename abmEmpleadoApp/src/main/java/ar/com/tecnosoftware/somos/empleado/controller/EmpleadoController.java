@@ -6,6 +6,8 @@ import ar.com.tecnosoftware.somos.empleado.exception.EmpleadoNotFoundException;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
+import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
+import ar.com.tecnosoftware.somos.usuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class EmpleadoController {
 
     @Autowired
     private ProyectoEmpleadoService proyectoEmpleadoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @PostMapping(value = "/crear")
     public void addEmpleado(@Valid @RequestBody Empleado empleado) {
@@ -53,7 +58,7 @@ public class EmpleadoController {
 
     @PutMapping (value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Empleado> bajaEmpleado(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados) throws EmpleadoErrorException, EmpleadoNotFoundException{
+    public ResponseEntity<Empleado> bajaEmpleado(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados, @RequestBody Usuario usuario) throws EmpleadoErrorException, EmpleadoNotFoundException{
         Empleado empleado = empleadoService.darBaja(id);
         if(empleado == null){
             throw new EmpleadoNotFoundException("No se encontró el empleado con id " + id);
@@ -61,6 +66,10 @@ public class EmpleadoController {
 
         if (!proyectoEmpleadoService.darBajaProyectosEmpleados(proyectoEmpleados)){
             throw new EmpleadoErrorException("Hubo un error al dar de baja al empleado por la relación con los ProyectoEmpleados");
+        }
+
+        if((usuario != null) && !usuarioService.darBajaEmpleadoDeUsuario(usuario)){
+            throw new EmpleadoErrorException("Hubo un error al dar de baja al empleado por la relación con los usuarios. Puede que no exista el Empleado por defecto");
         }
 
         return ResponseEntity.ok(empleado);

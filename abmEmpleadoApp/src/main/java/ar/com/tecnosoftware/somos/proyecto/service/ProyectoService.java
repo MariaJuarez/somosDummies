@@ -25,7 +25,7 @@ public interface ProyectoService extends Service<Proyecto> {
 
     List<Proyecto> buscarProyectosConTecnologia(int idTecnologia);
 
-    Boolean darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, int idTecnologia);
+    Boolean darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, Tecnologia tecnologia);
 
     List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto);
 

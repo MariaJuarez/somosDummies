@@ -21,7 +21,7 @@ public interface EmpleadoService extends Service<Empleado> {
 
     List<Empleado> buscarEmpleadosConTecnologia(int idTecnologia);
 
-    Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia);
+    Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, Tecnologia tecnologia);
 
     List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado);
 

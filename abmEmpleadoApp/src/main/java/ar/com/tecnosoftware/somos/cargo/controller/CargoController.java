@@ -33,44 +33,44 @@ public class CargoController {
         cargoService.add(cargo);
     }
 
-    @GetMapping (value = "/listarActivos")
-    public ResponseEntity<List<Cargo>> findCargosActivos() throws CargoErrorException{
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<Cargo>> findCargosActivos() throws CargoErrorException {
         List<Cargo> cargos = cargoService.buscarNoBajas();
-        if(cargos == null){
+        if (cargos == null) {
             throw new CargoErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(cargos);
     }
 
-    @GetMapping (value = "/listarTodos")
+    @GetMapping(value = "/listarTodos")
     public ResponseEntity<List<Cargo>> findAllCargos() throws CargoNotFoundException {
         List<Cargo> cargos = cargoService.buscarTodos();
-        if(cargos == null){
+        if (cargos == null) {
             throw new CargoNotFoundException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(cargos);
     }
 
-    @PutMapping (value = "/baja/{id}")
+    @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Cargo> bajaCargo(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados) throws CargoNotFoundException, CargoErrorException{
+    public ResponseEntity<Cargo> bajaCargo(@PathVariable int id, @RequestBody List<ProyectoEmpleado> proyectoEmpleados) throws CargoNotFoundException, CargoErrorException {
         Cargo cargo = cargoService.darBaja(id);
 
-        if(cargo == null){
+        if (cargo == null) {
             throw new CargoNotFoundException("No se encontró el cargo con id " + id);
         }
 
-        if (!proyectoEmpleadoService.darBajaCargoDeProyectosEmpleados(proyectoEmpleados);){
-            throw new CargoErrorException("Hubo un error al dar de baja al cargo por la relación con los ProyectoEmpleados");
+        if (!proyectoEmpleadoService.darBajaCargoDeProyectosEmpleados(proyectoEmpleados)) {
+            throw new CargoErrorException("Hubo un error al dar de baja al cargo por la relación con los ProyectoEmpleados. Puede que no exista el Cargo por defecto.");
         }
 
         return ResponseEntity.ok(cargo);
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Cargo> editarCargo(@RequestBody Cargo cargo) throws CargoNotFoundException{
+    public ResponseEntity<Cargo> editarCargo(@RequestBody Cargo cargo) throws CargoNotFoundException {
         Cargo cargoEditado = cargoService.editar(cargo);
-        if(cargoEditado == null){
+        if (cargoEditado == null) {
             throw new CargoNotFoundException("No se encontró el cargo con id " + cargo.getId());
         }
 

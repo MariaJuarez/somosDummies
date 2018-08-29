@@ -31,13 +31,13 @@ public class TipoTecnologiaRepositoryImpl implements TipoTecnologiaRepository {
     }
 
     @Override
-    public void darBaja(TipoTecnologia tipoTecnologia) {
+    public TipoTecnologia darBaja(TipoTecnologia tipoTecnologia) {
         tipoTecnologia.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(tipoTecnologia);
     }
 
     @Override
-    public void editar(TipoTecnologia tipoTecnologia) {
-        entityManager.merge(tipoTecnologia);
+    public TipoTecnologia editar(TipoTecnologia tipoTecnologia) {
+        return entityManager.merge(tipoTecnologia);
     }
 }

@@ -54,8 +54,12 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        proyectoEmpleadoRepository.darBaja(proyectoEmpleadoRepository.buscar(id));
+    public ProyectoEmpleado darBaja(int id) {
+        ProyectoEmpleado proyectoEmpleado = proyectoEmpleadoRepository.buscar(id);
+        if (proyectoEmpleado == null) {
+            return null;
+        }
+        return proyectoEmpleadoRepository.darBaja(proyectoEmpleado);
     }
 
     @Override
@@ -70,7 +74,7 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Override
     public List<ProyectoEmpleado> buscarProyectosEmpleadosConProyecto(int idProyecto) {
-        return proyectoEmpleadoRepository.buscar("WHERE proyecto = " +idProyecto);
+        return proyectoEmpleadoRepository.buscar("WHERE proyecto = " + idProyecto);
     }
 
     @Override
@@ -79,18 +83,28 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     }
 
     @Override
-    public void darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados) {
+    public Boolean darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados) {
         Cargo cargo = cargoRepository.buscar(1);
-        for(ProyectoEmpleado proyectoEmpleado : proyectosEmpleados){
-            proyectoEmpleadoRepository.darBajaCargoDeProyectoEmpleado(proyectoEmpleado, cargo);
+        if (cargo == null) {
+            return false;
         }
+
+        for (ProyectoEmpleado proyectoEmpleado : proyectosEmpleados) {
+            if (proyectoEmpleadoRepository.darBajaCargoDeProyectoEmpleado(proyectoEmpleado, cargo) == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    public void darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados) {
+    public Boolean darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados) {
         for (ProyectoEmpleado proyectoEmpleado : proyectoEmpleados) {
-            proyectoEmpleadoRepository.darBaja(proyectoEmpleado);
+            if (proyectoEmpleadoRepository.darBaja(proyectoEmpleado) == null) {
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
@@ -103,10 +117,10 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     }
 
     @Override
-    public void editar(ProyectoEmpleado proyectoEmpleado) {
-        if (proyectoEmpleadoRepository.buscar(proyectoEmpleado.getId()) == null){
-            return;
+    public ProyectoEmpleado editar(ProyectoEmpleado proyectoEmpleado) {
+        if (proyectoEmpleadoRepository.buscar(proyectoEmpleado.getId()) == null) {
+            return null;
         }
-        proyectoEmpleadoRepository.editar(proyectoEmpleado);
+        return proyectoEmpleadoRepository.editar(proyectoEmpleado);
     }
 }

@@ -33,45 +33,45 @@ public class AreaController {
         areaService.add(area);
     }
 
-    @GetMapping (value = "/listarActivos")
-    public ResponseEntity<List<Area>> findAreasActivas() throws AreaErrorException{
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<Area>> findAreasActivas() throws AreaErrorException {
         List<Area> areas = areaService.buscarNoBajas();
-        if(areas == null){
+        if (areas == null) {
             throw new AreaErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(areas);
     }
 
-    @GetMapping (value = "/listarTodos")
-    public ResponseEntity<List<Area>> findAllArea() throws AreaErrorException{
+    @GetMapping(value = "/listarTodos")
+    public ResponseEntity<List<Area>> findAllArea() throws AreaErrorException {
 
         List<Area> areas = areaService.buscarTodos();
-        if(areas == null){
+        if (areas == null) {
             throw new AreaErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
         return ResponseEntity.ok(areas);
     }
 
-    @PutMapping (value = "/baja/{id}")
+    @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Area> bajaArea(@PathVariable int id, @RequestBody List<Empleado> empleados) throws AreaErrorException, AreaNotFoundException{
+    public ResponseEntity<Area> bajaArea(@PathVariable int id, @RequestBody List<Empleado> empleados) throws AreaErrorException, AreaNotFoundException {
         Area area = areaService.darBaja(id);
 
-        if(area == null){
+        if (area == null) {
             throw new AreaNotFoundException("No se encontró el area con id " + id);
         }
 
-        if (!empleadoService.darBajaAreaDeEmpleados(empleados)){
-            throw new AreaErrorException("Hubo un error al dar de baja al area por la relación con los empleados");
+        if (!empleadoService.darBajaAreaDeEmpleados(empleados)) {
+            throw new AreaErrorException("Hubo un error al dar de baja al area por la relación con los empleados. Puede que no exista el Area por defecto.");
         }
 
         return ResponseEntity.ok(area);
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Area> editarArea(@RequestBody Area area) throws AreaNotFoundException{
-        Area editado =  areaService.editar(area);
-        if (editado == null){
+    public ResponseEntity<Area> editarArea(@RequestBody Area area) throws AreaNotFoundException {
+        Area editado = areaService.editar(area);
+        if (editado == null) {
             throw new AreaNotFoundException("No se encontró el area con id " + area.getId());
         }
         return ResponseEntity.ok(editado);

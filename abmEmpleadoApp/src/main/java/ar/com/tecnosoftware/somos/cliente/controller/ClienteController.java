@@ -35,49 +35,49 @@ public class ClienteController {
         clienteService.add(cliente);
     }
 
-    @GetMapping (value = "/listarActivos")
-    public ResponseEntity<List<Cliente>> findClienteActivos() throws ClienterErrorException{
+    @GetMapping(value = "/listarActivos")
+    public ResponseEntity<List<Cliente>> findClienteActivos() throws ClienterErrorException {
         List<Cliente> clientes = clienteService.buscarNoBajas();
 
-        if(clientes == null){
+        if (clientes == null) {
             throw new ClienterErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
 
         return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping (value = "/listarTodos")
-    public ResponseEntity<List<Cliente>> findAllCliente() throws ClienterErrorException{
+    @GetMapping(value = "/listarTodos")
+    public ResponseEntity<List<Cliente>> findAllCliente() throws ClienterErrorException {
         List<Cliente> clientes = clienteService.buscarTodos();
 
-        if(clientes == null){
+        if (clientes == null) {
             throw new ClienterErrorException("Hubo un error al cargar la BD. Revise su conexión a la BD");
         }
 
         return ResponseEntity.ok(clientes);
     }
 
-    @PutMapping (value = "/baja/{id}")
+    @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Cliente> bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws ClienterErrorException, ClienteNotFoundException{
+    public ResponseEntity<Cliente> bajaCliente(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws ClienterErrorException, ClienteNotFoundException {
 
         Cliente cliente = clienteService.darBaja(id);
 
-        if(cliente == null){
+        if (cliente == null) {
             throw new ClienteNotFoundException("No se encontró el cliente con id " + id);
         }
 
-        if(!proyectoService.darBajaProyectos(proyectos)){
-            throw new ClienterErrorException("Hubo un error al dar de baja al cliente por la relación con los proyectos");
+        if (!proyectoService.darBajaProyectos(proyectos)) {
+            throw new ClienterErrorException("Hubo un error al dar de baja al cliente y a sus respectivos proyectos.");
         }
 
         return ResponseEntity.ok(cliente);
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Cliente> editarCliente(@RequestBody Cliente cliente) throws ClienteNotFoundException{
+    public ResponseEntity<Cliente> editarCliente(@RequestBody Cliente cliente) throws ClienteNotFoundException {
         Cliente clienteEditado = clienteService.editar(cliente);
-        if(clienteEditado == null){
+        if (clienteEditado == null) {
             throw new ClienteNotFoundException("No se encontró el cliente con el id " + cliente.getId());
         }
         return ResponseEntity.ok(cliente);
