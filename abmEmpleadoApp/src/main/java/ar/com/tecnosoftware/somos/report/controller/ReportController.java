@@ -1,6 +1,5 @@
 package ar.com.tecnosoftware.somos.report.controller;
 
-import ar.com.tecnosoftware.somos.report.EmpleadoBean;
 import ar.com.tecnosoftware.somos.report.ReporteUtil;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
