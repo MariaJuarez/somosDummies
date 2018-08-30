@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +32,8 @@ public class TipoProyectoController {
     private ProyectoService proyectoService;
 
     @PostMapping(value = "/crear")
-    public void addTipoProyecto(@RequestBody TipoProyecto tipoProyecto) {
-        tipoProyectoService.add(tipoProyecto);
+    public String addTipoProyecto(@Valid @RequestBody TipoProyecto tipoProyecto) {
+        return tipoProyectoService.add(tipoProyecto);
     }
 
     @GetMapping(value = "/listarActivos")
@@ -68,7 +72,7 @@ public class TipoProyectoController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<TipoProyecto> editarTipoProyecto(@RequestBody TipoProyecto tipoProyecto) throws TipoProyectoNotFoundException {
+    public ResponseEntity<TipoProyecto> editarTipoProyecto(@Valid @RequestBody TipoProyecto tipoProyecto) throws TipoProyectoNotFoundException {
         TipoProyecto editado = tipoProyectoService.editar(tipoProyecto);
 
         if (tipoProyecto == null) {
@@ -88,5 +92,17 @@ public class TipoProyectoController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(TipoProyectoErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 }

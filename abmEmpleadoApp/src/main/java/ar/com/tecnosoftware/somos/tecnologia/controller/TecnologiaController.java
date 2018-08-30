@@ -8,14 +8,18 @@ import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tecnologia.exception.TecnologiaErrorException;
 import ar.com.tecnosoftware.somos.tecnologia.exception.TecnologiaNotFoundException;
 import ar.com.tecnosoftware.somos.tecnologia.service.TecnologiaService;
+import ar.com.tecnosoftware.somos.tipoTecnologia.service.TipoTecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +37,16 @@ public class TecnologiaController {
     @Autowired
     private ProyectoService proyectoService;
 
+    @Autowired
+    private TipoTecnologiaService tipoTecnologiaService;
+
     @PostMapping(value = "/crear")
-    public void addTecnologia(@Valid @RequestBody Tecnologia tecnologia) throws TecnologiaErrorException {
+    public String addTecnologia(@Valid @RequestBody Tecnologia tecnologia) throws TecnologiaErrorException {
         String resultado = tecnologiaService.add(tecnologia);
         if (!resultado.equals("")) {
             throw new TecnologiaErrorException(resultado);
         }
+        return resultado;
     }
 
     @GetMapping(value = "/listarActivos")
@@ -81,7 +89,12 @@ public class TecnologiaController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Tecnologia> editarTecnologia(@RequestBody Tecnologia tecnologia) throws TecnologiaNotFoundException {
+    public ResponseEntity<Tecnologia> editarTecnologia(@Valid @RequestBody Tecnologia tecnologia) throws TecnologiaNotFoundException, TecnologiaErrorException {
+
+        if (tecnologiaService.buscar(tecnologia.getTipo().getId()) == null) {
+            throw new TecnologiaErrorException("No existe el Tipo de Tecnologia con id " + tecnologia.getTipo().getId());
+        }
+
         Tecnologia editado = tecnologiaService.editar(tecnologia);
 
         if (tecnologia == null) {
@@ -101,6 +114,18 @@ public class TecnologiaController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(TecnologiaErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 
 }

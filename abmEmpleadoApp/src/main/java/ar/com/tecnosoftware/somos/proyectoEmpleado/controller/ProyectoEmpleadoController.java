@@ -1,10 +1,12 @@
 package ar.com.tecnosoftware.somos.proyectoEmpleado.controller;
 
+import ar.com.tecnosoftware.somos.cargo.service.CargoService;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoErrorException;
 import ar.com.tecnosoftware.somos.proyecto.exception.ProyectoNotFoundException;
+import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.exception.ProyectoEmpleadoErrorException;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.exception.ProyectoEmpleadoNotFoundException;
@@ -13,10 +15,13 @@ import ar.com.tecnosoftware.somos.proyectoEmpleado.util.ProyectoEmpleadoFiltroUt
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,14 +37,21 @@ public class ProyectoEmpleadoController {
     private EmpleadoService empleadoService;
 
     @Autowired
+    private ProyectoService proyectoService;
+
+    @Autowired
+    private CargoService cargoService;
+
+    @Autowired
     private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
 
     @PostMapping(value = "/crear")
-    public void addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) throws ProyectoEmpleadoErrorException {
+    public String addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) throws ProyectoEmpleadoErrorException {
         String resultado = proyectoEmpleadoService.add(proyectoEmpleado);
         if (!resultado.equals("")) {
             throw new ProyectoEmpleadoErrorException(resultado);
         }
+        return resultado;
     }
 
     @GetMapping(value = "/listarActivos")
@@ -105,10 +117,23 @@ public class ProyectoEmpleadoController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<ProyectoEmpleado> editarProyectoEmpleado(@RequestBody ProyectoEmpleado proyectoEmpleado) throws ProyectoEmpleadoNotFoundException {
+    public ResponseEntity<ProyectoEmpleado> editarProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) throws ProyectoEmpleadoNotFoundException, ProyectoErrorException {
+
+        if (empleadoService.buscar(proyectoEmpleado.getEmpleado().getId()) == null) {
+            throw new ProyectoErrorException("No existe el empleado con id " + proyectoEmpleado.getEmpleado().getId());
+        }
+
+        if (proyectoService.buscar(proyectoEmpleado.getProyecto().getId()) == null) {
+            throw new ProyectoErrorException("No existe el proyecto con id " + proyectoEmpleado.getProyecto().getId());
+        }
+
+        if (cargoService.buscar(proyectoEmpleado.getCargo().getId()) == null) {
+            throw new ProyectoErrorException("No existe el cargo con id " + proyectoEmpleado.getCargo().getId());
+        }
+
         ProyectoEmpleado editado = proyectoEmpleadoService.editar(proyectoEmpleado);
         if (editado == null) {
-            throw new ProyectoEmpleadoNotFoundException("No se encontró el area con id " + proyectoEmpleado.getId());
+            throw new ProyectoEmpleadoNotFoundException("No se encontró el Proyecto Empleado con id " + proyectoEmpleado.getId());
         }
         return ResponseEntity.ok(editado);
     }
@@ -125,4 +150,15 @@ public class ProyectoEmpleadoController {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
+    }
 }

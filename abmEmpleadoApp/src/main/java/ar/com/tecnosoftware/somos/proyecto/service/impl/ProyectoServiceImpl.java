@@ -69,7 +69,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         proyecto.setTecnologias(setTecnologias(proyecto.getTecnologias()));
 
         proyectoRepository.guardar(proyecto);
-        return "";
+        return "Proyecto creado con exito";
     }
 
     @Override

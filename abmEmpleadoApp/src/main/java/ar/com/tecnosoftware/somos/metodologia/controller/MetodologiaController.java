@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +32,8 @@ public class MetodologiaController {
     private ProyectoService proyectoService;
 
     @PostMapping(value = "/crear")
-    public void addMetodologia(@RequestBody Metodologia metodologia) {
-        metodologiaService.add(metodologia);
+    public String addMetodologia(@Valid @RequestBody Metodologia metodologia) {
+        return metodologiaService.add(metodologia);
     }
 
     @GetMapping(value = "/listarActivos")
@@ -69,7 +73,7 @@ public class MetodologiaController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Metodologia> editarMetodologia(@RequestBody Metodologia metodologia) throws MetodologiaNotFoundException {
+    public ResponseEntity<Metodologia> editarMetodologia(@Valid @RequestBody Metodologia metodologia) throws MetodologiaNotFoundException {
 
         Metodologia metodologiaEditado = metodologiaService.editar(metodologia);
         if (metodologiaEditado == null) {
@@ -88,5 +92,17 @@ public class MetodologiaController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(MetodologiaErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 }

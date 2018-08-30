@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +32,8 @@ public class AreaController {
     private EmpleadoService empleadoService;
 
     @PostMapping(value = "/crear")
-    public void addArea(@RequestBody Area area) {
-        areaService.add(area);
+    public String addArea(@Valid @RequestBody Area area) {
+        return areaService.add(area);
     }
 
     @GetMapping(value = "/listarActivos")
@@ -68,7 +72,7 @@ public class AreaController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Area> editarArea(@RequestBody Area area) throws AreaNotFoundException {
+    public ResponseEntity<Area> editarArea(@Valid @RequestBody Area area) throws AreaNotFoundException {
         Area editado = areaService.editar(area);
         if (editado == null) {
             throw new AreaNotFoundException("No se encontró el area con id " + area.getId());
@@ -86,6 +90,18 @@ public class AreaController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(AreaErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 
 }

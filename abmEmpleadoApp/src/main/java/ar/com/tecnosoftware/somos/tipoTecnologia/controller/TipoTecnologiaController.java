@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +32,8 @@ public class TipoTecnologiaController {
     private TecnologiaService tecnologiaService;
 
     @PostMapping(value = "/crear")
-    public void addTipoTecnologia(@RequestBody TipoTecnologia tipoTecnologia) {
-        tipoTecnologiaService.add(tipoTecnologia);
+    public String addTipoTecnologia(@Valid @RequestBody TipoTecnologia tipoTecnologia) {
+        return tipoTecnologiaService.add(tipoTecnologia);
     }
 
     @GetMapping(value = "/listarActivos")
@@ -68,7 +72,7 @@ public class TipoTecnologiaController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<TipoTecnologia> editarTipoTecnologia(@RequestBody TipoTecnologia tipoTecnologia) throws TipoTecnologiaNotFoundException {
+    public ResponseEntity<TipoTecnologia> editarTipoTecnologia(@Valid @RequestBody TipoTecnologia tipoTecnologia) throws TipoTecnologiaNotFoundException {
         TipoTecnologia editado = tipoTecnologiaService.editar(tipoTecnologia);
 
         if (tipoTecnologia == null) {
@@ -87,6 +91,18 @@ public class TipoTecnologiaController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(TipoTecnologiaErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 
 }

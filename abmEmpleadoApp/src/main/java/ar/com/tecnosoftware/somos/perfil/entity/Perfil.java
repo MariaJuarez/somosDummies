@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.perfil.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
@@ -15,10 +16,12 @@ public class Perfil implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "abreviatura_perfil")
     private String abreviatura;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 

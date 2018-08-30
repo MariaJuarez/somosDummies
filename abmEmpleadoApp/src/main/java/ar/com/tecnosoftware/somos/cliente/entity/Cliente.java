@@ -1,9 +1,12 @@
 package ar.com.tecnosoftware.somos.cliente.entity;
 
+import ar.com.tecnosoftware.somos.grupo.Grupo;
 import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -16,16 +19,19 @@ public class Cliente implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion_cliente")
     private String descripcion;
 
-    @Basic
     @Column(name = "grupo")
-    private String grupo;
+    @NotNull
+    @Enumerated(EnumType.ORDINAL)
+    private Grupo grupo;
 
     @Basic
     @Column(name = "baja")

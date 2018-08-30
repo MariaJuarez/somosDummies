@@ -19,7 +19,7 @@ public class MetodologiaServiceImpl implements MetodologiaService {
     @Override
     public String add(Metodologia metodologia) {
         metodologiaRepository.guardar(metodologia);
-        return "";
+        return "Metodologia creada con exito";
     }
 
     @Override

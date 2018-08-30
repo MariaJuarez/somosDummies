@@ -41,7 +41,7 @@ public class ClienteServiceImpl implements ClienteService {
             cliente.setRubro(rubro);
         }
         clienteRepository.guardar(cliente);
-        return "";
+        return "Cliente creado con exito";
     }
 
     @Override

@@ -9,6 +9,10 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -59,26 +63,33 @@ public class Empleado implements Serializable {
     private int id;
 
     @Basic
+    @Min(1)
     @Column(name = "legajo")
     private int legajo;
 
     @Basic
+    @NotBlank
     @Column(name = "nombres")
     private String nombres;
 
     @Basic
+    @NotBlank
     @Column(name = "apellidos")
     private String apellidos;
 
     @Basic
+    @Min(12)
+    @Max(13)
     @Column(name = "cuil")
     private String cuil;
 
     @Basic
+    @NotNull
     @Column(name = "responsable")
     private String responsable;
 
     @Basic
+    @NotNull
     @Column(name = "fecha_ingreso")
     private Date ingreso;
 
@@ -87,10 +98,12 @@ public class Empleado implements Serializable {
     private Date egreso;
 
     @Basic
+    @NotBlank
     @Column(name = "domicilio")
     private String domicilio;
 
     @Basic
+    @NotNull
     @Column(name = "observaciones")
     private String observaciones;
 
@@ -99,10 +112,12 @@ public class Empleado implements Serializable {
     private boolean promovido;
 
     @Basic
+    @NotBlank
     @Column(name = "email")
     private String email;
 
     @Basic
+    @NotBlank
     @Column(name = "telefono")
     private String telefono;
 
@@ -111,13 +126,16 @@ public class Empleado implements Serializable {
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
     private Perfil perfil;
 
     @ManyToOne
-    @JoinColumn(name = "id_centro_costo", referencedColumnName = "id_centro_costo", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_centro_costo", referencedColumnName = "id_centro_costo")
     private Area area;
 
+    @NotNull
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;
 

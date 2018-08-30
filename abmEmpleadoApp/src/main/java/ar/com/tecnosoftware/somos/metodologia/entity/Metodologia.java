@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.metodologia.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
@@ -15,6 +16,7 @@ public class Metodologia implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 

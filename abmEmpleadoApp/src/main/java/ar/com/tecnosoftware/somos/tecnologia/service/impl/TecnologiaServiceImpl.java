@@ -29,7 +29,7 @@ public class TecnologiaServiceImpl implements TecnologiaService {
         }
         tecnologia.setTipo(tipoTecnologia);
         tecnologiaRepository.guardar(tecnologia);
-        return "";
+        return "Tecnologia creada con exito";
     }
 
     @Override

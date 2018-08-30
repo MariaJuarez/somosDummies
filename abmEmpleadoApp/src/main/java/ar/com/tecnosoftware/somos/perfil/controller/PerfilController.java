@@ -10,9 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +32,8 @@ public class PerfilController {
     private EmpleadoService empleadoService;
 
     @PostMapping(value = "/crear")
-    public void addPerfil(@RequestBody Perfil perfil) {
-        perfilService.add(perfil);
+    public String addPerfil(@Valid @RequestBody Perfil perfil) {
+        return perfilService.add(perfil);
     }
 
     @GetMapping(value = "/listarActivos")
@@ -69,7 +73,7 @@ public class PerfilController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Perfil> editarPerfil(@RequestBody Perfil perfil) throws PerfilNotFoundException {
+    public ResponseEntity<Perfil> editarPerfil(@Valid @RequestBody Perfil perfil) throws PerfilNotFoundException {
         Perfil perfil1Editado = perfilService.editar(perfil);
 
         if (perfil1Editado == null) {
@@ -92,4 +96,15 @@ public class PerfilController {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
+    }
 }

@@ -9,6 +9,8 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -43,6 +45,7 @@ public class Proyecto implements Serializable {
     private int id;
 
     @Basic
+    @NotNull
     @Column(name = "JIRA")
     private String jira;
 
@@ -51,18 +54,22 @@ public class Proyecto implements Serializable {
     private int crm;
 
     @Basic
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 
     @Basic
+    @NotBlank
     @Column(name = "lider")
     private String lider;
 
     @Basic
+    @NotBlank
     @Column(name = "objetivo")
     private String objetivo;
 
@@ -71,10 +78,12 @@ public class Proyecto implements Serializable {
     private boolean externo;
 
     @Basic
+    @NotNull
     @Column(name = "equipo_trabajo")
     private String equipo;
 
     @Basic
+    @NotNull
     @Column(name = "fecha_inicio")
     private Date inicio;
 
@@ -83,22 +92,27 @@ public class Proyecto implements Serializable {
     private Date fin;
 
     @Basic
+    @NotNull
     @Column(name = "usuarios")
     private String usuarios;
 
     @Basic
+    @NotNull
     @Column(name = "area_solicitante")
     private String solicitante;
 
     @Basic
+    @NotNull
     @Column(name = "roles")
     private String roles;
 
     @Basic
+    @NotNull
     @Column(name = "requerimiento_funcional")
     private String requerimiento;
 
     @Basic
+    @NotNull
     @Column(name = "observaciones")
     private String observaciones;
 
@@ -111,15 +125,18 @@ public class Proyecto implements Serializable {
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "id_metodologia", referencedColumnName = "id_metodologia", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_metodologia", referencedColumnName = "id_metodologia")
     private Metodologia metodologia;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_tipo_proyecto", referencedColumnName = "id_tipo_proyecto")
     private TipoProyecto tipo;
 
     @ManyToMany

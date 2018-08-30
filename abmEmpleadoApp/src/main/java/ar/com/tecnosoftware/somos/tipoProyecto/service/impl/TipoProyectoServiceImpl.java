@@ -19,7 +19,7 @@ public class TipoProyectoServiceImpl implements TipoProyectoService {
     @Override
     public String add(TipoProyecto tipoProyecto) {
         tipoProyectoRepository.guardar(tipoProyecto);
-        return "";
+        return "TipoProyecto creado con exito";
     }
 
     @Override

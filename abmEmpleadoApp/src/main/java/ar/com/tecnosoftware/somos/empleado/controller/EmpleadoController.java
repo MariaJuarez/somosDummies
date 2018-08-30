@@ -1,9 +1,11 @@
 package ar.com.tecnosoftware.somos.empleado.controller;
 
+import ar.com.tecnosoftware.somos.area.service.AreaService;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.empleado.exception.EmpleadoErrorException;
 import ar.com.tecnosoftware.somos.empleado.exception.EmpleadoNotFoundException;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
+import ar.com.tecnosoftware.somos.perfil.service.PerfilService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
 import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
@@ -12,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,14 +38,22 @@ public class EmpleadoController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private AreaService areaService;
+
+    @Autowired
+    private PerfilService perfilService;
+
     @PostMapping(value = "/crear")
-    public void addEmpleado(@Valid @RequestBody Empleado empleado) throws EmpleadoErrorException {
+    public String addEmpleado(@Valid @RequestBody Empleado empleado) throws EmpleadoErrorException {
 
         String resultado = empleadoService.add(empleado);
 
         if (!resultado.equals("")) {
             throw new EmpleadoErrorException(resultado);
         }
+
+        return resultado;
     }
 
     @GetMapping(value = "/listarActivos")
@@ -81,7 +94,15 @@ public class EmpleadoController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Empleado> editarEmpleado(@RequestBody Empleado empleado) throws EmpleadoNotFoundException {
+    public ResponseEntity<Empleado> editarEmpleado(@Valid @RequestBody Empleado empleado) throws EmpleadoNotFoundException, EmpleadoErrorException {
+
+        if (areaService.buscar(empleado.getArea().getId()) == null) {
+            throw new EmpleadoErrorException("No existe el area con id " + empleado.getArea().getId());
+        }
+
+        if (perfilService.buscar(empleado.getPerfil().getId()) == null) {
+            throw new EmpleadoErrorException("No existe el perfil con id " + empleado.getPerfil().getId());
+        }
 
         Empleado empleadoEditado = empleadoService.editar(empleado);
 
@@ -102,5 +123,17 @@ public class EmpleadoController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(EmpleadoErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 }

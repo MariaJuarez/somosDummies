@@ -4,6 +4,8 @@ import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -16,6 +18,7 @@ public class Tecnologia implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 
@@ -24,9 +27,11 @@ public class Tecnologia implements Serializable {
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_tecnologia", referencedColumnName = "id_tipo_tecnologia", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_tipo_tecnologia", referencedColumnName = "id_tipo_tecnologia")
     private TipoTecnologia tipo;
 
+    @NotNull
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;
 

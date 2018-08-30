@@ -19,7 +19,7 @@ public class PerfilServiceImpl implements PerfilService {
     @Override
     public String add(Perfil perfil) {
         perfilRepository.guardar(perfil);
-        return "";
+        return "Perfil creado con exito";
     }
 
     @Override

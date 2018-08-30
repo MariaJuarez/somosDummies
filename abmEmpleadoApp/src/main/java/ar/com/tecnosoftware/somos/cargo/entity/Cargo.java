@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.cargo.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
@@ -14,6 +15,7 @@ public class Cargo implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 

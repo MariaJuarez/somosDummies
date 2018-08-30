@@ -8,14 +8,18 @@ import ar.com.tecnosoftware.somos.cliente.exception.ClienteErrorException;
 import ar.com.tecnosoftware.somos.cliente.service.ClienteService;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
+import ar.com.tecnosoftware.somos.rubro.service.RubroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,13 +34,17 @@ public class ClienteController {
     @Autowired
     private ProyectoService proyectoService;
 
+    @Autowired
+    private RubroService rubroService;
+
     @PostMapping(value = "/crear")
-    public void addCliente(@Valid @RequestBody Cliente cliente) throws ClienteErrorException {
+    public String addCliente(@Valid @RequestBody Cliente cliente) throws ClienteErrorException {
 
         String resultado = clienteService.add(cliente);
         if (!resultado.equals("")) {
             throw new ClienteErrorException(resultado);
         }
+        return resultado;
     }
 
     @GetMapping(value = "/listarActivos")
@@ -79,7 +87,12 @@ public class ClienteController {
     }
 
     @PutMapping(value = "/editar")
-    public ResponseEntity<Cliente> editarCliente(@RequestBody Cliente cliente) throws ClienteNotFoundException {
+    public ResponseEntity<Cliente> editarCliente(@Valid @RequestBody Cliente cliente) throws ClienteNotFoundException, ClienteErrorException {
+
+        if (rubroService.buscar(cliente.getRubro().getId()) == null) {
+            throw new ClienteErrorException("No existe el Rubro con id " + cliente.getRubro().getId());
+        }
+
         Cliente clienteEditado = clienteService.editar(cliente);
         if (clienteEditado == null) {
             throw new ClienteNotFoundException("No se encontró el cliente con el id " + cliente.getId());
@@ -97,6 +110,18 @@ public class ClienteController {
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public Map<String, String> errorException(CargoErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public Map<String, Map<String, String>> errorException(MethodArgumentNotValidException e) {
+        Map<String, String> map = new HashMap<>();
+        Map<String, Map<String, String>> errors = new HashMap<>();
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            map.put(fieldError.getField(), fieldError.getDefaultMessage());
+        }
+        errors.put("errores", map);
+        return errors;
     }
 
 }

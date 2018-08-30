@@ -18,8 +18,9 @@ public class AreaServiceImpl implements AreaService {
 
     @Override
     public String add(Area area) {
+        area.setBaja(false);
         areaRepository.guardar(area);
-        return "";
+        return "Area creada con exito";
     }
 
     @Override

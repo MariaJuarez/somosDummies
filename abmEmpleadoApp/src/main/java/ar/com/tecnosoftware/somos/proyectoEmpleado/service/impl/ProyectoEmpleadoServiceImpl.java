@@ -62,7 +62,7 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
         proyectoEmpleado.setCargo(cargo);
 
         proyectoEmpleadoRepository.guardar(proyectoEmpleado);
-        return "";
+        return "ProyectoEmpleado creado con exito";
     }
 
     @Override

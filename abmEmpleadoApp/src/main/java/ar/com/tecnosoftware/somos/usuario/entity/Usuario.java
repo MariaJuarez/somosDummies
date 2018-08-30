@@ -4,6 +4,8 @@ import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -16,6 +18,7 @@ public class Usuario implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
 
@@ -24,6 +27,7 @@ public class Usuario implements Serializable {
     private boolean baja;
 
     @OneToOne
-    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
     private Empleado empleado;
 }

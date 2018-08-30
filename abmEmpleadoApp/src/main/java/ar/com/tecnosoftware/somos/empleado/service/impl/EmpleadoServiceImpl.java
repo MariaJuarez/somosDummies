@@ -44,7 +44,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         empleado.setArea(area);
         empleado.setTecnologias(setTecnologias(empleado.getTecnologias()));
         empleadoRepository.guardar(empleado);
-        return "";
+        return "Empleado creado con exito";
     }
 
     @Override

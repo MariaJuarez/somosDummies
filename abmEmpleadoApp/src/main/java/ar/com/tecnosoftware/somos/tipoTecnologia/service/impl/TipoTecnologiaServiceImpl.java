@@ -19,7 +19,7 @@ public class TipoTecnologiaServiceImpl implements TipoTecnologiaService {
     @Override
     public String add(TipoTecnologia tipoTecnologia) {
         tipoTecnologiaRepository.guardar(tipoTecnologia);
-        return "";
+        return "TipoTecnologia creado con exito";
     }
 
     @Override

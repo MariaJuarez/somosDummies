@@ -29,7 +29,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         usuario.setEmpleado(empleado);
         usuarioRepository.guardar(usuario);
-        return "";
+        return "Usuario creado con exito";
     }
 
     @Override

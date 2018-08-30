@@ -18,8 +18,9 @@ public class CargoServiceImpl implements CargoService {
 
     @Override
     public String add(Cargo cargo) {
+        cargo.setBaja(false);
         cargoRepository.guardar(cargo);
-        return "";
+        return "Cargo creado con exito";
     }
 
     @Override
