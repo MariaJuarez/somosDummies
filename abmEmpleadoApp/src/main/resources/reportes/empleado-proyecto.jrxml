@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.464100000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<property name="ireport.background.image" value="C:\Users\mjuarez\Documents\somosTecno\abmEmpleadoApp\src\main\resources\reportes\imagenes\logo.png"/>
+	<property name="ireport.background.image" value="C:\Users\mjuarez\somosTecnosoftware\abmEmpleadoApp\src\main\resources\reportes\imagenes\logo.jpg"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>

@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empleado" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f8ff0e5-e498-4973-a964-f62967d44cad">
-	<property name="ireport.zoom" value="1.6105100000000039"/>
-	<property name="ireport.x" value="44"/>
+	<property name="ireport.zoom" value="2.8531167061100082"/>
+	<property name="ireport.x" value="575"/>
 	<property name="ireport.y" value="0"/>
-	<property name="ireport.background.image" value="C:\Users\mjuarez\Documents\somosTecno\abmEmpleadoApp\src\main\resources\reportes\imagenes\logo.png"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
-	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
-	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
-	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
 	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
 	<property name="net.sf.jasperreports.export.xls.sheet.names.all" value="Data/Footnotes"/>
-	<property name="net.sf.jasperreports.export.xls.freeze.row" value="3"/>
 	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
 	<property name="net.sf.jasperreports.exports.xls.font.size.fix.enabled" value="false"/>
-	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
@@ -50,22 +42,22 @@ FROM
 	<title>
 		<band height="99" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="632" y="2" width="170" height="33" forecolor="#006600" uuid="470009a7-7ea2-484e-a156-c6c297afa0b4"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement style="Title" x="415" y="2" width="371" height="33" forecolor="#006600" uuid="470009a7-7ea2-484e-a156-c6c297afa0b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Constantia"/>
 				</textElement>
 				<text><![CDATA[SOMOS TSSA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="SubTitle" x="311" y="64" width="174" height="22" forecolor="#000000" uuid="e187307b-95a3-4f5d-88e1-1dbbf1c89089"/>
-				<textElement>
+				<reportElement style="SubTitle" x="218" y="64" width="363" height="22" forecolor="#000000" uuid="e187307b-95a3-4f5d-88e1-1dbbf1c89089"/>
+				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte Empleados]]></text>
 			</staticText>
 			<image>
 				<reportElement x="2" y="2" width="273" height="46" uuid="97e9aa40-e546-4e3b-bf83-c33a647f94f7"/>
-				<imageExpression><![CDATA["C:\\Users\\mjuarez\\Documents\\somosTecno\\abmEmpleadoApp\\src\\main\\resources\\reportes\\imagenes\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\mjuarez\\somosTecnosoftware\\abmEmpleadoApp\\src\\main\\resources\\reportes\\imagenes\\logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

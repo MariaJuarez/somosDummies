@@ -1,6 +1,7 @@
 package ar.com.tecnosoftware.somos.report.controller;
 
 import ar.com.tecnosoftware.somos.report.ReporteUtil;
+import net.sf.jasperreports.engine.JRException;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ReportController {
 
     @GetMapping(path = "/pdf/{reportFileName}")
     @ResponseBody
-    public void getPdf(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) {
+    public void getPdf(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws IOException, JRException {
                 LOG.info("METHOD: getPdf --- Obteniendo el reporte de ".concat(reportFileName));
                 reporteUtil.setReportFileName(reportFileName);
                 reporteUtil.generarReportePdf(response);
