@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empleado" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f8ff0e5-e498-4973-a964-f62967d44cad">
-	<property name="ireport.zoom" value="2.8531167061100082"/>
-	<property name="ireport.x" value="575"/>
+	<property name="ireport.zoom" value="1.331000000000003"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<property name="ireport.background.image.properties" value="false,true,1.0,0,0,0,0,0,0"/>
 	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
 	<property name="net.sf.jasperreports.export.xls.sheet.names.all" value="Data/Footnotes"/>
 	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
 	<property name="net.sf.jasperreports.exports.xls.font.size.fix.enabled" value="false"/>
-	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" isPdfEmbedded="false"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="imagen" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
      area.`descripcion` AS area_descripcion,
@@ -57,7 +58,7 @@ FROM
 			</staticText>
 			<image>
 				<reportElement x="2" y="2" width="273" height="46" uuid="97e9aa40-e546-4e3b-bf83-c33a647f94f7"/>
-				<imageExpression><![CDATA["C:\\Users\\mjuarez\\somosTecnosoftware\\abmEmpleadoApp\\src\\main\\resources\\reportes\\imagenes\\logo.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[$P{imagen}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -125,7 +126,7 @@ FROM
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="38" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="0" width="802" height="1" uuid="9919747d-8a6a-4a3f-b6d6-c455a9e5074a"/>
 				<graphicElement>
@@ -190,16 +191,6 @@ FROM
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="13" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="802" height="1" uuid="5d5c6d80-f51a-4950-8435-50be27c5ff3c"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-		</band>
-	</columnFooter>
 	<pageFooter>
 		<band height="37" splitType="Stretch">
 			<textField>
