@@ -1,56 +1,47 @@
 package ar.com.tecnosoftware.somos.report.controller;
 
-import ar.com.tecnosoftware.somos.report.ReporteUtil;
-import net.sf.jasperreports.engine.JRException;
+import ar.com.tecnosoftware.somos.report.ReportExporter;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @RestController
-@RequestMapping("/report")
+@RequestMapping("/reportes")
 public class ReportController {
 
     private final Log LOG = LogFactory.getLog(ReportController.class);
 
     @Autowired
-    ApplicationContext context;
-
-    @Autowired
-    ReporteUtil reporteUtil;
+    ReportExporter reportExporter;
 
     @GetMapping(path = "/pdf/{reportFileName}")
     @ResponseBody
-    public void getPdf(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws IOException, JRException {
-                LOG.info("METHOD: getPdf --- Obteniendo el reporte de ".concat(reportFileName));
-                reporteUtil.setReportFileName(reportFileName);
-                reporteUtil.generarReportePdf(response);
+    public void getPdf(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) {
+        LOG.info("METHOD: getPdf --- Obteniendo el reporte de ".concat(reportFileName));
+        reportExporter.exportarPdf(reportFileName, response);
         }
-
-    //@GetMapping(path = "/excel/{reportFileName}")
-    @ResponseBody
-    public void getExcel(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        LOG.info("METHOD: getExcel --- Obteniendo el reporte de ".concat(reportFileName));
-        reporteUtil.setReportFileName(reportFileName);
-      //  reporteUtil.getReporteExcel(response);
-    }
 
 
     @GetMapping(path = "/excel/{reportFileName}")
-    public void verReporteExcel(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws IOException {
+    public void getExcel(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) {
         LOG.info("METHOD: getExcel --- Obteniendo el reporte de ".concat(reportFileName));
-        //Instancia hacia la clase reporteClientes
-        reporteUtil.setReportFileName(reportFileName);
-        reporteUtil.getReporteExcel(response);
+        reportExporter.exportarXlsx(reportFileName,response);
+    }
 
+    @GetMapping(path = "/csv/{reportFileName}")
+    public void getCsv(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws IOException {
+        LOG.info("METHOD: getCsv --- Obteniendo el reporte de ".concat(reportFileName));
+        reportExporter.exportarCsv(reportFileName,response);
+    }
 
+    @GetMapping(path = "/txt/{reportFileName}")
+    public void getTxt(HttpServletResponse response, @PathVariable("reportFileName") String reportFileName) throws IOException {
+        LOG.info("METHOD: getTxt --- Obteniendo el reporte de ".concat(reportFileName));
+        reportExporter.exportTxt(reportFileName,response);
     }
 }
 
