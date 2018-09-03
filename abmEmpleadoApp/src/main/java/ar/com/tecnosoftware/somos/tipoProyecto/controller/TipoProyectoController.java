@@ -75,7 +75,7 @@ public class TipoProyectoController {
     public ResponseEntity<TipoProyecto> editarTipoProyecto(@Valid @RequestBody TipoProyecto tipoProyecto) throws TipoProyectoNotFoundException {
         TipoProyecto editado = tipoProyectoService.editar(tipoProyecto);
 
-        if (tipoProyecto == null) {
+        if (editado == null) {
             throw new TipoProyectoNotFoundException("No se encontró el tipo de proyecto con id " + tipoProyecto.getId());
         }
 

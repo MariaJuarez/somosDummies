@@ -1,7 +1,5 @@
 package ar.com.tecnosoftware.somos.cliente.controller;
 
-import ar.com.tecnosoftware.somos.cargo.exception.CargoErrorException;
-import ar.com.tecnosoftware.somos.cargo.exception.CargoNotFoundException;
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.cliente.exception.ClienteNotFoundException;
 import ar.com.tecnosoftware.somos.cliente.exception.ClienteErrorException;
@@ -41,7 +39,7 @@ public class ClienteController {
     public String addCliente(@Valid @RequestBody Cliente cliente) throws ClienteErrorException {
 
         String resultado = clienteService.add(cliente);
-        if (!resultado.equals("")) {
+        if (!resultado.equals("Cliente creado con exito")) {
             throw new ClienteErrorException(resultado);
         }
         return resultado;
@@ -89,6 +87,10 @@ public class ClienteController {
     @PutMapping(value = "/editar")
     public ResponseEntity<Cliente> editarCliente(@Valid @RequestBody Cliente cliente) throws ClienteNotFoundException, ClienteErrorException {
 
+        if(cliente.getRubro() == null){
+            throw new ClienteErrorException("No puede ser el Rubro null");
+        }
+
         if (rubroService.buscar(cliente.getRubro().getId()) == null) {
             throw new ClienteErrorException("No existe el Rubro con id " + cliente.getRubro().getId());
         }
@@ -100,15 +102,15 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
-    @ExceptionHandler(CargoNotFoundException.class)
+    @ExceptionHandler(ClienteNotFoundException.class)
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    public Map<String, String> notFoundException(CargoNotFoundException e) {
+    public Map<String, String> notFoundException(ClienteNotFoundException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 
-    @ExceptionHandler(CargoErrorException.class)
+    @ExceptionHandler(ClienteErrorException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    public Map<String, String> errorException(CargoErrorException e) {
+    public Map<String, String> errorException(ClienteErrorException e) {
         return Collections.singletonMap("mensaje", e.getMessage());
     }
 

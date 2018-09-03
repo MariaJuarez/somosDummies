@@ -7,11 +7,13 @@ import ar.com.tecnosoftware.somos.metodologia.repository.MetodologiaRepository;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
+import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tecnologia.repository.TecnologiaRepository;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.tipoProyecto.repository.TipoProyectoRepository;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,11 +64,16 @@ public class ProyectoServiceImpl implements ProyectoService {
         }
         proyecto.setMetodologia(metodologia);
 
+        if(!FechasUtil.comprobarFechas(proyecto.getInicio(), proyecto.getFin())){
+            return "La fecha fin no puede ser anterior a la fecha de inicio";
+        }
+
         if (proyecto.getTecnologias().size() == 0) {
             resultado += "Debe introducir al menos una tecnología.";
             return resultado;
         }
-        proyecto.setTecnologias(setTecnologias(proyecto.getTecnologias()));
+
+        proyecto.setTecnologias(comprobarTecnologias(proyecto.getTecnologias()));
 
         proyectoRepository.guardar(proyecto);
         return "Proyecto creado con exito";
@@ -97,12 +104,17 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias) {
+    public List<Tecnologia> comprobarTecnologias(List<Tecnologia> tecnologias) {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
         for (Tecnologia tecnologia : tecnologias) {
             Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
-            if (temp != null) {
+            if ((temp != null)&&(!temp.isBaja())&&(!tecnologiasEnBD.contains(temp))) {
+                if(tecnologia.getSenority() == null){
+                   temp.setSenority(Senority.NO_APLICA);
+                } else {
+                    temp.setSenority(tecnologia.getSenority());
+                }
                 tecnologiasEnBD.add(temp);
             }
         }
@@ -190,6 +202,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         if (proyectoRepository.buscar(proyecto.getId()) == null) {
             return null;
         }
+        proyecto.setTecnologias(comprobarTecnologias(proyecto.getTecnologias()));
         return proyectoRepository.editar(proyecto);
     }
 }

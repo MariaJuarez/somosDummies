@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class ProyectoEmpleadoFiltroUtil {
     /*
     Devuelve un numero y cada numero representa una combinacion de filtros
@@ -21,7 +20,7 @@ public class ProyectoEmpleadoFiltroUtil {
         7-Clientes y Rubro
         9-TipoProyecto, Clientes y Rubro
     */
-    public int filtrosProyectoEmpleado(FiltroEmpleado filtroEmpleado){
+    public static int filtrosProyectoEmpleado(FiltroEmpleado filtroEmpleado){
 
         int tipoFiltro = 0;
 
@@ -46,7 +45,7 @@ public class ProyectoEmpleadoFiltroUtil {
         return tipoFiltro;
     }
 
-    public String armarQuery(int tipoFiltro){
+    public static String armarQuery(int tipoFiltro){
 
         String hql = "SELECT DISTINCT (pe.empleado) FROM ProyectoEmpleado pe ";
 
@@ -93,7 +92,7 @@ public class ProyectoEmpleadoFiltroUtil {
         return hql;
     }
 
-    public List<Empleado> filtroPorEmpleadoPorProyecto(List<Empleado> filtroPorEmpleado, List<Empleado> filtroPorProyecto){
+    public static List<Empleado> filtroPorEmpleadoPorProyecto(List<Empleado> filtroPorEmpleado, List<Empleado> filtroPorProyecto){
         List<Empleado> resultado = new ArrayList<>(filtroPorProyecto);
         resultado.retainAll(filtroPorEmpleado);
         return resultado;

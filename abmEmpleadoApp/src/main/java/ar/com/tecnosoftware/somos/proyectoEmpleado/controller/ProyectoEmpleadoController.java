@@ -12,6 +12,7 @@ import ar.com.tecnosoftware.somos.proyectoEmpleado.exception.ProyectoEmpleadoErr
 import ar.com.tecnosoftware.somos.proyectoEmpleado.exception.ProyectoEmpleadoNotFoundException;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.util.ProyectoEmpleadoFiltroUtil;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,13 +43,10 @@ public class ProyectoEmpleadoController {
     @Autowired
     private CargoService cargoService;
 
-    @Autowired
-    private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
-
     @PostMapping(value = "/crear")
     public String addProyectoEmpleado(@Valid @RequestBody ProyectoEmpleado proyectoEmpleado) throws ProyectoEmpleadoErrorException {
         String resultado = proyectoEmpleadoService.add(proyectoEmpleado);
-        if (!resultado.equals("")) {
+        if (!resultado.equals("ProyectoEmpleado creado con exito")) {
             throw new ProyectoEmpleadoErrorException(resultado);
         }
         return resultado;
@@ -102,7 +100,7 @@ public class ProyectoEmpleadoController {
         }
 
         if (filtroPorEmpleado != null && filtroPorProyecto != null) {
-            return proyectoEmpleadoFiltroUtil.filtroPorEmpleadoPorProyecto(filtroPorEmpleado, filtroPorProyecto);
+            return ProyectoEmpleadoFiltroUtil.filtroPorEmpleadoPorProyecto(filtroPorEmpleado, filtroPorProyecto);
         } else {
             if (filtroPorEmpleado != null) {
                 return filtroPorEmpleado;
@@ -129,6 +127,10 @@ public class ProyectoEmpleadoController {
 
         if (cargoService.buscar(proyectoEmpleado.getCargo().getId()) == null) {
             throw new ProyectoErrorException("No existe el cargo con id " + proyectoEmpleado.getCargo().getId());
+        }
+
+        if(!FechasUtil.comprobarFechas(proyectoEmpleado.getInicio(), proyectoEmpleado.getFin())){
+            throw new ProyectoErrorException("La fecha fin no puede ser anterior a la fecha de inicio");
         }
 
         ProyectoEmpleado editado = proyectoEmpleadoService.editar(proyectoEmpleado);

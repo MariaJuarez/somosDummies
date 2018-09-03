@@ -9,10 +9,7 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -78,8 +75,8 @@ public class Empleado implements Serializable {
     private String apellidos;
 
     @Basic
-    @Min(12)
-    @Max(13)
+    @Size(min = 12, max = 13)
+    @NotNull
     @Column(name = "cuil")
     private String cuil;
 
@@ -140,6 +137,7 @@ public class Empleado implements Serializable {
     private Senority senority;
 
     @ManyToMany
+    @NotNull
     @JoinTable(name = "empleados_tecnologias",
             joinColumns = @JoinColumn(name = "id_empleado"),
             inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))

@@ -11,6 +11,7 @@ import ar.com.tecnosoftware.somos.proyectoEmpleado.repository.ProyectoEmpleadoRe
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.util.ProyectoEmpleadoFiltroUtil;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +33,6 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Autowired
     private CargoRepository cargoRepository;
-
-    @Autowired
-    private ProyectoEmpleadoFiltroUtil proyectoEmpleadoFiltroUtil;
 
     @Override
     public String add(ProyectoEmpleado proyectoEmpleado) {
@@ -59,7 +57,12 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
             resultado += "Cargo con id " + proyectoEmpleado.getCargo().getId();
             return resultado;
         }
+
         proyectoEmpleado.setCargo(cargo);
+
+        if(!FechasUtil.comprobarFechas(proyectoEmpleado.getInicio(), proyectoEmpleado.getFin())){
+            return "La fecha fin no puede ser anterior a la fecha de inicio";
+        }
 
         proyectoEmpleadoRepository.guardar(proyectoEmpleado);
         return "ProyectoEmpleado creado con exito";
@@ -132,8 +135,8 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     @Override
     public List<Empleado> buscarEmpleadosPorFiltro(FiltroEmpleado filtroEmpleado) {
 
-        int tipoFiltro = proyectoEmpleadoFiltroUtil.filtrosProyectoEmpleado(filtroEmpleado);
-        String hql = proyectoEmpleadoFiltroUtil.armarQuery(tipoFiltro);
+        int tipoFiltro = ProyectoEmpleadoFiltroUtil.filtrosProyectoEmpleado(filtroEmpleado);
+        String hql = ProyectoEmpleadoFiltroUtil.armarQuery(tipoFiltro);
 
         return proyectoEmpleadoRepository.buscarEmpleadosPorFiltro(hql, filtroEmpleado, tipoFiltro);
     }

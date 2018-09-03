@@ -10,6 +10,7 @@ import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
 import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
 import ar.com.tecnosoftware.somos.usuario.service.UsuarioService;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public class EmpleadoController {
 
         String resultado = empleadoService.add(empleado);
 
-        if (!resultado.equals("")) {
+        if (!resultado.equals("Empleado creado con exito")) {
             throw new EmpleadoErrorException(resultado);
         }
 
@@ -102,6 +103,10 @@ public class EmpleadoController {
 
         if (perfilService.buscar(empleado.getPerfil().getId()) == null) {
             throw new EmpleadoErrorException("No existe el perfil con id " + empleado.getPerfil().getId());
+        }
+
+        if(!FechasUtil.comprobarFechas(empleado.getIngreso(), empleado.getEgreso())){
+            throw new EmpleadoErrorException("La fecha de egreso no puede ser anterior a la fecha de ingreso");
         }
 
         Empleado empleadoEditado = empleadoService.editar(empleado);

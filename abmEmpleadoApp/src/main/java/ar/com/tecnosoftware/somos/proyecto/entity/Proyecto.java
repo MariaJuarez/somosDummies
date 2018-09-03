@@ -140,6 +140,7 @@ public class Proyecto implements Serializable {
     private TipoProyecto tipo;
 
     @ManyToMany
+    @NotNull
     @JoinTable(name = "proyectos_tecnologias",
             joinColumns = @JoinColumn(name = "id_proyecto"),
             inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))

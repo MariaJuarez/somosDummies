@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProyectoService extends Service<Proyecto> {
 
-    List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias);
+    List<Tecnologia> comprobarTecnologias(List<Tecnologia> tecnologias);
 
     List<Proyecto> buscarProyectosConCliente(int idCliente);
 

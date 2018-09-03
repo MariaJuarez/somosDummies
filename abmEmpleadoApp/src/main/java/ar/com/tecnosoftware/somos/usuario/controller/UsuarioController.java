@@ -32,7 +32,7 @@ public class UsuarioController {
     @PostMapping(value = "/crear")
     public String addUsuario(@Valid @RequestBody Usuario usuario) throws UsuarioErrorException {
         String resultado = usuarioService.add(usuario);
-        if (resultado == null) {
+        if (!resultado.equals("Usuario creado con exito")) {
             throw new UsuarioErrorException(resultado);
         }
         return resultado;

@@ -10,6 +10,7 @@ import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
 import ar.com.tecnosoftware.somos.tipoProyecto.service.TipoProyectoService;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +49,7 @@ public class ProyectoController {
     public String addProyecto(@Valid @RequestBody Proyecto proyecto) throws ProyectoErrorException {
 
         String resultado = proyectoService.add(proyecto);
-        if (!resultado.equals("")) {
+        if (!resultado.equals("Proyecto creado con exito")) {
             throw new ProyectoErrorException(resultado);
         }
         return resultado;
@@ -114,9 +115,13 @@ public class ProyectoController {
             throw new ProyectoErrorException("No existe el tipo de proyecto con id " + proyecto.getTipo().getId());
         }
 
+        if (!FechasUtil.comprobarFechas(proyecto.getInicio(), proyecto.getFin())){
+            throw new ProyectoErrorException("La fecha fin no puede ser anterior a la fecha inicio");
+        }
+
         Proyecto proyectoEditado = proyectoService.editar(proyecto);
 
-        if (proyecto == null) {
+        if (proyectoEditado == null) {
             throw new ProyectoNotFoundException("No se encontró el proyecto con id " + proyecto.getId());
         }
 

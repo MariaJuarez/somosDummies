@@ -43,7 +43,7 @@ public class TecnologiaController {
     @PostMapping(value = "/crear")
     public String addTecnologia(@Valid @RequestBody Tecnologia tecnologia) throws TecnologiaErrorException {
         String resultado = tecnologiaService.add(tecnologia);
-        if (!resultado.equals("")) {
+        if (!resultado.equals("Tecnologia creada con exito")) {
             throw new TecnologiaErrorException(resultado);
         }
         return resultado;
@@ -97,7 +97,7 @@ public class TecnologiaController {
 
         Tecnologia editado = tecnologiaService.editar(tecnologia);
 
-        if (tecnologia == null) {
+        if (editado == null) {
             throw new TecnologiaNotFoundException("No se encontró la tecnologia con id " + tecnologia.getId());
         }
 

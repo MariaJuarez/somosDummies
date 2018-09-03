@@ -8,9 +8,11 @@ import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
+import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.tecnologia.repository.TecnologiaRepository;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +44,17 @@ public class EmpleadoServiceImpl implements EmpleadoService {
             return "No existe el Area con id " + empleado.getArea().getId();
         }
         empleado.setArea(area);
-        empleado.setTecnologias(setTecnologias(empleado.getTecnologias()));
+
+        Perfil perfil = perfilRepository.buscar(empleado.getPerfil().getId());
+        if(perfil == null){
+            return "No existe el Perfil con id " + empleado.getPerfil().getId();
+        }
+
+        if(!FechasUtil.comprobarFechas(empleado.getIngreso(), empleado.getEgreso())){
+            return "La fecha de egreso no puede ser anterior a la fecha de ingreso";
+        }
+
+        empleado.setTecnologias(comprobarTecnologias(empleado.getTecnologias()));
         empleadoRepository.guardar(empleado);
         return "Empleado creado con exito";
     }
@@ -92,12 +104,17 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias) {
+    public List<Tecnologia> comprobarTecnologias(List<Tecnologia> tecnologias) {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
         for (Tecnologia tecnologia : tecnologias){
             Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
-            if(temp != null){
+            if((temp != null)&&(!temp.isBaja())&&(!tecnologiasEnBD.contains(temp))){
+                if(tecnologia.getSenority() == null){
+                    temp.setSenority(Senority.SIN_ASIGNAR);
+                } else {
+                    temp.setSenority(tecnologia.getSenority());
+                }
                 tecnologiasEnBD.add(temp);
             }
         }
@@ -152,6 +169,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         if (empleadoRepository.buscar(empleado.getId()) == null){
             return null;
         }
+        empleado.setTecnologias(comprobarTecnologias(empleado.getTecnologias()));
         return empleadoRepository.editar(empleado);
     }
 }

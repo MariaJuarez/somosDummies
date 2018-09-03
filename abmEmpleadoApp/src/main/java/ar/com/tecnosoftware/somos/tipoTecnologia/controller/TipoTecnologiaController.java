@@ -75,7 +75,7 @@ public class TipoTecnologiaController {
     public ResponseEntity<TipoTecnologia> editarTipoTecnologia(@Valid @RequestBody TipoTecnologia tipoTecnologia) throws TipoTecnologiaNotFoundException {
         TipoTecnologia editado = tipoTecnologiaService.editar(tipoTecnologia);
 
-        if (tipoTecnologia == null) {
+        if (editado == null) {
             throw new TipoTecnologiaNotFoundException("No se encontró el tipo de tecnologia con id " + tipoTecnologia.getId());
         }
         return ResponseEntity.ok(editado);

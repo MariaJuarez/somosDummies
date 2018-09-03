@@ -13,7 +13,7 @@ public interface EmpleadoService extends Service<Empleado> {
 
     Boolean darBajaAreaDeEmpleados(List<Empleado> empleados);
 
-    List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias);
+    List<Tecnologia> comprobarTecnologias(List<Tecnologia> tecnologias);
 
     List<Empleado> buscarEmpleadosConPerfil(int idPerfil);
 
