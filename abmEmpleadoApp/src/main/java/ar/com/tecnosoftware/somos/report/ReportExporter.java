@@ -7,7 +7,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.HtmlExporter;
 import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRTextExporter;
-import net.sf.jasperreports.engine.export.JRTextExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.*;
 import org.apache.juli.logging.Log;
@@ -73,7 +72,7 @@ public class ReportExporter {
             //Elimina una fila con una altura de fila muy grande al final de la pestaña de datos.
             xlsReportConfiguration.setRemoveEmptySpaceBetweenRows(true);
             // Elimina las columnas vacías, como las causadas por los márgenes o la distribución deficiente.
-          //  xlsReportConfiguration.setRemoveEmptySpaceBetweenColumns(true);
+            xlsReportConfiguration.setRemoveEmptySpaceBetweenColumns(true);
             /*
             Trata las fechas como fechas, números como números, en lugar de tratar todo como texto
              */
@@ -81,7 +80,7 @@ public class ReportExporter {
             /*
             Muestra las líneas de cuadrícula de Excel, de lo contrario obtendrá un blanco sólido.
              */
-            xlsReportConfiguration.setWhitePageBackground(true);
+            xlsReportConfiguration.setWhitePageBackground(false);
             /*
             Le dice a Excel que no elimine el gráfico del logotipo de la empresa. "true" (es el valor predeterminado) y  elimina los gráficos.
              */
@@ -91,7 +90,17 @@ public class ReportExporter {
              logotipo de la empresa y la fila de los encabezados de las columnas se congelan,
              y el usuario puede desplazarse por miles de registros y seguir viéndolos.
              */
-            xlsReportConfiguration.setFreezeRow(6);
+            xlsReportConfiguration.setFreezeRow(4);
+
+            xlsReportConfiguration.setAutoFitPageHeight(true);
+
+            xlsReportConfiguration.setCellHidden(true);
+            //esta me permitio que fuera mas legible el titulo ya que ajustaba la celda al tamaño de los elementos en la cabecera
+            xlsReportConfiguration.setCollapseRowSpan(true);
+       //     xlsReportConfiguration.setFitHeight(10);
+            xlsReportConfiguration.setForcePageBreaks(true);
+
+            xlsReportConfiguration.setIgnoreCellBackground(false);
 
             jrExporter.setConfiguration(xlsReportConfiguration);
 
