@@ -22,9 +22,14 @@ public class TecnologiaServiceImpl implements TecnologiaService {
     private TipoTecnologiaRepository tipoTecnologiaRepository;
 
     @Override
-    public void add(Tecnologia tecnologia) {
-        tecnologia.setTipo(tipoTecnologiaRepository.buscar(tecnologia.getTipo().getId()));
+    public String add(Tecnologia tecnologia) {
+        TipoTecnologia tipoTecnologia = tipoTecnologiaRepository.buscar(tecnologia.getTipo().getId());
+        if (tipoTecnologia == null) {
+            return "No existe el Tipo Tecnologia con id " + tecnologia.getTipo().getId();
+        }
+        tecnologia.setTipo(tipoTecnologia);
         tecnologiaRepository.guardar(tecnologia);
+        return "Tecnologia creada con exito";
     }
 
     @Override
@@ -33,8 +38,12 @@ public class TecnologiaServiceImpl implements TecnologiaService {
     }
 
     @Override
-    public void darBaja(int id) {
-        tecnologiaRepository.darBaja(tecnologiaRepository.buscar(id));
+    public Tecnologia darBaja(int id) {
+        Tecnologia tecnologia = tecnologiaRepository.buscar(id);
+        if (tecnologia == null) {
+            return null;
+        }
+        return tecnologiaRepository.darBaja(tecnologia);
     }
 
     @Override
@@ -53,10 +62,24 @@ public class TecnologiaServiceImpl implements TecnologiaService {
     }
 
     @Override
-    public void darBajaTipoTecnologiasDeTecnologias(List<Tecnologia> tecnologias) {
+    public Boolean darBajaTipoTecnologiasDeTecnologias(List<Tecnologia> tecnologias) {
         TipoTecnologia tipoTecnologia = tipoTecnologiaRepository.buscar(1);
-        for(Tecnologia tecnologia : tecnologias){
-            tecnologiaRepository.darBajaTipoTecnologiaDeTecnologia(tecnologia, tipoTecnologia);
+        if (tipoTecnologia == null) {
+            return false;
         }
+        for (Tecnologia tecnologia : tecnologias) {
+            if (tecnologiaRepository.darBajaTipoTecnologiaDeTecnologia(tecnologia, tipoTecnologia) == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Tecnologia editar(Tecnologia tecnologia) {
+        if (tecnologiaRepository.buscar(tecnologia.getId()) == null) {
+            return null;
+        }
+        return tecnologiaRepository.editar(tecnologia);
     }
 }

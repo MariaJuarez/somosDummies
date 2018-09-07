@@ -9,6 +9,6 @@ public interface ClienteService extends Service<Cliente> {
 
     List<Cliente> buscarClientesConRubro(int idRubro);
 
-    void darBajaRubroDeClientes(List<Cliente> clientes);
+    Boolean darBajaRubroDeClientes(List<Cliente> clientes);
 
 }

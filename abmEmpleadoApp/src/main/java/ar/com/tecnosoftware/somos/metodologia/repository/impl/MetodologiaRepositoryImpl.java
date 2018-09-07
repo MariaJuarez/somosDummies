@@ -31,8 +31,13 @@ public class MetodologiaRepositoryImpl implements MetodologiaRepository {
     }
 
     @Override
-    public void darBaja(Metodologia metodologia) {
+    public Metodologia darBaja(Metodologia metodologia) {
         metodologia.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(metodologia);
+    }
+
+    @Override
+    public Metodologia editar(Metodologia metodologia) {
+        return entityManager.merge(metodologia);
     }
 }

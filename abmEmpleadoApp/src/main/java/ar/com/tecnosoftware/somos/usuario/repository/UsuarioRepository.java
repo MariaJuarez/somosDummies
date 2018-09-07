@@ -8,6 +8,6 @@ public interface UsuarioRepository extends Repository<Usuario> {
 
     Usuario buscarUsuarioConEmpleado(int idEmpleado);
 
-    void darBajaEmpleadoDeUsuario(Usuario usuario, Empleado empleado);
+    Usuario darBajaEmpleadoDeUsuario(Usuario usuario, Empleado empleado);
 
 }

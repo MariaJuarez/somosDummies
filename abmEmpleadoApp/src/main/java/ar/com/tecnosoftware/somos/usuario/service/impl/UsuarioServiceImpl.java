@@ -1,5 +1,6 @@
 package ar.com.tecnosoftware.somos.usuario.service.impl;
 
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.usuario.entity.Usuario;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.usuario.repository.UsuarioRepository;
@@ -21,9 +22,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     private EmpleadoRepository empleadoRepository;
 
     @Override
-    public void add(Usuario usuario) {
-        usuario.setEmpleado(empleadoRepository.buscar(usuario.getEmpleado().getId()));
+    public String add(Usuario usuario) {
+        Empleado empleado = empleadoRepository.buscar(usuario.getEmpleado().getId());
+        if(empleado == null){
+            return "No existe el Empleado con id " + usuario.getEmpleado().getId();
+        }
+        usuario.setEmpleado(empleado);
         usuarioRepository.guardar(usuario);
+        return "Usuario creado con exito";
     }
 
     @Override
@@ -42,8 +48,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void darBaja(int id) {
-        usuarioRepository.darBaja(usuarioRepository.buscar(id));
+    public Usuario darBaja(int id) {
+        Usuario usuario = usuarioRepository.buscar(id);
+        if(usuario == null){
+            return null;
+        }
+        return usuarioRepository.darBaja(usuario);
     }
 
     @Override
@@ -52,7 +62,23 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public void darBajaEmpleadoDeUsuario(Usuario usuario) {
-        usuarioRepository.darBajaEmpleadoDeUsuario(usuario, empleadoRepository.buscar(1));
+    public Boolean darBajaEmpleadoDeUsuario(Usuario usuario) {
+        Empleado empleado = empleadoRepository.buscar(1);
+        if(empleado == null){
+            return false;
+        }
+
+        if(usuarioRepository.darBajaEmpleadoDeUsuario(usuario, empleado) == null){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Usuario editar(Usuario usuario) {
+        if (usuarioRepository.buscar(usuario.getId()) == null){
+            return null;
+        }
+        return usuarioRepository.editar(usuario);
     }
 }

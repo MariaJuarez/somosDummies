@@ -1,13 +1,12 @@
 package ar.com.tecnosoftware.somos.area.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Area implements Serializable {
 
@@ -15,7 +14,9 @@ public class Area implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_centro_costo")
     private int id;
+
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 

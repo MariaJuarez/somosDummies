@@ -1,19 +1,16 @@
-package ar.com.tecnosoftware.somos.empleado.filtro;
+package ar.com.tecnosoftware.somos.filtro;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
-import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.rubro.entity.Rubro;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 public class FiltroEmpleado {
     //Empleado
     private Boolean baja = null;
@@ -36,12 +33,13 @@ public class FiltroEmpleado {
     //Si no se envia algun atributo de tecnologia, no hará correctamente el filtro
     private List<Tecnologia> tecnologias = null;
 
-    //Proyecto
+    //Filtro por Proyecto, se pueden enviar el objeto inicializando solo el id
     private Rubro rubro = null;
 
     private TipoProyecto tipoProyecto = null;
 
-    private Cliente cliente = null;
+    //Solo enviar lista de enteros, nada de objetos
+    private List<Integer> clientes = null;
 
     private Proyecto proyecto = null;
 }

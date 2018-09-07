@@ -31,8 +31,13 @@ public class LiderServicioRepositoryImpl implements LiderServicioRepository {
     }
 
     @Override
-    public void darBaja(LiderServicio liderServicio) {
+    public LiderServicio darBaja(LiderServicio liderServicio) {
         liderServicio.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(liderServicio);
+    }
+
+    @Override
+    public LiderServicio editar(LiderServicio liderServicio) {
+        return entityManager.merge(liderServicio);
     }
 }

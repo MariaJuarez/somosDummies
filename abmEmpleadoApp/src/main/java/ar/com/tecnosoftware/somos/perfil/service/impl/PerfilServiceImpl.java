@@ -17,8 +17,9 @@ public class PerfilServiceImpl implements PerfilService {
     private PerfilRepository perfilRepository;
 
     @Override
-    public void add(Perfil perfil) {
+    public String add(Perfil perfil) {
         perfilRepository.guardar(perfil);
+        return "Perfil creado con exito";
     }
 
     @Override
@@ -27,8 +28,12 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
     @Override
-    public void darBaja(int id) {
-        perfilRepository.darBaja(perfilRepository.buscar(id));
+    public Perfil darBaja(int id) {
+        Perfil perfil = perfilRepository.buscar(id);
+        if(perfil == null){
+            return null;
+        }
+        return perfilRepository.darBaja(perfil);
     }
 
     @Override
@@ -39,5 +44,13 @@ public class PerfilServiceImpl implements PerfilService {
     @Override
     public List<Perfil> buscarNoBajas() {
         return perfilRepository.buscar("WHERE baja = false");
+    }
+
+    @Override
+    public Perfil editar(Perfil perfil) {
+        if (perfilRepository.buscar(perfil.getId()) == null){
+            return null;
+        }
+        return perfilRepository.editar(perfil);
     }
 }

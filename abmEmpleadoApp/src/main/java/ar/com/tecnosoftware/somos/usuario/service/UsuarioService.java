@@ -7,6 +7,6 @@ public interface UsuarioService extends Service<Usuario> {
 
     Usuario buscarUsuarioConEmpleado(int idEmpleado);
 
-    void darBajaEmpleadoDeUsuario(Usuario usuario);
+    Boolean darBajaEmpleadoDeUsuario(Usuario usuario);
 
 }

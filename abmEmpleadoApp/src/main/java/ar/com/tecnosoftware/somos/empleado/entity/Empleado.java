@@ -4,18 +4,17 @@ import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @FilterDefs({
         @FilterDef(name = "filtroBaja", parameters = {
@@ -41,22 +40,7 @@ import java.util.List;
         }),
         @FilterDef(name = "filtroArea", parameters = {
                 @ParamDef(name = "idArea", type = "integer")
-        })/*
-        @FilterDef(name = "filtroRubro", parameters = {
-                @ParamDef(name = "idRubro", type = "integer")
-        }),
-        @FilterDef(name = "filtroTipoProyecto", parameters = {
-                @ParamDef(name = "idTipoProyecto", type = "integer")
-        }),
-        @FilterDef(name = "filtroCliente", parameters = {
-                @ParamDef(name = "idCliente", type = "integer")
-        }),
-        @FilterDef(name = "filtroProyecto", parameters = {
-                @ParamDef(name = "idProyecto", type = "integer")
-        }),
-        @FilterDef(name = "filtroAnioLps", parameters = {
-                @ParamDef(name = "anioLps", type = "date")
-        })*/
+        })
 })
 @Filters({
         @Filter(name = "filtroBaja", condition = ":baja = baja"),
@@ -67,11 +51,6 @@ import java.util.List;
         @Filter(name = "filtroFechaEgreso", condition = ":fechaEgreso = fecha_egreso"),
         @Filter(name = "filtroPromovido", condition = ":promovido = promovido_lps"),
         @Filter(name = "filtroArea", condition = ":idArea = id_centro_costo")
-       /* @Filter(name = "filtroRubro", condition = ":idArea = id_centro_costo"),
-        @Filter(name = "filtroTipoProyecto", condition = ":legajo = legajo"),
-        @Filter(name = "filtroCliente", condition = ":idArea = id_centro_costo"),
-        @Filter(name = "filtroProyecto", condition = ":legajo = legajo"),
-        @Filter(name = "filtroAnioLps", condition = ":idArea = id_centro_costo")*/
 })
 public class Empleado implements Serializable {
 
@@ -81,26 +60,33 @@ public class Empleado implements Serializable {
     private int id;
 
     @Basic
+    @Min(1)
     @Column(name = "legajo")
     private int legajo;
 
     @Basic
+    @NotBlank
     @Column(name = "nombres")
     private String nombres;
 
     @Basic
+    @NotBlank
     @Column(name = "apellidos")
     private String apellidos;
 
     @Basic
+    @Size(min = 12, max = 13)
+    @NotNull
     @Column(name = "cuil")
     private String cuil;
 
     @Basic
+    @NotNull
     @Column(name = "responsable")
     private String responsable;
 
     @Basic
+    @NotNull
     @Column(name = "fecha_ingreso")
     private Date ingreso;
 
@@ -109,10 +95,12 @@ public class Empleado implements Serializable {
     private Date egreso;
 
     @Basic
+    @NotBlank
     @Column(name = "domicilio")
     private String domicilio;
 
     @Basic
+    @NotNull
     @Column(name = "observaciones")
     private String observaciones;
 
@@ -121,10 +109,12 @@ public class Empleado implements Serializable {
     private boolean promovido;
 
     @Basic
+    @NotBlank
     @Column(name = "email")
     private String email;
 
     @Basic
+    @NotBlank
     @Column(name = "telefono")
     private String telefono;
 
@@ -133,17 +123,21 @@ public class Empleado implements Serializable {
     private boolean baja;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
     private Perfil perfil;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "id_centro_costo", referencedColumnName = "id_centro_costo")
     private Area area;
 
+    @NotNull
     @Enumerated(EnumType.ORDINAL)
     private Senority senority;
 
     @ManyToMany
+    @NotNull
     @JoinTable(name = "empleados_tecnologias",
             joinColumns = @JoinColumn(name = "id_empleado"),
             inverseJoinColumns = @JoinColumn(name = "id_tecnologia"))

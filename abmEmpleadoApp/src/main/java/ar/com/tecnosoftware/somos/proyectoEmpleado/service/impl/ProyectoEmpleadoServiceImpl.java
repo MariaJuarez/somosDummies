@@ -1,12 +1,17 @@
 package ar.com.tecnosoftware.somos.proyectoEmpleado.service.impl;
 
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.cargo.repository.CargoRepository;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.repository.ProyectoEmpleadoRepository;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.service.ProyectoEmpleadoService;
+import ar.com.tecnosoftware.somos.proyectoEmpleado.util.ProyectoEmpleadoFiltroUtil;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,11 +35,37 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     private CargoRepository cargoRepository;
 
     @Override
-    public void add(ProyectoEmpleado proyectoEmpleado) {
-        proyectoEmpleado.setEmpleado(empleadoRepository.buscar(proyectoEmpleado.getEmpleado().getId()));
-        proyectoEmpleado.setProyecto(proyectoRepository.buscar(proyectoEmpleado.getProyecto().getId()));
-        proyectoEmpleado.setCargo(cargoRepository.buscar(proyectoEmpleado.getCargo().getId()));
+    public String add(ProyectoEmpleado proyectoEmpleado) {
+        String resultado = "No existe el";
+
+        Empleado empleado = empleadoRepository.buscar(proyectoEmpleado.getEmpleado().getId());
+        if (empleado == null) {
+            resultado += "Empleado con id " + proyectoEmpleado.getEmpleado().getId();
+            return resultado;
+        }
+        proyectoEmpleado.setEmpleado(empleado);
+
+        Proyecto proyecto = proyectoRepository.buscar(proyectoEmpleado.getProyecto().getId());
+        if (proyecto == null) {
+            resultado += "Proyecto con id " + proyectoEmpleado.getProyecto().getId();
+            return resultado;
+        }
+        proyectoEmpleado.setProyecto(proyecto);
+
+        Cargo cargo = cargoRepository.buscar(proyectoEmpleado.getCargo().getId());
+        if (proyecto == null) {
+            resultado += "Cargo con id " + proyectoEmpleado.getCargo().getId();
+            return resultado;
+        }
+
+        proyectoEmpleado.setCargo(cargo);
+
+        if(!FechasUtil.comprobarFechas(proyectoEmpleado.getInicio(), proyectoEmpleado.getFin())){
+            return "La fecha fin no puede ser anterior a la fecha de inicio";
+        }
+
         proyectoEmpleadoRepository.guardar(proyectoEmpleado);
+        return "ProyectoEmpleado creado con exito";
     }
 
     @Override
@@ -48,8 +79,12 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        proyectoEmpleadoRepository.darBaja(proyectoEmpleadoRepository.buscar(id));
+    public ProyectoEmpleado darBaja(int id) {
+        ProyectoEmpleado proyectoEmpleado = proyectoEmpleadoRepository.buscar(id);
+        if (proyectoEmpleado == null) {
+            return null;
+        }
+        return proyectoEmpleadoRepository.darBaja(proyectoEmpleado);
     }
 
     @Override
@@ -64,7 +99,7 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
 
     @Override
     public List<ProyectoEmpleado> buscarProyectosEmpleadosConProyecto(int idProyecto) {
-        return proyectoEmpleadoRepository.buscar("WHERE proyecto = " +idProyecto);
+        return proyectoEmpleadoRepository.buscar("WHERE proyecto = " + idProyecto);
     }
 
     @Override
@@ -73,17 +108,44 @@ public class ProyectoEmpleadoServiceImpl implements ProyectoEmpleadoService {
     }
 
     @Override
-    public void darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados) {
+    public Boolean darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados) {
         Cargo cargo = cargoRepository.buscar(1);
-        for(ProyectoEmpleado proyectoEmpleado : proyectosEmpleados){
-            proyectoEmpleadoRepository.darBajaCargoDeProyectoEmpleado(proyectoEmpleado, cargo);
+        if (cargo == null) {
+            return false;
         }
+
+        for (ProyectoEmpleado proyectoEmpleado : proyectosEmpleados) {
+            if (proyectoEmpleadoRepository.darBajaCargoDeProyectoEmpleado(proyectoEmpleado, cargo) == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    public void darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados) {
+    public Boolean darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados) {
         for (ProyectoEmpleado proyectoEmpleado : proyectoEmpleados) {
-            proyectoEmpleadoRepository.darBaja(proyectoEmpleado);
+            if (proyectoEmpleadoRepository.darBaja(proyectoEmpleado) == null) {
+                return false;
+            }
         }
+        return true;
+    }
+
+    @Override
+    public List<Empleado> buscarEmpleadosPorFiltro(FiltroEmpleado filtroEmpleado) {
+
+        int tipoFiltro = ProyectoEmpleadoFiltroUtil.filtrosProyectoEmpleado(filtroEmpleado);
+        String hql = ProyectoEmpleadoFiltroUtil.armarQuery(tipoFiltro);
+
+        return proyectoEmpleadoRepository.buscarEmpleadosPorFiltro(hql, filtroEmpleado, tipoFiltro);
+    }
+
+    @Override
+    public ProyectoEmpleado editar(ProyectoEmpleado proyectoEmpleado) {
+        if (proyectoEmpleadoRepository.buscar(proyectoEmpleado.getId()) == null) {
+            return null;
+        }
+        return proyectoEmpleadoRepository.editar(proyectoEmpleado);
     }
 }

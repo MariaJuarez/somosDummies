@@ -1,16 +1,19 @@
 package ar.com.tecnosoftware.somos.proyecto.service.impl;
 
+import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
 import ar.com.tecnosoftware.somos.cliente.repository.ClienteRepository;
 import ar.com.tecnosoftware.somos.metodologia.entity.Metodologia;
 import ar.com.tecnosoftware.somos.metodologia.repository.MetodologiaRepository;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
-import ar.com.tecnosoftware.somos.proyecto.filtro.FiltroProyecto;
+import ar.com.tecnosoftware.somos.filtro.FiltroProyecto;
 import ar.com.tecnosoftware.somos.proyecto.repository.ProyectoRepository;
+import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.tecnologia.repository.TecnologiaRepository;
 import ar.com.tecnosoftware.somos.tipoProyecto.entity.TipoProyecto;
 import ar.com.tecnosoftware.somos.proyecto.service.ProyectoService;
 import ar.com.tecnosoftware.somos.tipoProyecto.repository.TipoProyectoRepository;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,12 +41,42 @@ public class ProyectoServiceImpl implements ProyectoService {
     private MetodologiaRepository metodologiaRepository;
 
     @Override
-    public void add(Proyecto proyecto) {
-        proyecto.setTipo(tipoProyectoRepository.buscar(proyecto.getTipo().getId()));
-        proyecto.setCliente(clienteRepository.buscar(proyecto.getCliente().getId()));
-        proyecto.setMetodologia(metodologiaRepository.buscar(proyecto.getMetodologia().getIdMetodologia()));
-        proyecto.setTecnologias(setTecnologias(proyecto.getTecnologias()));
+    public String add(Proyecto proyecto) {
+        String resultado = "No existe ";
+        TipoProyecto tipoProyecto = tipoProyectoRepository.buscar(proyecto.getTipo().getId());
+        if (tipoProyecto == null) {
+            resultado += " el Tipo de Proyecto con id " + proyecto.getTipo().getId();
+            return resultado;
+        }
+        proyecto.setTipo(tipoProyecto);
+
+        Cliente cliente = clienteRepository.buscar(proyecto.getCliente().getId());
+        if (cliente == null) {
+            resultado += "el Cliente con id " + proyecto.getCliente().getId();
+            return resultado;
+        }
+        proyecto.setCliente(cliente);
+
+        Metodologia metodologia = metodologiaRepository.buscar(proyecto.getMetodologia().getId());
+        if (metodologia == null) {
+            resultado += "la Metodologia con id " + proyecto.getMetodologia().getId();
+            return resultado;
+        }
+        proyecto.setMetodologia(metodologia);
+
+        if(!FechasUtil.comprobarFechas(proyecto.getInicio(), proyecto.getFin())){
+            return "La fecha fin no puede ser anterior a la fecha de inicio";
+        }
+
+        if (proyecto.getTecnologias().size() == 0) {
+            resultado += "Debe introducir al menos una tecnología.";
+            return resultado;
+        }
+
+        proyecto.setTecnologias(comprobarTecnologias(proyecto.getTecnologias()));
+
         proyectoRepository.guardar(proyecto);
+        return "Proyecto creado con exito";
     }
 
     @Override
@@ -52,8 +85,12 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        proyectoRepository.darBaja(proyectoRepository.buscar(id));
+    public Proyecto darBaja(int id) {
+        Proyecto proyecto = proyectoRepository.buscar(id);
+        if (proyecto == null) {
+            return null;
+        }
+        return proyectoRepository.darBaja(proyecto);
     }
 
     @Override
@@ -67,12 +104,17 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias) {
+    public List<Tecnologia> comprobarTecnologias(List<Tecnologia> tecnologias) {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
-        for (Tecnologia tecnologia : tecnologias){
+        for (Tecnologia tecnologia : tecnologias) {
             Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
-            if(temp != null){
+            if ((temp != null)&&(!temp.isBaja())&&(!tecnologiasEnBD.contains(temp))) {
+                if(tecnologia.getSenority() == null){
+                   temp.setSenority(Senority.NO_APLICA);
+                } else {
+                    temp.setSenority(tecnologia.getSenority());
+                }
                 tecnologiasEnBD.add(temp);
             }
         }
@@ -82,14 +124,17 @@ public class ProyectoServiceImpl implements ProyectoService {
 
     @Override
     public List<Proyecto> buscarProyectosConCliente(int idCliente) {
-        return proyectoRepository.buscar("WHERE cliente = " + idCliente);
+        return proyectoRepository.buscar("WHERE clientes = " + idCliente);
     }
 
     @Override
-    public void darBajaProyectos(List<Proyecto> proyectos) {
+    public Boolean darBajaProyectos(List<Proyecto> proyectos) {
         for (Proyecto proyecto : proyectos) {
-            proyectoRepository.darBaja(proyecto);
+            if (proyectoRepository.darBaja(proyecto) == null) {
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
@@ -98,11 +143,17 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public void darBajaMetodologiaDeProyectos(List<Proyecto> proyectos) {
+    public Boolean darBajaMetodologiaDeProyectos(List<Proyecto> proyectos) {
         Metodologia metodologia = metodologiaRepository.buscar(1);
-        for(Proyecto proyecto : proyectos){
-            proyectoRepository.darBajaMetodologiaDeProyecto(proyecto, metodologia);
+        if (metodologia == null) {
+            return false;
         }
+        for (Proyecto proyecto : proyectos) {
+            if (proyectoRepository.darBajaMetodologiaDeProyecto(proyecto, metodologia) == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -111,11 +162,17 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public void darBajaTipoProyectoDeProyectos(List<Proyecto> proyectos) {
+    public Boolean darBajaTipoProyectoDeProyectos(List<Proyecto> proyectos) {
         TipoProyecto tipoProyecto = tipoProyectoRepository.buscar(1);
-        for(Proyecto proyecto : proyectos){
-            proyectoRepository.darBajaTipoProyectoDeProyecto(proyecto, tipoProyecto);
+        if (tipoProyecto == null) {
+            return false;
         }
+        for (Proyecto proyecto : proyectos) {
+            if (proyectoRepository.darBajaTipoProyectoDeProyecto(proyecto, tipoProyecto) == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -124,16 +181,28 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public void darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, int idTecnologia) {
-        Tecnologia tecnologia = tecnologiaRepository.buscar(idTecnologia);
-        for (Proyecto proyecto : proyectos){
+    public Boolean darBajaTecnologiaDeProyectos(List<Proyecto> proyectos, Tecnologia tecnologia) {
+
+        for (Proyecto proyecto : proyectos) {
             proyecto.getTecnologias().remove(tecnologia);
-            proyectoRepository.darBajaTecnologiaDeProyecto(proyecto);
+            if (proyectoRepository.darBajaTecnologiaDeProyecto(proyecto) == null) {
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
     public List<Proyecto> buscarPorFiltro(FiltroProyecto filtroProyecto) {
         return proyectoRepository.buscarPorFiltro(filtroProyecto);
+    }
+
+    @Override
+    public Proyecto editar(Proyecto proyecto) {
+        if (proyectoRepository.buscar(proyecto.getId()) == null) {
+            return null;
+        }
+        proyecto.setTecnologias(comprobarTecnologias(proyecto.getTecnologias()));
+        return proyectoRepository.editar(proyecto);
     }
 }

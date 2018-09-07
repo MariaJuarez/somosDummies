@@ -31,8 +31,13 @@ public class RubroRepositoryImpl implements RubroRepository {
     }
 
     @Override
-    public void darBaja(Rubro rubro) {
+    public Rubro darBaja(Rubro rubro) {
         rubro.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(rubro);
+    }
+
+    @Override
+    public Rubro editar(Rubro rubro) {
+        return entityManager.merge(rubro);
     }
 }

@@ -31,8 +31,13 @@ public class TipoProyectoRepositoryImpl implements TipoProyectoRepository {
     }
 
     @Override
-    public void darBaja(TipoProyecto tipoProyecto) {
+    public TipoProyecto darBaja(TipoProyecto tipoProyecto) {
         tipoProyecto.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(tipoProyecto);
+    }
+
+    @Override
+    public TipoProyecto editar(TipoProyecto tipoProyecto) {
+        return entityManager.merge(tipoProyecto);
     }
 }

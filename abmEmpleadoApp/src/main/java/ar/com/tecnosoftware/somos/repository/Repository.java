@@ -10,6 +10,8 @@ public interface Repository<T>{
 
     List<T> buscar(String extension);
 
-    void darBaja(T t);
+    T darBaja(T t);
+
+    T editar(T t);
 
 }
