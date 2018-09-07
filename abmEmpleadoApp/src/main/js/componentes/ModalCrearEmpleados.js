@@ -46,14 +46,21 @@ class Home extends React.Component{
 
     }
     onChange (e){
-        this.setState({ [e.target.empleado]: e.target.value });
+        console.log(e.target)
+        console.log(e.target.id=="nombres")
+        console.log(e.target.id==="nombres")
+        if (e.target.id=="nombres") {
+            console.log(this.state.empleado.nombres);
+            this.setState({[this.state.empleado.nombres]: e.target.value});
+            console.log(this.state.empleado.nombres);
+        }
     }
 
     onSubmit(e){
-        console.log("ssss")
+        console.log(e)
         e.preventDefault();
-        const {empleado} = this.state;
-
+        console.log(this.state.empleado)
+        /*
         axios.post('http://localhost:8080/empleado/crear', this.state.empleado)
             .then((result) => {
                 console.log(result)
@@ -61,6 +68,7 @@ class Home extends React.Component{
             .catch(error => {
                 console.log(error)
             });
+         */
 
     }
 
