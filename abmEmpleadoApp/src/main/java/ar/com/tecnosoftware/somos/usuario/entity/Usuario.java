@@ -1,14 +1,14 @@
 package ar.com.tecnosoftware.somos.usuario.entity;
 
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Usuario implements Serializable {
 
@@ -18,6 +18,7 @@ public class Usuario implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
 
@@ -26,6 +27,7 @@ public class Usuario implements Serializable {
     private boolean baja;
 
     @OneToOne
+    @NotNull
     @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
     private Empleado empleado;
 }

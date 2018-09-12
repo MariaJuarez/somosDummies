@@ -1,13 +1,12 @@
 package ar.com.tecnosoftware.somos.rubro.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Rubro implements Serializable {
 
@@ -17,6 +16,7 @@ public class Rubro implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 

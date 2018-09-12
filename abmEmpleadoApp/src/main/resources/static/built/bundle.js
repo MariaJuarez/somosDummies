@@ -49524,21 +49524,30 @@
 	    _createClass(Home, [{
 	        key: "onChange",
 	        value: function onChange(e) {
-	            this.setState(_defineProperty({}, e.target.empleado, e.target.value));
+	            console.log(e.target);
+	            console.log(e.target.id == "nombres");
+	            console.log(e.target.id === "nombres");
+	            if (e.target.id == "nombres") {
+	                console.log(this.state.empleado.nombres);
+	                this.setState(_defineProperty({}, this.state.empleado.nombres, e.target.value));
+	                console.log(this.state.empleado.nombres);
+	            }
 	        }
 	    }, {
 	        key: "onSubmit",
 	        value: function onSubmit(e) {
-	            console.log("ssss");
+	            console.log(e);
 	            e.preventDefault();
-	            var empleado = this.state.empleado;
-	
-	
-	            _axios2.default.post('http://localhost:8080/empleado/crear', this.state.empleado).then(function (result) {
-	                console.log(result);
-	            }).catch(function (error) {
-	                console.log(error);
-	            });
+	            console.log(this.state.empleado);
+	            /*
+	            axios.post('http://localhost:8080/empleado/crear', this.state.empleado)
+	                .then((result) => {
+	                    console.log(result)
+	                })
+	                .catch(error => {
+	                    console.log(error)
+	                });
+	             */
 	        }
 	    }, {
 	        key: "handleHide",
@@ -49681,6 +49690,7 @@
 	        value: function render() {
 	            var empleado = this.props.empleado;
 	            var onSubmit = this.props.onSubmit;
+	            var onChange = this.props.onChange;
 	
 	            return _react2.default.createElement(
 	                _reactBootstrap.Form,
@@ -49693,7 +49703,7 @@
 	                        null,
 	                        'Promovido LPS'
 	                    ),
-	                    _react2.default.createElement(_reactBootstrap.Checkbox, { inline: true, defaultValue: empleado.promovidoLps, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.Checkbox, { inline: true, defaultValue: empleado.promovidoLps, onChange: onChange })
 	                ),
 	                _react2.default.createElement(
 	                    _reactBootstrap.FormGroup,
@@ -49704,7 +49714,7 @@
 	                        'Legajo'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero de legajo', defaultValue: empleado.legajo, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero de legajo', defaultValue: empleado.legajo, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49716,7 +49726,7 @@
 	                        'Cuil'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero Cuil sin guiones', defaultValue: empleado.cuil, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero Cuil sin guiones', defaultValue: empleado.cuil, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49729,7 +49739,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormControl,
-	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senioriti, onChange: this.onChange },
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senioriti, onChange: onChange },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: 'select' },
@@ -49752,7 +49762,7 @@
 	                        'Nombres'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombres', defaultValue: empleado.nombres, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombres', defaultValue: empleado.nombres, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49764,7 +49774,7 @@
 	                        'Apellidos'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'apellidos', defaultValue: empleado.apellidos, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'apellidos', defaultValue: empleado.apellidos, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49776,7 +49786,7 @@
 	                        'Email'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'mail@ejemplo.com', defaultValue: empleado.email, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'mail@ejemplo.com', defaultValue: empleado.email, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement('hr', null),
@@ -49820,7 +49830,7 @@
 	                        'Telefono'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'ej 1122232425', defaultValue: empleado.telefono, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'ej 1122232425', defaultValue: empleado.telefono, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49833,7 +49843,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormControl,
-	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.area, onChange: this.onChange },
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.area, onChange: onChange },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: 'select' },
@@ -49856,7 +49866,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormControl,
-	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.perfil, onChange: this.onChange },
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.perfil, onChange: onChange },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: 'select' },
@@ -49879,7 +49889,7 @@
 	                        'Domicilio Laboral'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'lugar de trabajo', defaultValue: empleado.domicilioLaboral, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'lugar de trabajo', defaultValue: empleado.domicilioLaboral, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49890,7 +49900,7 @@
 	                        null,
 	                        'Observaciones'
 	                    ),
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa una breve observacion', defaultValue: empleado.observaciones, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: 'textarea', placeholder: 'describa una breve observacion', defaultValue: empleado.observaciones, onChange: onChange })
 	                ),
 	                _react2.default.createElement(
 	                    _reactBootstrap.FormGroup,
@@ -49901,9 +49911,10 @@
 	                        'Responsable'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombre de responsable', defaultValue: empleado.responsable, onChange: this.onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombre de responsable', defaultValue: empleado.responsable, onChange: onChange })
 	                ),
-	                ' '
+	                ' ',
+	                _react2.default.createElement('input', { type: 'submit' })
 	            );
 	        }
 	    }]);

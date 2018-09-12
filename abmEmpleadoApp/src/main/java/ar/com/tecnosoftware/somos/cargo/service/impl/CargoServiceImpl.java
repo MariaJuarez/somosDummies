@@ -17,8 +17,10 @@ public class CargoServiceImpl implements CargoService {
     private CargoRepository cargoRepository;
 
     @Override
-    public void add(Cargo cargo) {
+    public String add(Cargo cargo) {
+        cargo.setBaja(false);
         cargoRepository.guardar(cargo);
+        return "Cargo creado con exito";
     }
 
     @Override
@@ -37,7 +39,21 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        cargoRepository.darBaja(cargoRepository.buscar(id));
+    public Cargo darBaja(int id) {
+
+        Cargo cargo = cargoRepository.buscar(id);
+        if (cargo == null){
+            return null;
+        }
+
+        return cargoRepository.darBaja(cargo);
+    }
+
+    @Override
+    public Cargo editar(Cargo cargo) {
+        if (cargoRepository.buscar(cargo.getId()) == null){
+            return null;
+        }
+        return cargoRepository.editar(cargo);
     }
 }

@@ -1,13 +1,11 @@
-package ar.com.tecnosoftware.somos.proyecto.filtro;
+package ar.com.tecnosoftware.somos.filtro;
 
 import ar.com.tecnosoftware.somos.cliente.entity.Cliente;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 public class FiltroProyecto {
 
     private Date fechaInicio = null;

@@ -4,7 +4,7 @@ package ar.com.tecnosoftware.somos.empleado.service.impl;
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.area.repository.AreaRepository;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.perfil.repository.PerfilRepository;
@@ -12,12 +12,8 @@ import ar.com.tecnosoftware.somos.senority.Senority;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
 import ar.com.tecnosoftware.somos.empleado.service.EmpleadoService;
 import ar.com.tecnosoftware.somos.tecnologia.repository.TecnologiaRepository;
-import ar.com.tecnosoftware.somos.tipoTecnologia.entity.TipoTecnologia;
-import ar.com.tecnosoftware.somos.tipoTecnologia.repository.TipoTecnologiaRepository;
-import ar.com.tecnosoftware.somos.tipoTecnologia.repository.impl.TipoTecnologiaRepositoryImpl;
+import ar.com.tecnosoftware.somos.util.FechasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,82 +36,27 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Autowired
     private PerfilRepository perfilRepository;
 
-    @EventListener
-    public void appReady(ApplicationReadyEvent event) {
-        /*Para la carga previa*/
-        /*TipoTecno*/
-        /*
-        TipoTecnologia tipotec= new TipoTecnologia();
-        tipotec.setDescripcion("java");
-        tipotec.setBaja(false);
-
-        //tipoTecnologiaRepository.guardar(tipotec);
-
-        /*Perfil*/
-        /*
-        Perfil per=new Perfil();
-        per.setAbreviatura("abreviatura");
-        per.setDescripcion("desc");
-        per.setBaja(false);
-        per.setId(1);
-        //perfilRepository.guardar(per);
-
-        /*Area*/
-        /*
-        Area area=new Area();
-        per.setDescripcion("desc");
-        per.setBaja(false);
-        area.setId(1);
-        //areaRepository.guardar(area);
-
-        /*Tecnologia*/
-        /*
-        Tecnologia tec=new Tecnologia();
-        tec.setDescripcion("desc");
-        tec.setBaja(false);
-
-        tipotec.setId(1);
-        tec.setTipo(tipotec);
-        tec.setSenority(Senority.JUNIOR);
-        tec.setId(1);
-        //tecnologiaRepository.guardar(tec);
-
-
-
-        /*Empleado*/
-        /*
-        Empleado emp=new Empleado();
-        emp.setLegajo(1);
-        emp.setNombres("nombres");
-        emp.setApellidos("apellidos");
-        emp.setCuil("cuil");
-        emp.setResponsable("responsable");
-        emp.setIngreso(null);
-        emp.setEgreso(null);
-        emp.setDomicilio("domicilio");
-        emp.setObservaciones("observaciones");
-        emp.setPromovido(false);
-        emp.setEmail("email");
-        emp.setTelefono("telefono");
-        emp.setBaja(false);
-        emp.setPerfil(per);
-        emp.setArea(area);
-        emp.setSenority(Senority.JUNIOR);
-        ArrayList<Tecnologia> tecs= new ArrayList<>();
-        tecs.add(tec);
-        emp.setTecnologias(tecs);
-
-
-        empleadoRepository.guardar(emp);
-        */
-
-    }
-
     @Override
-    public void add(Empleado empleado) {
-        empleado.setArea(areaRepository.buscar(empleado.getArea().getId()));
-        empleado.setTecnologias(setTecnologias(empleado.getTecnologias()));
+    public String add(Empleado empleado) {
+
+        Area area = areaRepository.buscar(empleado.getArea().getId());
+        if(area == null){
+            return "No existe el Area con id " + empleado.getArea().getId();
+        }
+        empleado.setArea(area);
+
+        Perfil perfil = perfilRepository.buscar(empleado.getPerfil().getId());
+        if(perfil == null){
+            return "No existe el Perfil con id " + empleado.getPerfil().getId();
+        }
+
+        if(!FechasUtil.comprobarFechas(empleado.getIngreso(), empleado.getEgreso())){
+            return "La fecha de egreso no puede ser anterior a la fecha de ingreso";
+        }
+
+        empleado.setTecnologias(comprobarTecnologias(empleado.getTecnologias()));
         empleadoRepository.guardar(empleado);
+        return "Empleado creado con exito";
     }
 
     @Override
@@ -134,8 +75,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBaja(int id) {
-        empleadoRepository.darBaja(empleadoRepository.buscar(id));
+    public Empleado darBaja(int id) {
+        Empleado empleado = empleadoRepository.buscar(id);
+        if(empleado == null){
+            return null;
+        }
+        return empleadoRepository.darBaja(empleado);
     }
 
     @Override
@@ -144,20 +89,32 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBajaAreaDeEmpleados(List<Empleado> empleados) {
+    public Boolean darBajaAreaDeEmpleados(List<Empleado> empleados) {
         Area area = areaRepository.buscar(1);
-        for(Empleado empleado : empleados){
-            empleadoRepository.darBajaAreaDeEmpleado(empleado, area);
+        if(area == null){
+            return false;
         }
+
+        for(Empleado empleado : empleados){
+            if (empleadoRepository.darBajaAreaDeEmpleado(empleado, area) == null){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
-    public List<Tecnologia> setTecnologias(List<Tecnologia> tecnologias) {
+    public List<Tecnologia> comprobarTecnologias(List<Tecnologia> tecnologias) {
         List<Tecnologia> tecnologiasEnBD = new ArrayList<>();
 
         for (Tecnologia tecnologia : tecnologias){
             Tecnologia temp = tecnologiaRepository.buscar(tecnologia.getId());
-            if(temp != null){
+            if((temp != null)&&(!temp.isBaja())&&(!tecnologiasEnBD.contains(temp))){
+                if(tecnologia.getSenority() == null){
+                    temp.setSenority(Senority.SIN_ASIGNAR);
+                } else {
+                    temp.setSenority(tecnologia.getSenority());
+                }
                 tecnologiasEnBD.add(temp);
             }
         }
@@ -171,11 +128,18 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBajaPerfilDeEmpleados(List<Empleado> empleados) {
+    public Boolean darBajaPerfilDeEmpleados(List<Empleado> empleados) {
         Perfil perfil = perfilRepository.buscar(1);
-        for(Empleado empleado : empleados){
-            empleadoRepository.darBajaPerfilDeEmpleado(empleado, perfil);
+        if(perfil == null){
+            return false;
         }
+
+        for(Empleado empleado : empleados){
+            if(empleadoRepository.darBajaPerfilDeEmpleado(empleado, perfil) == null){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -184,17 +148,29 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void darBajaTecnologiaDeEmpleados(List<Empleado> empleados, int idTecnologia) {
-        Tecnologia tecnologia = tecnologiaRepository.buscar(idTecnologia);
+    public Boolean darBajaTecnologiaDeEmpleados(List<Empleado> empleados, Tecnologia tecnologia) {
+
         for (Empleado empleado : empleados){
             empleado.getTecnologias().remove(tecnologia);
-            empleadoRepository.darBajaTecnologiaDeEmpleado(empleado);
+            if(empleadoRepository.darBajaTecnologiaDeEmpleado(empleado) == null){
+                return false;
+            }
         }
+        return true;
     }
 
     @Override
     public List<Empleado> buscarPorFiltro(FiltroEmpleado filtroEmpleado) {
         return empleadoRepository.buscarPorFiltro(filtroEmpleado);
+    }
+
+    @Override
+    public Empleado editar(Empleado empleado) {
+        if (empleadoRepository.buscar(empleado.getId()) == null){
+            return null;
+        }
+        empleado.setTecnologias(comprobarTecnologias(empleado.getTecnologias()));
+        return empleadoRepository.editar(empleado);
     }
 }
 

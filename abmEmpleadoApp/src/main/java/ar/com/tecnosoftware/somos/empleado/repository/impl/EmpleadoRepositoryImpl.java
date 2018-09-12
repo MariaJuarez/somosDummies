@@ -2,11 +2,10 @@ package ar.com.tecnosoftware.somos.empleado.repository.impl;
 
 import ar.com.tecnosoftware.somos.area.entity.Area;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
-import ar.com.tecnosoftware.somos.empleado.filtro.FiltroEmpleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.perfil.entity.Perfil;
 import ar.com.tecnosoftware.somos.empleado.repository.EmpleadoRepository;
 import ar.com.tecnosoftware.somos.tecnologia.entity.Tecnologia;
-import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -38,20 +37,21 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public void darBaja(Empleado empleado) {
+    public Empleado darBaja(Empleado empleado) {
         empleado.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(empleado);
     }
 
     @Override
-    public void darBajaAreaDeEmpleado(Empleado empleado, Area area) {
-        entityManager.merge(empleado);
+    public Empleado darBajaAreaDeEmpleado(Empleado empleado, Area area) {
+        empleado.setArea(area);
+        return entityManager.merge(empleado);
     }
 
     @Override
-    public void darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil) {
+    public Empleado darBajaPerfilDeEmpleado(Empleado empleado, Perfil perfil) {
         empleado.setPerfil(perfil);
-        entityManager.merge(empleado);
+        return entityManager.merge(empleado);
     }
 
     @Override
@@ -61,8 +61,8 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
     }
 
     @Override
-    public void darBajaTecnologiaDeEmpleado(Empleado empleado) {
-        entityManager.merge(empleado);
+    public Empleado darBajaTecnologiaDeEmpleado(Empleado empleado) {
+        return entityManager.merge(empleado);
     }
 
     @Override
@@ -149,5 +149,10 @@ public class EmpleadoRepositoryImpl implements EmpleadoRepository {
         }
 
         return nuevaLista;
+    }
+
+    @Override
+    public Empleado editar(Empleado empleado) {
+        return entityManager.merge(empleado);
     }
 }

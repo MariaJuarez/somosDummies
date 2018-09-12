@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TecnologiaRepository extends Repository<Tecnologia> {
 
-    void darBajaTipoTecnologiaDeTecnologia(Tecnologia tecnologia, TipoTecnologia tipoTecnologia);
+    Tecnologia darBajaTipoTecnologiaDeTecnologia(Tecnologia tecnologia, TipoTecnologia tipoTecnologia);
 
 }

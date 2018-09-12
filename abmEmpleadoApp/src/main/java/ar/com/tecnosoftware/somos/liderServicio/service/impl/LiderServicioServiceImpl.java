@@ -17,8 +17,9 @@ public class LiderServicioServiceImpl implements LiderServicioService {
     private LiderServicioRepository liderServicioRepository;
 
     @Override
-    public void add(LiderServicio liderServicio) {
+    public String add(LiderServicio liderServicio) {
         liderServicioRepository.guardar(liderServicio);
+        return "";
     }
 
     @Override
@@ -27,8 +28,12 @@ public class LiderServicioServiceImpl implements LiderServicioService {
     }
 
     @Override
-    public void darBaja(int id) {
-        liderServicioRepository.darBaja(liderServicioRepository.buscar(id));
+    public LiderServicio darBaja(int id) {
+        LiderServicio liderServicio = liderServicioRepository.buscar(id);
+        if (liderServicio == null) {
+            return null;
+        }
+        return liderServicioRepository.darBaja(liderServicio);
     }
 
     @Override
@@ -39,5 +44,13 @@ public class LiderServicioServiceImpl implements LiderServicioService {
     @Override
     public List<LiderServicio> buscarNoBajas() {
         return liderServicioRepository.buscar("WHERE baja = false");
+    }
+
+    @Override
+    public LiderServicio editar(LiderServicio liderServicio) {
+        if (liderServicioRepository.buscar(liderServicio.getIdLds()) == null) {
+            return null;
+        }
+        return liderServicioRepository.editar(liderServicio);
     }
 }

@@ -31,8 +31,13 @@ public class CargoRespositoryImpl implements CargoRepository {
     }
 
     @Override
-    public void darBaja(Cargo cargo) {
+    public Cargo darBaja(Cargo cargo) {
         cargo.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(cargo);
+    }
+
+    @Override
+    public Cargo editar(Cargo cargo) {
+        return entityManager.merge(cargo);
     }
 }

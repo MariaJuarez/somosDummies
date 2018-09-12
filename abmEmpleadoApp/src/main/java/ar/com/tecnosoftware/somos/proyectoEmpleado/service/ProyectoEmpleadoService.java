@@ -1,5 +1,7 @@
 package ar.com.tecnosoftware.somos.proyectoEmpleado.service;
 
+import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
+import ar.com.tecnosoftware.somos.filtro.FiltroEmpleado;
 import ar.com.tecnosoftware.somos.proyectoEmpleado.entity.ProyectoEmpleado;
 import ar.com.tecnosoftware.somos.service.Service;
 
@@ -13,8 +15,10 @@ public interface ProyectoEmpleadoService extends Service<ProyectoEmpleado> {
 
     List<ProyectoEmpleado> buscarProyectosEmpleadosConCargo(int idCargo);
 
-    void darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados);
+    Boolean darBajaCargoDeProyectosEmpleados(List<ProyectoEmpleado> proyectosEmpleados);
 
-    void darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados);
+    Boolean darBajaProyectosEmpleados(List<ProyectoEmpleado> proyectoEmpleados);
+
+    List<Empleado> buscarEmpleadosPorFiltro(FiltroEmpleado filtroEmpleado);
 
 }

@@ -17,8 +17,10 @@ public class AreaServiceImpl implements AreaService {
     private AreaRepository areaRepository;
 
     @Override
-    public void add(Area area) {
+    public String add(Area area) {
+        area.setBaja(false);
         areaRepository.guardar(area);
+        return "Area creada con exito";
     }
 
     @Override
@@ -37,7 +39,19 @@ public class AreaServiceImpl implements AreaService {
     }
 
     @Override
-    public void darBaja(int id) {
-        areaRepository.darBaja(areaRepository.buscar(id));
+    public Area darBaja(int id) {
+        Area area = areaRepository.buscar(id);
+        if (area == null){
+            return null;
+        }
+        return areaRepository.darBaja(area);
+    }
+
+    @Override
+    public Area editar(Area area) {
+        if(areaRepository.buscar(area.getId()) == null){
+            return null;
+        }
+        return areaRepository.editar(area);
     }
 }

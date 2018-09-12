@@ -3,6 +3,7 @@ package ar.com.tecnosoftware.somos.tipoTecnologia.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Data
@@ -15,6 +16,7 @@ public class TipoTecnologia implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 

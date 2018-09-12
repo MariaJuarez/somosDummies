@@ -3,15 +3,15 @@ package ar.com.tecnosoftware.somos.proyectoEmpleado.entity;
 import ar.com.tecnosoftware.somos.cargo.entity.Cargo;
 import ar.com.tecnosoftware.somos.empleado.entity.Empleado;
 import ar.com.tecnosoftware.somos.proyecto.entity.Proyecto;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class ProyectoEmpleado implements Serializable {
 
@@ -21,10 +21,12 @@ public class ProyectoEmpleado implements Serializable {
     private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "tareas_proyecto")
     private String tareas;
 
     @Basic
+    @NotNull
     @Column(name = "fecha_inicio")
     private Date inicio;
 
@@ -33,23 +35,22 @@ public class ProyectoEmpleado implements Serializable {
     private Date fin;
 
     @Basic
-    @Column(name = "fecha_relevamiento")
-    private Date relevamiento;
-
-    @Basic
     @Column(name = "baja")
     private boolean baja;
 
     @ManyToOne
-    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
     private Empleado empleado;
 
     @ManyToOne
-    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_proyecto", referencedColumnName = "id_proyecto")
     private Proyecto proyecto;
 
     @ManyToOne
-    @JoinColumn(name = "id_cargo", referencedColumnName = "id_cargo", nullable = false)
+    @NotNull
+    @JoinColumn(name = "id_cargo", referencedColumnName = "id_cargo")
     private Cargo cargo;
 
 }

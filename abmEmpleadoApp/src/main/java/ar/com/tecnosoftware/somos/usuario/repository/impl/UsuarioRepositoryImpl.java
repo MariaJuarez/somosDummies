@@ -32,9 +32,9 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public void darBaja(Usuario usuario) {
+    public Usuario darBaja(Usuario usuario) {
         usuario.setBaja(true);
-        entityManager.flush();
+        return entityManager.merge(usuario);
     }
 
     @Override
@@ -44,8 +44,13 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public void darBajaEmpleadoDeUsuario(Usuario usuario, Empleado empleado) {
+    public Usuario darBajaEmpleadoDeUsuario(Usuario usuario, Empleado empleado) {
         usuario.setEmpleado(empleado);
-        entityManager.merge(usuario);
+        return entityManager.merge(usuario);
+    }
+
+    @Override
+    public Usuario editar(Usuario usuario) {
+        return entityManager.merge(usuario);
     }
 }

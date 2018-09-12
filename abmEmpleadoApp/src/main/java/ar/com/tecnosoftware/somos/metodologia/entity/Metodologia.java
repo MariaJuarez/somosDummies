@@ -1,22 +1,22 @@
 package ar.com.tecnosoftware.somos.metodologia.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 public class Metodologia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_metodologia")
-    private int idMetodologia;
+    private int id;
 
     @Basic
+    @NotBlank
     @Column(name = "descripcion")
     private String descripcion;
 
