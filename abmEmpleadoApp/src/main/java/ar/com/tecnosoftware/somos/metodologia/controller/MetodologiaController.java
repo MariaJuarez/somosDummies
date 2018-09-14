@@ -57,16 +57,14 @@ public class MetodologiaController {
 
     @PutMapping(value = "/baja/{id}")
     @Transactional
-    public ResponseEntity<Metodologia> bajaMetodologia(@PathVariable int id, @RequestBody List<Proyecto> proyectos) throws MetodologiaNotFoundException, MetodologiaErrorException {
+    public ResponseEntity<Metodologia> bajaMetodologia(@PathVariable int id) throws MetodologiaNotFoundException, MetodologiaErrorException {
         Metodologia metodologia = metodologiaService.darBaja(id);
 
         if (metodologia == null) {
             throw new MetodologiaNotFoundException("No se encontró la metodologia con id " + id);
         }
 
-        if (!proyectoService.darBajaMetodologiaDeProyectos(proyectos)) {
-            throw new MetodologiaErrorException("Hubo un error al dar de baja a la metodologia por la relación con los proyectos. Puede que la Metodologia por defecto no existe.");
-        }
+
 
         return ResponseEntity.ok(metodologia);
 
