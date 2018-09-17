@@ -1,5 +1,5 @@
 
-export default (store={titulo : "mi pagina"},action) =>{
+export default (store={titulo : "Somos"},action) =>{
 	switch (action.type) {
 		case "CAMBIAR_TITULO":
 			return {titulo:action.payload}

@@ -13,9 +13,11 @@ font-style:normal;
 font-weight: normal;
 src: URL(../../FORMALB0.eot);
 }
-
 .navbar-header a{
   color: #dedede!important;
+}
+.dropdown-menu .desplegable a{
+  color: black !important;
 }
 .navbar-nav li a{
   color: #dedede!important;
@@ -42,19 +44,37 @@ a.letra{
    background-color: red;
 }
 .coloractivo{
-  background-color: green !important;
+  background-color: #33691E !important;
   color:white!important;
 }
+.colorreactivar{
+  background-color:#42A5F5!important;
+  color:white!important;
+}
+.colorreactivar:hover{
+  background-color: #90CAF9!important;
+  color:black!important;
+}
+.colorcerrar{
+  color:white!important;
+  background-color: #9E9E9E!important;
+}
+.colorcerrar:hover{
+  color:black!important;
+  background-color: #E0E0E0!important;
+}
 .collapse ul  li  a:hover{
-    background-color: green !important;
+    background-color: #33691E !important;
 }
 .buttonMarginBottom{
   margin-bottom: 1em;
+  margin-left: 0;
 }
-
+.css-10nd86i{
+  width: 94%;
+}
 .form-inline .form-group.enLinea{
   width: 100%;
-
 }
 .sc-bwzfXH.kGGIis{
   width: 94%;
@@ -67,8 +87,8 @@ a.letra{
 .form-inline .form-group{
   margin-left:1em;
   width: 47%;
-  margin-bottom: 0.2em;
-  margin-top: 0.2em;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 
 }
 .control-label{
@@ -90,11 +110,18 @@ a.letra{
 
 html,
 body {
+  background-color: #f7f7f7;
   height: 100%;
   position: relative;
   padding-top: 4em;
 }
+.table-responsive{
+  background-color: #E0E0E0 !important;
+  margin-left: 15px !important;
+  margin-right: 15px !important;
+}
 .tabla {
+  background-color: #f7f7f7;
   min-height: 80vh; /* will cover the 100% of viewport */
   overflow: hidden;
   display: block;
@@ -110,14 +137,28 @@ body {
   text-align: center;
   color: white;
 }
-
 .imagenTecno{
- margin-top: 0.5%;
- width:240px;
+ padding-top: 1%;
+ width:230px;
 }
 
+.logout{
+  position: relative;
+}
+
+@media all and (min-width: 768px) and (max-width: 991px){
+  .imagenTecno{
+    width:200px;
+    padding-top: 1%;
+
+  }
+
+}
 
 @media all and (max-width: 767px){
+  .dropdown-menu .desplegable a{
+  color: white !important;
+  }
   .logoHeader{
     width: 200px;
     margin: auto;
@@ -129,6 +170,7 @@ body {
     padding: 0;
 
   }
+
   .navbar-fixed-top{
     margin-bottom: 20%;
   }
@@ -150,6 +192,7 @@ body {
     vertical-align: middle;
     margin-left: 25%;
   }
+  
   .navbar-toggle .collapsed{
     width: 25%;
   }
@@ -162,6 +205,18 @@ body {
     width: 100%;
     text-align: center;
   }
+
+/*.pull-right.nav.navbar-nav{
+    width: 100% !important;
+    margin: 0;
+    text-align: center;
+  }*/
+.Navbar-nav.pull-right.nav.navbar-nav{
+    width: 100% !important;
+    margin: 0;
+    text-align: center;
+}
+  
   .login-page {
   width: 90% !important;
   padding: 8% 0 0;
@@ -172,15 +227,14 @@ body {
   }
   .form-inline .form-group{
   width: 100%;
-  
-  }
-  .form-inline .form-group.promovidoLPS{
-  margin-bottom: 2em;
   }
 
  }
 
-
+ /*.logoHeader{
+    width: 200px;
+    margin: auto;
+  }*/
 .login-page {
   width: 30em;
   padding: 8% 0 0;
@@ -236,9 +290,51 @@ body {
 .form .register-form {
   display: none;
 }
-.form-inline .form-group{
-  margin-bottom: 0.5em;
+.botonesModal{
+  text-align: right;
+  width: 97% !important;
   
 }
 
+.coloreditar{
+  background-color: #8BC34A;
+  color:white;
+}
+.colorborrar{
+  background-color: #F44336;
+  color:white;
+}
+.colornuevo{
+  background-color: #1565C0;
+  color:white;
+}
+.colornuevo:focus{
+  background-color: #1565C0;
+  color:white;
+}
+.colornuevo:hover{
+  background-color: #90CAF9;
+  color:black;
+}
 
+
+
+.botonesModal .btn.btn-primary.submit{
+  margin: 1em;
+}
+.botonesModal .btn.btn-primary.reset{
+  
+  margin-top:1em;
+  margin-bottom:1em;
+
+}
+.radio{
+  margin-right: 2em;
+}
+/*.btn.btm-sm.btn-danger.espacioBoton.btn.btn-default{
+  background-color: orange !important;
+}*/
+
+.espacioBoton{
+  margin-left: 0.5em;
+}

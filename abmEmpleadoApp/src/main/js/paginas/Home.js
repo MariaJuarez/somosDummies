@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux"
 
 import '../estilos/style.css';
 
+
 class Home extends React.Component{
 	
 	constructor(props){
@@ -17,8 +18,7 @@ class Home extends React.Component{
 	render(){
 		return(
 			<div className='container tabla'>
-			<h1 className= "letra">{this.props.titulo}</h1>
-			
+			<h1 className= "letra">{this.props.titulo}</h1>			
 			</div>
 
 		)

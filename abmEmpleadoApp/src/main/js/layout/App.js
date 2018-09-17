@@ -2,8 +2,6 @@ import React from "react"
 import Header from "./Header"
 import Footer from "./Footer"
 import Main from "./Main"
-
-import Tablas from "../componentes/Tablas"
 import axios from 'axios'
 
 		
@@ -13,62 +11,50 @@ import Home from "../paginas/Home"
 import Empleados from "../paginas/Empleados"
 import Proyectos from "../paginas/Proyectos"
 import Login from "../paginas/Login"
+import Cargos  from "../paginas/Administracion/Cargos"
+import Areas from "../paginas/Administracion/Areas"
+import Perfiles from "../paginas/Administracion/Perfiles"
+import Rubros from "../paginas/Administracion/Rubros"
+import Metodologias from "../paginas/Administracion/Metodologias"
+import Clientes from "../paginas/Administracion/Clientes"
+import Tecnologias  from "../paginas/Administracion/Tecnologias"
+import TiposDeProyecto from "../paginas/Administracion/TiposDeProyecto"
+import Usuarios  from "../paginas/Administracion/Usuarios"
+import '../estilos/style.css'
 
 
 class App extends React.Component{
 	constructor(props){
-		super(props)
-		this.sumar=this.sumar.bind(this)
-		this.restar=this.restar.bind(this)
-		this.handleData = this.handleData.bind(this)    	
+		super(props) 	
 		this.state={
 			titulo:"Somos",
 			links:[
 				{texto:"Empleados", url: "empleados"},
 				{texto:"Proyectos", url: "proyectos"},
-				{texto:"Login", url: "login"}
-				
+				{texto:"Administracion", url: "administracion", Dropdown:[
+				{texto:"Cargos", url: "cargos"},
+				{texto:"Areas", url: "areas"},
+				{texto:"Clientes", url: "clientes"},
+				{texto:"Rubros", url: "rubros"},
+				{texto:"Metodologias", url: "metodologias"},
+				{texto:"Perfiles", url: "perfiles"},
+				{texto:"Tecnologias", url: "tecnologias"},
+				{texto:"Tipos de Proyecto", url: "tiposDeProyecto"},
+				{texto:"Usuarios", url: "usuarios"}
+				]},
 				
 				
 			],
-			contador:0,
-			username: '',
-			fromChild: ''
+			session:{texto:"Logout", url: "login"}
 		}	
 	}
 
-	handleData(data) {
-	    this.setState({
-	      contador:parseInt(data) 
-	    });
-	}
-
-	sumar(){
-		this.setState({
-			contador:this.state.contador+1
-		})
-	}
-
-	restar(){
-		if (this.state.contador>0) {
-			this.setState({
-				contador:this.state.contador-1
-			})
-		}
-		
-	}
-
-	handleClick () {
-    	axios.get('https://api.github.com/users/maecapozzi')
-      	.then(response => this.setState({username: response.data.id}))
-  	}
-
 	render(){
-		let {titulo,links,contador,username,publish}=this.state
+		let {titulo,links, session}=this.state
 		return(
 			<Router>
 				<React.Fragment>
-					<Header titulo={titulo} links={links}>
+					<Header titulo={titulo} links={links} session={session}>
 					</Header>
 
 					<Main id="home" >
@@ -76,23 +62,18 @@ class App extends React.Component{
 							<Route path="/" exact component={Home} />
 							<Route path="/empleados" exact component={Empleados}/>
 							<Route path="/proyectos" exact component={Proyectos}/>
+							<Route path="/cargos" exact component={Cargos}/>
+							<Route path="/areas" exact component={Areas}/>
+							<Route path="/clientes" exact component={Clientes}/>
+							<Route path="/rubros" exact component={Rubros}/>
+							<Route path="/metodologias" exact component={Metodologias}/>
+							<Route path="/perfiles" exact component={Perfiles}/>
+							<Route path="/tecnologias" exact component={Tecnologias}/>
+							<Route path="/tiposDeProyecto" exact component={TiposDeProyecto}/>
+							<Route path="/usuarios" exact component={Usuarios}/>
 							<Route path="/login" exact component={Login}/>
-							
 						</Switch>
 					</Main>
-					
-						{/*<Contador contador={contador} handlerFromParant={this.handleData} sumar={this.sumar} restar={this.restar} editar={this.editar} />*/}
-					
-					
-					{/*<Child handlerFromParant={this.handleData} /> */}
-					
-					
-					
-					{/*<PersonList/>*/}
-					 
-
- 
-					
 					 
 				    <Footer/>
 				</React.Fragment>

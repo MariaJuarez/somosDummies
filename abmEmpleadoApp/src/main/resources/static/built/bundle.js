@@ -49464,14 +49464,6 @@
 	
 	var _FormularioEmpleado2 = _interopRequireDefault(_FormularioEmpleado);
 	
-	__webpack_require__(414);
-	
-	var _reactDatetime = __webpack_require__(541);
-	
-	var _reactDatetime2 = _interopRequireDefault(_reactDatetime);
-	
-	__webpack_require__(551);
-	
 	var _axios = __webpack_require__(352);
 	
 	var _axios2 = _interopRequireDefault(_axios);
@@ -49495,33 +49487,32 @@
 	        var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props, context));
 	
 	        _this.handleHide = _this.handleHide.bind(_this);
-	        _this.handleInputChange = _this.handleInputChange.bind(_this);
+	        _this.onChange = _this.onChange.bind(_this);
 	        _this.onSubmit = _this.onSubmit.bind(_this);
 	        _this.state = {
 	            show: false,
-	
 	            empleado: {
-	                legajo: 3,
-	                nombres: "unico Wilber",
-	                apellidos: "Martinez Rojas",
-	                cuil: "20-879765-2",
-	                responsable: "Juan Carlos",
-	                fechaIngreso: null,
-	                fechaEgreso: null,
-	                domicilioLaboral: "HIT",
-	                observaciones: "Viejo",
-	                promovidoLps: false,
-	                email: "rrojas@tecno.com",
-	                telefono: "1125746993",
-	                perfil: {
-	                    id: 2
+	                "legajo": 3,
+	                "nombres": "unico Wilber",
+	                "apellidos": "Martinez Rojas",
+	                "cuil": "20-879765-2",
+	                "responsable": "Juan Carlos",
+	                "fechaIngreso": null,
+	                "fechaEgreso": null,
+	                "domicilioLaboral": "HIT",
+	                "observaciones": "Viejo",
+	                "promovidoLps": false,
+	                "email": "rrojas@tecno.com",
+	                "telefono": "1125746993",
+	                "perfil": {
+	                    "id": 2
 	                },
-	                area: {
-	                    id: 1
+	                "area": {
+	                    "id": 1
 	                },
-	                senority: 3,
-	                tecnologias: [{
-	                    id: 1
+	                "senority": 3,
+	                "tecnologias": [{
+	                    "id": 1
 	                }]
 	            }
 	
@@ -49531,29 +49522,32 @@
 	    }
 	
 	    _createClass(Home, [{
-	        key: "handleInputChange",
-	        value: function handleInputChange(event) {
-	            console.log('handleInputChange antes');
-	            console.log(this.state.empleado);
-	
-	            this.setState(_defineProperty({}, event.empleado.nombres, event.target.defaultValue));
-	
-	            console.log('handleInputChange despues');
-	            console.log(this.state.empleado);
+	        key: "onChange",
+	        value: function onChange(e) {
+	            console.log(e.target);
+	            console.log(e.target.id == "nombres");
+	            console.log(e.target.id === "nombres");
+	            if (e.target.id == "nombres") {
+	                console.log(this.state.empleado.nombres);
+	                this.setState(_defineProperty({}, this.state.empleado.nombres, e.target.value));
+	                console.log(this.state.empleado.nombres);
+	            }
 	        }
 	    }, {
 	        key: "onSubmit",
 	        value: function onSubmit(e) {
+	            console.log(e);
 	            e.preventDefault();
-	            var nuevoEmpleado = this.state.empleado;
-	
-	            _axios2.default.post('http://localhost:8080/empleado/crear', nuevoEmpleado).then(function (result) {
-	                console.log("console onsubmit");
-	                console.log(nuevoEmpleado);
-	                console.log(result);
-	            }).catch(function (error) {
-	                console.log(error);
-	            });
+	            console.log(this.state.empleado);
+	            /*
+	            axios.post('http://localhost:8080/empleado/crear', this.state.empleado)
+	                .then((result) => {
+	                    console.log(result)
+	                })
+	                .catch(error => {
+	                    console.log(error)
+	                });
+	             */
 	        }
 	    }, {
 	        key: "handleHide",
@@ -49576,10 +49570,6 @@
 	                { id: "modal-tooltip" },
 	                "wow."
 	            );
-	            var _state = this.state,
-	                onSubmit = _state.onSubmit,
-	                empleado = _state.empleado;
-	
 	            return _react2.default.createElement(
 	                "div",
 	                { className: "container" },
@@ -49621,230 +49611,7 @@
 	                        _react2.default.createElement(
 	                            _reactBootstrap.Modal.Body,
 	                            null,
-	                            _react2.default.createElement(
-	                                _reactBootstrap.Form,
-	                                { inline: true, onSubmit: onSubmit },
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "promovidoLPS" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Promovido LPS"
-	                                    ),
-	                                    _react2.default.createElement(_reactBootstrap.Checkbox, { inline: true, defaultValue: empleado.promovidoLps, onChange: this.handleInputChange })
-	                                ),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "legajo" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Legajo"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "number", placeholder: "Numero de legajo", defaultValue: empleado.legajo, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "cuil" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Cuil"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "Numero de cuil", defaultValue: empleado.cuil, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "formControlPromovidoLPS" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Senioriti"
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.FormControl,
-	                                        { componentClass: "select", placeholder: "select", defaultValue: empleado.senority, onChange: this.handleInputChange },
-	                                        _react2.default.createElement(
-	                                            "option",
-	                                            { value: "select" },
-	                                            "seleccionar"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "option",
-	                                            { value: "other" },
-	                                            "..."
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement("hr", null),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "nombres", className: "enLinea" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Nombres"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "nombres", defaultValue: empleado.nombres, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "apellidos", className: "enLinea" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Apellidos"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "apellidos", defaultValue: empleado.apellidos, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "email", className: "enLinea" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Email"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "mail@ejemplo.com", defaultValue: empleado.email, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement("hr", null),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "fechaIngreso", className: "inputCalendar", disabled: true },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Fecha Ingreso"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
-	                                        dateFormat: "DD-MM-YYYY",
-	                                        timeFormat: false, onChange: this.handleInputChange
-	                                    })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "fechaEgreso", className: "inputCalendar", disabled: true },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Fecha Ingreso"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
-	                                        dateFormat: "DD-MM-YYYY",
-	                                        timeFormat: false, onChange: this.handleInputChange
-	                                    })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement("hr", null),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "telefono" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Telefono"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "ej 1122232425", defaultValue: empleado.telefono, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "centroDeCosto" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "\xC1rea"
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.FormControl,
-	                                        { componentClass: "select", placeholder: "select", defaultValue: empleado.area, onChange: this.handleInputChange },
-	                                        _react2.default.createElement(
-	                                            "option",
-	                                            { value: "select" },
-	                                            "seleccionar"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "option",
-	                                            { value: "other" },
-	                                            "..."
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "perfil" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Perfil"
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.FormControl,
-	                                        { componentClass: "select", placeholder: "select", defaultValue: empleado.perfil, onChange: this.handleInputChange },
-	                                        _react2.default.createElement(
-	                                            "option",
-	                                            { value: "select" },
-	                                            "seleccionar"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "option",
-	                                            { value: "other" },
-	                                            "..."
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement("hr", null),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "domicilioLaboral", className: "enLinea" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Domicilio Laboral"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "lugar de trabajo", defaultValue: empleado.domicilioLaboral, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "observaciones", className: "enLinea" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Observaciones"
-	                                    ),
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { componentClass: "textarea", placeholder: "describa una breve observacion", defaultValue: empleado.observaciones, onChange: this.handleInputChange })
-	                                ),
-	                                _react2.default.createElement(
-	                                    _reactBootstrap.FormGroup,
-	                                    { controlId: "responsable", className: "enLinea" },
-	                                    _react2.default.createElement(
-	                                        _reactBootstrap.ControlLabel,
-	                                        null,
-	                                        "Responsable"
-	                                    ),
-	                                    ' ',
-	                                    _react2.default.createElement(_reactBootstrap.FormControl, { type: "text", placeholder: "nombre de responsable", defaultValue: empleado.responsable, onChange: this.handleInputChange })
-	                                ),
-	                                ' ',
-	                                _react2.default.createElement("input", { type: "submit", value: "Submit" })
-	                            )
+	                            _react2.default.createElement(_FormularioEmpleado2.default, { empleado: this.state.empleado, onChange: this.onChange, onSubmit: this.onSubmit })
 	                        ),
 	                        _react2.default.createElement(
 	                            _reactBootstrap.Modal.Footer,
@@ -49856,7 +49623,7 @@
 	                            ),
 	                            _react2.default.createElement(
 	                                _reactBootstrap.Button,
-	                                { type: "submit", bsStyle: "primary" },
+	                                { onClick: this.onSubmit, type: "submit", bsStyle: "primary" },
 	                                "Crear"
 	                            )
 	                        )
@@ -49921,11 +49688,9 @@
 	    _createClass(FormularioEmpleado, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props,
-	                empleado = _props.empleado,
-	                onSubmit = _props.onSubmit,
-	                onChange = _props.onChange;
-	
+	            var empleado = this.props.empleado;
+	            var onSubmit = this.props.onSubmit;
+	            var onChange = this.props.onChange;
 	
 	            return _react2.default.createElement(
 	                _reactBootstrap.Form,
@@ -49961,7 +49726,7 @@
 	                        'Cuil'
 	                    ),
 	                    ' ',
-	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'Numero de cuil', defaultValue: empleado.cuil, onChange: onChange })
+	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'number', placeholder: 'Numero Cuil sin guiones', defaultValue: empleado.cuil, onChange: onChange })
 	                ),
 	                ' ',
 	                _react2.default.createElement(
@@ -49974,7 +49739,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactBootstrap.FormControl,
-	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senority, onChange: onChange },
+	                        { componentClass: 'select', placeholder: 'select', defaultValue: empleado.senioriti, onChange: onChange },
 	                        _react2.default.createElement(
 	                            'option',
 	                            { value: 'select' },
@@ -50036,7 +49801,7 @@
 	                    ' ',
 	                    _react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
 	                        dateFormat: 'DD-MM-YYYY',
-	                        timeFormat: false, onChange: onChange
+	                        timeFormat: false, onChange: this.onChange
 	                    })
 	                ),
 	                ' ',
@@ -50051,7 +49816,7 @@
 	                    ' ',
 	                    _react2.default.createElement(_reactDatetime2.default, { closeOnSelect: true,
 	                        dateFormat: 'DD-MM-YYYY',
-	                        timeFormat: false, onChange: onChange
+	                        timeFormat: false, onChange: this.onChange
 	                    })
 	                ),
 	                ' ',
@@ -50148,7 +49913,8 @@
 	                    ' ',
 	                    _react2.default.createElement(_reactBootstrap.FormControl, { type: 'text', placeholder: 'nombre de responsable', defaultValue: empleado.responsable, onChange: onChange })
 	                ),
-	                ' '
+	                ' ',
+	                _react2.default.createElement('input', { type: 'submit' })
 	            );
 	        }
 	    }]);

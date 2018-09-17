@@ -3,8 +3,8 @@
 //las acciones
 import {combineReducers} from "redux"
 import App from "./reducers/App"
-
+import { reducer as reduxFormReducer } from 'redux-form'
 
 export default combineReducers({
-	App
+	App,form: reduxFormReducer
 })
